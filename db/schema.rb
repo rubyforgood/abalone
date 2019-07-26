@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_140157) do
+ActiveRecord::Schema.define(version: 2019_07_26_182945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,32 @@ ActiveRecord::Schema.define(version: 2019_07_26_140157) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
 
-    create_table "facilities", force: :cascade do |t|
+  create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "mortality_trackings", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "mortality_date"
+    t.string "cohort"
+    t.string "shl_number"
+    t.date "spawning_date"
+    t.integer "shell_box"
+    t.string "shell_container"
+    t.string "animal_location"
+    t.integer "number_morts"
+    t.string "approximation"
+    t.string "processed_by_shl"
+    t.string "initials"
+    t.string "tags"
+    t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
