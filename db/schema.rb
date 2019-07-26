@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_144739) do
+ActiveRecord::Schema.define(version: 2019_07_26_173323) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "spawning_success_raw_data", force: :cascade do |t|
-    t.string "tag"
-    t.decimal "shl_number"
-    t.date "spawning_date"
-    t.date "date_attempted"
-    t.string "spawning_success"
-    t.decimal "nbr_of_eggs_spawned"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -46,4 +36,16 @@ ActiveRecord::Schema.define(version: 2019_07_26_144739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "spawning_success_raw_csvs", force: :cascade do |t|
+    t.string "tag"
+    t.decimal "shl_number"
+    t.date "spawning_date"
+    t.date "date_attempted"
+    t.string "spawning_success"
+    t.decimal "nbr_of_eggs_spawned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end
