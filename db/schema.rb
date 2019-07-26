@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_192306) do
     t.boolean "raw", default: true, null: false
     t.date "mortality_date"
     t.string "cohort"
-    t.string "shl_number"
+    t.string "shl_case_number"
     t.date "spawning_date"
     t.integer "shell_box"
     t.string "shell_container"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_192306) do
     t.string "tags"
     t.string "comments"
   end
-  
+
   create_table "pedigrees", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.string "cohort"
