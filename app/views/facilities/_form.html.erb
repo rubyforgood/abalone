@@ -1,0 +1,27 @@
+<%= form_with(model: facility, local: true) do |form| %>
+  <% if facility.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
+
+      <ul>
+      <% facility.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
