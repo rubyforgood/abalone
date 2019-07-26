@@ -28,6 +28,11 @@ ActiveRecord::Schema.define(version: 2019_07_26_140157) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
-  end
 
+    create_table "facilities", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end
