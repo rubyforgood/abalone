@@ -18,7 +18,7 @@ set :deploy_to, "/srv/www/abalone"
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 append :linked_files, "config/master.key"
@@ -44,3 +44,7 @@ set :rvm_custom_path, '/usr/share/rvm'
 
 # capistrano/rails
 set :migration_role, :app
+
+namespace :deploy do
+  after :starting, 'envvars:load'
+end
