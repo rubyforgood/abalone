@@ -4,7 +4,7 @@ class CreateMortalityTracking < ActiveRecord::Migration[5.2]
       t.boolean :raw, default: true, null: false
       t.date :mortality_date
       t.string :cohort
-      t.string :shl_number
+      t.string :shl_case_number
       t.date :spawning_date
       t.integer :shell_box
       t.string :shell_container

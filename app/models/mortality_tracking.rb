@@ -1,7 +1,7 @@
 class MortalityTracking < ApplicationRecord
   HEADERS = {
     COHORT: "cohort",
-    SHL_NUMBER: "shl_number",
+    SHL_CASE_NUMBER: "shl_case_number",
     SHELL_CONTAINER: "shell_container",
     ANIMAL_LOCATION: "animal_location",
     APPROXIMATION: "approximation",
