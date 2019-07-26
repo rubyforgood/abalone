@@ -52,8 +52,17 @@ ActiveRecord::Schema.define(version: 2019_07_26_182945) do
     t.string "initials"
     t.string "tags"
     t.string "comments"
+  end
+
+  create_table "spawning_successes", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.string "tag"
+    t.decimal "shl_number"
+    t.date "spawning_date"
+    t.date "date_attempted"
+    t.string "spawning_success"
+    t.decimal "nbr_of_eggs_spawned"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
 end
