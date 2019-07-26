@@ -1,4 +1,4 @@
-class SpawningSuccess < ApplicationRecord
+class SpawningSuccessRawData < ApplicationRecord
   HEADERS = {
       TAG: "Tag",
       SHL_NUMBER: "SHL_number",

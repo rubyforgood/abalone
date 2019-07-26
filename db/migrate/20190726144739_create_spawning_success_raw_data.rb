@@ -1,6 +1,6 @@
-class CreateSpawningSuccesses < ActiveRecord::Migration[5.2]
+class CreateSpawningSuccessRawData < ActiveRecord::Migration[5.2]
   def change
-    create_table :spawning_successes do |t|
+    create_table :spawning_success_raw_data do |t|
       t.string :tag
       t.numeric :shl_number
       t.date :spawning_date

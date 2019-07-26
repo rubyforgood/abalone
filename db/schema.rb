@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_144739) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "spawning_successes", force: :cascade do |t|
+  create_table "spawning_success_raw_data", force: :cascade do |t|
     t.string "tag"
     t.decimal "shl_number"
     t.date "spawning_date"
