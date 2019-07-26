@@ -74,6 +74,10 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano3-puma (4.0.0)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (~> 4.0)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     creek (2.4.4)
@@ -243,6 +247,7 @@ DEPENDENCIES
   capistrano-bundler (~> 1.6)
   capistrano-rails (~> 1.4)
   capistrano-rvm (~> 0.1)
+  capistrano3-puma (~> 4.0)
   creek
   daemons
   delayed_job_active_record
