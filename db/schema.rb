@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 2019_07_26_182100) do
     t.string "initial_holding_facility"
     t.string "final_holding_facility_date_of_arrival"
     t.string "otc_treatment_completion_date"
+  end
+
+  create_table "spawning_successes", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.string "tag"
+    t.decimal "shl_number"
+    t.date "spawning_date"
+    t.date "date_attempted"
+    t.string "spawning_success"
+    t.decimal "nbr_of_eggs_spawned"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
