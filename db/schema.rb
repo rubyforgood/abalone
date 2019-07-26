@@ -37,6 +37,23 @@ ActiveRecord::Schema.define(version: 2019_07_26_192306) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "mortality_trackings", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "mortality_date"
+    t.string "cohort"
+    t.string "shl_case_number"
+    t.date "spawning_date"
+    t.integer "shell_box"
+    t.string "shell_container"
+    t.string "animal_location"
+    t.integer "number_morts"
+    t.string "approximation"
+    t.string "processed_by_shl"
+    t.string "initials"
+    t.string "tags"
+    t.string "comments"
+  end
+
   create_table "pedigrees", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.string "cohort"
