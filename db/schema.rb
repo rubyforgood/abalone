@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_144739) do
     t.decimal "shl_number"
     t.date "spawning_date"
     t.date "date_attempted"
-    t.decimal "spawning_success"
+    t.string "spawning_success"
     t.decimal "nbr_of_eggs_spawned"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

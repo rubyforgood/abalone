@@ -5,7 +5,7 @@ class CreateSpawningSuccesses < ActiveRecord::Migration[5.2]
       t.numeric :shl_number
       t.date :spawning_date
       t.date :date_attempted
-      t.numeric :spawning_success
+      t.string :spawning_success
       t.numeric :nbr_of_eggs_spawned
 
       t.timestamps
