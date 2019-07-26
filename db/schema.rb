@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_173323) do
+ActiveRecord::Schema.define(version: 2019_07_26_144739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,8 @@ ActiveRecord::Schema.define(version: 2019_07_26_173323) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "spawning_success_raw_csvs", force: :cascade do |t|
+  create_table "spawning_successes", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
     t.string "tag"
     t.decimal "shl_number"
     t.date "spawning_date"

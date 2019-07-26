@@ -1,6 +1,7 @@
-class CreateSpawningSuccessRawData < ActiveRecord::Migration[5.2]
+class CreateSpawningSuccess < ActiveRecord::Migration[5.2]
   def change
-    create_table :spawning_success_raw_data do |t|
+    create_table :spawning_successes do |t|
+      t.boolean :raw, null: false, default: true
       t.string :tag
       t.numeric :shl_number
       t.date :spawning_date
