@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_192306) do
+ActiveRecord::Schema.define(version: 2019_07_26_211013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,14 +104,14 @@ ActiveRecord::Schema.define(version: 2019_07_26_192306) do
     t.string "proximity_to_nearest_neighbor"
     t.string "collection_method_notes"
     t.string "foot_condition_notes"
-    t.string "collection_depth"
-    t.string "length"
-    t.string "weight"
+    t.decimal "collection_depth"
+    t.decimal "length"
+    t.decimal "weight"
     t.string "gonad_score"
     t.string "predicted_sex"
     t.string "initial_holding_facility"
-    t.string "final_holding_facility_date_of_arrival"
-    t.string "otc_treatment_completion_date"
+    t.string "final_holding_facility_and_date_of_arrival"
+    t.date "otc_treatment_completion_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
