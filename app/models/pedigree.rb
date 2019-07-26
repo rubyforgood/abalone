@@ -1,0 +1,2 @@
+class Pedigree < ApplicationRecord
+end
