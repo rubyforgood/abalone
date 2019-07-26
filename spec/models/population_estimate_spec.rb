@@ -1,5 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe PopulationEstimate, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:population_estimate) { FactoryBot.create :population_estimate }
+
+  describe 'structure' do
+    it { is_expected.to have_db_column :sample_date }
+    it { is_expected.to have_db_column :shl_case_number }
+    it { is_expected.to have_db_column :spawning_date }
+    it { is_expected.to have_db_column :lifestage }
+    it { is_expected.to have_db_column :abundance }
+    it { is_expected.to have_db_column :facility }
+    it { is_expected.to have_db_column :notes }
+
+    describe 'it only has 10 columns' do
+      it { expect(PopulationEstimate.columns.count).to eq 11 }
+    end
+  end
 end
