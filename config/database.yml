@@ -82,4 +82,5 @@ production:
   <<: *default
   database: abalone_production
   username: abalone
+  host: localhost
   password: <%= ENV['ABALONE_DATABASE_PASSWORD'] %>
