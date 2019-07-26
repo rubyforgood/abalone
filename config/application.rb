@@ -29,5 +29,8 @@ module Abalone
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # background processing with delayed_job
+    config.active_job.queue_adapter = :delayed_job
   end
 end
