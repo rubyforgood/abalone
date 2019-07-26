@@ -52,6 +52,26 @@ ActiveRecord::Schema.define(version: 2019_07_26_192306) do
     t.string "tags"
     t.string "comments"
   end
+  
+  create_table "wild_collections", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.string "tag"
+    t.date "collection_date"
+    t.string "general_location"
+    t.string "precise_location"
+    t.point "collection_coodinates"
+    t.string "proximity_to_nearest_neighbor"
+    t.string "collection_method_notes"
+    t.string "foot_condition_notes"
+    t.string "collection_depth"
+    t.string "length"
+    t.string "weight"
+    t.string "gonad_score"
+    t.string "predicted_sex"
+    t.string "initial_holding_facility"
+    t.string "final_holding_facility_date_of_arrival"
+    t.string "otc_treatment_completion_date"
+  end
 
   create_table "pedigrees", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
