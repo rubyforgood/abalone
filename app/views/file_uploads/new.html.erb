@@ -1,0 +1,16 @@
+<h1>File Uploads</h1>
+
+<h2>Upload a Spreadsheet to Import its Data</h2>
+
+<p>Select the type of spreadsheet and upload a .xlsx or .csv spreadsheet.</p>
+<p>CSV files are recommended for large spreadsheets (over 1000 rows).</p>
+
+<%= form_tag({action: :upload}, multipart: true, method: 'post') do %>
+  <%= label_tag(:category, 'Category') %>
+  <%= select_tag(:category, options_for_select(@categories)) %>
+  <br />
+  <%= label_tag('input_file', 'Select a file to upload') %>
+  <%= file_field_tag 'input_file' %>
+  <br />
+  <%= submit_tag('Upload File for Processing') %>
+<% end %>
