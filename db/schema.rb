@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_183847) do
+ActiveRecord::Schema.define(version: 2019_07_26_192306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_183847) do
   create_table "population_estimates", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.date "sample_date"
-    t.string "shl_number"
+    t.string "shl_case_number"
     t.date "spawning_date"
     t.string "lifestage"
     t.string "abundance"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2019_07_26_183847) do
   create_table "spawning_successes", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.string "tag"
-    t.decimal "shl_number"
+    t.string "shl_case_number"
     t.date "spawning_date"
     t.date "date_attempted"
     t.string "spawning_success"
