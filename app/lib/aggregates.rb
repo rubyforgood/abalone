@@ -33,8 +33,32 @@ module Aggregates
     end
 
     # average growth rates of tagged individuals within populations or size classes over time
-    def self.growth_rates(population)
+    def self.growth_rates(date_range, tags, population=nil)
+      query = TaggedAnimalAssessment.not_raw.where(tag: tags)
+      query = query.where(tags: tags, spawning_date: population) if population
+      return {} if query.empty?
 
+      animal_growth = {}
+
+      query.pluck(:tag).uniq.each do |tag|
+        hash = query.where(tag: tag).group_by(&:measurement_date)
+        # => {date => [record1, record2,...recordn]}
+        count = 1 # for tracking rolling average
+
+        hash.each_with_object(0) do |(k, val), rolling_sum|
+          # calc rolling average
+          # potential for innacurate calc if they have two measurements on the same day
+          raise "Two measurements for the same day" if val.count > 1
+          val = val.first
+          hash[k] =  ((val.length + rolling_sum) / count.to_f).round(2)
+          # update tracking values for rolling avg
+          count += 1
+          rolling_sum += val.length
+        end
+        animal_growth[tag] = hash
+      end
+
+      animal_growth
     end
 
     # mortality within a cohort/population over time
