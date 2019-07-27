@@ -3,12 +3,12 @@ module Aggregates
 
     # total number of animals in the program, by spawning date and holding facility
     def self.total_animals_by_spawndate_and_facility(spawning_date, facility)
-      PopulationEstimate.where(facility: facility, spawning_date: spawning_date).pluck(:abundance).map(&:to_i).reduce(:+)
+      PopulationEstimate.not_raw.where(facility: facility, spawning_date: spawning_date).pluck(:abundance).map(&:to_i).reduce(:+)
     end
 
     # spawning history of the broodstock (i.e., when we attempted to spawn them, were they successful in releasing gametes)
     def self.spawning_history(shl_case_number, successful= %w[y Y])
-      query = SpawningSuccess.where(shl_case_number: shl_case_number, spawning_success: successful).group_by(&:date_attempted)
+      query = SpawningSuccess.not_raw.where(shl_case_number: shl_case_number, spawning_success: successful).group_by(&:date_attempted)
       query.each{ |k,v|  query[k] = v.map(&:spawning_success).count  }
     end
 
@@ -19,8 +19,12 @@ module Aggregates
     end
 
     # size distribution of animals within a population or within the entire captive breeding program
-    def self.size_distribution(cohort)
-
+    def self.size_distribution(spawning_date= nil)
+      if spawning_date.present?
+        query = TaggedAnimalAssesment.not_raw.where(spawning_date: spawning_date)
+      else
+        query = TaggedAnimalAssesment.not_raw.all
+      end
     end
 
     # average growth rates of tagged individuals within populations or size classes over time
@@ -30,7 +34,7 @@ module Aggregates
 
     # mortality within a cohort/population over time
     def self.deaths_by_cohort_for_date_range(cohort, date_range)
-      query_results = MortalityTracking.where(cohort: cohort, mortality_date: date_range ).group_by(&:mortality_date)
+      query_results = MortalityTracking.not_raw.where(cohort: cohort, mortality_date: date_range ).group_by(&:mortality_date)
       query_results.each{|k,v| query_results[k] = v.map(&:number_morts).sum }
     end
   end
