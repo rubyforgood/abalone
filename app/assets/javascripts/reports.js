@@ -1,34 +1,50 @@
+var Reports = (function() {
+  var chart = null;
+
+  var showChart = function(element) {
+    switch (element.id) {
+      case 'spawning-chart':
+        new SpawningChart(element);
+        break;
+      case 'production-chart':
+        new ProductionChart(element);
+        break;
+      case 'mortality-chart':
+        new MortalityChart(element);
+        break;
+      case 'growth-chart':
+        new GrowthChart(element);
+        break;
+      default:
+        console.log("Unknown chart type " + element.id);
+    }
+  };
+
+  return {
+    showChart: showChart
+  };
+})();
+
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('chart') === null) return; 
 
-  var myChart = Highcharts.chart('chart', {
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Animals Spawned by Year'
-    },
-    xAxis: {
-      categories: ['2015', '2016', '2017', '2018', '2019']
-    },
-    yAxis: {
-      title: {
-        text: '# of Animals'
+  var tabs = document.querySelectorAll('.tabs li');
+
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function() {
+      if (this.classList.contains('is-active')) return;
+
+      for (var i = 0; i < tabs.length; i++) {
+        if (tabs[i] !== this) {
+          tabs[i].classList.remove('is-active');
+        }
       }
-    },
-    series: [
-      {
-        name: 'BML',
-        data: [120, 88, 246, 275, 182]
-      }, 
-      {
-        name: 'TAF',
-        data: [75, 100, 90, 108, 117]
-      },
-      {
-        name: 'UCSB',
-        data: [177, 80, 92, 120, 155]
-      }
-    ]
-  });
+
+      this.classList.toggle('is-active');
+
+      Reports.showChart(this);
+    });
+  }
+
+  Reports.showChart(document.querySelectorAll('.tabs .is-active')[0]);
 });
