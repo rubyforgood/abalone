@@ -1,4 +1,6 @@
 class WildCollection < ApplicationRecord
+  include Raw
+
   HEADERS = {
     TAG: "Tag",
     COLLECTION_DATE: "Collection_date",

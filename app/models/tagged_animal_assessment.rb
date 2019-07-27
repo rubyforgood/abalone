@@ -1,5 +1,7 @@
 class TaggedAnimalAssessment < ApplicationRecord
-    HEADERS = {
+  include Raw
+
+  HEADERS = {
         MEASUREMENT_DATE: "Measurement_date",
         COHORT: "Cohort",
         SPAWNING_DATE: "Spawning_date",

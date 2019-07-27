@@ -1,4 +1,6 @@
 class SpawningSuccess < ApplicationRecord
+  include Raw
+
   HEADERS = {
       TAG: "Tag",
       SHL_CASE_NUMBER: "SHL Case Number",

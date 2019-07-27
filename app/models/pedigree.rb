@@ -1,4 +1,6 @@
 class Pedigree < ApplicationRecord
+  include Raw
+
   HEADERS = {
     COHORT: "Cohort",
     SHL_CASE_NUMBER: 'SHL Case #',
