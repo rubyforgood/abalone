@@ -11,9 +11,9 @@ module CsvImporter
     csv_category_model = model_from_category(category_name)
     IOStreams.each_record(filename) do |record|
       attrs = translate_attribute_names(record, category_name)
-      spawning_success = csv_category_model.new(attrs.merge({raw: false}))
-      spawning_success.cleanse_data! if spawning_success.respond_to?(:cleanse_data!)
-      spawning_success.save
+      csv_row_record = csv_category_model.new(attrs.merge({raw: false}))
+      csv_row_record.cleanse_data! if csv_row_record.respond_to?(:cleanse_data!)
+      csv_row_record.save
     end
   end
 
@@ -26,7 +26,6 @@ module CsvImporter
     when CSV_CATEGORIES[:UNTAGGED_ANIMAL_ASSESSMENT]
       UntaggedAnimalAssessment
     else
-      p category_name
       raise InvalidCsvCategoryError
     end
   end

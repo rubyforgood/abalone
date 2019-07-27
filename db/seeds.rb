@@ -24,6 +24,6 @@ facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code
 Dir["db/sample_data_files/*"].each do |category_dir|
   category_class_name = File.basename(category_dir).titleize
   Dir["#{category_dir}/*.csv"].each_with_index do |filename, i|
-    CsvImporter.import(filename, category_class_name) if i == 0
+    CsvImporter.import(filename, category_class_name)
   end
 end
