@@ -1,4 +1,4 @@
-﻿,Measurement_date,Cohort,Spawning_date,Growout_Rack,Growout_Column,Growout_Trough,Length (mm),Mass (g),Gonad Score,Predicted Sex,Notes
+﻿,Measurement_date,Cohort,Spawning_date,Growout_Rack,Growout_Column,Growout_Trough,Length,Mass,Gonad Score,Predicted Sex,Notes
 1,6/12/18,SF16-9A,3/2/16,3,A,1,14.3,0.35,0,,
 2,6/12/18,SF16-9A,3/2/16,3,A,1,64.2,19.80,1,M,
 3,6/12/18,SF16-9A,3/2/16,3,A,1,11.7,0.18,0,,
