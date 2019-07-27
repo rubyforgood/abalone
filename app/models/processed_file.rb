@@ -1,0 +1,2 @@
+class ProcessedFile < ApplicationRecord
+end
