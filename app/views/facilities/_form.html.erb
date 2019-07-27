@@ -12,16 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
   </div>
 
   <div class="field">
-    <%= form.label :code %>
-    <%= form.text_field :code %>
+    <%= form.label :code, class: 'label' %>
+    <%= form.text_field :code, class: 'input' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="field">
+    <div class="control">
+      <%= form.submit('Submit', class: 'button is-primary') %>
+    </div>
   </div>
 <% end %>

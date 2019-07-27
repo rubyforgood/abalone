@@ -18,25 +18,28 @@
           <h1 class="has-text-weight-bold">Abalone Analytics</h1>
         </div>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <a role="button" data-target="nav-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
         </a>
       </div>
 
-      <div id="navbarBasicExample" class="navbar-menu">
+      <div id="nav-menu" class="navbar-menu">
         <div class="navbar-start">
           <%= link_to 'Home', root_path, class: 'navbar-item'%>
+          <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
+
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
-              Files
+              Uploads
             </a>
             <div class="navbar-dropdown">
               <%= link_to 'Files List', file_uploads_path, class: 'navbar-item'%>
               <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
             </div>
           </div>
+
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               More
@@ -57,17 +60,17 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-primary">
-              <span class="icon">
-                <i class="fab fa-github"></i>
-              </span>
-              <strong>Github</strong>
-            </a>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-primary">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <strong>Github</strong>
+              </a>
+            </div>
           </div>
         </div>
       </div>
