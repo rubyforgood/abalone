@@ -50,8 +50,8 @@ module Aggregates
           # potential for innacurate calc if they have two measurements on the same day
           raise "Two measurements for the same day" if val.count > 1
           val = val.first
-          # the .to_s is to swap this from an less readable big decimal to something readable
-          hash[k] =  ((val.length + rolling_sum) / count.to_f).round(2).to_s
+          # the .to_f is to swap this from a less readable big decimal to something readable
+          hash[k] =  ((val.length + rolling_sum) / count.to_f).round(2).to_f
           # update tracking values for rolling avg
           count += 1
           rolling_sum += val.length
