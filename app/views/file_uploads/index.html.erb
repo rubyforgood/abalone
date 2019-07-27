@@ -1,5 +1,7 @@
 <h1>Uploaded Files</h1>
 <br />
+<%= link_to 'Upload New File', new_file_upload_path %>
+<br />
 <%- @processed_files.each do |pf| %>
   Filename: <%= pf.original_filename %><br />
   Created At: <%= pf.created_at %><br />
