@@ -3,7 +3,7 @@ module Aggregates
 
     # total number of animals in the program, by spawning date and holding facility
     def self.total_animals_by_spawndate_and_facility(spawning_date, facility)
-
+      PopulationEstimate.where(facility: facility, spawning_date: spawning_date).pluck(:abundance).map(&:to_i).reduce(:+)
     end
 
     # spawning history of the broodstock (i.e., when we attempted to spawn them, were they successful in releasing gametes)
@@ -14,16 +14,18 @@ module Aggregates
 
     # total egg, larval, or juvenile production by year (esp. how many year-old animals are produced annually)
     def self.offspring_production(life_stage, year)
-      
+
 
     end
 
     # size distribution of animals within a population or within the entire captive breeding program
     def self.size_distribution(cohort)
+
     end
 
     # average growth rates of tagged individuals within populations or size classes over time
     def self.growth_rates(population?)
+
     end
 
     # mortality within a cohort/population over time
