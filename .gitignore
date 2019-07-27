@@ -27,3 +27,5 @@
 /config/master.key
 .*.swp
 .idea/
+
+.DS_Store
