@@ -18,6 +18,7 @@ class SpawningSuccessJob < ApplicationJob
         fail_processed_file("Does not have valid headers. Data not imported!")
       end
     end
+    remove_file!(filename)
     @processed_file.save
   end
 
@@ -95,6 +96,10 @@ class SpawningSuccessJob < ApplicationJob
   # original_filename('1564252385_859395139_spawn_newheaders.xlsx') returns 'spawn_newheaders.xlsx'
   def original_filename(filename)
     /\d+_\d+_(.+)?/.match(filename.to_s)&.captures&.first
+  end
+
+  def remove_file!(filename)
+    Rails.root.join('storage', filename).delete
   end
 
 end
