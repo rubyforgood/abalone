@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_211013) do
+ActiveRecord::Schema.define(version: 2019_07_26_192306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,23 @@ ActiveRecord::Schema.define(version: 2019_07_26_211013) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "mortality_trackings", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "mortality_date"
+    t.string "cohort"
+    t.string "shl_case_number"
+    t.date "spawning_date"
+    t.integer "shell_box"
+    t.string "shell_container"
+    t.string "animal_location"
+    t.integer "number_morts"
+    t.string "approximation"
+    t.string "processed_by_shl"
+    t.string "initials"
+    t.string "tags"
+    t.string "comments"
   end
 
   create_table "pedigrees", force: :cascade do |t|
@@ -94,23 +111,6 @@ ActiveRecord::Schema.define(version: 2019_07_26_211013) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "untagged_animal_assessments", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "measurement_date"
-    t.string "cohort"
-    t.date "spawning_date"
-    t.decimal "growout_rack"
-    t.string "growout_column"
-    t.decimal "growout_trough"
-    t.decimal "length"
-    t.decimal "mass"
-    t.decimal "gonad_score"
-    t.string "predicted_sex"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "wild_collections", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.string "tag"
@@ -121,14 +121,14 @@ ActiveRecord::Schema.define(version: 2019_07_26_211013) do
     t.string "proximity_to_nearest_neighbor"
     t.string "collection_method_notes"
     t.string "foot_condition_notes"
-    t.decimal "collection_depth"
-    t.decimal "length"
-    t.decimal "weight"
+    t.string "collection_depth"
+    t.string "length"
+    t.string "weight"
     t.string "gonad_score"
     t.string "predicted_sex"
     t.string "initial_holding_facility"
-    t.string "final_holding_facility_and_date_of_arrival"
-    t.date "otc_treatment_completion_date"
+    t.string "final_holding_facility_date_of_arrival"
+    t.string "otc_treatment_completion_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
