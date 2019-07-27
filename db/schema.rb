@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_144739) do
+ActiveRecord::Schema.define(version: 2019_07_26_211013) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,14 +37,98 @@ ActiveRecord::Schema.define(version: 2019_07_26_144739) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pedigrees", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.string "cohort"
+    t.string "shl_case_number"
+    t.date "spawning_date"
+    t.string "mother"
+    t.string "father"
+    t.string "seperate_cross_within_cohort"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "population_estimates", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "sample_date"
+    t.string "shl_case_number"
+    t.date "spawning_date"
+    t.string "lifestage"
+    t.string "abundance"
+    t.string "facility"
+    t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "spawning_successes", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.string "tag"
-    t.decimal "shl_number"
+    t.string "shl_case_number"
     t.date "spawning_date"
     t.date "date_attempted"
     t.string "spawning_success"
     t.decimal "nbr_of_eggs_spawned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tagged_animal_assessments", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "measurement_date"
+    t.string "shl_case_number"
+    t.date "spawning_date"
+    t.string "tag"
+    t.string "from_growout_rack"
+    t.string "from_growout_column"
+    t.string "from_growout_trough"
+    t.string "to_growout_rack"
+    t.string "to_growout_column"
+    t.string "to_growout_trough"
+    t.decimal "length"
+    t.string "gonad_score"
+    t.string "predicted_sex"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "untagged_animal_assessments", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "measurement_date"
+    t.string "cohort"
+    t.date "spawning_date"
+    t.decimal "growout_rack"
+    t.string "growout_column"
+    t.decimal "growout_trough"
+    t.decimal "length"
+    t.decimal "mass"
+    t.decimal "gonad_score"
+    t.string "predicted_sex"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "wild_collections", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.string "tag"
+    t.date "collection_date"
+    t.string "general_location"
+    t.string "precise_location"
+    t.point "collection_coodinates"
+    t.string "proximity_to_nearest_neighbor"
+    t.string "collection_method_notes"
+    t.string "foot_condition_notes"
+    t.decimal "collection_depth"
+    t.decimal "length"
+    t.decimal "weight"
+    t.string "gonad_score"
+    t.string "predicted_sex"
+    t.string "initial_holding_facility"
+    t.string "final_holding_facility_and_date_of_arrival"
+    t.date "otc_treatment_completion_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

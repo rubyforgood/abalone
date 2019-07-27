@@ -1,6 +1,6 @@
 class UntaggedAnimalAssessment < ApplicationRecord
   HEADERS = {
-    MEASUREMENT_DATA: "Measurement_data",
+    MEASUREMENT_DATE: "Measurement_date",
     COHORT: "Cohort",
     SPAWNING_DATE: "Spawning_date",
     GROWOUT_RACK: "Growout_Rack",
