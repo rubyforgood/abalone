@@ -10,6 +10,7 @@ class FileUploadsController < ApplicationController
   ].freeze
 
   def index
+    @processed_files = ProcessedFile.all.order(updated_at: :desc).first(20)
   end
 
   def new

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_211013) do
+ActiveRecord::Schema.define(version: 2019_07_27_173430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,17 @@ ActiveRecord::Schema.define(version: 2019_07_26_211013) do
     t.string "abundance"
     t.string "facility"
     t.string "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "processed_files", force: :cascade do |t|
+    t.string "filename"
+    t.string "original_filename"
+    t.string "category"
+    t.string "status"
+    t.jsonb "job_stats", default: "{}", null: false
+    t.text "job_errors"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

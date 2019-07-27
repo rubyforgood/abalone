@@ -1,24 +1,24 @@
 class SpawningSuccessJob < ApplicationJob
 
-  attr_accessor :stats
+  attr_accessor :processed_file, :stats
 
-  # TODO Check if a file was already uploaded
-  # TODO Create a new table to track uploaded files and processing results:
-  #   filename
-  #   category
-  #   job id
-  #   completion status
-  #   job stats
-  #   job errors
   def perform(*args)
     filename = args[0]
     full_path = Rails.root.join('storage', filename).to_s
     initialize_stats!
-    if validate_headers(full_path)
-      import_records(full_path)
+    initialize_processed_file(filename)
+    if already_processed?(filename)
+      fail_processed_file("Already processed a file with the same name. Data not imported!")
     else
-      Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
+      if validate_headers(full_path)
+        import_records(full_path)
+        complete_processed_file!
+      else
+        Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
+        fail_processed_file("Does not have valid headers. Data not imported!")
+      end
     end
+    @processed_file.save
   end
 
   def validate_headers(filename)
@@ -67,4 +67,34 @@ class SpawningSuccessJob < ApplicationJob
     attrs['nbr_of_eggs_spawned'] = attrs.delete('number_of_eggs_spawned_if_female')
     attrs
   end
+
+  def already_processed?(filename)
+    ProcessedFile.where(status: 'Processed').where(original_filename: original_filename(filename)).count > 0
+  end
+
+  def initialize_processed_file(filename)
+    @processed_file = ProcessedFile.create(filename: filename,
+                         original_filename: original_filename(filename),
+                         category: self.class.to_s.gsub(/Job/,''),
+                         status: 'Running',
+                         job_stats: @stats)
+  end
+
+  def complete_processed_file!
+    @processed_file.job_stats = @stats
+    @processed_file.status = 'Processed'
+  end
+
+  def fail_processed_file(error)
+    @processed_file.status = 'Failed'
+    @processed_file.job_stats = {}
+    @processed_file.job_errors = error
+  end
+
+  # Remove the prepended timestamp.
+  # original_filename('1564252385_859395139_spawn_newheaders.xlsx') returns 'spawn_newheaders.xlsx'
+  def original_filename(filename)
+    /\d+_\d+_(.+)?/.match(filename.to_s)&.captures&.first
+  end
+
 end
