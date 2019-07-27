@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post '/file_uploads', to: 'file_uploads#upload'
   resources :file_uploads, only: [:index, :new]
 
+  get 'reports', action: 'index', controller: 'reports'
+
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
 
