@@ -21,12 +21,8 @@ module Aggregates
 
     # size distribution of animals within a population or within the entire captive breeding program
     def self.size_distribution(spawning_date= nil)
-      if spawning_date.present?
-        query = TaggedAnimalAssessment.not_raw.where(spawning_date: spawning_date)
-      else
-        query = TaggedAnimalAssessment.not_raw.all
-      end
-
+      query = TaggedAnimalAssessment.not_raw
+      query = query.where(spawning_date: spawning_date) if spawning_date
       query.group(:length).count
     end
 
