@@ -1,15 +1,72 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Abalone</title>
+    <title>Abalone Analytics</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
+    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <div class="navbar-item">
+          <%= image_tag 'mollusc-icon.png' %>
+          <h1 class="has-text-weight-bold">Abalone Analytics</h1>
+        </div>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link_to 'Home', root_path, class: 'navbar-item'%>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              More
+            </a>
+
+            <div class="navbar-dropdown">
+              <%= link_to 'About', about_path, class: 'navbar-item' %>
+
+              <a href="https://rubyforgood.org/" target="_blank" class="navbar-item">
+                Ruby for Good
+              </a>
+
+              <hr class="navbar-divider">
+
+              <a href="https://github.com/rubyforgood/abalone/issues/new" target="_blank" class="navbar-item">
+                Report an issue
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-primary">
+              <span class="icon">
+                <i class="fab fa-github"></i>
+              </span>
+              <strong>Github</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
     <%= yield %>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>
