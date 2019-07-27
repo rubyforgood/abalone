@@ -2,13 +2,14 @@ module Aggregates
   class Calculations
 
     # total number of animals in the program, by spawning date and holding facility
+    # spawndate acts as the cohort designator here
     def self.total_animals_by_spawndate_and_facility(spawning_date, facility)
       PopulationEstimate.not_raw.where(facility: facility, spawning_date: spawning_date).pluck(:abundance).map(&:to_i).reduce(:+)
     end
 
     # spawning history of the broodstock (i.e., when we attempted to spawn them, were they successful in releasing gametes)
-    def self.spawning_history(shl_case_number, successful= %w[y Y])
-      query = SpawningSuccess.not_raw.where(shl_case_number: shl_case_number, spawning_success: successful).group_by(&:date_attempted)
+    def self.spawning_history(spawning_date, successful= %w[y Y])
+      query = SpawningSuccess.not_raw.where(spawning_date: spawning_date, spawning_success: successful).group_by(&:date_attempted)
       query.each{ |k,v|  query[k] = v.map(&:spawning_success).count  }
     end
 
@@ -21,14 +22,16 @@ module Aggregates
     # size distribution of animals within a population or within the entire captive breeding program
     def self.size_distribution(spawning_date= nil)
       if spawning_date.present?
-        query = TaggedAnimalAssesment.not_raw.where(spawning_date: spawning_date)
+        query = TaggedAnimalAssessment.not_raw.where(spawning_date: spawning_date)
       else
-        query = TaggedAnimalAssesment.not_raw.all
+        query = TaggedAnimalAssessment.not_raw.all
       end
+
+      query.group(:length).count
     end
 
     # average growth rates of tagged individuals within populations or size classes over time
-    def self.growth_rates(population?)
+    def self.growth_rates(population)
 
     end
 
