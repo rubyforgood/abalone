@@ -11,6 +11,7 @@ module Aggregates
     end
 
     # spawning history of the broodstock (i.e., when we attempted to spawn them, were they successful in releasing gametes)
+    # => {date => n, date1 => n1, date2 => n2... }
     def self.spawning_history(spawning_date, successful= %w[y Y])
       query = SpawningSuccess.not_raw
                 .where(spawning_date: spawning_date, spawning_success: successful)
@@ -21,11 +22,12 @@ module Aggregates
 
     # total egg, larval, or juvenile production by year (esp. how many year-old animals are produced annually)
     def self.offspring_production(life_stage, year)
-
-
+      # TODO
+      {}
     end
 
     # size distribution of animals within a population or within the entire captive breeding program
+    # => {l => c, l2 => c2, l3 => c3, ....}
     def self.size_distribution(spawning_date= nil)
       query = TaggedAnimalAssessment.not_raw
       query = query.where(spawning_date: spawning_date) if spawning_date
@@ -33,6 +35,7 @@ module Aggregates
     end
 
     # average growth rates of tagged individuals within populations or size classes over time
+    # => {tag => {date => n, date2 => n2} }
     def self.growth_rates(date_range, tags, population=nil)
       query = TaggedAnimalAssessment.not_raw.where(tag: tags)
       query = query.where(tags: tags, spawning_date: population) if population
@@ -63,6 +66,7 @@ module Aggregates
     end
 
     # mortality within a cohort/population over time
+    # => { date => death_count, death2 => death_count2,... }
     def self.deaths_by_cohort_for_date_range(cohort, date_range)
       query_results = MortalityTracking.not_raw
                         .where(cohort: cohort, mortality_date: date_range )
