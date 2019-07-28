@@ -1,14 +1,18 @@
-<p id="notice"><%= notice %></p>
+<section class="section">
+  <div class="container">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @facility.name %>
-</p>
+    <p>
+      <strong>Name:</strong>
+      <%= @facility.name %>
+    </p>
 
-<p>
-  <strong>Code:</strong>
-  <%= @facility.code %>
-</p>
+    <p>
+      <strong>Code:</strong>
+      <%= @facility.code %>
+    </p>
 
-<%= link_to 'Edit', edit_facility_path(@facility) %> |
-<%= link_to 'Back', facilities_path %>
+    <%= link_to 'Edit', edit_facility_path(@facility) %> |
+    <%= link_to 'Back', facilities_path %>
+  </div>
+</section>

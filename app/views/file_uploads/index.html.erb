@@ -1,0 +1,14 @@
+<h1>Uploaded Files</h1>
+<br />
+<%= link_to 'Upload New File', new_file_upload_path %><br />
+<br />
+<%- @processed_files.each do |pf| %>
+  Filename: <%= pf.original_filename %><br />
+  Created At: <%= pf.created_at %><br />
+  Updated At: <%= pf.updated_at %><br />
+  Category: <%= pf.category %><br />
+  Status: <%= pf.status %><br />
+  Errors: <%= pf.job_errors %><br />
+  Statistics: <%= pf.job_stats %><br />
+  <hr />
+<% end %>
