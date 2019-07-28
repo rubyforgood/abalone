@@ -13,7 +13,7 @@ RSpec.describe PopulationEstimate, type: :model do
     it { is_expected.to have_db_column :notes }
 
     describe 'it only has 11 columns' do
-      it { expect(PopulationEstimate.columns.count).to eq 11 }
+      it { expect(PopulationEstimate.columns.count).to eq 12 }
     end
   end
 end

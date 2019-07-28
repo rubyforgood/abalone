@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
     <title>Abalone Analytics</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -14,8 +21,8 @@
     <nav class="navbar is-light" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <%= link_to(root_path, class: 'navbar-item') do %>
-          <%= image_tag 'mollusc-icon.png' %>
-          <h1 class="has-text-weight-bold">Abalone Analytics</h1>
+          <%= image_tag 'abalone_logo.png' %>
+          <h1 class="has-text-right has-text-weight-bold">Abalone Analytics</h1>
         <% end %>
 
         <a role="button" data-target="nav-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -27,7 +34,6 @@
 
       <div id="nav-menu" class="navbar-menu">
         <div class="navbar-start">
-          <%= link_to 'Home', root_path, class: 'navbar-item'%>
           <%= link_to 'Reports', reports_path, class: 'navbar-item'%>
           <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
 
@@ -65,7 +71,7 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-primary">
+              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-grey-light">
                 <span class="icon">
                   <i class="fab fa-github"></i>
                 </span>
@@ -81,6 +87,7 @@
 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
     <%= javascript_include_tag 'application' %>
   </body>
 </html>

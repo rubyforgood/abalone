@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.string "initials"
     t.string "tags"
     t.string "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "processed_file_id"
   end
 
@@ -137,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.decimal "growout_trough"
     t.decimal "length"
     t.decimal "mass"
-    t.string "gonad_score"
+    t.decimal "gonad_score"
     t.string "predicted_sex"
     t.text "notes"
     t.datetime "created_at", null: false
