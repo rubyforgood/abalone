@@ -19,7 +19,7 @@ var SpawningChart = function(element) {
       {
         name: 'BML',
         data: [120, 88, 246, 275, 182]
-      }, 
+      },
       {
         name: 'TAF',
         data: [75, 100, 90, 108, 117]
