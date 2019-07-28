@@ -1,4 +1,4 @@
-﻿Measurement_date,SHL_case_number,Spawning_date,Tag,From_Growout_Rack,From_Growout_Column,From_Growout_Trough,To_Growout_Rack,To_Growout_Column,To_Growout_Trough,Length,Gonad_Score,Predicted_Sex,Notes
+Measurement_date,SHL_case_number,Spawning_date,Tag,From_Growout_Rack,From_Growout_Column,From_Growout_Trough,To_Growout_Rack,To_Growout_Column,To_Growout_Trough,Length,Gonad_Score,Predicted_Sex,Notes
 6/17/18,SF16-9A,3/2/16,Lav_067,3,A,1,1,A,2,50.1,1,M,
 6/17/18,SF16-9A,3/2/16,Lav_005,3,A,1,1,A,2,39.8,1,M,
 6/17/18,SF16-9A,3/2/16,Lav_046,3,A,1,1,A,2,30.1,0,,

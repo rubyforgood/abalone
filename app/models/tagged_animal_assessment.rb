@@ -1,9 +1,8 @@
 class TaggedAnimalAssessment < ApplicationRecord
   include Raw
 
-  HEADERS = {
-        MEASUREMENT_DATE: "Measurement_date",
-        COHORT: "Cohort",
+  HEADERS = {MEASUREMENT_DATE: "Measurement_date",
+        SHL_CASE_NUMBER: "SHL_case_number",
         SPAWNING_DATE: "Spawning_date",
         TAG: "Tag",
         FROM_GROWOUT_RACK: "From_Growout_Rack",
@@ -18,7 +17,6 @@ class TaggedAnimalAssessment < ApplicationRecord
         NOTES: "Notes",
     }
 
-
   def measurement_date=(measurement_date_str)
     write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))
   end
@@ -29,5 +27,8 @@ class TaggedAnimalAssessment < ApplicationRecord
 
   def self.lengths_for_measurement(processed_file_id)
     select(:length).where(processed_file_id: processed_file_id).map { |record| record.length.to_f }
+  end
+
+  def cleanse_data!
   end
 end

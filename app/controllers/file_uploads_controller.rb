@@ -4,7 +4,7 @@ class FileUploadsController < ApplicationController
   # Ex: Selecting "Spawning Success" in the form will post "SpawningSuccess" and process the data with a SpawningSuccessJob.
   CATEGORIES = [
       ['Spawning Success','SpawningSuccess'],
-      # ['Tagged Animal Assessment','TaggedAnimalAssessment'],
+      ['Tagged Animal Assessment','TaggedAnimalAssessment'],
       # ['Untagged Animal Assessment', 'UntaggedAnimalAssessment'],
       # ['Wild Collection','WildCollection']
   ].freeze
