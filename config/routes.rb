@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/file_uploads/:id', to: 'file_uploads#show', as: 'show_processed_file'
 
   get 'reports', action: 'index', controller: 'reports'
+  get 'growth_rates', action: 'growth_rates', controller: 'reports'
 
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
