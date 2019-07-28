@@ -1,4 +1,6 @@
 class PopulationEstimate < ApplicationRecord
+  include Raw
+
   HEADERS = {
     SAMPLE_DATE: "Sample_date",
     SHL_CASE_NUMBER: "SHL Case Number",

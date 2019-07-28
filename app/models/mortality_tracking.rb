@@ -1,4 +1,6 @@
 class MortalityTracking < ApplicationRecord
+  include Raw
+
   HEADERS = {
     COHORT: "cohort",
     SHL_CASE_NUMBER: "shl_case_number",
