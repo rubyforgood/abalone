@@ -12,7 +12,7 @@ RSpec.describe SpawningSuccess, type: :model do
     it { is_expected.to have_db_column :nbr_of_eggs_spawned }
 
     describe 'it only has 10 columns' do
-      it { expect(SpawningSuccess.columns.count).to eq 10 }
+      it { expect(SpawningSuccess.columns.count).to eq 11 }
     end
   end
 end
