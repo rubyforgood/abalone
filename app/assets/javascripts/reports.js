@@ -1,7 +1,7 @@
-var Reports = (function() {
+var Reports = (function () {
   var chart = null;
+  var showChart = async function (element) {
 
-  var showChart = function(element) {
     switch (element.id) {
       case 'spawning-chart':
         new SpawningChart(element);
@@ -13,7 +13,14 @@ var Reports = (function() {
         new MortalityChart(element);
         break;
       case 'growth-chart':
-        new GrowthChart(element);
+        var randomFileNumber = Reports.randomFileNumber()
+        try {
+          var response = await fetch('reports/lengths/' + randomFileNumber)
+          var growthReportData = await response.json();
+          new GrowthChart(element, growthReportData);
+        } catch(e) {
+          alert(`Could not retrieve data for uploaded file ${randomFileNumber}.`)
+        }
         break;
       default:
         console.log("Unknown chart type " + element.id);
@@ -25,14 +32,21 @@ var Reports = (function() {
   };
 })();
 
-document.addEventListener('DOMContentLoaded', function() {
-  if (document.getElementById('chart') === null) return; 
+// TODO: get id of a specific measurement.
+var currentFile = 0
+Reports.randomFileNumber = function() {
+  if (currentFile >= 5) currentFile = 0
+  return ++currentFile
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.getElementById('chart') === null) return;
 
   var tabs = document.querySelectorAll('.tabs li');
 
   for (var i = 0; i < tabs.length; i++) {
-    tabs[i].addEventListener('click', function() {
-      if (this.classList.contains('is-active')) return;
+    tabs[i].addEventListener('click', function () {
+      // if (this.classList.contains('is-active')) return;
 
       for (var i = 0; i < tabs.length; i++) {
         if (tabs[i] !== this) {
