@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :file_uploads, only: [:index, :new]
   get '/file_uploads/:id', to: 'file_uploads#show', as: 'show_processed_file'
 
+  get 'reports', action: 'index', controller: 'reports'
+
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
 
