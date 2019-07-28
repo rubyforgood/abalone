@@ -2,15 +2,19 @@ class MortalityTracking < ApplicationRecord
   include Raw
 
   HEADERS = {
-    COHORT: "cohort",
-    SHL_CASE_NUMBER: "shl_case_number",
-    SHELL_CONTAINER: "shell_container",
-    ANIMAL_LOCATION: "animal_location",
-    APPROXIMATION: "approximation",
-    PROCESSED_BY_SHL: "processed_by_shl",
-    INITIALS: "initials",
-    TAGS: "tags",
-    COMMENTS: "comments"
+    MORTALITY_DATE: "Mortality_date",
+    COHORT: "Cohort",
+    SHL_CASE_NUMBER: "SHL number",
+    SPAWNING_DATE: "Spawning_date",
+    SHELL_BOX: "Shell_box",
+    SHELL_CONTAINER: "Shell_container",
+    ANIMAL_LOCATION: "Animal_location",
+    NUMBER_MORTS: "\# Morts",
+    APPROXIMATION:"Approximation?",
+    PROCESSED_BY_SHL: "Processed by SHL?",
+    INITIALS: "Initials",
+    TAGS: "Tag(s)",
+    COMMENTS: "Comments"
   }
 
 end

@@ -13,7 +13,7 @@ RSpec.describe Pedigree, type: :model do
     it { is_expected.to have_db_column :seperate_cross_within_cohort }
 
     describe 'it only has 10 columns' do
-      it { expect(Pedigree.columns.count).to eq 10 }
+      it { expect(Pedigree.columns.count).to eq 11 }
     end
   end
 end
