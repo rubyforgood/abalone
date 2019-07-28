@@ -26,4 +26,8 @@ class TaggedAnimalAssessment < ApplicationRecord
   def spawning_date=(spawning_date_str)
     write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
   end
+
+  def lengths_for_measurement(measurement_event_id)
+    select(length).where(measurement_event_id: measurement_event_id)
+  end
 end
