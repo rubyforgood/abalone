@@ -1,5 +1,5 @@
 .has-bg-img {
-  background-image: url("/images/abalone-hero.png"), linear-gradient(45deg, rgba(0, 158, 108, 0.8) 0%, rgba(0, 209, 178, 0.8) 100%);
+  background-image: url("/images/abalone-hero.png"), linear-gradient(45deg, rgba(61, 24, 144, 0.8) 0%, rgba(105, 120, 228, 0.8) 100%);
   background-repeat: no-repeat;
   background-position: center center;
 }
