@@ -20,4 +20,8 @@ class UntaggedAnimalAssessment < ApplicationRecord
   def spawning_date=(spawning_date_str)
     write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
   end
+
+  def self.lengths_for_measurement(processed_file_id)
+    select(:length).where(processed_file_id: processed_file_id).map { |record| record.length.to_f }
+  end
 end
