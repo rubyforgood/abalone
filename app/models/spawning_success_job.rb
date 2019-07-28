@@ -37,7 +37,9 @@ class SpawningSuccessJob < ApplicationJob
     raise "No input file specified" unless filename
     IOStreams.each_record(filename) do |record|
       attrs = translate_attribute_names(record)
-      spawning_success = SpawningSuccess.new(attrs.merge({raw: false}))
+      spawning_success = SpawningSuccess.new(
+          attrs.merge({processed_file_id: @processed_file.id, raw: false})
+      )
       spawning_success.cleanse_data!
       unless spawning_success.save
         Rails.logger.error "Error: Row #{@stats[:row_count]+2} is not valid. #{attrs}"
