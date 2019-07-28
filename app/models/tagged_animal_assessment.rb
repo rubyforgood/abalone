@@ -1,9 +1,8 @@
 class TaggedAnimalAssessment < ApplicationRecord
   include Raw
 
-  HEADERS = {
-        MEASUREMENT_DATE: "Measurement_date",
-        COHORT: "Cohort",
+  HEADERS = {MEASUREMENT_DATE: "Measurement_date",
+        SHL_CASE_NUMBER: "SHL_case_number",
         SPAWNING_DATE: "Spawning_date",
         TAG: "Tag",
         FROM_GROWOUT_RACK: "From_Growout_Rack",
@@ -18,12 +17,14 @@ class TaggedAnimalAssessment < ApplicationRecord
         NOTES: "Notes",
     }
 
-
   def measurement_date=(measurement_date_str)
     write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))
   end
 
   def spawning_date=(spawning_date_str)
     write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
+  end
+
+  def cleanse_data!
   end
 end
