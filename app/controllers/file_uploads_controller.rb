@@ -17,6 +17,14 @@ class FileUploadsController < ApplicationController
     @categories = [['Select One', '']] + CATEGORIES
   end
 
+  def show
+    if @processed_file = ProcessedFile.find(params['id'])
+      record_class = @processed_file.category.constantize
+      @headers = record_class::HEADERS.keys.map{|header| header.downcase}
+      @records = record_class.where(processed_file_id: @processed_file.id)
+    end
+  end
+
   def upload
 
     @category = params[:category]

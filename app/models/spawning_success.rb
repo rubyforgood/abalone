@@ -10,9 +10,9 @@ class SpawningSuccess < ApplicationRecord
 
   validates :shl_case_number, presence: true
 
+  # Note: Case is meaningful for spawning_success. n, Y and y mean different things.
   def cleanse_data!
-    tag = tag.to_s&.strip&.upcase
-    slh_case_number = shl_case_number.to_s&.strip&.upcase
-    spawning_success = spawning_success.to_s&.strip&.upcase
+    self.tag = self.tag.to_s&.strip&.upcase
+    self.shl_case_number = self.shl_case_number.to_s&.strip&.upcase
   end
 end

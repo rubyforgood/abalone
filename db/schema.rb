@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_27_173430) do
+ActiveRecord::Schema.define(version: 2019_07_27_201619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_173430) do
     t.string "initials"
     t.string "tags"
     t.string "comments"
+    t.integer "processed_file_id"
   end
 
   create_table "pedigrees", force: :cascade do |t|
@@ -64,6 +65,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_173430) do
     t.string "seperate_cross_within_cohort"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "processed_file_id"
   end
 
   create_table "population_estimates", force: :cascade do |t|
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_173430) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "processed_file_id"
   end
 
   create_table "processed_files", force: :cascade do |t|
@@ -100,6 +103,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_173430) do
     t.decimal "nbr_of_eggs_spawned"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "processed_file_id"
   end
 
   create_table "tagged_animal_assessments", force: :cascade do |t|
@@ -120,6 +124,25 @@ ActiveRecord::Schema.define(version: 2019_07_27_173430) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "processed_file_id"
+  end
+
+  create_table "untagged_animal_assessments", force: :cascade do |t|
+    t.boolean "raw", default: true, null: false
+    t.date "measurement_date"
+    t.string "cohort"
+    t.date "spawning_date"
+    t.decimal "growout_rack"
+    t.string "growout_column"
+    t.decimal "growout_trough"
+    t.decimal "length"
+    t.decimal "mass"
+    t.string "gonad_score"
+    t.string "predicted_sex"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "processed_file_id"
   end
 
   create_table "wild_collections", force: :cascade do |t|
@@ -142,6 +165,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_173430) do
     t.date "otc_treatment_completion_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "processed_file_id"
   end
 
 end
