@@ -35,7 +35,7 @@ var Reports = (function () {
 // TODO: get id of a specific measurement.
 var currentFile = 0
 Reports.randomFileNumber = function() {
-  if (currentFile >= 5) currentFile = 0
+  if (currentFile >= 4) currentFile = 0
   return ++currentFile
 }
 
