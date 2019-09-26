@@ -1,5 +1,7 @@
-# Abalone Analysis
-A Ruby on Rails application for tracking and analysis of data related to the monitoring of abalone populations. Currently live at [abalone.blrice.net](http://abalone.blrice.net/).
+# Abalone Analytics
+The Bodega Marine Laboratory's White Abalone captive breeding program is working to prevent the extinction of the White Abalone (Haliotis sorenseni), an endangered marine snail. White abalone are one of seven species found in California and are culturally significant to the native people of the area. White abalone were perilously overfished throughout the 20th century, resulting in a 99 percent population decrease by the end of the 1970s. This group is working to reverse their decline and have already seen some great success, they currently have more abalone in the lab than exist in the wild! Ruby for Good is supporting these efforts by developing a data tracking and analytics system for Abalone population trends, mortality rates, and breeding programs to help save this species from extinction.
+
+Currently live at [abalone.blrice.net](http://abalone.blrice.net/).
 
 ## Getting Started
 
