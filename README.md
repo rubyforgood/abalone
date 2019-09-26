@@ -12,8 +12,13 @@ This application is built on following and you must have these installed before 
 ### Setup
 After cloning this repo, execute the following commands in your CLI:
 ```
-
+gem install bundler
+bundle install
+rake db:create
+rake db:migrate
+rake db:seed
 ```
+
 
 ## Deployment
 The application is currently deployed on a DigitalOcean droplet via Capistrano. Once your public SSH key has been added to the appropriate user on the necessary server(s), use `bundle exec cap production deploy` to deploy the application, run migrations, and restart the Puma application server. Puma is reverse-proxied behind Nginx. The Nginx configuration is currently maintained outside of the Rails development pipeline.
