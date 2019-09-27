@@ -34,6 +34,7 @@ The application is currently deployed on a DigitalOcean droplet via Capistrano. 
 ## And Don't Forget...
 
 ...that Gary needs you.
+
 ![a white abalone](https://github.com/rubyforgood/abalone/blob/master/app/assets/images/Burgess%20white%20ab%201.png)
 
 _Photo credit: John Burgess/The Press Democrat_
