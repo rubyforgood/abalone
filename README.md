@@ -30,3 +30,11 @@ NOTE: This app is still in early stages of development (MVP). Please notify Elle
 
 ## Deployment
 The application is currently deployed on a DigitalOcean droplet via Capistrano. Once your public SSH key has been added to the appropriate user on the necessary server(s), use `bundle exec cap production deploy` to deploy the application, run migrations, and restart the Puma application server. Puma is reverse-proxied behind Nginx. The Nginx configuration is currently maintained outside of the Rails development pipeline. Currently live at [abalone.blrice.net](http://abalone.blrice.net/).
+
+## And Don't Forget...
+
+...that Gary needs you.
+![a white abalone](https://github.com/rubyforgood/abalone/blob/master/app/assets/images/Burgess%20white%20ab%201.png)
+
+_Photo credit: John Burgess/The Press Democrat_
+
