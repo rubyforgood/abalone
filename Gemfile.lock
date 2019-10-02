@@ -74,6 +74,9 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano3-delayed-job (1.7.6)
+      capistrano (~> 3.0, >= 3.0.0)
+      daemons (~> 1.3)
     capistrano3-puma (4.0.0)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -264,6 +267,7 @@ DEPENDENCIES
   capistrano-bundler (~> 1.6)
   capistrano-rails (~> 1.4)
   capistrano-rvm (~> 0.1)
+  capistrano3-delayed-job (~> 1.0)
   capistrano3-puma (~> 4.0)
   creek
   daemons

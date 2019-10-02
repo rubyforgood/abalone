@@ -54,3 +54,4 @@ gem 'iostreams'
 # background processing
 gem 'daemons'
 gem 'delayed_job_active_record'
+gem 'capistrano3-delayed-job', '~> 1.0'
