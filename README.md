@@ -5,13 +5,13 @@ The Bodega Marine Laboratory's White Abalone captive breeding program is working
 
 ## Getting Started
 
-### Prerequisites
+#### Prerequisites
 This application is built on following and you must have these installed before you begin:
 * Ruby (2.6.3)
 * Rails (5.2)
 * PostgreSQL (tested on 9.x)
 
-### Setup
+#### Setup
 After cloning this repo, execute the following commands in your CLI:
 ```
 gem install bundler
@@ -23,7 +23,7 @@ rake db:seed
 
 Then, run `bundle exec rails s` and browse to http://localhost:3000/.
 
-### Running Background Jobs
+#### Running Background Jobs
 
 The app uses the gem [delayed_job](https://github.com/collectiveidea/delayed_job) for processing CSVs. To run background jobs, run the following command in your terminal:
 ```
@@ -35,7 +35,29 @@ To confirm background jobs are processing, try uploading a CSV at `http://localh
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one.
 
-NOTE: This app is still in early stages of development (MVP). Please notify Ellen Cornelius at gellinellen@gmail.com if you would like to be assigned an issue or if you have questions about requirements.
+### Get Familiar with the App
+
+This app is still in early stages of development (MVP). We have defined our [MVP and additional milestones here](https://github.com/rubyforgood/abalone/milestones)
+
+Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues), which lay out our path to MVP. Feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue or email Ellen Cornelius at gellinellen@gmail.com.
+
+##### The Problem
+Our stakeholder, the Bodega Marine Laboratory, has more data that they can keep track of! They want to have a central data repository for all of their abalone captive breeding data instead of just spreadhseets. It is hard to run reports and anlytics on the data when it's not all in one place.
+
+##### The Solution
+We are building an app which has the following capabilities:
+1. Stores raw data: There are several different types of CSVs that the lab has been amassing (Mortality Tracking Data, Pedigree Data, Population Estimate Data, Spawning Success Data, Tagged Animal Assessment Data, Untagged Animal Assessment Data, and Wild Collection Data). Examples of these CSVs can be found in the [`db/sample_data_files`](https://github.com/rubyforgood/abalone/tree/master/db/sample_data_files) directory.
+2. Imports CSVs: Users are able to import single CSVs and in bulk. Users should generally submit cleaned CSVs, but the app should alert users if there are parsing problems and which rows need to be fixed. 
+3. Display Charts and Analytics: For MVP, we would like to display a Histogram binned in 1cm increments of different body lengths for a certain cohort or group of cohorts.
+4. Export CSVs: TBD.
+
+##### Jargon
+* Cohort = This is how the lab coloquilly refer to each of their populations spawned on a certain date. It's bascially a note/nickname for each group of animals with a particular SHL #/spawning date. Written as `place_YYYY`
+
+##### File Upload Architecture
+
+
+##### The Problem
 
 ## Deployment
 The application is currently deployed on a DigitalOcean droplet via Capistrano. Once your public SSH key has been added to the appropriate user on the necessary server(s), use `bundle exec cap production deploy` to deploy the application, run migrations, and restart the Puma application server. Puma is reverse-proxied behind Nginx. The Nginx configuration is currently maintained outside of the Rails development pipeline. Currently live at [abalone.blrice.net](http://abalone.blrice.net/).
