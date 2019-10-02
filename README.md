@@ -25,12 +25,12 @@ Then, run `bundle exec rails s` and browse to http://localhost:3000/.
 
 ### Running Background Jobs
 
-The app uses delayed_job for processing CSVs. To run background jobs, run the following command in your terminal:
+The app uses the gem [delayed_job](https://github.com/collectiveidea/delayed_job) for processing CSVs. To run background jobs, run the following command in your terminal:
 ```
 rake jobs:work
 ```
 
-To confirm this is working, try uploading a CSV at `http://localhost:3000/file_uploads/new`. You should see the job complete in your CLI and see the file upload results here at `http://localhost:3000/file_uploads`.
+To confirm background jobs are processing, try uploading a CSV at `http://localhost:3000/file_uploads/new`. You should see the job complete in your CLI and see the file upload results here at `http://localhost:3000/file_uploads`.
 
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one.
