@@ -34,6 +34,7 @@ require "capistrano/rails/assets"
 require "capistrano/rails/migrations"
 # require "capistrano/passenger"
 require "capistrano/puma"
+require "capistrano/delayed_job"
 
 install_plugin Capistrano::Puma
 
