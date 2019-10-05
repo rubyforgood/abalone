@@ -59,7 +59,7 @@ We are building an app which has the following capabilities:
 * **Institution** = e.g. `BML from 6/5/13 - 11/20/14` Animals move around among a finite number of partner institutions (it is possible for new facilities to be added, but it only happens about once every few years).
 * **Holding area** = e.g. `Juvenile Rack 1 Column A Trough 3 from 3/4/15 - 6/2/16` This is the tank space by date. This is a note. The types of input will vary significantly within a facility and over time.
 
-[See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki)
+[See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
 
 ### File Upload Architecture
