@@ -62,7 +62,7 @@ We are building an app which has the following capabilities:
 [See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
 
-### File Upload Architecture
+### CSV Upload Architecture
 
 ![file upload architecture diagram](https://github.com/rubyforgood/abalone/blob/master/app/assets/images/abalone_upload_job.jpeg)
 
