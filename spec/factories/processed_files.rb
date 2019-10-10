@@ -2,9 +2,9 @@ FactoryBot.define do
   factory :processed_file do
     filename { "MyString" }
     category { "MyString" }
-    job_id { 1 }
+    id { 1 }
     status { "MyString" }
     job_stats { "" }
-    errors { "MyText" }
+    job_errors { "MyText" }
   end
 end
