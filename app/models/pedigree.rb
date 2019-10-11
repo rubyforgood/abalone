@@ -1,3 +1,22 @@
+# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# == Schema Information
+#
+# Table name: pedigrees
+#
+#  id                           :bigint           not null, primary key
+#  raw                          :boolean          default(TRUE), not null
+#  cohort                       :string
+#  shl_case_number              :string
+#  spawning_date                :date
+#  mother                       :string
+#  father                       :string
+#  seperate_cross_within_cohort :string
+#  created_at                   :datetime         not null
+#  updated_at                   :datetime         not null
+#  processed_file_id            :integer
+#
+# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+
 class Pedigree < ApplicationRecord
   include Raw
 
