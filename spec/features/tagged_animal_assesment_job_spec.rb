@@ -19,7 +19,6 @@ describe "upload CSV files for TaggedAnimalAssessmentJob", type: :feature do
     end
   end
 
-
   context 'when user uploads a CSV with invalid headers' do
     it "creates new ProcessedFile record with failed status" do
       visit 'file_uploads/new'
@@ -32,6 +31,28 @@ describe "upload CSV files for TaggedAnimalAssessmentJob", type: :feature do
       processed_file = ProcessedFile.last
       expect(processed_file.status).to eq "Failed"
       expect(processed_file.job_errors).to eq "Does not have valid headers. Data not imported!"
+      expect(page).to have_content 'Successfully queued spreadsheet for import'
+    end
+  end
+
+  context 'when user upload a CSV that has been already processed' do
+    it "creates new ProcessedFile record with failed status" do
+      ProcessedFile.create!(
+        filename: '1570712512_473156000_Tagged_assessment_12172018 (original).csv',
+        original_filename: 'Tagged_assessment_12172018 (original).csv',
+        category: 'TaggedAnimalAssessment',
+        status: 'Processed'
+      )
+
+      visit 'file_uploads/new'
+
+      select "Tagged Animal Assessment", from: 'category'
+      attach_file('input_file', Rails.root + valid_file)
+      click_on 'Submit'
+
+      expect(ProcessedFile.count).to eq 2
+      processed_file = ProcessedFile.where(status: "Failed").first
+      expect(processed_file.job_errors).to eq "Already processed a file with the same name. Data not imported!"
       expect(page).to have_content 'Successfully queued spreadsheet for import'
     end
   end
