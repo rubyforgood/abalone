@@ -29,6 +29,4 @@ class TaggedAnimalAssessment < ApplicationRecord
     select(:length).where(processed_file_id: processed_file_id).map { |record| record.length.to_f }
   end
 
-  def cleanse_data!
-  end
 end
