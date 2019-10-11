@@ -19,8 +19,8 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
       expect(processed_file.status).to eq "Processed"
       expect(processed_file.job_errors).to eq(nil)
       expect(processed_file.job_stats).to eq(
-        { "row_count"=>201, 
-          "rows_imported"=>201, 
+        { "row_count"=>201,
+          "rows_imported"=>201,
           "shl_case_numbers"=>{""=>201} # @NOTE: Is it okay?
         }
       )
@@ -42,14 +42,13 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   end
 
   context 'when user upload a CSV that has been already processed' do
-    it "creates new ProcessedFile record with 'Failed' status" do
-      ProcessedFile.create!(
-        filename: '1570712512_473156000_Tagged_assessment_12172018 (original).csv',
-        original_filename: 'Tagged_assessment_12172018 (original).csv',
-        category: 'TaggedAnimalAssessment',
-        status: 'Processed'
-      )
+    before do
+      FactoryBot.create :processed_file,
+        status: 'Processed',
+        original_filename: 'Tagged_assessment_12172018 (original).csv'
+    end
 
+    it "creates new ProcessedFile record with 'Failed' status" do
       upload_file(valid_file)
 
       processed_file = ProcessedFile.where(status: "Failed").first
@@ -69,9 +68,9 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
       expect(processed_file.status).to eq "Processed"
       expect(processed_file.job_errors).to eq(nil)
       expect(processed_file.job_stats).to eq(
-        { "row_count"=>201, 
-          "rows_imported"=>199, 
-          "rows_not_imported"=>2, 
+        { "row_count"=>201,
+          "rows_imported"=>199,
+          "rows_not_imported"=>2,
         }
       )
       expect(page).to have_content expected_success_message
