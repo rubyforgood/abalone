@@ -5,36 +5,25 @@ var GrowthChart = function (element, data) {
       text: 'Growth Histogram For Measurement ' + data.processed_file_id
     },
     xAxis: [{
-      title: {text: 'Data'},
-      alignTicks: false
-    }, {
-      title: {text: 'Histogram'},
-      alignTicks: false,
-      opposite: true
+      title: {text: 'Length (cm)'},
     }],
 
     yAxis: [{
-      title: {text: 'Data'}
-    }, {
-      title: {text: 'Histogram'},
-      opposite: true
+      title: {text: 'Count'}
     }],
 
-    series: [{
-      name: 'Histogram',
-      type: 'histogram',
-      xAxis: 1,
-      yAxis: 1,
-      baseSeries: 's1',
-      zIndex: -1
-    }, {
-      name: 'Data',
-      type: 'scatter',
-      data: data.total_animal_lengths,
-      id: 's1',
-      marker: {
-        radius: 1.5
-      }
+    series: [
+      {
+        visible:false,
+        showInLegend:false,
+        id:"id1",
+        data: data.total_animal_lengths
+      },
+      {
+        name: 'Histogram',
+        type: 'histogram',
+        showInLegend:false,
+        baseSeries: "id1",
     }]
   });
 }
