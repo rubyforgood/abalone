@@ -9,7 +9,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
-Dir[Rails.root.join("spec", "concerns", "**", "*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec", "jobs", "concerns", "**", "*.rb")].each { |f| require f }
 require 'support/factory_bot'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
