@@ -21,7 +21,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
       expect(processed_file.job_stats).to eq(
         { "row_count"=>201,
           "rows_imported"=>201,
-          "shl_case_numbers"=>{""=>201} # @NOTE: Is it okay?
+          "shl_case_numbers" => {"SF16-9A"=>100, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69},
         }
       )
       expect(page).to have_content expected_success_message
