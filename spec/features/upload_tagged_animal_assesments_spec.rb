@@ -5,7 +5,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   let(:dir_path) { "db/sample_data_files/tagged_animal_assessment"}
   let(:valid_file) { "#{dir_path}/Tagged_assessment_12172018 (original).csv" }
   let(:invalid_file) { "#{dir_path}/invalid-headers.csv" }
-  let(:incomplete_data_file) { "#{dir_path}/Tagged_assessment_09172018.csv" } # TODO: change path
+  let(:incomplete_data_file) { "#{dir_path}/Tagged_assessment_03172018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
 
   before { visit new_file_upload_path }
@@ -60,7 +60,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   end
 
   context 'when user upload file with invalid rows' do
-    xit "creates new ProcessedFile record with 'Processed' status" do
+    it "creates new ProcessedFile record with 'Processed' status" do
       upload_file(incomplete_data_file)
 
       processed_file = ProcessedFile.last
@@ -71,6 +71,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
         { "row_count"=>201,
           "rows_imported"=>199,
           "rows_not_imported"=>2,
+          "shl_case_numbers" => {"SF16-9A"=>98, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69}
         }
       )
       expect(page).to have_content expected_success_message

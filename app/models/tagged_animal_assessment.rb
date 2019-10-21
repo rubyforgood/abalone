@@ -18,6 +18,9 @@ class TaggedAnimalAssessment < ApplicationRecord
     NOTES: "Notes",
   }
 
+  validates :measurement_date, :shl_case_number, :spawning_date, :tag, :length, presence: true
+  validates :length, numericality: true
+
   def measurement_date=(measurement_date_str)
     write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))
   end
