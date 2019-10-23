@@ -27,12 +27,12 @@ module ImportJob
 
   def validate_headers(filename)
     raise "No input file specified" unless filename
-    headers = []
-    IOStreams.each_row(filename) do |row|
-      headers = row
-      break
-    end
+
+    headers = CSV.parse(File.read(filename, encoding: 'bom|utf-8'), headers: true)
+      .headers
+      .compact
     valid_headers = category.constantize::HEADERS.values
+
     Rails.logger.debug "Headers in file: #{headers}"
     Rails.logger.debug "Valid headers for model: #{valid_headers}"
     valid_headers == headers
@@ -60,9 +60,7 @@ module ImportJob
 
   def stats
     @stats ||= Hash.new(0)
-
     @stats[:shl_case_numbers] = Hash.new(0) unless @stats.key?(:shl_case_numbers)
-
     @stats
   end
 
