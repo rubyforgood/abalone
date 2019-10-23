@@ -41,6 +41,17 @@ This app is still in early stages of development (MVP). We have defined our [MVP
 
 Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues), which lay out our path to MVP. Feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue or email Ellen Cornelius at gellinellen@gmail.com.
 
+### Development
+We have included the [Annotate gem](https://github.com/ctran/annotate_models) in this project, for better development experience. It annotates (table attributes) models, model specs, and factories.
+
+The annotate task will run automatically when running migrations. Please see `lib/tasks/auto_annotate_models.rake` for configuration details.
+
+If it does not run automatically, you can run it manually, on the project root dir, with:
+```
+annotate
+```
+Check out their Github page for more running options.
+
 ### The Problem
 Our stakeholder, the Bodega Marine Laboratory, has more data that they can keep track of! They want to have a central data repository for all of their abalone captive breeding data instead of just spreadhseets. It is hard to run reports and anlytics on the data when it's not all in one place.
 

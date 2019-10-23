@@ -1,3 +1,23 @@
+# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# == Schema Information
+#
+# Table name: population_estimates
+#
+#  id                :bigint           not null, primary key
+#  raw               :boolean          default(TRUE), not null
+#  sample_date       :date
+#  shl_case_number   :string
+#  spawning_date     :date
+#  lifestage         :string
+#  abundance         :string
+#  facility          :string
+#  notes             :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  processed_file_id :integer
+#
+# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+
 FactoryBot.define do
   factory :population_estimate do
     sample_date {Time.now}
