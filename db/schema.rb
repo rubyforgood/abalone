@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.decimal "growout_trough"
     t.decimal "length"
     t.decimal "mass"
-    t.decimal "gonad_score"
+    t.string "gonad_score"
     t.string "predicted_sex"
     t.text "notes"
     t.datetime "created_at", null: false

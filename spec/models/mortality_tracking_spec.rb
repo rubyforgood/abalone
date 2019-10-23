@@ -19,8 +19,8 @@ RSpec.describe MortalityTracking, type: :model do
     it { is_expected.to have_db_column :tags }
     it { is_expected.to have_db_column :comments }
 
-    describe 'it only has 16 columns' do
-      it { expect(MortalityTracking.columns.count).to eq 16 }
+    describe 'it only has 18 columns' do
+      it { expect(MortalityTracking.columns.count).to eq 18 }
     end
   end
 end
