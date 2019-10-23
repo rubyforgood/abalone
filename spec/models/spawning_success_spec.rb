@@ -1,3 +1,22 @@
+# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# == Schema Information
+#
+# Table name: spawning_successes
+#
+#  id                  :bigint           not null, primary key
+#  raw                 :boolean          default(TRUE), not null
+#  tag                 :string
+#  shl_case_number     :string
+#  spawning_date       :date
+#  date_attempted      :date
+#  spawning_success    :string
+#  nbr_of_eggs_spawned :decimal(, )
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  processed_file_id   :integer
+#
+# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+
 require 'rails_helper'
 
 RSpec.describe SpawningSuccess, type: :model do

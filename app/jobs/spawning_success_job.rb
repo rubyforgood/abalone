@@ -72,7 +72,10 @@ class SpawningSuccessJob < ApplicationJob
   end
 
   def already_processed?(filename)
-    ProcessedFile.where(status: 'Processed').where(original_filename: original_filename(filename)).count > 0
+    ProcessedFile
+      .where(status: 'Processed')
+      .where(original_filename: original_filename(filename))
+      .exists?
   end
 
   def initialize_processed_file(filename)

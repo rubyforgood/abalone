@@ -33,6 +33,7 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :development do
@@ -40,6 +41,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
 
+  gem 'annotate',                      require: false
   gem 'capistrano',         '~> 3.11', require: false
   gem 'capistrano-bundler', '~> 1.6',  require: false
   gem 'capistrano-rvm',     '~> 0.1',  require: false
