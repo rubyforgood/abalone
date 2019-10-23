@@ -14,6 +14,9 @@ Delayed::Worker.delay_jobs = false
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
+Dir[Rails.root.join("spec", "jobs", "concerns", "**", "*.rb")].each { |f| require f }
+require 'support/factory_bot'
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
