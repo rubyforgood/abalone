@@ -3,14 +3,12 @@ module ImportJob
   extend ActiveSupport::Concern
 
   included do
-    attr_accessor :category, :processed_file, :stats
+    attr_accessor :processed_file
   end
 
   def perform(*args)
     filename = args[0]
     full_path = Rails.root.join('storage', filename).to_s
-    @category = self.class.to_s.gsub(/Job/, '')
-    initialize_stats!
     initialize_processed_file(filename)
     if already_processed?(filename)
       fail_processed_file("Already processed a file with the same name. Data not imported!")
@@ -34,7 +32,7 @@ module ImportJob
       headers = row
       break
     end
-    valid_headers = @category.constantize::HEADERS.values
+    valid_headers = category.constantize::HEADERS.values
     Rails.logger.debug "Headers in file: #{headers}"
     Rails.logger.debug "Valid headers for model: #{valid_headers}"
     valid_headers == headers
@@ -44,32 +42,39 @@ module ImportJob
     raise "No input file specified" unless filename
     IOStreams.each_record(filename) do |record|
       attrs = translate_attribute_names(record)
-      spawning_success = @category.constantize.new(
+      spawning_success = category.constantize.new(
           attrs.merge({processed_file_id: @processed_file.id, raw: false})
       )
       spawning_success.cleanse_data!
       unless spawning_success.save
-        Rails.logger.error "Error: Row #{@stats[:row_count] + 2} is not valid. #{attrs}"
+        Rails.logger.error "Error: Row #{stats[:row_count] + 2} is not valid. #{attrs}"
       end
       increment_stats(attrs, spawning_success.persisted?)
     end
-    Rails.logger.info @stats
+    Rails.logger.info stats
+  end
+
+  def category
+    @category ||= self.class.to_s.gsub(/Job/, '')
+  end
+
+  def stats
+    @stats ||= Hash.new(0)
+
+    @stats[:shl_case_numbers] = Hash.new(0) unless @stats.key?(:shl_case_numbers)
+
+    @stats
   end
 
   private
 
-  def initialize_stats!
-    @stats = Hash.new(0)
-    @stats[:shl_case_numbers] = Hash.new(0)
-  end
-
   def increment_stats(attrs, persisted)
-    @stats[:row_count] += 1
+    stats[:row_count] += 1
     if persisted
-      @stats[:rows_imported] += 1
-      @stats[:shl_case_numbers][attrs['shl_case_number']] += 1
+      stats[:rows_imported] += 1
+      stats[:shl_case_numbers][attrs['shl_case_number']] += 1
     else
-      @stats[:rows_not_imported] += 1
+      stats[:rows_not_imported] += 1
     end
   end
 
@@ -84,13 +89,13 @@ module ImportJob
   def initialize_processed_file(filename)
     @processed_file = ProcessedFile.create(filename: filename,
                                            original_filename: original_filename(filename),
-                                           category: @category,
+                                           category: category,
                                            status: 'Running',
-                                           job_stats: @stats)
+                                           job_stats: stats)
   end
 
   def complete_processed_file!
-    @processed_file.job_stats = @stats
+    @processed_file.job_stats = stats
     @processed_file.status = 'Processed'
   end
 
