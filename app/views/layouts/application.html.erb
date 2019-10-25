@@ -34,18 +34,20 @@
 
       <div id="nav-menu" class="navbar-menu">
         <div class="navbar-start">
-          <%= link_to 'Reports', reports_path, class: 'navbar-item'%>
-          <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
+          <% if current_user %>
+            <%= link_to 'Reports', reports_path, class: 'navbar-item'%>
+            <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              Uploads
-            </a>
-            <div class="navbar-dropdown">
-              <%= link_to 'Files List', file_uploads_path, class: 'navbar-item'%>
-              <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                Uploads
+              </a>
+              <div class="navbar-dropdown">
+                <%= link_to 'Files List', file_uploads_path, class: 'navbar-item'%>
+                <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
+              </div>
             </div>
-          </div>
+          <% end %>
 
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
@@ -71,6 +73,12 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
+              <% if user_signed_in? %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-grey-light" %>
+              <% else %>
+                <%= link_to "Login", new_user_session_path, class: "button is-grey-light" %>
+              <% end %>
+
               <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-grey-light">
                 <span class="icon">
                   <i class="fab fa-github"></i>
@@ -82,6 +90,13 @@
         </div>
       </div>
     </nav>
+
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
 
     <%= yield %>
 
