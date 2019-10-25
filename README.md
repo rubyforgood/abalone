@@ -23,6 +23,12 @@ rake db:seed
 
 Then, run `bundle exec rails s` and browse to http://localhost:3000/.
 
+Login information:
+```
+Email: admin@test.com
+Password: password
+```
+
 ### Running Background Jobs
 
 The app uses the gem [delayed_job](https://github.com/collectiveidea/delayed_job) for processing CSVs. To run background jobs, run the following command in your CLI:
