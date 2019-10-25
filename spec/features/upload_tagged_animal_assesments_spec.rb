@@ -2,13 +2,20 @@ require 'rails_helper'
 
 describe "upload TaggedAnimalAssessment category", type: :feature do
 
+  let(:user) { User.create({ :email => "admin@test.com",
+                :password => "password",
+                :password_confirmation => "password" }) }
+
   let(:dir_path) { "db/sample_data_files/tagged_animal_assessment"}
   let(:valid_file) { "#{dir_path}/Tagged_assessment_12172018 (original).csv" }
   let(:invalid_file) { "#{dir_path}/invalid-headers.csv" }
   let(:incomplete_data_file) { "#{dir_path}/Tagged_assessment_03172018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
 
-  before { visit new_file_upload_path }
+  before do
+    sign_in user
+    visit new_file_upload_path
+  end
 
   context 'when user successfully uploads a CSV with no errors' do
     it "creates new ProcessedFile record with 'Processed' status " do
