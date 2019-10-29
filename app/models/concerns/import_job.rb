@@ -17,7 +17,7 @@ module ImportJob
         import_records(full_path)
         complete_processed_file!
       else
-        Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
+        log("Error: #{filename} does not have valid headers. Data not imported!", :error)
         fail_processed_file("Does not have valid headers. Data not imported!")
       end
     end
@@ -33,8 +33,8 @@ module ImportJob
       .compact
     valid_headers = category.constantize::HEADERS.values
 
-    Rails.logger.debug "Headers in file: #{headers}"
-    Rails.logger.debug "Valid headers for model: #{valid_headers}"
+    log("Headers in file: #{headers}", :debug)
+    log("Valid headers for model: #{valid_headers}", :debug)
     valid_headers == headers
   end
 
@@ -47,11 +47,11 @@ module ImportJob
       )
       spawning_success.cleanse_data!
       unless spawning_success.save
-        Rails.logger.error "Error: Row #{stats[:row_count] + 2} is not valid. #{attrs}"
+        log("Error: Row #{stats[:row_count] + 2} is not valid. #{attrs}", :error)
       end
       increment_stats(attrs, spawning_success.persisted?)
     end
-    Rails.logger.info stats
+    log(stats, :info)
   end
 
   def category
@@ -111,6 +111,15 @@ module ImportJob
 
   def remove_file!(filename)
     Rails.root.join('storage', filename).delete
+  end
+
+  def logger
+    @logger ||= Delayed::Worker.logger
+  end
+
+  def log(message, level = :debug)
+    raise "Wrong logger level: #{level}" unless %i(debug error info).include?(level)
+    logger.send(level, message)
   end
 
 end
