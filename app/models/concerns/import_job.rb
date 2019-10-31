@@ -27,11 +27,10 @@ module ImportJob
 
   def validate_headers(filename)
     raise "No input file specified" unless filename
-
     headers = CSV.parse(File.read(filename, encoding: 'bom|utf-8'), headers: true)
       .headers
       .compact
-    valid_headers = category.constantize::HEADERS.values
+    valid_headers = category_model::HEADERS.values
 
     log("Headers in file: #{headers}", :debug)
     log("Valid headers for model: #{valid_headers}", :debug)
@@ -42,14 +41,14 @@ module ImportJob
     raise "No input file specified" unless filename
     IOStreams.each_record(filename) do |record|
       attrs = translate_attribute_names(record)
-      spawning_success = category.constantize.new(
+      initialized_model = category_model.new(
           attrs.merge({processed_file_id: @processed_file.id, raw: false})
       )
-      spawning_success.cleanse_data!
-      unless spawning_success.save
+      initialized_model.cleanse_data!
+      unless initialized_model.save
         log("Error: Row #{stats[:row_count] + 2} is not valid. #{attrs}", :error)
       end
-      increment_stats(attrs, spawning_success.persisted?)
+      increment_stats(attrs, initialized_model.persisted?)
     end
     log(stats, :info)
   end
@@ -58,13 +57,15 @@ module ImportJob
     @category ||= self.class.to_s.gsub(/Job/, '')
   end
 
+  def category_model
+    @category_model ||= category.constantize
+  end
+
   def stats
     @stats ||= Hash.new(0)
     @stats[:shl_case_numbers] = Hash.new(0) unless @stats.key?(:shl_case_numbers)
     @stats
   end
-
-  private
 
   def increment_stats(attrs, persisted)
     stats[:row_count] += 1
