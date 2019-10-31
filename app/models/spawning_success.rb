@@ -22,7 +22,7 @@ class SpawningSuccess < ApplicationRecord
 
   HEADERS = {
       TAG: "Tag",
-      SHL_CASE_NUMBER: "SHL_case_number",
+      SHL_CASE_NUMBER: "SHL_number",
       SPAWNING_DATE: "Spawning_date",
       DATE_ATTEMPTED:   "Date_attempted",
       SPAWNING_SUCCESS:  "Spawning_success",

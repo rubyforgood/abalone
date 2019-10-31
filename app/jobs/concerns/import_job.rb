@@ -2,8 +2,10 @@ module ImportJob
 
   extend ActiveSupport::Concern
 
-  included do
+  included do |base|
     attr_accessor :processed_file
+
+    base.extend ImportJobClassMethods
   end
 
   def perform(*args)
@@ -54,7 +56,7 @@ module ImportJob
   end
 
   def category
-    @category ||= self.class.to_s.gsub(/Job/, '')
+    self.class.category
   end
 
   def category_model
@@ -71,11 +73,12 @@ module ImportJob
     stats[:row_count] += 1
     if persisted
       stats[:rows_imported] += 1
-      stats[:shl_case_numbers][attrs['shl_case_number']] += 1
+      stats[:shl_case_numbers][attrs['shl_case_number']] += 1 if attrs.key?('shl_case_number')
     else
       stats[:rows_not_imported] += 1
     end
   end
+
 
   def translate_attribute_names(attrs)
     attrs
@@ -127,4 +130,9 @@ module ImportJob
     logger.send(level, message)
   end
 
+  module ImportJobClassMethods
+    def category
+      @category ||= to_s.gsub(/Job/, '')
+    end
+  end
 end
