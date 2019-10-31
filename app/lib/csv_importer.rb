@@ -36,7 +36,8 @@ module CsvImporter
   def self.translate_attribute_names(attrs, category_name)
     case category_name
     when CSV_CATEGORIES[:SPAWNING_SUCCESS]
-      attrs['nbr_of_eggs_spawned'] = attrs.delete('number_of_eggs_spawned_if_female')
+      attrs['nbr_of_eggs_spawned'] =
+        attrs.delete('number_of_eggs_spawned_if_female')
     end
     attrs
   end

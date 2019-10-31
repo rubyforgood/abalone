@@ -28,11 +28,15 @@ class FacilitiesController < ApplicationController
 
     respond_to do |format|
       if @facility.save
-        format.html { redirect_to @facility, notice: 'Facility was successfully created.' }
+        format.html do
+          redirect_to @facility, notice: 'Facility was successfully created.'
+        end
         format.json { render :show, status: :created, location: @facility }
       else
         format.html { render :new }
-        format.json { render json: @facility.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @facility.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -42,11 +46,15 @@ class FacilitiesController < ApplicationController
   def update
     respond_to do |format|
       if @facility.update(facility_params)
-        format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
+        format.html do
+          redirect_to @facility, notice: 'Facility was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @facility }
       else
         format.html { render :edit }
-        format.json { render json: @facility.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @facility.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -56,7 +64,10 @@ class FacilitiesController < ApplicationController
   def destroy
     @facility.destroy
     respond_to do |format|
-      format.html { redirect_to facilities_url, notice: 'Facility was successfully destroyed.' }
+      format.html do
+        redirect_to facilities_url,
+        notice: 'Facility was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -68,7 +79,8 @@ class FacilitiesController < ApplicationController
     @facility = Facility.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
   def facility_params
     params.require(:facility).permit(:name, :code)
   end
