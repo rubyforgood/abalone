@@ -5,3 +5,9 @@
 #file-name {
   display: none;
 }
+.container_with_scroll{
+  overflow-x: scroll;
+}
+.column.is-thinner{
+  padding: .15rem .75rem;
+}
