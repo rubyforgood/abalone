@@ -8,3 +8,8 @@ services:
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
+deploy:
+  provider: heroku
+  app: abalonerescue
+  api_key:
+    secure: $HEROKU_DEPLOY_TOKEN
