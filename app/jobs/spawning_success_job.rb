@@ -9,15 +9,15 @@ class SpawningSuccessJob < ApplicationJob
     initialize_stats!
     initialize_processed_file(filename)
     if already_processed?(filename)
-      fail_processed_file('Already processed a file with the same name. Data not imported!')
+      fail_processed_file('Already processed a file with the same name.
+        Data not imported!')
+    elsif validate_headers(full_path)
+      import_records(full_path)
+      complete_processed_file!
     else
-      if validate_headers(full_path)
-        import_records(full_path)
-        complete_processed_file!
-      else
-        Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
-        fail_processed_file('Does not have valid headers. Data not imported!')
-      end
+      Rails.logger.error "Error: #{filename} does not have valid headers.
+      Data not imported!"
+      fail_processed_file('Does not have valid headers. Data not imported!')
     end
     remove_file!(filename)
     @processed_file.save
@@ -45,7 +45,8 @@ class SpawningSuccessJob < ApplicationJob
       )
       spawning_success.cleanse_data!
       unless spawning_success.save
-        Rails.logger.error "Error: Row #{@stats[:row_count] + 2} is not valid. #{attrs}"
+        Rails.logger.error "Error: Row #{@stats[:row_count] + 2}
+        is not valid. #{attrs}"
       end
       increment_stats(attrs, spawning_success.persisted?)
     end
@@ -70,7 +71,8 @@ class SpawningSuccessJob < ApplicationJob
   end
 
   def translate_attribute_names(attrs)
-    attrs['nbr_of_eggs_spawned'] = attrs.delete('number_of_eggs_spawned_if_female')
+    attrs['nbr_of_eggs_spawned'] =
+      attrs.delete('number_of_eggs_spawned_if_female')
     attrs
   end
 
@@ -83,8 +85,10 @@ class SpawningSuccessJob < ApplicationJob
 
   def initialize_processed_file(filename)
     @processed_file = ProcessedFile.create(filename: filename,
-                                           original_filename: original_filename(filename),
-                                           category: self.class.to_s.gsub(/Job/, ''),
+                                           original_filename:
+                                            original_filename(filename),
+                                           category:
+                                            self.class.to_s.gsub(/Job/, ''),
                                            status: 'Running',
                                            job_stats: @stats)
   end
@@ -101,7 +105,8 @@ class SpawningSuccessJob < ApplicationJob
   end
 
   # Remove the prepended timestamp.
-  # original_filename('1564252385_859395139_spawn_newheaders.xlsx') returns 'spawn_newheaders.xlsx'
+  # original_filename('1564252385_859395139_spawn_newheaders.xlsx')
+  # returns 'spawn_newheaders.xlsx'
   def original_filename(filename)
     /\d+_\d+_(.+)?/.match(filename.to_s)&.captures&.first
   end
