@@ -12,7 +12,7 @@ This application is built on following and you must have these installed before 
 * PostgreSQL (tested on 9.x)
 
 ### Setup
-After cloning this repo, execute the following commands in your CLI:
+After *forking* this repo and cloning your own copy onto your local machine, execute the following commands in your CLI:
 ```
 gem install bundler
 bundle install
