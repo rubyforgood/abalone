@@ -13,3 +13,4 @@ deploy:
   app: abalonerescue
   api_key:
     secure: $HEROKU_DEPLOY_TOKEN
+  run: "rake db:migrate"
