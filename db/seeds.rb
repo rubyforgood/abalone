@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+# This file should contain all the record creation needed to seed the database
+# with its default values.
+# The data can then be loaded with the rails db:seed command
+# (or created alongside the database with db:setup).
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#  movies = Movie.create([{ name: 'Star Wars' },
+# { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 facilities = { 'Aquarium of the Pacific' => 'AOP',
                'Cabrillo Marine Aquarium' => 'CMA',
@@ -20,7 +23,8 @@ facilities = { 'Aquarium of the Pacific' => 'AOP',
                'UC Davis Bodega Marine Laboratory' => 'BML',
                'UC Santa Barbara' => 'UCSB' }
 
-facilities.each { |f_name, f_code| Facility.find_or_create_by(name: f_name, code: f_code) }
+facilities.each { |f_name, f_code| 
+Facility.find_or_create_by(name: f_name, code: f_code) }
 
 # import all sample_data_files
 Dir['db/sample_data_files/*'].each do |category_dir|
