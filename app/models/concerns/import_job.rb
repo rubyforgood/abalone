@@ -13,14 +13,12 @@ module ImportJob
     initialize_processed_file(filename)
     if already_processed?(filename)
       fail_processed_file('Already processed a file with the same name. Data not imported!')
+    elsif validate_headers(full_path)
+      import_records(full_path)
+      complete_processed_file!
     else
-      if validate_headers(full_path)
-        import_records(full_path)
-        complete_processed_file!
-      else
-        Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
-        fail_processed_file('Does not have valid headers. Data not imported!')
-      end
+      Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
+      fail_processed_file('Does not have valid headers. Data not imported!')
     end
     remove_file!(filename)
     @processed_file.save
