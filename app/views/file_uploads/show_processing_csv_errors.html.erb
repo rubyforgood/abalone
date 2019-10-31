@@ -1,0 +1,31 @@
+<section class="section">
+<div class="container is-fluid">
+  <h1 class="title">Detailed processed file with errors</h1>
+
+  <br />
+  <%= link_to "<button class='button is-link'>Upload New File</button>".html_safe, new_file_upload_path %>
+  <br />
+  <br />
+  <%= @processed_file.original_filename %> processed at <%= @processed_file.updated_at %><br />
+  <br />
+
+  <div class="container_with_scroll">
+    <table class="table is-bordered if-fullwidth is-striped is-hoverable">
+      <thead>
+      <%- @headers.each do |attr|%>
+        <th><%= attr %></th>
+      <%- end %>
+      </thead>
+      <tbody>
+      <%- @records.each do |record| %>
+        <tr>
+          <%- @headers.each do |attr|%>
+            <td><%= record[attr.to_s] %></td>
+          <%- end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>

@@ -5,7 +5,13 @@
     <%- @processed_files.each do |pf| %>
       <div class="columns">
         <div class="column is-thinner is-1">File name:</div>
-        <div class="column is-thinner is-11"><%= pf.original_filename %></div>
+        <div class="column is-thinner is-11">
+          <%- if pf.status == 'Processed' %>
+            <%= link_to pf.original_filename, show_processing_csv_errors_path(pf.id) %>
+          <% else %>
+            <%= pf.original_filename %>
+          <%- end %>
+        </div>
       </div>
       <div class="columns">
         <div class="column is-thinner is-1">Created at:</div>

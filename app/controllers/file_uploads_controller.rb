@@ -17,6 +17,29 @@ class FileUploadsController < ApplicationController
     @categories = [['Select One', '']] + CATEGORIES
   end
 
+  def show_processing_csv_errors
+    if @processed_file = ProcessedFile.find(params['id'])
+      record_class = @processed_file.category.constantize
+      @headers = [:validation_status].concat record_class::HEADERS.keys.map{|header| header.downcase}
+      records = []
+      errors_list = Array.new
+      full_path_file = Rails.root.join('storage', @processed_file.filename).to_s
+
+      IOStreams.each_record(full_path_file) do |record|
+        attrs = record
+        spawning_success = @processed_file.category.constantize.new(
+            attrs.merge({processed_file_id: @processed_file.id, raw: false})
+        )
+        spawning_success.cleanse_data!
+        error_message = spawning_success.valid? ? '' : spawning_success.errors.full_messages.join(",")
+        campos = attrs.merge ({ 'validation_status' => error_message})
+        records.push(campos)
+      end
+      @errors_list = errors_list
+      @records = records
+    end
+  end
+
   def show
     if @processed_file = ProcessedFile.find(params['id'])
       record_class = @processed_file.category.constantize
@@ -47,5 +70,4 @@ class FileUploadsController < ApplicationController
       @result = 'Error: Invalid category!'
     end
   end
-
 end
