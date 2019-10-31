@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class FileUploadsController < ApplicationController
-  # The second value for each category entry will be used to determine the job class that processes the data.
-  # Ex: Selecting "Spawning Success" in the form will post "SpawningSuccess" and process the data with a SpawningSuccessJob.
+  # The second value for each category entry will be used to determine
+  # the job class that processes the data.
+  # Ex: Selecting "Spawning Success" in the form will post "SpawningSuccess"
+  # and process the data with a SpawningSuccessJob.
   CATEGORIES = [
     ['Spawning Success', 'SpawningSuccess'],
     ['Tagged Animal Assessment', 'TaggedAnimalAssessment']
@@ -39,7 +41,8 @@ class FileUploadsController < ApplicationController
 
         job_class = [@category, 'Job'].join
         @reference = job_class.constantize.perform_later(@filename)
-        @result = "Successfully queued spreadsheet for import as a #{job_class}."
+        @result =
+        "Successfully queued spreadsheet for import as a #{job_class}."
       else
         @result = 'Error: No file uploaded.'
       end
