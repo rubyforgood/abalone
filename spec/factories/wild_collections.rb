@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
 # == Schema Information
 #
@@ -29,6 +31,5 @@
 
 FactoryBot.define do
   factory :wild_collection do
-    
   end
 end

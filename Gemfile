@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -27,25 +29,25 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.8'
-  gem "factory_bot_rails"
-  gem 'rubocop-rails'
-  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
-  gem 'shoulda-matchers'
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
+  gem 'rspec-rails', '~> 3.8'
+  gem 'rubocop-rails'
+  gem 'shoulda-matchers'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
 
   gem 'annotate',                      require: false
   gem 'capistrano',         '~> 3.11', require: false
   gem 'capistrano-bundler', '~> 1.6',  require: false
-  gem 'capistrano-rvm',     '~> 0.1',  require: false
   gem 'capistrano-rails',   '~> 1.4',  require: false
+  gem 'capistrano-rvm',     '~> 0.1',  require: false
   gem 'capistrano3-puma',   '~> 4.0',  require: false
 end
 
@@ -54,6 +56,6 @@ gem 'creek'
 gem 'iostreams'
 
 # background processing
+gem 'capistrano3-delayed-job', '~> 1.0'
 gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'capistrano3-delayed-job', '~> 1.0'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateWildCollections < ActiveRecord::Migration[5.2]
   def change
     create_table :wild_collections do |t|

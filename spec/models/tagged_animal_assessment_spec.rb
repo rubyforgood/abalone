@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
 # == Schema Information
 #
@@ -28,7 +30,6 @@
 require 'rails_helper'
 
 RSpec.describe TaggedAnimalAssessment, type: :model do
-
   describe 'validations' do
     it { should validate_presence_of(:measurement_date) }
     it { should validate_presence_of(:shl_case_number) }

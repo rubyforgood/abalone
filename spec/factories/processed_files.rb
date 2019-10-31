@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
 # == Schema Information
 #
@@ -17,10 +19,10 @@
 
 FactoryBot.define do
   factory :processed_file do
-    filename { "MyString" }
-    category { "MyString" }
-    status { "MyString" }
-    job_stats { "" }
-    job_errors { "MyText" }
+    filename { 'MyString' }
+    category { 'MyString' }
+    status { 'MyString' }
+    job_stats { '' }
+    job_errors { 'MyText' }
   end
 end

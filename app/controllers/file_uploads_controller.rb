@@ -1,12 +1,13 @@
-class FileUploadsController < ApplicationController
+# frozen_string_literal: true
 
+class FileUploadsController < ApplicationController
   # The second value for each category entry will be used to determine the job class that processes the data.
   # Ex: Selecting "Spawning Success" in the form will post "SpawningSuccess" and process the data with a SpawningSuccessJob.
   CATEGORIES = [
-      ['Spawning Success','SpawningSuccess'],
-      ['Tagged Animal Assessment','TaggedAnimalAssessment'],
-      # ['Untagged Animal Assessment', 'UntaggedAnimalAssessment'],
-      # ['Wild Collection','WildCollection']
+    ['Spawning Success', 'SpawningSuccess'],
+    ['Tagged Animal Assessment', 'TaggedAnimalAssessment']
+    # ['Untagged Animal Assessment', 'UntaggedAnimalAssessment'],
+    # ['Wild Collection','WildCollection']
   ].freeze
 
   def index
@@ -20,15 +21,14 @@ class FileUploadsController < ApplicationController
   def show
     if @processed_file = ProcessedFile.find(params['id'])
       record_class = @processed_file.category.constantize
-      @headers = record_class::HEADERS.keys.map{|header| header.downcase}
+      @headers = record_class::HEADERS.keys.map(&:downcase)
       @records = record_class.where(processed_file_id: @processed_file.id)
     end
   end
 
   def upload
-
     @category = params[:category]
-    if CATEGORIES.map{|label,value| value}.include?(@category)
+    if CATEGORIES.map { |_label, value| value }.include?(@category)
       uploaded_io = params[:input_file]
       timestamp = Time.new.strftime('%s_%N')
       if uploaded_io
@@ -37,7 +37,7 @@ class FileUploadsController < ApplicationController
           file.write(uploaded_io.read)
         end
 
-        job_class = [@category,'Job'].join
+        job_class = [@category, 'Job'].join
         @reference = job_class.constantize.perform_later(@filename)
         @result = "Successfully queued spreadsheet for import as a #{job_class}."
       else
@@ -47,5 +47,4 @@ class FileUploadsController < ApplicationController
       @result = 'Error: Invalid category!'
     end
   end
-
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class FacilitiesController < ApplicationController
-  before_action :set_facility, only: [:show, :edit, :update, :destroy]
+  before_action :set_facility, only: %i[show edit update destroy]
 
   # GET /facilities
   # GET /facilities.json
@@ -9,8 +11,7 @@ class FacilitiesController < ApplicationController
 
   # GET /facilities/1
   # GET /facilities/1.json
-  def show
-  end
+  def show; end
 
   # GET /facilities/new
   def new
@@ -18,8 +19,7 @@ class FacilitiesController < ApplicationController
   end
 
   # GET /facilities/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /facilities
   # POST /facilities.json
@@ -62,13 +62,14 @@ class FacilitiesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_facility
-      @facility = Facility.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def facility_params
-      params.require(:facility).permit(:name, :code)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_facility
+    @facility = Facility.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def facility_params
+    params.require(:facility).permit(:name, :code)
+  end
 end

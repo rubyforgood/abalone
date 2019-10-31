@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUntaggedAnimalAssessments < ActiveRecord::Migration[5.2]
   def change
     create_table :untagged_animal_assessments do |t|

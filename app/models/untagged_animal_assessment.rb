@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
 # == Schema Information
 #
@@ -24,18 +26,18 @@
 
 class UntaggedAnimalAssessment < ApplicationRecord
   HEADERS = {
-    MEASUREMENT_DATE: "Measurement_date",
-    COHORT: "Cohort",
-    SPAWNING_DATE: "Spawning_date",
-    GROWOUT_RACK: "Growout_Rack",
-    GROWOUT_COLUMN: "Growout_Column",
-    GROWOUT_TROUGH: "Growout_Trough",
-    LENGTH: "Length (mm)",
-    MASS: "Mass (g)",
-    GONAD_SCORE: "Gonad Score",
-    PREDICTED_SEX: "Predicted Sex",
-    NOTES: "Notes"
-  }
+    MEASUREMENT_DATE: 'Measurement_date',
+    COHORT: 'Cohort',
+    SPAWNING_DATE: 'Spawning_date',
+    GROWOUT_RACK: 'Growout_Rack',
+    GROWOUT_COLUMN: 'Growout_Column',
+    GROWOUT_TROUGH: 'Growout_Trough',
+    LENGTH: 'Length (mm)',
+    MASS: 'Mass (g)',
+    GONAD_SCORE: 'Gonad Score',
+    PREDICTED_SEX: 'Predicted Sex',
+    NOTES: 'Notes'
+  }.freeze
 
   def measurement_date=(measurement_date_str)
     write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))

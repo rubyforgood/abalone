@@ -1,5 +1,6 @@
-module ImportJob
+# frozen_string_literal: true
 
+module ImportJob
   extend ActiveSupport::Concern
 
   included do
@@ -11,14 +12,14 @@ module ImportJob
     full_path = Rails.root.join('storage', filename).to_s
     initialize_processed_file(filename)
     if already_processed?(filename)
-      fail_processed_file("Already processed a file with the same name. Data not imported!")
+      fail_processed_file('Already processed a file with the same name. Data not imported!')
     else
       if validate_headers(full_path)
         import_records(full_path)
         complete_processed_file!
       else
         Rails.logger.error "Error: #{filename} does not have valid headers. Data not imported!"
-        fail_processed_file("Does not have valid headers. Data not imported!")
+        fail_processed_file('Does not have valid headers. Data not imported!')
       end
     end
     remove_file!(filename)
@@ -26,7 +27,8 @@ module ImportJob
   end
 
   def validate_headers(filename)
-    raise "No input file specified" unless filename
+    raise 'No input file specified' unless filename
+
     headers = []
     IOStreams.each_row(filename) do |row|
       headers = row
@@ -39,11 +41,12 @@ module ImportJob
   end
 
   def import_records(filename)
-    raise "No input file specified" unless filename
+    raise 'No input file specified' unless filename
+
     IOStreams.each_record(filename) do |record|
       attrs = translate_attribute_names(record)
       spawning_success = category.constantize.new(
-          attrs.merge({processed_file_id: @processed_file.id, raw: false})
+        attrs.merge(processed_file_id: @processed_file.id, raw: false)
       )
       spawning_success.cleanse_data!
       unless spawning_success.save
@@ -114,5 +117,4 @@ module ImportJob
   def remove_file!(filename)
     Rails.root.join('storage', filename).delete
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
 # == Schema Information
 #
@@ -27,6 +29,5 @@
 
 FactoryBot.define do
   factory :tagged_animal_assessment do
-    
   end
 end

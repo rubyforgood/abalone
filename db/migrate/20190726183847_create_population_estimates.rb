@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreatePopulationEstimates < ActiveRecord::Migration[5.2]
   def change
     create_table :population_estimates do |t|
