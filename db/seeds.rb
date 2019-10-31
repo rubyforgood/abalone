@@ -23,7 +23,7 @@ facilities = { 'Aquarium of the Pacific' => 'AOP',
                'UC Davis Bodega Marine Laboratory' => 'BML',
                'UC Santa Barbara' => 'UCSB' }
 
-facilities.each { |f_name, f_code| 
+facilities.each { |f_name, f_code|
 Facility.find_or_create_by(name: f_name, code: f_code) }
 
 # import all sample_data_files
