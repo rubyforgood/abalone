@@ -35,7 +35,18 @@ module ImportJob
 
     log("Headers in file: #{headers}", :debug)
     log("Valid headers for model: #{valid_headers}", :debug)
-    valid_headers == headers
+
+    success = valid_headers == headers
+    unless success
+      ActionCable.server.broadcast "import_job", { html: 
+        "<div class='notification is-warning'>
+          <strong>Invalid headers</strong>
+          <p>Valid headers: #{valid_headers.join(', ')}</p>
+          <p>Current headers: #{headers.join(', ')}</p>
+        </div>"
+      } 
+    end
+    success 
   end
 
   def import_records(filename)

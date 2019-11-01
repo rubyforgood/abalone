@@ -31,9 +31,15 @@ Password: password
 
 ### Running Background Jobs
 
-The app uses the gem [delayed_job](https://github.com/collectiveidea/delayed_job) for processing CSVs. To run background jobs, run the following command in your CLI:
+The app uses the gem [delayed_job](https://github.com/collectiveidea/delayed_job) for processing CSVs. To run background jobs, run the following commands in your CLI:
 ```
 rake jobs:work
+```
+
+Run redis (necessary for Action Cable broadcasting):
+
+```
+redis-server
 ```
 
 To confirm background jobs are processing, try uploading a CSV at `http://localhost:3000/file_uploads/new`. You should see the job complete in your CLI and see the file upload results here at `http://localhost:3000/file_uploads`.

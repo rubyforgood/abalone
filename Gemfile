@@ -59,3 +59,6 @@ gem 'iostreams'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'capistrano3-delayed-job', '~> 1.0'
+
+# Action Cable
+gem 'redis'
