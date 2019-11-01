@@ -6,7 +6,11 @@
   <%= link_to "<button class='button is-link'>Upload New File</button>".html_safe, new_file_upload_path %>
   <br />
   <br />
-  <%= @processed_file.original_filename %> processed at <%= @processed_file.updated_at %><br />
+  Filename: <%= @processed_file.original_filename %> processed at <%= @processed_file.updated_at %><br />
+  Processed At: <%= @processed_file.updated_at %><br />
+  Category: <%= @processed_file.category %><br />
+  Statistics: <%= @processed_file.job_stats %><br />
+  
   <br />
 
   <div class="container_with_scroll">
