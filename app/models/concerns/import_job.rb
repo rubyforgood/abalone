@@ -81,7 +81,7 @@ module ImportJob
   end
 
   def already_processed?(filename)
-    ProcessedFile.where(status: 'Processed').where(original_filename: original_filename(filename)).count > 0
+    ProcessedFile.where(status: ['Processed','Processed with errors'] ).where(original_filename: original_filename(filename)).count > 0
   end
 
   def initialize_processed_file(filename)
