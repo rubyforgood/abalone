@@ -12,7 +12,7 @@ This application is built on following and you must have these installed before 
 * PostgreSQL (tested on 9.x)
 
 ### Setup
-After cloning this repo, execute the following commands in your CLI:
+After *forking* this repo and cloning your own copy onto your local machine, execute the following commands in your CLI:
 ```
 gem install bundler
 bundle install
@@ -31,6 +31,11 @@ rake jobs:work
 ```
 
 To confirm background jobs are processing, try uploading a CSV at `http://localhost:3000/file_uploads/new`. You should see the job complete in your CLI and see the file upload results here at `http://localhost:3000/file_uploads`.
+
+To see detailed logs from background jobs, run:
+```
+tail -f log/delayed_job.log
+```
 
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
