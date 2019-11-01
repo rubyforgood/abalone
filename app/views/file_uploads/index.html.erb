@@ -1,17 +1,52 @@
-<h1>Uploaded Files</h1>
-<br />
-<%= link_to 'Upload New File', new_file_upload_path %><br />
-<br />
-<%- @processed_files.each do |pf| %>
-  Filename: <%= pf.original_filename %><br />
-  Created At: <%= pf.created_at %><br />
-  Updated At: <%= pf.updated_at %><br />
-  Category: <%= pf.category %><br />
-  Status: <%= pf.status %><br />
-  Errors: <%= pf.job_errors %><br />
-  Statistics: <%= pf.job_stats %><br />
-  <%- if pf.status == 'Processed' %>
-    <%= link_to 'Show records loaded by this file.', show_processed_file_path(pf.id) %>
-  <%- end %>
-  <hr />
-<% end %>
+<section class="section">
+  <div class="container is-fluid">
+    <h1 class="title">Uploaded Files - <%= link_to "<button class='button is-link'>Upload New File</button>".html_safe, new_file_upload_path %></h1>
+    <br /><br />
+    <%- @processed_files.each do |pf| %>
+      <div class="columns">
+        <div class="column is-thinner is-1">File name:</div>
+        <div class="column is-thinner is-11"><%= pf.original_filename %></div>
+      </div>
+      <div class="columns">
+        <div class="column is-thinner is-1">Created at:</div>
+        <div class="column is-thinner is-11"><%= pf.created_at %></div>
+      </div>
+      <div class="columns">
+        <div class="column is-thinner is-1">Updated at:</div>
+        <div class="column is-thinner is-11"><%= pf.updated_at %></div>
+      </div>
+      <div class="columns">
+        <div class="column is-thinner is-1">Category at:</div>
+        <div class="column is-thinner is-11"><%= pf.category %></div>
+      </div>
+      <div class="columns">
+        <div class="column is-thinner is-1">Status at:</div>
+        <div class="column is-thinner is-11">
+          <%- if pf.status == 'Processed' %>
+            <span class="icon has-text-success">
+              <i class="fas fa-check-square"></i>
+            </span>
+            <%= pf.status %>
+          <%- else %>
+            <span class="icon has-text-danger">
+              <i class="fas fa-ban"></i>
+            </span>
+            <%= pf.status %>
+          <%- end %>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-thinner is-1">Errors at:</div>
+        <div class="column is-thinner is-11"><%= pf.job_errors %></div>
+      </div>
+      <div class="columns">
+        <div class="column is-thinner is-1">Statistics at:</div>
+        <div class="column is-thinner is-11"><%= pf.job_stats %></div>
+      </div>
+      <%- if pf.status == 'Processed' %>
+        <%= link_to "<button class='button is-link'>Show records loaded by this file</button>".html_safe, show_processed_file_path(pf.id) %>
+      <%- end %>
+      <hr />
+    <% end %>
+  </div>
+</section>
