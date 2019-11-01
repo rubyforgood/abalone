@@ -59,7 +59,6 @@ class FileUploadsController < ApplicationController
         File.open(Rails.root.join('storage', @filename), 'wb') do |file|
           file.write(uploaded_io.read)
         end
-
         job_class = [@category,'Job'].join
         @reference = job_class.constantize.perform_later(@filename)
         @result = "Successfully queued spreadsheet for import as a #{job_class}."
