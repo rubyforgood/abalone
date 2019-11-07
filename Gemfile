@@ -36,6 +36,7 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'shoulda-matchers'
   gem 'capybara'
+  gem 'action-cable-testing'
 end
 
 group :development do
