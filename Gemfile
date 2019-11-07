@@ -60,5 +60,8 @@ gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'capistrano3-delayed-job', '~> 1.0'
 
-# Action Cable
+# Use Redis adapter to run Action Cable in production
 gem 'redis'
+
+# Add jQuery
+gem 'jquery-rails'
