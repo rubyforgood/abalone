@@ -30,22 +30,45 @@ class UntaggedAnimalAssessment < ApplicationRecord
     GROWOUT_RACK: "Growout_Rack",
     GROWOUT_COLUMN: "Growout_Column",
     GROWOUT_TROUGH: "Growout_Trough",
-    LENGTH: "Length (mm)",
-    MASS: "Mass (g)",
+    LENGTH: "Length", # (mm)
+    MASS: "Mass", # (g)
     GONAD_SCORE: "Gonad Score",
     PREDICTED_SEX: "Predicted Sex",
     NOTES: "Notes"
   }
 
+  validates(
+    :measurement_date,
+    :cohort,
+    :spawning_date,
+    :growout_trough,
+    :growout_rack,
+    :growout_column,
+    :length, presence: true
+  )
+  validates :length, numericality: true
+
+  # Cohort is translated to shl_case_number to compute stats.
+  # Here we need to transfer it back to be able to store value in the DB.
+  def shl_case_number=(value)
+    self.cohort = value
+  end
+
   def measurement_date=(measurement_date_str)
+    return unless measurement_date_str
     write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))
   end
 
   def spawning_date=(spawning_date_str)
+    return unless spawning_date_str
     write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
   end
 
   def self.lengths_for_measurement(processed_file_id)
     select(:length).where(processed_file_id: processed_file_id).map { |record| record.length.to_f }
+  end
+
+  def cleanse_data!
+    # Do nothing
   end
 end
