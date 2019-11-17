@@ -42,7 +42,7 @@ module ImportJob
   def import_records(filename)
     raise "No input file specified" unless filename
     IOStreams.each_record(filename) do |record|
-      attrs = translate_attribute_names(record)
+      attrs = preprocess_attribute_values(translate_attribute_names(record))
       initialized_model = category_model.new(
           attrs.merge({processed_file_id: @processed_file.id, raw: false})
       )
@@ -79,6 +79,11 @@ module ImportJob
     end
   end
 
+  # We're receiving date values in a format different than what ActiveRecord expects, we need a mechanism
+  # for applying transformations to values before they get to the model.
+  def preprocess_attribute_values(attrs)
+    attrs
+  end
 
   def translate_attribute_names(attrs)
     attrs
