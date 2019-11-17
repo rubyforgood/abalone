@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_024307) do
+ActiveRecord::Schema.define(version: 2019_10_31_181501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 2019_10_25_024307) do
     t.date "collection_date"
     t.string "general_location"
     t.string "precise_location"
-    t.point "collection_coodinates"
+    t.point "collection_coordinates"
     t.string "proximity_to_nearest_neighbor"
     t.string "collection_method_notes"
     t.string "foot_condition_notes"

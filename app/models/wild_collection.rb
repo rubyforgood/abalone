@@ -35,7 +35,7 @@ class WildCollection < ApplicationRecord
     COLLECTION_DATE: "Collection_date",
     GENERAL_LOCATION: "General Location",
     PRECISE_LOCATION: "Precise Location",
-    COLLECTION_COODINATES: "Collection_coodinates",
+    COLLECTION_COORDINATES: "Collection_coodinates",
     PROXIMITY_TO_NEAREST_NEIGHBOR: "Proximity to nearest neighbor (m)",
     COLLECTION_METHOD_NOTES: "Collection method notes",
     FOOT_CONDITION_NOTES: "Foot condition notes",
