@@ -5,7 +5,7 @@ class FileUploadsController < ApplicationController
   CATEGORIES = [
       ['Spawning Success','SpawningSuccess'],
       ['Tagged Animal Assessment','TaggedAnimalAssessment'],
-      # ['Untagged Animal Assessment', 'UntaggedAnimalAssessment'],
+      ['Untagged Animal Assessment', 'UntaggedAnimalAssessment'],
       # ['Wild Collection','WildCollection']
   ].freeze
 

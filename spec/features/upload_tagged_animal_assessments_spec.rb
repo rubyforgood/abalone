@@ -12,7 +12,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
   context 'when user successfully uploads a CSV with no errors' do
     it "creates new ProcessedFile record with 'Processed' status " do
-      upload_file(valid_file)
+      upload_file("Tagged Animal Assessment", valid_file)
 
       processed_file = ProcessedFile.last
       expect(ProcessedFile.count).to eq 1
@@ -30,7 +30,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
   context 'when user uploads a CSV with invalid headers' do
     it "creates new ProcessedFile record with 'Failed' status" do
-      upload_file(invalid_file)
+      upload_file("Tagged Animal Assessment", invalid_file)
 
       processed_file = ProcessedFile.last
       expect(ProcessedFile.count).to eq 1
@@ -49,7 +49,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
     end
 
     it "creates new ProcessedFile record with 'Failed' status" do
-      upload_file(valid_file)
+      upload_file("Tagged Animal Assessment", valid_file)
 
       processed_file = ProcessedFile.where(status: "Failed").first
       expect(ProcessedFile.count).to eq 2
@@ -61,7 +61,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
   context 'when user upload file with invalid rows' do
     it "creates new ProcessedFile record with 'Processed' status" do
-      upload_file(incomplete_data_file)
+      upload_file("Tagged Animal Assessment", incomplete_data_file)
 
       processed_file = ProcessedFile.last
       expect(ProcessedFile.count).to eq 1
@@ -77,11 +77,4 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
       expect(page).to have_content expected_success_message
     end
   end
-end
-
-# Helper method
-def upload_file(filename)
-  select "Tagged Animal Assessment", from: 'category'
-  attach_file('input_file', Rails.root + filename)
-  click_on 'Submit'
 end

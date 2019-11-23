@@ -25,5 +25,15 @@
 require 'rails_helper'
 
 RSpec.describe UntaggedAnimalAssessment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validations' do
+    it { should validate_presence_of(:measurement_date) }
+    it { should validate_presence_of(:cohort) }
+    it { should validate_presence_of(:spawning_date) }
+    it { should validate_presence_of(:growout_trough) }
+    it { should validate_presence_of(:growout_rack) }
+    it { should validate_presence_of(:growout_column) }
+    it { should validate_presence_of(:length) }
+
+    it { should validate_numericality_of(:length) }
+  end
 end
