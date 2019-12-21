@@ -301,7 +301,7 @@ DEPENDENCIES
   creek
   daemons
   delayed_job_active_record
-  devise
+  devise (~> 4.7)
   factory_bot_rails
   faker!
   iostreams
