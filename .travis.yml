@@ -1,0 +1,16 @@
+sudo: false
+language: ruby
+before_install: gem install bundler
+services:
+  - postgresql
+# documentation for why we use these before_script commands for setting up postgres:
+# https://docs.travis-ci.com/user/database-setup/#using-postgresql-in-your-builds
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
+deploy:
+  provider: heroku
+  app: abalonerescue
+  api_key:
+    secure: $HEROKU_DEPLOY_TOKEN
+  run: "rake db:migrate"
