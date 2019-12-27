@@ -38,15 +38,11 @@ module ImportJob
 
     success = valid_headers == headers
     unless success
-      ActionCable.server.broadcast "import_job", { html:
-        "<div class='notification is-warning'>
-          <button class='delete'></button>
-          <strong>Invalid headers</strong>
-          <p>Valid headers: #{valid_headers.join(', ')}</p>
-          <p>Current headers: #{headers.join(', ')}</p>
-        </div>"
-      }
+      Notification::Broadcaster.new(
+        Notification::Formatter::ImportJob.new(data: { headers: headers, valid_headers: valid_headers })
+      ).deliver_message
     end
+
     success
   end
 
