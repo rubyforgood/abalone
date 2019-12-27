@@ -1,14 +1,15 @@
 module Notification
-  module Formatter
-    class ImportJob
+  module Action
+    class ImportJobInvalid
 
       CHANNEL_NAME = 'import_job'.freeze
+      NOTIFICATION_TITLE = '<strong>Error:</strong> <span>Invalid Headers:</span>'.freeze
+      NOTIFICATION_TYPE = 'warning'.freeze
 
-      attr_reader :data, :notification_type
+      attr_reader :data
 
-      def initialize(data:, notification_type: 'warning')
+      def initialize(data:)
         @data = data
-        @notification_type = notification_type
       end
 
       def deliver_message
@@ -21,7 +22,8 @@ module Notification
         {
           invalid_headers: headers - valid_headers,
           valid_headers: valid_headers,
-          notification_type: notification_type
+          notification_title: NOTIFICATION_TITLE,
+          notification_type: NOTIFICATION_TYPE
         }
       end
 

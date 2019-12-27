@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Notification::Formatter::ImportJob do
+RSpec.describe Notification::Action::ImportJobInvalid do
 
   let(:instance) { described_class.new(data: data) }
   let(:data) {{
@@ -14,6 +14,7 @@ RSpec.describe Notification::Formatter::ImportJob do
         content: {
           invalid_headers: ["not valid header", "another not valid header"],
           valid_headers: ["header_1", "header_2", "header_3"],
+          notification_title: "<strong>Error:</strong> <span>Invalid Headers:</span>",
           notification_type: "warning"
         }
       })

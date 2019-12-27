@@ -23,6 +23,7 @@ module ImportJob
     end
     remove_file!(filename)
     @processed_file.save
+    Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new).deliver_message
   end
 
   def validate_headers(filename)
@@ -39,7 +40,7 @@ module ImportJob
     success = valid_headers == headers
     unless success
       Notification::Broadcaster.new(
-        Notification::Formatter::ImportJob.new(data: { headers: headers, valid_headers: valid_headers })
+        Notification::Action::ImportJobInvalid.new(data: { headers: headers, valid_headers: valid_headers })
       ).deliver_message
     end
 
