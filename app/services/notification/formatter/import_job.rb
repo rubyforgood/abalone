@@ -4,26 +4,25 @@ module Notification
 
       CHANNEL_NAME = 'import_job'.freeze
 
-      attr_reader :data, :type
+      attr_reader :data, :notification_type
 
-      def initialize(data:, notification_type: :error)
+      def initialize(data:, notification_type: 'warning')
         @data = data
         @notification_type = notification_type
       end
 
       def deliver_message
-        ActionCable.server.broadcast CHANNEL_NAME, { html: output_html }
+        ActionCable.server.broadcast CHANNEL_NAME, { content: json_data }
       end
 
       private
 
-      def output_html
-        "<div class='notification is-warning'>
-          <button class='delete'></button>
-          <strong>Invalid headers</strong>
-          <p>Valid headers: #{valid_headers.join(', ')}</p>
-          <p>Current headers: #{headers.join(', ')}</p>
-        </div>"
+      def json_data
+        {
+          invalid_headers: headers - valid_headers,
+          valid_headers: valid_headers,
+          notification_type: notification_type
+        }
       end
 
       def headers
