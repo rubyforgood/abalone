@@ -13,15 +13,14 @@ module Notification
       end
 
       def deliver_message
-        ActionCable.server.broadcast CHANNEL_NAME, { content: json_data }
+        ActionCable.server.broadcast CHANNEL_NAME, json_data
       end
 
       private
 
       def json_data
         {
-          invalid_headers: headers - valid_headers,
-          valid_headers: valid_headers,
+          errors: invalid_headers,
           notification_title: NOTIFICATION_TITLE,
           notification_type: NOTIFICATION_TYPE
         }
@@ -33,6 +32,10 @@ module Notification
 
       def valid_headers
         data[:valid_headers]
+      end
+
+      def invalid_headers
+        headers - valid_headers
       end
 
     end

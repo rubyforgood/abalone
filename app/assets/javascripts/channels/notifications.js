@@ -9,7 +9,7 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
     // console.log("Disconnected to notifications")
   },
 
-  received: function({ content: { invalid_headers, valid_headers, notification_type, notification_title }}) {
+  received: function({ errors, notification_type, notification_title }) {
     const $notificationErrorType = $('.notification-error-type');
     const $notificationErrorContent = $('.notification-error-content');
     const $notificationErrorTitle = $('.notification-error-title');
@@ -21,7 +21,7 @@ App.notifications = App.cable.subscriptions.create("NotificationsChannel", {
     const list = items => ul(items.map(li));
 
     $notificationErrorTitle.html(notification_title);
-    $notificationErrorContent.html(list(invalid_headers));
+    $notificationErrorContent.html(list(errors));
     $notificationErrorType.addClass(`is-${notification_type}`);
   }
 });

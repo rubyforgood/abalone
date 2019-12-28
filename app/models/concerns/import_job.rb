@@ -12,10 +12,12 @@ module ImportJob
     initialize_processed_file(filename)
     if already_processed?(filename)
       fail_processed_file("Already processed a file with the same name. Data not imported!")
+      Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new(errors: ["Already processed."])).deliver_message
     else
       if validate_headers(full_path)
         import_records(full_path)
         complete_processed_file!
+        Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new).deliver_message
       else
         log("Error: #{filename} does not have valid headers. Data not imported!", :error)
         fail_processed_file("Does not have valid headers. Data not imported!")
@@ -23,7 +25,6 @@ module ImportJob
     end
     remove_file!(filename)
     @processed_file.save
-    Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new).deliver_message
   end
 
   def validate_headers(filename)
