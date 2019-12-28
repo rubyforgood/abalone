@@ -14,8 +14,9 @@ shared_examples_for "import job" do
     end
   end
 
+  let(:user) { create(:user, email: 'test@test.com', password: 'password') }
   let(:filename) { "Tagged_assessment_12172018 (original).csv" }
-  let(:perform_job) { described_class.perform_now(filename) }
+  let(:perform_job) { described_class.perform_now(filename, user.id) }
 
   it "saves ProcessedFile" do
     expect{ perform_job }.to change { ProcessedFile.count }.by 1
@@ -25,7 +26,7 @@ shared_examples_for "import job" do
   describe "#validate_headers" do
     it "returns true for valid headers" do
       validate_headers = described_class.new.validate_headers(
-        Rails.root.join("storage", filename).to_s
+        Rails.root.join("storage", filename).to_s, user
       )
 
       expect(validate_headers).to eq(true)
@@ -33,7 +34,8 @@ shared_examples_for "import job" do
 
     it "returns false for invalid headers" do
       validate_headers = described_class.new.validate_headers(
-        Rails.root.join("spec", "support", "csv", "invalid_headers.csv").to_s
+        Rails.root.join("spec", "support", "csv", "invalid_headers.csv").to_s,
+        user
       )
 
       expect(validate_headers).to eq(false)

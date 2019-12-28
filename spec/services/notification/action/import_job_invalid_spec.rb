@@ -10,12 +10,12 @@ RSpec.describe Notification::Action::ImportJobInvalid do
 
   describe "#deliver_message" do
     it 'broadcasts json data using ActionCable' do
-      expect(ActionCable.server).to receive(:broadcast).with("import_job", {
+      expect(ActionCable.server).to receive(:broadcast).with("channel:user_id", {
         errors: ["not valid header", "another not valid header"],
         notification_title: "<strong>Error:</strong> <span>Invalid Headers:</span>",
         notification_type: "warning"
       })
-      instance.deliver_message
+      instance.deliver_message("channel:user_id")
     end
   end
 end
