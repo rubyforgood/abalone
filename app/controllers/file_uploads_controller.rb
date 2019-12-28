@@ -38,7 +38,7 @@ class FileUploadsController < ApplicationController
         end
 
         job_class = [@category,'Job'].join
-        @reference = job_class.constantize.perform_later(@filename)
+        @reference = job_class.constantize.perform_later(@filename, current_user.id )
         @result = "Successfully queued spreadsheet for import as a #{job_class}."
       else
         @result = 'Error: No file uploaded.'

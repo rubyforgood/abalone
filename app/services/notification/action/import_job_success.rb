@@ -2,7 +2,6 @@ module Notification
   module Action
     class ImportJobSuccess
 
-      CHANNEL_NAME = 'import_job'.freeze
       NOTIFICATION_TITLE = 'Done!'.freeze
       NOTIFICATION_TYPE = 'success'.freeze
 
@@ -13,8 +12,8 @@ module Notification
         @errors = errors
       end
 
-      def deliver_message
-        ActionCable.server.broadcast CHANNEL_NAME, json_data
+      def deliver_message(channel_name)
+        ActionCable.server.broadcast channel_name, json_data
       end
 
       private

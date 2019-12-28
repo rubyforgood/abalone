@@ -2,7 +2,6 @@ module Notification
   module Action
     class ImportJobInvalid
 
-      CHANNEL_NAME = 'import_job'.freeze
       NOTIFICATION_TITLE = '<strong>Error:</strong> <span>Invalid Headers:</span>'.freeze
       NOTIFICATION_TYPE = 'warning'.freeze
 
@@ -12,8 +11,8 @@ module Notification
         @data = data
       end
 
-      def deliver_message
-        ActionCable.server.broadcast CHANNEL_NAME, json_data
+      def deliver_message(channel_name)
+        ActionCable.server.broadcast channel_name, json_data
       end
 
       private

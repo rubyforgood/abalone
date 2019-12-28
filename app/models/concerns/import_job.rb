@@ -6,18 +6,19 @@ module ImportJob
     attr_accessor :processed_file
   end
 
-  def perform(*args)
-    filename = args[0]
+  def perform(filename, user_id)
     full_path = Rails.root.join('storage', filename).to_s
+    user = User.find(user_id)
+
     initialize_processed_file(filename)
     if already_processed?(filename)
       fail_processed_file("Already processed a file with the same name. Data not imported!")
-      Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new(errors: ["Already processed."])).deliver_message
+      Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new(errors: ["Already processed."]), "import_job:#{user.id}").deliver_message
     else
-      if validate_headers(full_path)
+      if validate_headers(full_path, user)
         import_records(full_path)
         complete_processed_file!
-        Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new).deliver_message
+        Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new, "import_job:#{user.id}").deliver_message
       else
         log("Error: #{filename} does not have valid headers. Data not imported!", :error)
         fail_processed_file("Does not have valid headers. Data not imported!")
@@ -27,7 +28,7 @@ module ImportJob
     @processed_file.save
   end
 
-  def validate_headers(filename)
+  def validate_headers(filename, user)
     raise "No input file specified" unless filename
 
     headers = CSV.parse(File.read(filename, encoding: 'bom|utf-8'), headers: true)
@@ -41,7 +42,8 @@ module ImportJob
     success = valid_headers == headers
     unless success
       Notification::Broadcaster.new(
-        Notification::Action::ImportJobInvalid.new(data: { headers: headers, valid_headers: valid_headers })
+        Notification::Action::ImportJobInvalid.new(data: { headers: headers, valid_headers: valid_headers }),
+        "import_job:#{user.id}"
       ).deliver_message
     end
 
