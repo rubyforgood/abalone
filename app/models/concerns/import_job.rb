@@ -12,8 +12,9 @@ module ImportJob
 
     initialize_processed_file(filename)
     if already_processed?(filename)
-      fail_processed_file("Already processed a file with the same name. Data not imported!")
-      Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new(errors: ["Already processed."]), "import_job:#{user.id}").deliver_message
+      warning_msg = "Already processed a file with the same name. Data not imported!"
+      fail_processed_file(warning_msg)
+      Notification::Broadcaster.new(Notification::Action::ImportJobSuccess.new(errors: [warning_msg]), "import_job:#{user.id}").deliver_message
     else
       if validate_headers(full_path, user)
         import_records(full_path)
