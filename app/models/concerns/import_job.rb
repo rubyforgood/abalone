@@ -95,7 +95,7 @@ module ImportJob
   def complete_processed_file!
     @processed_file.job_stats = stats
     if stats[:rows_not_imported] > 0
-      @processed_file.status = 'Processed with errors'
+      @processed_file.status = 'Processed with errors - only re-upload fixed rows to avoid data duplication'
     else
       @processed_file.status = 'Processed'
     end
