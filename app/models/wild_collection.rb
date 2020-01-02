@@ -30,6 +30,8 @@
 class WildCollection < ApplicationRecord
   include Raw
 
+  # Keys in HEADERS hash match database column names
+  # Values match csv file column names
   HEADERS = {
     TAG: "Tag",
     COLLECTION_DATE: "Collection_date",

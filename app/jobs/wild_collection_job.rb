@@ -3,6 +3,7 @@ class WildCollectionJob < ApplicationJob
 
   private
 
+  # Translate from csv column name to database column name
   def translate_attribute_names(attrs)
     attrs['proximity_to_nearest_neighbor']              = attrs.delete('proximity_to_nearest_neighbor_m')
     attrs['collection_depth']                           = attrs.delete('collection_depth_m')
