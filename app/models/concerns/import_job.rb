@@ -21,7 +21,7 @@ module ImportJob
         fail_processed_file("Does not have valid headers. Data not imported!")
       end
     end
-    remove_file!(filename)
+    remove_file!(filename) unless stats[:rows_not_imported] > 0
     @processed_file.save
   end
 
@@ -81,7 +81,7 @@ module ImportJob
   end
 
   def already_processed?(filename)
-    ProcessedFile.where(status: 'Processed').where(original_filename: original_filename(filename)).count > 0
+    ProcessedFile.where(status: ['Processed','Processed with errors'] ).where(original_filename: original_filename(filename)).count > 0
   end
 
   def initialize_processed_file(filename)
@@ -94,7 +94,11 @@ module ImportJob
 
   def complete_processed_file!
     @processed_file.job_stats = stats
-    @processed_file.status = 'Processed'
+    if stats[:rows_not_imported] > 0
+      @processed_file.status = 'Processed with errors - only re-upload fixed rows to avoid data duplication'
+    else
+      @processed_file.status = 'Processed'
+    end
   end
 
   def fail_processed_file(error)
