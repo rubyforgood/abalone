@@ -6,10 +6,9 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
                 :password => "password",
                 :password_confirmation => "password" }) }
 
-  let(:dir_path) { "db/sample_data_files/untagged_animal_assessment"}
-  let(:valid_file) { "#{dir_path}/Untagged_assessment_03122018.csv" }
-  let(:invalid_file) { "#{dir_path}/invalid-headers.csv" }
-  let(:incomplete_data_file) { "#{dir_path}/Untagged_assessment_03122018-invalid-rows.csv" }
+  let(:valid_file) { "db/sample_data_files/untagged_animal_assessment/Untagged_assessment_03122018.csv" }
+  let(:invalid_file) { "spec/support/csv/invalid_headers.csv" }
+  let(:incomplete_data_file) { "spec/support/csv/Untagged_assessment_03122018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
 
   before do

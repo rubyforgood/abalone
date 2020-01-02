@@ -6,10 +6,9 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
                 :password => "password",
                 :password_confirmation => "password" }) }
 
-  let(:dir_path) { "db/sample_data_files/tagged_animal_assessment"}
-  let(:valid_file) { "#{dir_path}/Tagged_assessment_12172018 (original).csv" }
-  let(:invalid_file) { "#{dir_path}/invalid-headers.csv" }
-  let(:incomplete_data_file) { "#{dir_path}/Tagged_assessment_03172018-invalid-rows.csv" }
+  let(:valid_file) { "db/sample_data_files/tagged_animal_assessment/Tagged_assessment_12172018 (original).csv" }
+  let(:invalid_file) { "spec/support/csv/invalid_headers.csv" }
+  let(:incomplete_data_file) { "spec/support/csv/Tagged_assessment_03172018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
 
   before do
