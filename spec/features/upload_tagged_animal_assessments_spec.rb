@@ -71,7 +71,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
       processed_file = ProcessedFile.last
       expect(ProcessedFile.count).to eq 1
-      expect(processed_file.status).to eq "Processed"
+      expect(processed_file.status).to eq "Processed with errors - only re-upload fixed rows to avoid data duplication"
       expect(processed_file.job_errors).to eq(nil)
       expect(processed_file.job_stats).to eq(
         { "row_count"=>201,
