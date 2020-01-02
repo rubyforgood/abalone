@@ -1,41 +1,56 @@
-module CsvImporter
-  CSV_CATEGORIES = {
-      SPAWNING_SUCCESS: 'Spawning Success',
-      TAGGED_ANIMAL_ASSESSMENT: 'Tagged Animal Assessment',
-      UNTAGGED_ANIMAL_ASSESSMENT: 'Untagged Animal Assessment'
-  }.freeze
+class CsvImporter
+  attr_reader :stats, :model, :filename, :processed_file_id
 
-  class InvalidCsvCategoryError < StandardError; end;
+  CATEGORIES = [
+      'Spawning Success',
+      'Tagged Animal Assessment',
+      'Untagged Animal Assessment',
+      'Wild Collection',
+  ].freeze
+
+  class InvalidCategoryError < StandardError; end;
 
   def self.import(filename, category_name, processed_file_id)
-    csv_category_model = model_from_category(category_name)
-    IOStreams.each_record(filename) do |record|
-      attrs = translate_attribute_names(record, category_name)
-      attrs[:processed_file_id] = processed_file_id
-      csv_row_record = csv_category_model.new(attrs.merge({raw: false}))
-      csv_row_record.cleanse_data! if csv_row_record.respond_to?(:cleanse_data!)
-      csv_row_record.save
+    importer = new(filename, category_name, processed_file_id)
+    importer.process
+    importer.stats
+  end
+
+  def initialize(filename, category_name, processed_file_id)
+    @filename = filename
+    @processed_file_id = processed_file_id
+    @model = model_from_category(category_name)
+
+    @stats = Hash.new(0)
+    @stats[:shl_case_numbers] = Hash.new(0)
+  end
+
+  def process
+    IOStreams.each_record(filename) do |csv_row|
+      csv_row[:processed_file_id] = processed_file_id
+      csv_row[:raw] = false
+      record = model.create_from_csv_data(csv_row)
+      record.cleanse_data! if record.respond_to?(:cleanse_data!)
+      record.save
+      increment_stats(record)
     end
   end
 
-  def self.model_from_category(category_name)
-    case category_name
-    when CSV_CATEGORIES[:SPAWNING_SUCCESS]
-      SpawningSuccess
-    when CSV_CATEGORIES[:TAGGED_ANIMAL_ASSESSMENT]
-      TaggedAnimalAssessment
-    when CSV_CATEGORIES[:UNTAGGED_ANIMAL_ASSESSMENT]
-      UntaggedAnimalAssessment
+  def model_from_category(category_name)
+    if CATEGORIES.include?(category_name)
+      category_name.delete(' ').constantize
     else
-      raise InvalidCsvCategoryError
+      raise InvalidCategoryError
     end
   end
 
-  def self.translate_attribute_names(attrs, category_name)
-    case category_name
-    when CSV_CATEGORIES[:SPAWNING_SUCCESS]
-      attrs['nbr_of_eggs_spawned'] = attrs.delete('number_of_eggs_spawned_if_female')
+  def increment_stats(model)
+    stats[:row_count] += 1
+    if model.persisted?
+      stats[:rows_imported] += 1
+      stats[:shl_case_numbers][model.shl_case_number] += 1 if model.respond_to?(:shl_case_number)
+    else
+      stats[:rows_not_imported] += 1
     end
-    attrs
   end
 end

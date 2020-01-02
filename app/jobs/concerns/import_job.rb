@@ -3,7 +3,7 @@ module ImportJob
   extend ActiveSupport::Concern
 
   included do |base|
-    attr_accessor :processed_file
+    attr_accessor :processed_file, :stats
 
     base.extend ImportJobClassMethods
   end
@@ -41,17 +41,7 @@ module ImportJob
 
   def import_records(filename)
     raise "No input file specified" unless filename
-    IOStreams.each_record(filename) do |record|
-      attrs = preprocess_attribute_values(translate_attribute_names(record))
-      initialized_model = category_model.new(
-          attrs.merge({processed_file_id: @processed_file.id, raw: false})
-      )
-      initialized_model.cleanse_data!
-      unless initialized_model.save
-        log("Error: Row #{stats[:row_count] + 2} is not valid. #{attrs}", :error)
-      end
-      increment_stats(attrs, initialized_model.persisted?)
-    end
+    @stats = CsvImporter.import(filename, category_model.name.underscore.humanize.titleize, @processed_file.id)
     log(stats, :info)
   end
 
@@ -63,42 +53,15 @@ module ImportJob
     @category_model ||= category.constantize
   end
 
-  def stats
-    @stats ||= Hash.new(0)
-    @stats[:shl_case_numbers] = Hash.new(0) unless @stats.key?(:shl_case_numbers)
-    @stats
-  end
-
-  def increment_stats(attrs, persisted)
-    stats[:row_count] += 1
-    if persisted
-      stats[:rows_imported] += 1
-      stats[:shl_case_numbers][attrs['shl_case_number']] += 1 if attrs.key?('shl_case_number')
-    else
-      stats[:rows_not_imported] += 1
-    end
-  end
-
-  # We're receiving date values in a format different than what ActiveRecord expects, we need a mechanism
-  # for applying transformations to values before they get to the model.
-  def preprocess_attribute_values(attrs)
-    attrs
-  end
-
-  def translate_attribute_names(attrs)
-    attrs
-  end
-
   def already_processed?(filename)
     ProcessedFile.where(status: ['Processed','Processed with errors'] ).where(original_filename: original_filename(filename)).count > 0
   end
 
   def initialize_processed_file(filename)
-    @processed_file = ProcessedFile.create(filename: filename,
-                                           original_filename: original_filename(filename),
-                                           category: category,
-                                           status: 'Running',
-                                           job_stats: stats)
+    @processed_file = ProcessedFile.new(filename: filename,
+                                        original_filename: original_filename(filename),
+                                        category: category,
+                                        status: 'Running')
   end
 
   def complete_processed_file!

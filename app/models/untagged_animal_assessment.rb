@@ -48,10 +48,18 @@ class UntaggedAnimalAssessment < ApplicationRecord
   )
   validates :length, numericality: true
 
+  def self.create_from_csv_data(attrs)
+    new(attrs)
+  end
+
   # Cohort is translated to shl_case_number to compute stats.
   # Here we need to transfer it back to be able to store value in the DB.
   def shl_case_number=(value)
     self.cohort = value
+  end
+
+  def shl_case_number
+    self.cohort
   end
 
   def measurement_date=(measurement_date_str)

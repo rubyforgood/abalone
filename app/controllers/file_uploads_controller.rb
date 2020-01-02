@@ -2,12 +2,7 @@ class FileUploadsController < ApplicationController
 
   # The second value for each category entry will be used to determine the job class that processes the data.
   # Ex: Selecting "Spawning Success" in the form will post "SpawningSuccess" and process the data with a SpawningSuccessJob.
-  CATEGORIES = [
-      ['Spawning Success','SpawningSuccess'],
-      ['Tagged Animal Assessment','TaggedAnimalAssessment'],
-      ['Untagged Animal Assessment', 'UntaggedAnimalAssessment'],
-      # ['Wild Collection','WildCollection']
-  ].freeze
+  CATEGORIES = CsvImporter::CATEGORIES.map {|category| [category, category.delete(' ')] }.freeze
 
   def index
     @processed_files = ProcessedFile.all.order(updated_at: :desc).first(20)

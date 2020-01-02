@@ -297,6 +297,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootsnap (>= 1.1.0)
+  byebug
   capistrano (~> 3.11)
   capistrano-bundler (~> 1.6)
   capistrano-rails (~> 1.4)

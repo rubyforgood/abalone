@@ -32,7 +32,7 @@ facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code
 #   end
 # end
 
-current_csv_importers = ['Spawning Success','Tagged Animal Assessment','Untagged Animal Assessment']
+current_csv_importers = CsvImporter::CATEGORIES
 
 Dir["db/sample_data_files/*"].each do |category_dir|
   category_class_name = File.basename(category_dir).titleize
