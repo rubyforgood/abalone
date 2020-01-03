@@ -26,7 +26,17 @@ class TaggedAnimalAssessment < ApplicationRecord
   end
 
   def self.lengths_for_measurement(processed_file_id)
-    select(:length).where(processed_file_id: processed_file_id).map { |record| record.length.to_f }
+    # group by bin (1cm). need constant of bins
+      # groups = select(:length).where(processed_file_id: processed_file_id).map { |record| record.length.to_f }
+    # count = count of all animals from that spreadsheet
+
+    # total = total number of estimated animals from cohort (will need PopulationEstimate minus Mortality)
+
+    # for each group, num / count * total. will come up with a whole number, like 20. keep 20 with the size bin {"2cm" => 20}
+
+    # for each group, shovel in 2.times {data << 20} to an array
+
+    # data = [20,20]
   end
 
   def cleanse_data!

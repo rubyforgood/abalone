@@ -24,6 +24,7 @@ var GrowthChart = function (element, data) {
         type: 'histogram',
         showInLegend:false,
         baseSeries: "id1",
+        binWidth: 1
     }]
   });
 }
