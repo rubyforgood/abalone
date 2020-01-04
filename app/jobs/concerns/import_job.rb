@@ -2,8 +2,10 @@ module ImportJob
 
   extend ActiveSupport::Concern
 
-  included do
+  included do |base|
     attr_accessor :processed_file
+
+    base.extend ImportJobClassMethods
   end
 
   def perform(*args)
@@ -27,11 +29,10 @@ module ImportJob
 
   def validate_headers(filename)
     raise "No input file specified" unless filename
-
     headers = CSV.parse(File.read(filename, encoding: 'bom|utf-8'), headers: true)
       .headers
       .compact
-    valid_headers = category.constantize::HEADERS.values
+    valid_headers = category_model::HEADERS.values
 
     log("Headers in file: #{headers}", :debug)
     log("Valid headers for model: #{valid_headers}", :debug)
@@ -41,21 +42,25 @@ module ImportJob
   def import_records(filename)
     raise "No input file specified" unless filename
     IOStreams.each_record(filename) do |record|
-      attrs = translate_attribute_names(record)
-      spawning_success = category.constantize.new(
+      attrs = preprocess_attribute_values(translate_attribute_names(record))
+      initialized_model = category_model.new(
           attrs.merge({processed_file_id: @processed_file.id, raw: false})
       )
-      spawning_success.cleanse_data!
-      unless spawning_success.save
+      initialized_model.cleanse_data!
+      unless initialized_model.save
         log("Error: Row #{stats[:row_count] + 2} is not valid. #{attrs}", :error)
       end
-      increment_stats(attrs, spawning_success.persisted?)
+      increment_stats(attrs, initialized_model.persisted?)
     end
     log(stats, :info)
   end
 
   def category
-    @category ||= self.class.to_s.gsub(/Job/, '')
+    self.class.category
+  end
+
+  def category_model
+    @category_model ||= category.constantize
   end
 
   def stats
@@ -64,16 +69,20 @@ module ImportJob
     @stats
   end
 
-  private
-
   def increment_stats(attrs, persisted)
     stats[:row_count] += 1
     if persisted
       stats[:rows_imported] += 1
-      stats[:shl_case_numbers][attrs['shl_case_number']] += 1
+      stats[:shl_case_numbers][attrs['shl_case_number']] += 1 if attrs.key?('shl_case_number')
     else
       stats[:rows_not_imported] += 1
     end
+  end
+
+  # We're receiving date values in a format different than what ActiveRecord expects, we need a mechanism
+  # for applying transformations to values before they get to the model.
+  def preprocess_attribute_values(attrs)
+    attrs
   end
 
   def translate_attribute_names(attrs)
@@ -126,4 +135,9 @@ module ImportJob
     logger.send(level, message)
   end
 
+  module ImportJobClassMethods
+    def category
+      @category ||= to_s.gsub(/Job/, '')
+    end
+  end
 end

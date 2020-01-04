@@ -13,8 +13,8 @@ require 'capybara/rspec'
 Delayed::Worker.delay_jobs = false
 
 # Add additional requires below this line. Rails is not loaded until this point!
-
 Dir[Rails.root.join("spec", "jobs", "concerns", "**", "*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec", "models", "concerns", "**", "*.rb")].each { |f| require f }
 require 'support/factory_bot'
 require './spec/support/file_upload_helpers'
 

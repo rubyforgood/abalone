@@ -3,7 +3,7 @@ require "rails_helper"
 shared_examples_for "import job" do
   before(:each) do
     FileUtils.cp(
-      Rails.root.join("db", "sample_data_files", "tagged_animal_assessment", filename),
+      Rails.root.join("db", "sample_data_files", described_class.category.underscore, filename),
       Rails.root.join("storage")
     )
   end
@@ -14,7 +14,6 @@ shared_examples_for "import job" do
     end
   end
 
-  let(:filename) { "Tagged_assessment_12172018 (original).csv" }
   let(:perform_job) { described_class.perform_now(filename) }
 
   it "saves ProcessedFile" do

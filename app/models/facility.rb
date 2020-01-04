@@ -12,4 +12,15 @@
 # rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
 
 class Facility < ApplicationRecord
+  after_commit { Rails.cache.delete('facility_codes') }
+
+  def self.valid_codes
+    Rails.cache.fetch('facility_codes') do
+      Facility.all.map { |facility| facility.code.upcase }
+    end
+  end
+
+  def self.valid_code?(code)
+    valid_codes.include?(code.upcase)
+  end
 end
