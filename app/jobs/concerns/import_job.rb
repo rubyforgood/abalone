@@ -18,12 +18,12 @@ module ImportJob
       if validate_headers(full_path)
         import_records(full_path)
         complete_processed_file!
+        remove_file!(filename) unless stats[:rows_not_imported] > 0
       else
         log("Error: #{filename} does not have valid headers. Data not imported!", :error)
         fail_processed_file("Does not have valid headers. Data not imported!")
       end
     end
-    remove_file!(filename) unless stats[:rows_not_imported] > 0
     @processed_file.save
   end
 
