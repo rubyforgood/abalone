@@ -64,7 +64,7 @@ annotate
 Check out their Github page for more running options.
 
 ### Architectural Constraints
-Cost is a limitation of this app. We are hosting on a free Heroku instance and need to keep it this way. Do not add additional components that could potentially add costs to hosting (e.g. databases, frameworks, etc). Please talk to us if you have questions.
+In submitting features or bug fixes, please do not add new infrastructure components — e.g. databases, message queues, external caches — that might increase operational hosting costs. We are hosting on a free Heroku instance and need to keep it this way for the foreseeable future. Come talk to us if you have questions by posting in the Ruby for Good [#abalone](https://rubyforgood.slack.com/archives/CKYAB3G3X) slack channel or creating an [issue](https://github.com/rubyforgood/abalone/issues/new).
 
 ### Other Considerations
 We want it to be easy to understand and contribute to this app, which means we like comments in our code! We also want to keep the codebase beginner-friendly. Please keep this in mind when you are tempted to refactor that abstraction into an additional abstraction.
