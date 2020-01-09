@@ -48,6 +48,10 @@ class TaggedAnimalAssessment < ApplicationRecord
   validates :measurement_date, :shl_case_number, :spawning_date, :tag, :length, presence: true
   validates :length, numericality: true
 
+  def self.create_from_csv_data(attrs)
+    new(attrs)
+  end
+
   def measurement_date=(measurement_date_str)
     return unless measurement_date_str
     write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))
@@ -65,5 +69,4 @@ class TaggedAnimalAssessment < ApplicationRecord
   def cleanse_data!
     # Do nothing
   end
-
 end
