@@ -161,7 +161,7 @@ GEM
     net-scp (2.0.0)
       net-ssh (>= 2.6.5, < 6.0.0)
     net-ssh (5.2.0)
-    nio4r (2.4.0)
+    nio4r (2.5.2)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
@@ -176,7 +176,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.10)
     public_suffix (3.1.1)
-    puma (4.0.1)
+    puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.0.7)
     rack-test (1.1.0)
@@ -317,7 +317,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   pry
   pry-byebug
-  puma (~> 4.0)
+  puma (~> 4.3)
   rails (~> 5.2.3)
   rspec-rails (~> 3.8)
   rubocop-rails
