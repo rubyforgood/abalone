@@ -49,12 +49,13 @@ class FileUploadsController < ApplicationController
       uploaded_io = params[:input_file]
       timestamp = Time.new.strftime('%s_%N')
       if uploaded_io
-        @filename = [timestamp, uploaded_io.original_filename].join('_')
-        File.open(Rails.root.join('storage', @filename), 'wb') do |file|
-          file.write(uploaded_io.read)
+        begin
+          temporary_file = TemporaryFile.create(contents: uploaded_io.read)
+        rescue Exception => e
+          @result = "Error: File could not be uploaded: #{e.message}"
         end
         job_class = [@category,'Job'].join
-        @reference = job_class.constantize.perform_later(@filename)
+        @reference = job_class.constantize.perform_later(temporary_file.id)
         @result = "Successfully queued spreadsheet for import as a #{job_class}."
       else
         @result = 'Error: No file uploaded.'

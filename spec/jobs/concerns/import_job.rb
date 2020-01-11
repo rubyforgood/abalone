@@ -1,62 +1,42 @@
 require "rails_helper"
 
 shared_examples_for "import job" do
-  before(:each) do
-    FileUtils.cp(
-      Rails.root.join("db", "sample_data_files", described_class.category.underscore, filename),
-      Rails.root.join("storage")
-    )
-  end
-
-  after(:each) do
-    if File.exist?(Rails.root.join("storage", filename))
-      File.delete(Rails.root.join("storage", filename))
-    end
-  end
-
-  let(:perform_job) { described_class.perform_now(filename) }
+  let(:local_sample_data_filepath) { Rails.root.join("db", "sample_data_files", described_class.category.underscore, filename) }
+  let(:sample_csv_text) { File.read(local_sample_data_filepath, encoding: 'bom|utf-8') }
+  let(:temporary_file) { create(:temporary_file, contents: sample_csv_text) }
+  let(:perform_job) { described_class.perform_now(temporary_file.id) }
 
   it "saves ProcessedFile" do
     expect{ perform_job }.to change { ProcessedFile.count }.by 1
-    expect(ProcessedFile.last.filename).to eq(filename)
+    expect(ProcessedFile.last.temporary_file_id).to eq(temporary_file.id)
   end
 
   describe "#validate_headers" do
     it "returns true for valid headers" do
-      validate_headers = described_class.new.validate_headers(
-        Rails.root.join("storage", filename).to_s
-      )
+      validate_headers = described_class.new.validate_headers(local_sample_data_filepath)
 
       expect(validate_headers).to eq(true)
     end
 
     it "returns false for invalid headers" do
-      validate_headers = described_class.new.validate_headers(
-        Rails.root.join("spec", "support", "csv", "invalid_headers.csv").to_s
-      )
+      invalid_headers_sample_data_filepath = Rails.root.join("spec", "support", "csv", "invalid_headers.csv")
+      invalid_headers_sample_csv_text = File.read(local_sample_data_filepath, encoding: 'bom|utf-8')
+      invalid_headers_temporary_file = create(:temporary_file, contents: invalid_headers_sample_csv_text)
+      validate_headers = described_class.new.validate_headers(invalid_headers_sample_data_filepath)
 
       expect(validate_headers).to eq(false)
     end
   end
 
-  describe "#import_records" do
-    it "imports record into db" do
-      processed_file = create(:processed_file)
-      instance = described_class.new
-      record_count_before = instance.category.constantize.count
-      instance.processed_file=(processed_file)
+  it "imports record into db" do
+    instance = described_class.new
+    record_count_before = instance.category.constantize.count
 
-      expect do
-        instance.import_records(
-          Rails.root.join("storage", filename).to_s
-        )
-      end.to change { instance.category.constantize.count }
+    expect { instance.perform(temporary_file.id) }.to change { instance.category.constantize.count }
 
-      record_count_after = instance.category.constantize.count
-
-      expect(
-        record_count_before < record_count_after
-      ).to eq(true)
-    end
+    record_count_after = instance.category.constantize.count
+    expect(
+      record_count_before < record_count_after
+    ).to eq(true)
   end
 end
