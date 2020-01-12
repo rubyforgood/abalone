@@ -11,13 +11,12 @@ module ImportJob
   def perform(*args)
     temporary_file_id = args[0]
     temporary_file = TemporaryFile.find(temporary_file_id)
+    initialize_processed_file(temporary_file_id)
     if already_processed?(temporary_file_id)
-      initialize_processed_file(temporary_file_id)
       fail_processed_file("Already processed a file from the same upload event. Data not imported!")
     else
       filename = create_temp_file_on_disk(temporary_file_id)
       full_path = Rails.root.join('storage', filename).to_s
-      initialize_processed_file(temporary_file_id)
 
       if validate_headers(full_path)
         import_records(full_path)
