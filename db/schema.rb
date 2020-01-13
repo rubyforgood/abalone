@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_181501) do
+ActiveRecord::Schema.define(version: 2020_01_09_184825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_181501) do
     t.text "job_errors"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "temporary_file_id"
   end
 
   create_table "spawning_successes", force: :cascade do |t|
@@ -127,6 +128,12 @@ ActiveRecord::Schema.define(version: 2019_10_31_181501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
+  end
+
+  create_table "temporary_files", force: :cascade do |t|
+    t.text "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "untagged_animal_assessments", force: :cascade do |t|
