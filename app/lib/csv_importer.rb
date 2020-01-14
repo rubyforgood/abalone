@@ -26,15 +26,22 @@ class CsvImporter
   end
 
   def process
-    IOStreams.each_record(filename) do |csv_row|
-      csv_row[:processed_file_id] = processed_file_id
-      csv_row[:raw] = false
-      record = model.create_from_csv_data(csv_row)
-      record.cleanse_data! if record.respond_to?(:cleanse_data!)
-      record.save
-      increment_stats(record)
+    model.transaction do
+      IOStreams.each_record(filename) do |csv_row|
+        csv_row[:processed_file_id] = processed_file_id
+        csv_row[:raw] = false
+        record = model.create_from_csv_data(csv_row)
+        record.cleanse_data! if record.respond_to?(:cleanse_data!)
+        unless record.save
+          @stats = Hash.new(0)
+          raise ActiveRecord::Rollback
+        end
+        increment_stats(record)
+      end
     end
   end
+
+  private
 
   def model_from_category(category_name)
     if CATEGORIES.include?(category_name)
