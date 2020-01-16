@@ -1,14 +1,14 @@
 Tag,Collection_date,General Location,Precise Location,Collection_coodinates,Proximity to nearest neighbor (m),Collection method notes,Foot condition notes,Collection_depth_(m),Length,Weight,Gonad Score,Predicted Sex,Initial holding facility,Final holding facility & date of arrival,OTC treatment completion date
 Green_314,10/21/16,Los Angeles County,redacted,"1,1",>10,spatula,no cuts or abrasians reported,21.6,175,1242,1,M,AoP,BML; 12/13/2016,NA
-Green_312,1/31/17,Los Angeles County,redacted,redacted,>10,on rock,no cuts or abrasians reported,20.7,172,,NA,F,AoP,BML; 2/24/2017,4/25/17
-Green_408,3/15/17,Los Angeles County,redacted,redacted,>10,spatula,scrape,18.3,170,800,1-2?,F?,AoP,BML; 3/30/2017,4/25/17
-Green_425,3/15/17,Los Angeles County,redacted,redacted,>10,spatula + iron,1 small cut foot,17.7,175,874,2,F?,AoP,BML; 3/30/2017,4/25/17
-Green_416,4/12/17,Los Angeles County,redacted,redacted,>10,spatula,1-cm cut on foot,19.5,148,,,,AoP,BML; 7/6/2017,
-Green_404,5/19/17,Catalina Island,redacted,redacted,>10,spatula + iron,1 small cut front epipodial edge,32.3,152,,1,F,BML,BML; 5/20/2017,6/13/17
-Green_410,5/19/17,Catalina Island,redacted,redacted,~10,spatula + iron,2-3 large cuts,28.7,152,,1,F,BML,BML; 5/20/2018,6/13/17
-Green_429,5/19/17,Catalina Island,redacted,redacted,~10,spatula,1 small cut posterior foot,30.2,159,,0,,BML,BML; 5/20/2019,6/13/17
-Green_418,6/9/17,San Diego County,redacted,redacted,>10,hand,no cuts or abrasions reported,21.9,169,719,1,F,SWFSC,BML; 7/6/2017,7/6/17
-Yellow_120,11/13/17,San Diego County,redacted,redacted,>10,spatula + iron,"deep cut (approx. 20mm wide, 5-10mm deep) to the side of the foot at the posterior end",19.8,,,0,,SWFSC,BML; 1/29/18,
-Yellow 121,11/13/17,San Diego County,redacted,redacted,>10,spatula + iron,no cuts or abrasions reported,19.8,,,0,,SWFSC,BML; 1/29/18,
-Yellow 122,11/14/17,San Diego County,redacted,redacted,>10,spatula + iron,small abrasions to the bottom of the foot (approx. 2-3mm) at the posterior end,21,,,,,SWFSC,BML; 1/29/18,
-Yellow 119,3/18/19,Los Angeles County,redacted,redacted,>10,ochre star +iron,no cuts or abrasions reported,7,,,,,SWFSC,,
+Green_312,1/31/17,Los Angeles County,redacted,"1,1",>10,on rock,no cuts or abrasians reported,20.7,172,,NA,F,AoP,BML; 2/24/2017,4/25/17
+Green_408,3/15/17,Los Angeles County,redacted,"1,1",>10,spatula,scrape,18.3,170,800,1-2?,F?,AoP,BML; 3/30/2017,4/25/17
+Green_425,3/15/17,Los Angeles County,redacted,"1,1",>10,spatula + iron,1 small cut foot,17.7,175,874,2,F?,AoP,BML; 3/30/2017,4/25/17
+Green_416,4/12/17,Los Angeles County,redacted,"1,1",>10,spatula,1-cm cut on foot,19.5,148,,,,AoP,BML; 7/6/2017,
+Green_404,5/19/17,Catalina Island,redacted,"1,1",>10,spatula + iron,1 small cut front epipodial edge,32.3,152,,1,F,BML,BML; 5/20/2017,6/13/17
+Green_410,5/19/17,Catalina Island,redacted,"1,1",~10,spatula + iron,2-3 large cuts,28.7,152,,1,F,BML,BML; 5/20/2018,6/13/17
+Green_429,5/19/17,Catalina Island,redacted,"1,1",~10,spatula,1 small cut posterior foot,30.2,159,,0,,BML,BML; 5/20/2019,6/13/17
+Green_418,6/9/17,San Diego County,redacted,"1,1",>10,hand,no cuts or abrasions reported,21.9,169,719,1,F,SWFSC,BML; 7/6/2017,7/6/17
+Yellow_120,11/13/17,San Diego County,redacted,"1,1",>10,spatula + iron,"deep cut (approx. 20mm wide, 5-10mm deep) to the side of the foot at the posterior end",19.8,,,0,,SWFSC,BML; 1/29/18,
+Yellow 121,11/13/17,San Diego County,redacted,"1,1",>10,spatula + iron,no cuts or abrasions reported,19.8,,,0,,SWFSC,BML; 1/29/18,
+Yellow 122,11/14/17,San Diego County,redacted,"1,1",>10,spatula + iron,small abrasions to the bottom of the foot (approx. 2-3mm) at the posterior end,21,,,,,SWFSC,BML; 1/29/18,
+Yellow 119,3/18/19,Los Angeles County,redacted,"1,1",>10,ochre star +iron,no cuts or abrasions reported,7,,,,,SWFSC,,
