@@ -1,5 +1,6 @@
 class CsvImporter
-  attr_reader :stats, :model, :filename, :processed_file_id
+  attr_reader :stats, :model, :filename, :processed_file_id, :erred
+  alias :erred? :erred
 
   CATEGORIES = [
       'Spawning Success',
@@ -10,20 +11,20 @@ class CsvImporter
 
   class InvalidCategoryError < StandardError; end;
 
-  def self.import(filename, category_name, processed_file_id)
-    importer = new(filename, category_name, processed_file_id)
-    importer.process
-    importer.stats
-  end
-
   def initialize(filename, category_name, processed_file_id)
     @filename = filename
     @processed_file_id = processed_file_id
     @model = model_from_category(category_name)
-
     @stats = Hash.new(0)
     @stats[:shl_case_numbers] = Hash.new(0)
+    @erred = false
   end
+
+  def call
+    process
+  end
+
+  private
 
   def process
     model.transaction do
@@ -35,6 +36,7 @@ class CsvImporter
 
         unless record.save
           @stats = Hash.new(0)
+          @erred = true 
           raise ActiveRecord::Rollback
         end
 
@@ -42,8 +44,6 @@ class CsvImporter
       end
     end
   end
-
-  private
 
   def model_from_category(category_name)
     if CATEGORIES.include?(category_name)

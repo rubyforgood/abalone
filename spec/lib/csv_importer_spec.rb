@@ -10,7 +10,7 @@ RSpec.describe CsvImporter do
         filename = Rails.root.join("spec", "support", "csv", "Tagged_assessment_valid_values.csv").to_s
 
         expect do
-          CsvImporter.import(filename, category_name, processed_file.id)
+          CsvImporter.new(filename, category_name, processed_file.id).call
         end.to change { TaggedAnimalAssessment.count }.by 3
       end
     end
@@ -20,7 +20,7 @@ RSpec.describe CsvImporter do
         filename = Rails.root.join("spec", "support", "csv", "Tagged_assessment_invalid_values.csv").to_s
 
         expect do
-          CsvImporter.import(filename, category_name, processed_file.id)
+          CsvImporter.new(filename, category_name, processed_file.id).call
         end.not_to change { TaggedAnimalAssessment.count }
       end
     end

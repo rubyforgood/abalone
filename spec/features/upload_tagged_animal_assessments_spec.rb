@@ -41,7 +41,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
       processed_file = ProcessedFile.last
       expect(ProcessedFile.count).to eq 1
       expect(processed_file.status).to eq "Failed"
-      expect(processed_file.job_errors).to eq "Does not have valid headers. Data not imported!"
+      expect(processed_file.job_errors).to eq "Does not have valid header(s). Data not imported!"
       expect(processed_file.job_stats).to eq({})
       expect(page).to have_content expected_success_message
     end
@@ -66,20 +66,14 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   end
 
   context 'when user upload file with invalid rows' do
-    it "creates new ProcessedFile record with 'Processed' status" do
+    it "creates new ProcessedFile record with 'Failed' status" do
       upload_file("Tagged Animal Assessment", incomplete_data_file)
 
       processed_file = ProcessedFile.last
       expect(ProcessedFile.count).to eq 1
-      expect(processed_file.status).to eq "Processed with errors - only re-upload fixed rows to avoid data duplication"
-      expect(processed_file.job_errors).to eq(nil)
-      expect(processed_file.job_stats).to eq(
-        { "row_count"=>201,
-          "rows_imported"=>199,
-          "rows_not_imported"=>2,
-          "shl_case_numbers" => {"SF16-9A"=>98, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69}
-        }
-      )
+      expect(processed_file.status).to eq "Failed"
+      expect(processed_file.job_errors).to eq("Does not have valid row(s). Data not imported!")
+      expect(processed_file.job_stats).to eq({})
       expect(page).to have_content expected_success_message
     end
   end
