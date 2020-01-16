@@ -32,10 +32,12 @@ class CsvImporter
         csv_row[:raw] = false
         record = model.create_from_csv_data(csv_row)
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
+
         unless record.save
           @stats = Hash.new(0)
           raise ActiveRecord::Rollback
         end
+
         increment_stats(record)
       end
     end
