@@ -10,13 +10,15 @@ module ImportJob
   end
 
   def perform(*args)
-    filename = args[0]
-    full_path = Rails.root.join('storage', filename).to_s
-    initialize_processed_file(filename)
-
-    if already_processed?(filename)
-      fail_processed_file("Already processed a file with the same name. Data not imported!")
+    temporary_file_id = args[0]
+    temporary_file = TemporaryFile.find(temporary_file_id)
+    initialize_processed_file(temporary_file_id)
+    if already_processed?(temporary_file_id)
+      fail_processed_file("Already processed a file from the same upload event. Data not imported!")
     else
+      filename = create_temp_file_on_disk(temporary_file_id)
+      full_path = Rails.root.join('storage', filename).to_s
+
       if validate_headers(full_path)
         if import_records(full_path)
           complete_processed_file!
@@ -33,13 +35,21 @@ module ImportJob
 
     @processed_file.save
   end
+  
+  def create_temp_file_on_disk(temporary_file_id)
+    timestamp = Time.new.strftime('%s_%N')
+    filename = [timestamp, temporary_file_id].join('_') + '.csv'
+    File.open(Rails.root.join('storage', filename), 'wb') do |file|
+      file.write TemporaryFile.find(temporary_file_id).contents
+    end
 
-  def validate_headers(filename)
-    raise "No input file specified" unless filename
+    return filename
+  end
+  
+  def validate_headers(full_path)
+    raise "No input file specified" unless full_path
 
-    headers = CSV.parse(File.read(filename, encoding: 'bom|utf-8'), headers: true)
-      .headers
-      .compact
+    headers = CSV.parse(File.read(full_path, encoding: 'bom|utf-8'), headers: true).headers.compact
     valid_headers = category_model::HEADERS.values
 
     log("Headers in file: #{headers}", :debug)
@@ -73,9 +83,8 @@ module ImportJob
     ProcessedFile.where(status: ['Processed','Processed with errors'] ).where(original_filename: original_filename(filename)).count > 0
   end
 
-  def initialize_processed_file(filename)
-    @processed_file = ProcessedFile.new(filename: filename,
-                                        original_filename: original_filename(filename),
+  def initialize_processed_file(temporary_file_id)
+    @processed_file = ProcessedFile.new(temporary_file_id: temporary_file_id,
                                         category: category,
                                         status: 'Running')
   end

@@ -48,10 +48,12 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
   end
 
   context 'when user upload a CSV that has been already processed' do
+    let(:temporary_file) { create(:temporary_file, contents: '') }
+
     before do
       FactoryBot.create :processed_file,
         status: 'Processed',
-        original_filename: 'Untagged_assessment_03122018.csv'
+        temporary_file_id: temporary_file.id
     end
 
     it "creates new ProcessedFile record with 'Failed' status" do
@@ -59,7 +61,7 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
 
       processed_file = ProcessedFile.where(status: "Failed").first
       expect(ProcessedFile.count).to eq 2
-      expect(processed_file.job_errors).to eq "Already processed a file with the same name. Data not imported!"
+      expect(processed_file.job_errors).to eq "Already processed a file from the same upload event. Data not imported!"
       expect(processed_file.job_stats).to eq({})
       expect(page).to have_content expected_success_message
     end
