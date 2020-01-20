@@ -1,6 +1,6 @@
 class CsvImporter
-  attr_reader :stats, :model, :filename, :processed_file_id, :erred
-  alias :erred? :erred
+  attr_reader :stats, :model, :filename, :processed_file_id, :errored
+  alias :errored? :errored
 
   CATEGORIES = [
       'Spawning Success',
@@ -17,7 +17,7 @@ class CsvImporter
     @model = model_from_category(category_name)
     @stats = Hash.new(0)
     @stats[:shl_case_numbers] = Hash.new(0)
-    @erred = false
+    @errored = false
   end
 
   def call
@@ -36,7 +36,7 @@ class CsvImporter
 
         unless record.save
           @stats = Hash.new(0)
-          @erred = true 
+          @errored = true 
           raise ActiveRecord::Rollback
         end
 

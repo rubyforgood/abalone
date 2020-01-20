@@ -62,7 +62,7 @@ module ImportJob
     csv_importer = CsvImporter.new(filename, category_model.name.underscore.humanize.titleize, @processed_file.id)
     csv_importer.call
 
-    if csv_importer.erred?
+    if csv_importer.errored?
       return false
     end
 
