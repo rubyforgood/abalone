@@ -23,6 +23,17 @@ RSpec.describe CsvImporter do
           CsvImporter.new(filename, category_name, processed_file.id).call
         end.not_to change { TaggedAnimalAssessment.count }
       end
+
+      it "provides error details" do
+        filename = Rails.root.join("spec", "support", "csv", "Tagged_assessment_invalid_values.csv").to_s
+        importer = CsvImporter.new(filename, category_name, processed_file.id)
+
+        expect do
+          importer.call
+        end.not_to change { TaggedAnimalAssessment.count }
+        expect(importer.errored?).to eq(true)
+        expect(importer.error_details.empty?).to eq(false)
+      end
     end
   end
 end

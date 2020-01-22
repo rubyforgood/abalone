@@ -75,7 +75,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
       expect(ProcessedFile.count).to eq 1
       expect(processed_file.status).to eq "Failed"
       expect(processed_file.job_errors).to eq("Does not have valid row(s). Data not imported!")
-      expect(processed_file.job_stats).to eq({})
+      expect(processed_file.job_stats).to eq({"row_number_2"=>{"shl_case_number"=>[{"error"=>"blank"}]}, "row_number_3"=>{"tag"=>[{"error"=>"blank"}]}})
       expect(page).to have_content expected_success_message
     end
   end

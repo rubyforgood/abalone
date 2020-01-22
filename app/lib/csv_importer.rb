@@ -1,6 +1,5 @@
 class CsvImporter
-  attr_reader :stats, :model, :filename, :processed_file_id, :errored
-  alias :errored? :errored
+  attr_reader :stats, :model, :filename, :processed_file_id, :error_details
 
   CATEGORIES = [
       'Spawning Success',
@@ -16,17 +15,23 @@ class CsvImporter
     @processed_file_id = processed_file_id
     @model = model_from_category(category_name)
     @stats = Hash.new(0)
+    @error_details = {}
     @stats[:shl_case_numbers] = Hash.new(0)
-    @errored = false
   end
 
   def call
     process
   end
 
+  def errored?
+    !error_details.empty?
+  end
+
   private
 
   def process
+    row_number = 2 # assuming 1 is headers
+
     model.transaction do
       IOStreams.each_record(filename) do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
@@ -34,13 +39,19 @@ class CsvImporter
         record = model.create_from_csv_data(csv_row)
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
-        unless record.save
-          @stats = Hash.new(0)
-          @errored = true 
-          raise ActiveRecord::Rollback
+        unless record.valid?
+          error_details["row_number_#{row_number}"] = record.errors.details
+        else
+          record.save
+          increment_stats(record)
         end
 
-        increment_stats(record)
+        row_number += 1
+      end
+
+      unless error_details.empty?
+        @stats = Hash.new(0)
+        raise ActiveRecord::Rollback
       end
     end
   end

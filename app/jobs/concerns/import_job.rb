@@ -4,7 +4,7 @@ module ImportJob
 
   included do |base|
     attr_accessor :processed_file, :stats
-    attr_reader :job_stats
+    attr_reader :job_stats, :error_details
 
     base.extend ImportJobClassMethods
   end
@@ -63,6 +63,8 @@ module ImportJob
     csv_importer.call
 
     if csv_importer.errored?
+      @error_details = csv_importer.error_details
+      log(error_details, :info)
       return false
     end
 
@@ -96,7 +98,7 @@ module ImportJob
 
   def fail_processed_file(error)
     @processed_file.status = 'Failed'
-    @processed_file.job_stats = {}
+    @processed_file.job_stats = error_details || {}
     @processed_file.job_errors = error
   end
 
