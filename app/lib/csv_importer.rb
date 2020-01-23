@@ -39,11 +39,11 @@ class CsvImporter
         record = model.create_from_csv_data(csv_row)
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
-        unless record.valid?
-          error_details["row_number_#{row_number}"] = record.errors.details
-        else
+        if record.valid?
           record.save
           increment_stats(record)
+        else
+          error_details["row_number_#{row_number}"] = record.errors.details
         end
 
         row_number += 1
