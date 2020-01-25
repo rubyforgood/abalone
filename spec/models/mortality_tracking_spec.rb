@@ -32,10 +32,10 @@ RSpec.describe MortalityTracking, type: :model do
   let(:valid_attributes) do
     {
       raw: true,
-      mortality_date: Date.strptime('1/1/19', '%m/%d/%y'),
+      mortality_date: '1/1/19',
       cohort: 'UCSB 2012',
       shl_case_number: 'SF08-26',
-      spawning_date: Date.strptime('5/1/19', '%m/%d/%y'),
+      spawning_date: '5/1/19',
       shell_box: 'SHL',
       shell_container: 'Loose',
       animal_location: '',
@@ -84,6 +84,18 @@ RSpec.describe MortalityTracking, type: :model do
   include_examples 'an optional field', :tags
   include_examples 'an optional field', :comments
 
+  describe 'raw' do
+    include_examples 'validate values for field', :raw do
+      let(:valid_values) do
+        [true, false]
+      end
+
+      let(:invalid_values) do
+        [nil]
+      end
+    end
+  end
+
   describe 'processed by shl' do
     include_examples 'validate values for field', :processed_by_shl do
       let(:valid_values) do
@@ -92,6 +104,54 @@ RSpec.describe MortalityTracking, type: :model do
 
       let(:invalid_values) do
         %w[Z]
+      end
+    end
+  end
+
+  describe '#mortality_date=' do
+    subject do
+      model = described_class.new
+      model.mortality_date = mortality_date_str
+      model.mortality_date
+    end
+
+    context 'when the mortality_date is not in the correct format' do
+      let(:mortality_date_str) { 'not-a-valid-date' }
+
+      it 'should set the mortality_date to nil' do
+        expect(subject).to eq(nil)
+      end
+    end
+
+    context 'when the mortality_date is not in the correct format' do
+      let(:mortality_date_str) { '4/10/20' }
+
+      it 'should set the mortality_date to a DateTime' do
+        expect(subject).to be_a_kind_of(Date)
+      end
+    end
+  end
+
+  describe '#spawning_date=' do
+    subject do
+      model = described_class.new
+      model.spawning_date = spawning_date_str
+      model.spawning_date
+    end
+
+    context 'when the spawning_date is not in the correct format' do
+      let(:spawning_date_str) { 'not-a-valid-date' }
+
+      it 'should set the spawning_date to nil' do
+        expect(subject).to eq(nil)
+      end
+    end
+
+    context 'when the mortality_date is not in the correct format' do
+      let(:spawning_date_str) { '4/10/20' }
+
+      it 'should set the spawning_date to a DateTime' do
+        expect(subject).to be_a_kind_of(Date)
       end
     end
   end

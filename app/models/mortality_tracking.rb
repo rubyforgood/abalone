@@ -43,7 +43,14 @@ class MortalityTracking < ApplicationRecord
     COMMENTS: "Comments"
   }
 
-  validates_presence_of :raw
+  def self.create_from_csv_data(attrs)
+    attrs['shl_case_number']                     = attrs.delete('shl_number')
+    attrs['number_morts']                     = attrs.delete('_morts')
+    new(attrs)
+  end
+
+  validates_inclusion_of :raw, in: [true, false]
+
   validates_presence_of :mortality_date
   # mortality_date has 'Unknown' and 'unkown' in csv
   validates_presence_of :cohort
@@ -55,5 +62,19 @@ class MortalityTracking < ApplicationRecord
   # number_morts has been '9+' and 'TBD' in csv
 
   validates :processed_by_shl, format: { with: /Y|N/ }, allow_blank: true
+
+  def mortality_date=(mortality_date_str)
+    return unless mortality_date_str
+    write_attribute(:mortality_date, DateTime.strptime(mortality_date_str, '%m/%d/%y'))
+  rescue
+    write_attribute(:mortality_date, nil)
+  end
+
+  def spawning_date=(spawning_date_str)
+    return unless spawning_date_str
+    write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
+  rescue
+    write_attribute(:spawning_date, nil)
+  end
 
 end
