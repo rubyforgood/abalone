@@ -46,6 +46,16 @@ class MortalityTracking < ApplicationRecord
   def self.create_from_csv_data(attrs)
     attrs['shl_case_number']                     = attrs.delete('shl_number')
     attrs['number_morts']                     = attrs.delete('_morts')
+
+    # Attempt to convert provided csv attributes
+    # to the proper format. Dates are provided as
+    # strings and must be converted to a datetime.
+    #
+    # Note - DateTime.strptime will raise a ArgumentError
+    # if there is a issue converting.
+    attrs['spawning_date'] = DateTime.parse(attrs.delete('spawning_date'))
+    attrs['mortality_date'] = DateTime.parse(attrs.delete('mortality_date'))
+
     new(attrs)
   end
 
@@ -62,19 +72,5 @@ class MortalityTracking < ApplicationRecord
   # number_morts has been '9+' and 'TBD' in csv
 
   validates :processed_by_shl, format: { with: /Y|N/ }, allow_blank: true
-
-  def mortality_date=(mortality_date_str)
-    return unless mortality_date_str
-    write_attribute(:mortality_date, DateTime.strptime(mortality_date_str, '%m/%d/%y'))
-  rescue
-    write_attribute(:mortality_date, nil)
-  end
-
-  def spawning_date=(spawning_date_str)
-    return unless spawning_date_str
-    write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
-  rescue
-    write_attribute(:spawning_date, nil)
-  end
 
 end

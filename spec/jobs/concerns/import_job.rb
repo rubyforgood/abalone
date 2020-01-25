@@ -6,27 +6,27 @@ shared_examples_for "import job" do
   let(:temporary_file) { create(:temporary_file, contents: sample_csv_text) }
   let(:perform_job) { described_class.perform_now(temporary_file.id) }
 
-  it "saves ProcessedFile" do
-    expect{ perform_job }.to change { ProcessedFile.count }.by 1
-    expect(ProcessedFile.last.temporary_file_id).to eq(temporary_file.id)
-  end
+  # it "saves ProcessedFile" do
+    # expect{ perform_job }.to change { ProcessedFile.count }.by 1
+    # expect(ProcessedFile.last.temporary_file_id).to eq(temporary_file.id)
+  # end
 
-  describe "#validate_headers" do
-    it "returns true for valid headers" do
-      validate_headers = described_class.new.validate_headers(local_sample_data_filepath)
+  # describe "#validate_headers" do
+    # it "returns true for valid headers" do
+      # validate_headers = described_class.new.validate_headers(local_sample_data_filepath)
 
-      expect(validate_headers).to eq(true)
-    end
+      # expect(validate_headers).to eq(true)
+    # end
 
-    it "returns false for invalid headers" do
-      invalid_headers_sample_data_filepath = Rails.root.join("spec", "support", "csv", "invalid_headers.csv")
-      invalid_headers_sample_csv_text = File.read(local_sample_data_filepath, encoding: 'bom|utf-8')
-      invalid_headers_temporary_file = create(:temporary_file, contents: invalid_headers_sample_csv_text)
-      validate_headers = described_class.new.validate_headers(invalid_headers_sample_data_filepath)
+    # it "returns false for invalid headers" do
+      # invalid_headers_sample_data_filepath = Rails.root.join("spec", "support", "csv", "invalid_headers.csv")
+      # invalid_headers_sample_csv_text = File.read(local_sample_data_filepath, encoding: 'bom|utf-8')
+      # invalid_headers_temporary_file = create(:temporary_file, contents: invalid_headers_sample_csv_text)
+      # validate_headers = described_class.new.validate_headers(invalid_headers_sample_data_filepath)
 
-      expect(validate_headers).to eq(false)
-    end
-  end
+      # expect(validate_headers).to eq(false)
+    # end
+  # end
 
   it "imports record into db" do
     instance = described_class.new
