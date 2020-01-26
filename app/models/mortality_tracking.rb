@@ -53,8 +53,8 @@ class MortalityTracking < ApplicationRecord
     #
     # Note - DateTime.strptime will raise a ArgumentError
     # if there is a issue converting.
-    attrs['spawning_date'] = DateTime.parse(attrs.delete('spawning_date'))
-    attrs['mortality_date'] = DateTime.parse(attrs.delete('mortality_date'))
+    attrs['spawning_date'] = DateTime.strptime(attrs.delete('spawning_date'), '%m/%d/%y')
+    attrs['mortality_date'] = DateTime.strptime(attrs.delete('mortality_date'), '%m/%d/%y')
 
     new(attrs)
   end
