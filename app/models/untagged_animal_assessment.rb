@@ -37,6 +37,12 @@ class UntaggedAnimalAssessment < ApplicationRecord
     NOTES: "Notes"
   }
 
+  # this is used to dynamically define argument setter for these attributes
+  DATE_ATTRIBUTES = %w[
+    measurement_date
+    spawning_date
+  ].freeze
+
   validates(
     :measurement_date,
     :cohort,
@@ -62,14 +68,15 @@ class UntaggedAnimalAssessment < ApplicationRecord
     self.cohort
   end
 
-  def measurement_date=(measurement_date_str)
-    return unless measurement_date_str
-    write_attribute(:measurement_date, DateTime.strptime(measurement_date_str, '%m/%d/%y'))
-  end
-
-  def spawning_date=(spawning_date_str)
-    return unless spawning_date_str
-    write_attribute(:spawning_date, DateTime.strptime(spawning_date_str, '%m/%d/%y'))
+  DATE_ATTRIBUTES.each do |name|
+    define_method "#{name}=" do |argument|
+      return unless argument
+      begin
+        write_attribute(name.to_sym, DateTime.strptime(argument, "%m/%d/%y"))
+      rescue ArgumentError
+        errors.add(name.to_sym, :invalid, message: "Invalid date format: #{argument}")
+      end
+    end
   end
 
   def self.lengths_for_measurement(processed_file_id)

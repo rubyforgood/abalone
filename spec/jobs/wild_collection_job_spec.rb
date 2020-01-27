@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe WildCollectionJob do
   let(:filename) { "example_of_wild_collection_data.csv" }
 
-  before do
+  before(:all) do
     Rails.application.load_seed
   end
 
