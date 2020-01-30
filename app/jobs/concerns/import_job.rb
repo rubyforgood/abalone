@@ -4,6 +4,7 @@ module ImportJob
 
   included do |base|
     attr_accessor :processed_file, :stats
+    attr_reader :job_stats, :error_details
 
     base.extend ImportJobClassMethods
   end
@@ -19,17 +20,22 @@ module ImportJob
       full_path = Rails.root.join('storage', filename).to_s
 
       if validate_headers(full_path)
-        import_records(full_path)
-        complete_processed_file!
-        remove_file!(filename) unless stats[:rows_not_imported] > 0
+        if import_records(full_path)
+          complete_processed_file!
+          remove_file!(filename)
+        else
+          log("Error: #{filename} does not have valid row(s). Data not imported!", :error)
+          fail_processed_file("Does not have valid row(s). Data not imported!")
+        end
       else
-        log("Error: #{filename} does not have valid headers. Data not imported!", :error)
-        fail_processed_file("Does not have valid headers. Data not imported!")
+        log("Error: #{filename} does not have valid header(s). Data not imported!", :error)
+        fail_processed_file("Does not have valid header(s). Data not imported!")
       end
     end
+
     @processed_file.save
   end
-
+  
   def create_temp_file_on_disk(temporary_file_id)
     timestamp = Time.new.strftime('%s_%N')
     filename = [timestamp, temporary_file_id].join('_') + '.csv'
@@ -39,7 +45,7 @@ module ImportJob
 
     return filename
   end
-
+  
   def validate_headers(full_path)
     raise "No input file specified" unless full_path
 
@@ -53,8 +59,18 @@ module ImportJob
 
   def import_records(filename)
     raise "No input file specified" unless filename
-    @stats = CsvImporter.import(filename, category_model.name.underscore.humanize.titleize, @processed_file.id)
-    log(stats, :info)
+    csv_importer = CsvImporter.new(filename, category_model.name.underscore.humanize.titleize, @processed_file.id)
+    csv_importer.call
+
+    if csv_importer.errored?
+      @error_details = csv_importer.error_details
+      log(error_details, :info)
+      return false
+    end
+
+    @job_stats = csv_importer.stats
+    log(job_stats, :info)
+    true
   end
 
   def category
@@ -76,17 +92,13 @@ module ImportJob
   end
 
   def complete_processed_file!
-    @processed_file.job_stats = stats
-    if stats[:rows_not_imported] > 0
-      @processed_file.status = 'Processed with errors - only re-upload fixed rows to avoid data duplication'
-    else
-      @processed_file.status = 'Processed'
-    end
+    @processed_file.job_stats = job_stats
+    @processed_file.status = 'Processed'
   end
 
   def fail_processed_file(error)
     @processed_file.status = 'Failed'
-    @processed_file.job_stats = {}
+    @processed_file.job_stats = error_details || {}
     @processed_file.job_errors = error
   end
 
