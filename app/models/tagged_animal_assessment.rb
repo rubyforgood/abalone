@@ -31,10 +31,10 @@ class TaggedAnimalAssessment < ApplicationRecord
                      .where(measurement_date: measurement_date)
 
       # group by bin (1cm). need constant of bins
-      grouped_measurements = measuremnts.group_by{|record| record.length.to_i}
+      grouped_measurements = measurements.group_by{|record| record.length.to_i}
 
       # count = count of all animals from that spreadsheet
-      sample = measurements.count
+      sample = measurements.count.to_f
 
       # total = total number of estimated animals from cohort (will need PopulationEstimate minus Mortality)
       total = 100
@@ -44,11 +44,10 @@ class TaggedAnimalAssessment < ApplicationRecord
         { group.first => (group.last.count / sample * total).round }
       end
 
-      # for each group, shovel in 2.times {data << 20} to an array
-      # data = [20,20]
+      # for each group, shovel in x.times to an array e.g. data = [20,20]
       extrapolated_lengths = []
       extrapolated_grouped_measurements.each do |group|
-        group.value.times{ extrapolated_lengths << group.key }
+        group.values.first.times{ extrapolated_lengths << group.keys.first }
       end
       extrapolated_lengths
   end
