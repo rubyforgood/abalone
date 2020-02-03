@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
 
   def lengths_for_measurement
     @processed_file_id = params[:processed_file_id]
-    @total_animal_lengths = TaggedAnimalAssessment.lengths_for_measurement('SF16-9D','2018-12-20')
+    @total_animal_lengths = TaggedAnimalAssessment.lengths_for_measurement(params[:shl_case_number], params[:date])
     # + UntaggedAnimalAssessment.lengths_for_measurement(@processed_file_id)
 
     respond_to do |format|
