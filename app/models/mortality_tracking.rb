@@ -59,18 +59,5 @@ class MortalityTracking < ApplicationRecord
     new(attrs)
   end
 
-  validates_inclusion_of :raw, in: [true, false]
-
-  validates_presence_of :mortality_date
-  # mortality_date has 'Unknown' and 'unkown' in csv
-  validates_presence_of :cohort
   validates_presence_of :shl_case_number
-  validates_presence_of :spawning_date
-  validates_presence_of :number_morts
-
-  validates :number_morts, numericality: true, allow_blank: true
-  # number_morts has been '9+' and 'TBD' in csv
-
-  validates :processed_by_shl, format: { with: /Y|N/ }, allow_blank: true
-
 end
