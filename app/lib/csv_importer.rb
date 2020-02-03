@@ -6,6 +6,7 @@ class CsvImporter
       'Tagged Animal Assessment',
       'Untagged Animal Assessment',
       'Wild Collection',
+      'Population Estimate'
   ].freeze
 
   class InvalidCategoryError < StandardError; end;
