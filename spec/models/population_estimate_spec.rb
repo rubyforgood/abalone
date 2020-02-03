@@ -21,19 +21,12 @@
 require 'rails_helper'
 
 RSpec.describe PopulationEstimate, type: :model do
-  let(:population_estimate) { FactoryBot.create :population_estimate }
+  describe 'validations' do
+    it { should validate_presence_of(:sample_date) }
+    it { should validate_presence_of(:shl_case_number) }
+    it { should validate_presence_of(:abundance) }
+    it { should validate_presence_of(:facility) }
 
-  describe 'structure' do
-    it { is_expected.to have_db_column :sample_date }
-    it { is_expected.to have_db_column :shl_case_number }
-    it { is_expected.to have_db_column :spawning_date }
-    it { is_expected.to have_db_column :lifestage }
-    it { is_expected.to have_db_column :abundance }
-    it { is_expected.to have_db_column :facility }
-    it { is_expected.to have_db_column :notes }
-
-    describe 'it only has 11 columns' do
-      it { expect(PopulationEstimate.columns.count).to eq 12 }
-    end
+    it { should validate_numericality_of(:abundance) }
   end
 end
