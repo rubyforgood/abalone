@@ -1,20 +1,40 @@
-<h1>Processed File</h1>
-<br />
-<%= @processed_file.original_filename %> processed at <%= @processed_file.updated_at %><br />
-<br />
-<table border="1" style="width:100%;">
-  <thead>
-  <%- @headers.each do |attr|%>
-    <th><%= attr %></th>
-  <%- end %>
-  </thead>
-  <tbody>
-  <%- @records.each do |record| %>
-    <tr>
-      <%- @headers.each do |attr|%>
-        <td><%= record[attr] %></td>
-      <%- end %>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<section class="section">
+  <div class="container is-fluid">
+    <h1 class="title">Processed File</h1>
+    <div class="columns">
+      <div class="column is-1">
+        File name:
+      </div>
+      <div class="column is-11">
+        <%= @processed_file.original_filename %>
+      </div>
+    </div>
+    <div class="columns">
+      <div class="column is-1">
+        Processed at:
+      </div>
+      <div class="column is-11">
+        <%= @processed_file.updated_at %>
+      </div>
+    </div>
+    <br />
+    <div class="container_with_scroll">
+      <table class="table is-bordered if-fullwidth is-striped is-hoverable">
+        <thead>
+        <%- @headers.each do |attr|%>
+          <th><%= attr %></th>
+        <%- end %>
+        </thead>
+        <tbody>
+        <%- @records.each do |record| %>
+          <tr>
+            <%- @headers.each do |attr|%>
+              <td><%= record[attr] %></td>
+            <%- end %>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

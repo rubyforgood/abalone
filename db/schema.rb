@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_27_201619) do
+ActiveRecord::Schema.define(version: 2020_01_09_184825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.text "job_errors"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "temporary_file_id"
   end
 
   create_table "spawning_successes", force: :cascade do |t|
@@ -129,6 +130,12 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.integer "processed_file_id"
   end
 
+  create_table "temporary_files", force: :cascade do |t|
+    t.text "contents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "untagged_animal_assessments", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.date "measurement_date"
@@ -139,12 +146,24 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.decimal "growout_trough"
     t.decimal "length"
     t.decimal "mass"
-    t.decimal "gonad_score"
+    t.string "gonad_score"
     t.string "predicted_sex"
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "wild_collections", force: :cascade do |t|
@@ -153,7 +172,7 @@ ActiveRecord::Schema.define(version: 2019_07_27_201619) do
     t.date "collection_date"
     t.string "general_location"
     t.string "precise_location"
-    t.point "collection_coodinates"
+    t.point "collection_coordinates"
     t.string "proximity_to_nearest_neighbor"
     t.string "collection_method_notes"
     t.string "foot_condition_notes"

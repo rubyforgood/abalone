@@ -1,3 +1,16 @@
+# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# == Schema Information
+#
+# Table name: facilities
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  code       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+
 require 'rails_helper'
 
 RSpec.describe Facility, type: :model do
