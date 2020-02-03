@@ -29,6 +29,25 @@ require 'rails_helper'
 RSpec.describe MortalityTracking, type: :model do
   let(:mortality_tracking) { FactoryBot.create :mortality_tracking }
 
+  let(:valid_attributes) do
+    {
+      raw: true,
+      mortality_date: '1/1/19',
+      cohort: 'UCSB 2012',
+      shl_case_number: 'SF08-26',
+      spawning_date: '5/1/19',
+      shell_box: 'SHL',
+      shell_container: 'Loose',
+      animal_location: '',
+      number_morts: 2,
+      approximation: '',
+      processed_by_shl: 'N',
+      initials: 'LA',
+      tags: 'Green_232 Yellow_222',
+      comments: 'Too degraded to process'
+    }
+  end
+
   describe 'structure' do
     it { is_expected.to have_db_column :raw }
     it { is_expected.to have_db_column :mortality_date }
@@ -48,5 +67,79 @@ RSpec.describe MortalityTracking, type: :model do
     describe 'it only has 18 columns' do
       it { expect(MortalityTracking.columns.count).to eq 18 }
     end
+  end
+
+  include_examples 'a required field', :mortality_date
+  include_examples 'a required field', :cohort
+  include_examples 'a required field', :shl_case_number
+  include_examples 'a required field', :spawning_date
+  include_examples 'a required field', :number_morts
+
+  include_examples 'an optional field', :shell_box
+  include_examples 'an optional field', :shell_container
+  include_examples 'an optional field', :animal_location
+  include_examples 'an optional field', :approximation
+  include_examples 'an optional field', :processed_by_shl
+  include_examples 'an optional field', :initials
+  include_examples 'an optional field', :tags
+  include_examples 'an optional field', :comments
+
+  describe 'raw' do
+    include_examples 'validate values for field', :raw do
+      let(:valid_values) do
+        [true, false]
+      end
+
+      let(:invalid_values) do
+        [nil]
+      end
+    end
+  end
+
+  describe 'processed by shl' do
+    include_examples 'validate values for field', :processed_by_shl do
+      let(:valid_values) do
+        %w[Y N]
+      end
+
+      let(:invalid_values) do
+        %w[Z]
+      end
+    end
+  end
+
+  describe '.create_from_csv_data' do
+    subject { described_class.create_from_csv_data(attrs) }
+    let(:attrs) do
+      {
+        'shl_number' => 'UCSB 2012',
+        '_morts' => 9,
+        'spawning_date' =>  spawning_date_str,
+        'mortality_date' => mortality_date_str
+      }
+    end
+    let(:spawning_date_str) { '01/11/20' }
+    let(:mortality_date_str) { '01/11/20' }
+
+    it 'should return a instance of the class' do
+      expect(subject).to be_a_kind_of(described_class)
+    end
+
+    context 'when the spawning_date is not in the correct date format' do
+      let(:spawning_date_str) { 'not-a-valid-format' }
+
+      it 'should raise a ArgumentError with invalid date as the  message' do
+        expect { subject }.to raise_error(ArgumentError, 'invalid date')
+      end
+    end
+
+    context 'when the mortality_date_str is not in the correct date format' do
+      let(:mortality_date_str) { 'not-a-valid-format' }
+
+      it 'should raise a ArgumentError with invalid date as the  message' do
+        expect { subject }.to raise_error(ArgumentError, 'invalid date')
+      end
+    end
+
   end
 end

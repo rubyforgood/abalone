@@ -43,6 +43,11 @@ To see detailed logs from background jobs, run:
 tail -f log/delayed_job.log
 ```
 
+To clear background jobs, run:
+```
+rake jobs:clear
+```
+
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
 
