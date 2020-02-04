@@ -51,7 +51,7 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
     before do
       FactoryBot.create :processed_file,
         filename: 'Untagged_assessment_03122018.csv',
-        cateogry: 'Untagged Animal Assessment',
+        category: 'Untagged Animal Assessment',
         status: 'Processed',
         temporary_file_id: temporary_file.id
     end
