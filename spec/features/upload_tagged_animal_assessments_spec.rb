@@ -60,7 +60,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
       processed_file = ProcessedFile.where(status: "Failed").first
       expect(ProcessedFile.count).to eq 2
-      expect(processed_file.job_errors).to eq "Already processed a file from the same upload event. Data not imported!"
+      expect(processed_file.job_errors).to eq "Already processed a file on 02/04/2020 with the same name: Tagged_assessment_12172018 (original).csv. Data not imported!"
       expect(processed_file.job_stats).to eq({})
       expect(page).to have_content expected_success_message
     end
