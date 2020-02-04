@@ -9,6 +9,7 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
   let(:invalid_file) { "spec/support/csv/invalid_headers.csv" }
   let(:incomplete_data_file) { "spec/support/csv/Untagged_assessment_03122018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
+  let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
 
   before do
     sign_in user
@@ -47,8 +48,6 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
   end
 
   context 'when user upload a CSV that has been already processed' do
-    let(:temporary_file) { create(:temporary_file, contents: '') }
-
     before do
       FactoryBot.create :processed_file,
         status: 'Processed',
@@ -60,7 +59,7 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
 
       processed_file = ProcessedFile.where(status: "Failed").first
       expect(ProcessedFile.count).to eq 2
-      expect(processed_file.job_errors).to eq "Already processed a file from the same upload event. Data not imported!"
+      expect(processed_file.job_errors).to eq "Already processed a file on #{processed_file.created_at.strftime('%m/%d/%Y')} with the same name: Untagged_assessment_03122018.csv. Data not imported!"
       expect(processed_file.job_stats).to eq({})
       expect(page).to have_content expected_success_message
     end
