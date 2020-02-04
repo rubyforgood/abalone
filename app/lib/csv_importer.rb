@@ -1,5 +1,5 @@
 class CsvImporter
-  attr_reader :stats, :model, :filename, :processed_file_id, :error_details
+  attr_reader :stats, :model, :temporary_file, :processed_file_id, :error_details
 
   CATEGORIES = [
       'Spawning Success',
@@ -12,8 +12,8 @@ class CsvImporter
 
   class InvalidCategoryError < StandardError; end;
 
-  def initialize(filename, category_name, processed_file_id)
-    @filename = filename
+  def initialize(temporary_file, category_name, processed_file_id)
+    @temporary_file = temporary_file
     @processed_file_id = processed_file_id
     @model = model_from_category(category_name)
     @stats = Hash.new(0)
@@ -35,10 +35,10 @@ class CsvImporter
     row_number = 2 # assuming 1 is headers
 
     model.transaction do
-      IOStreams.each_record(filename) do |csv_row|
+      CSV.parse(temporary_file, headers: true, header_converters: :symbol).each do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
-        record = model.create_from_csv_data(csv_row)
+        record = model.create_from_csv_data(csv_row.to_h)
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
         if record.valid?

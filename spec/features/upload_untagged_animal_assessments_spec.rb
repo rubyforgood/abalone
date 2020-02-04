@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "upload UntaggedAnimalAssessment category", type: :feature do
-
   let(:user) { User.create({ :email => "admin@test.com",
                 :password => "password",
                 :password_confirmation => "password" }) }

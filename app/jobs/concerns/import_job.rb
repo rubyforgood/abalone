@@ -1,28 +1,23 @@
 module ImportJob
-
   extend ActiveSupport::Concern
 
   included do |base|
     attr_accessor :processed_file, :stats
-    attr_reader :job_stats, :error_details
+    attr_reader :job_stats, :error_details, :filename
 
     base.extend ImportJobClassMethods
   end
 
   def perform(*args)
-    temporary_file_id = args[0]
-    temporary_file = TemporaryFile.find(temporary_file_id)
-    initialize_processed_file(temporary_file_id)
-    if already_processed?(temporary_file_id)
-      fail_processed_file("Already processed a file from the same upload event. Data not imported!")
+    temporary_file = args[0]
+    @filename = args[1]
+    initialize_processed_file(temporary_file, filename)
+    if already_processed?
+      fail_processed_file("Already processed a file on #{already_processed_file.first.created_at.strftime('%m/%d/%Y')} with the same name: #{filename}. Data not imported!")
     else
-      filename = create_temp_file_on_disk(temporary_file_id)
-      full_path = Rails.root.join('storage', filename).to_s
-
-      if validate_headers(full_path)
-        if import_records(full_path)
+      if validate_headers(temporary_file)
+        if import_records(temporary_file)
           complete_processed_file!
-          remove_file!(filename)
         else
           log("Error: #{filename} does not have valid row(s). Data not imported!", :error)
           fail_processed_file("Does not have valid row(s). Data not imported!")
@@ -35,21 +30,11 @@ module ImportJob
 
     @processed_file.save
   end
-  
-  def create_temp_file_on_disk(temporary_file_id)
-    timestamp = Time.new.strftime('%s_%N')
-    filename = [timestamp, temporary_file_id].join('_') + '.csv'
-    File.open(Rails.root.join('storage', filename), 'wb') do |file|
-      file.write TemporaryFile.find(temporary_file_id).contents
-    end
 
-    return filename
-  end
-  
-  def validate_headers(full_path)
-    raise "No input file specified" unless full_path
+  def validate_headers(temporary_file)
+    raise "No input file specified" unless temporary_file
 
-    headers = CSV.parse(File.read(full_path, encoding: 'bom|utf-8'), headers: true).headers.compact
+    headers = CSV.parse(temporary_file.contents, headers: true).headers.compact
     valid_headers = category_model::HEADERS.values
 
     log("Headers in file: #{headers}", :debug)
@@ -57,9 +42,9 @@ module ImportJob
     valid_headers == headers
   end
 
-  def import_records(filename)
-    raise "No input file specified" unless filename
-    csv_importer = CsvImporter.new(filename, category_model.name.underscore.humanize.titleize, @processed_file.id)
+  def import_records(temporary_file)
+    raise "No input file specified" unless temporary_file
+    csv_importer = CsvImporter.new(temporary_file.contents, category_model.name.underscore.humanize.titleize, @processed_file.id)
     csv_importer.call
 
     if csv_importer.errored?
@@ -81,12 +66,18 @@ module ImportJob
     @category_model ||= category.constantize
   end
 
-  def already_processed?(filename)
-    ProcessedFile.where(status: ['Processed','Processed with errors'] ).where(original_filename: original_filename(filename)).count > 0
+  def already_processed?
+    already_processed_file.count > 0
   end
 
-  def initialize_processed_file(temporary_file_id)
-    @processed_file = ProcessedFile.new(temporary_file_id: temporary_file_id,
+  def already_processed_file
+    @already_processed_file ||= ProcessedFile.where(status: ['Processed','Processed with errors'])
+                                             .where(filename: filename)
+  end
+
+  def initialize_processed_file(temporary_file, filename)
+    @processed_file = ProcessedFile.create(temporary_file_id: temporary_file.id,
+                                        filename: filename,
                                         category: category,
                                         status: 'Running')
   end
@@ -100,16 +91,6 @@ module ImportJob
     @processed_file.status = 'Failed'
     @processed_file.job_stats = error_details || {}
     @processed_file.job_errors = error
-  end
-
-  # Remove the prepended timestamp.
-  # original_filename('1564252385_859395139_spawn_newheaders.xlsx') returns 'spawn_newheaders.xlsx'
-  def original_filename(filename)
-    /\d+_\d+_(.+)?/.match(filename.to_s)&.captures&.first
-  end
-
-  def remove_file!(filename)
-    Rails.root.join('storage', filename).delete
   end
 
   def logger

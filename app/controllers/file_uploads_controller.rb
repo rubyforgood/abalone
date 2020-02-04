@@ -51,11 +51,12 @@ class FileUploadsController < ApplicationController
       if uploaded_io
         begin
           temporary_file = TemporaryFile.create(contents: uploaded_io.read)
+          filename = uploaded_io.original_filename
         rescue Exception => e
           @result = "Error: File could not be uploaded: #{e.message}"
         end
         job_class = [@category,'Job'].join
-        @reference = job_class.constantize.perform_later(temporary_file.id)
+        @reference = job_class.constantize.perform_later(temporary_file, filename)
         @result = "Successfully queued spreadsheet for import as a #{job_class}."
       else
         @result = 'Error: No file uploaded.'

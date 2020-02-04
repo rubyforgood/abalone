@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_03_060633) do
+ActiveRecord::Schema.define(version: 2020_02_04_044451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,7 +86,6 @@ ActiveRecord::Schema.define(version: 2020_02_03_060633) do
 
   create_table "processed_files", force: :cascade do |t|
     t.string "filename"
-    t.string "original_filename"
     t.string "category"
     t.string "status"
     t.jsonb "job_stats", default: "{}", null: false

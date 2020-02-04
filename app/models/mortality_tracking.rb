@@ -44,33 +44,23 @@ class MortalityTracking < ApplicationRecord
   }
 
   def self.create_from_csv_data(attrs)
-    attrs['shl_case_number']                     = attrs.delete('shl_number')
-    attrs['number_morts']                     = attrs.delete('_morts')
-
+    attrs[:shl_case_number] = attrs.delete(:shl_number)
+    attrs[:number_morts] = attrs.delete(:morts)
     # Attempt to convert provided csv attributes
     # to the proper format. Dates are provided as
     # strings and must be converted to a datetime.
     #
     # Note - DateTime.strptime will raise a ArgumentError
     # if there is a issue converting.
-    attrs['spawning_date'] = DateTime.strptime(attrs.delete('spawning_date'), '%m/%d/%y')
-    attrs['mortality_date'] = DateTime.strptime(attrs.delete('mortality_date'), '%m/%d/%y')
+    attrs[:spawning_date] = DateTime.strptime(attrs.delete(:spawning_date), '%m/%d/%y')
+    attrs[:mortality_date] = DateTime.strptime(attrs.delete(:mortality_date), '%m/%d/%y')
 
     new(attrs)
   end
 
-  validates_inclusion_of :raw, in: [true, false]
-
   validates_presence_of :mortality_date
   # mortality_date has 'Unknown' and 'unkown' in csv
-  validates_presence_of :cohort
   validates_presence_of :shl_case_number
   validates_presence_of :spawning_date
   validates_presence_of :number_morts
-
-  validates :number_morts, numericality: true, allow_blank: true
-  # number_morts has been '9+' and 'TBD' in csv
-
-  validates :processed_by_shl, format: { with: /Y|N/ }, allow_blank: true
-
 end

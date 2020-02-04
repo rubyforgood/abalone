@@ -7,9 +7,9 @@
         <div class="column is-thinner is-1">File name:</div>
         <div class="column is-thinner is-11">
           <%- if pf.job_stats["rows_not_imported"].to_i > 0 %>
-            <%= link_to pf.original_filename, show_processing_csv_errors_path(pf.id) %>
+            <%= link_to pf.filename, show_processing_csv_errors_path(pf.id) %>
           <% else %>
-            <%= pf.original_filename %>
+            <%= pf.filename %>
           <%- end %>
         </div>
       </div>
