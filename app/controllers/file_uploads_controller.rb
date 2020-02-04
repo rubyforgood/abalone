@@ -22,11 +22,11 @@ class FileUploadsController < ApplicationController
 
       IOStreams.each_record(full_path_file) do |record|
         attrs = record
-        spawning_success = @processed_file.category.constantize.new(
+        initialized_model = @processed_file.category.constantize.new(
             attrs.merge({processed_file_id: @processed_file.id, raw: false})
         )
-        spawning_success.cleanse_data!
-        error_message = spawning_success.valid? ? '' : spawning_success.errors.full_messages.join(",")
+        initialized_model.cleanse_data!
+        error_message = initialized_model.valid? ? '' : initialized_model.errors.full_messages.join(",")
         campos = attrs.merge ({ 'validation_status' => error_message})
         records.push(campos)
       end
@@ -51,12 +51,12 @@ class FileUploadsController < ApplicationController
       if uploaded_io
         begin
           temporary_file = TemporaryFile.create(contents: uploaded_io.read)
-          filename = uploaded_io.original_filename
+          @filename = uploaded_io.original_filename
         rescue Exception => e
           @result = "Error: File could not be uploaded: #{e.message}"
         end
         job_class = [@category,'Job'].join
-        @reference = job_class.constantize.perform_later(temporary_file, filename)
+        @reference = job_class.constantize.perform_later(temporary_file, @filename)
         @result = "Successfully queued spreadsheet for import as a #{job_class}."
       else
         @result = 'Error: No file uploaded.'
