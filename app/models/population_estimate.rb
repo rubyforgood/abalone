@@ -39,10 +39,11 @@ class PopulationEstimate < ApplicationRecord
            :lifestage_is_valid
 
   def self.create_from_csv_data(attrs)
-    attrs['abundance'] = attrs['abundance'].delete(',').to_i
-    attrs['shl_case_number'] = attrs.delete('shl_number')
-    attrs['sample_date'] = Date.strptime(attrs['sample_date'], '%m/%d/%y') rescue nil
-    attrs['spawning_date'] = Date.strptime(attrs['spawning_date'], '%m/%d/%y') rescue nil
+    attrs[:abundance] = attrs[:abundance].delete(',').to_i
+    attrs[:shl_case_number] = attrs.delete(:shl_number)
+    attrs[:sample_date] = Date.strptime(attrs[:sample_date], '%m/%d/%y') rescue nil
+    attrs[:spawning_date] = Date.strptime(attrs[:spawning_date], '%m/%d/%y') rescue nil
+
     new(attrs)
   end
 
