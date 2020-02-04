@@ -10,6 +10,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   let(:invalid_file) { "spec/support/csv/invalid_headers.csv" }
   let(:incomplete_data_file) { "spec/support/csv/Tagged_assessment_03172018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
+  let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
 
   before do
     sign_in user
@@ -48,8 +49,6 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   end
 
   context 'when user upload a CSV that has been already processed' do
-    let(:temporary_file) { create(:temporary_file, contents: '') }
-
     before do
       FactoryBot.create :processed_file,
         status: 'Processed',
