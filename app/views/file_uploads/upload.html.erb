@@ -1,10 +1,11 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">File Upload</h1>
+    <h1 class="title">File Upload(s) - <%= link_to "<button class='button is-link'>Upload More Files</button>".html_safe, new_file_upload_path %></h1>
 
-    <b><%= @result %></b>
-    <br />
-    Category: <%= @category %><br />
-    Filename: <%= @filename %><br />
+    <% @file_uploads.each do |file_upload| %>
+      <b><%= file_upload.result_message %></b><br />
+      Category: <%= file_upload.category %><br />
+      Filename: <%= file_upload.filename %><br />
+    <% end %>
   </div>
 </section>

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe "upload UntaggedAnimalAssessment category", type: :feature do
-  let(:user) { User.create({ :email => "admin@test.com",
+  let(:user) { User.create!({ :email => "admin@test.com",
                 :password => "password",
                 :password_confirmation => "password" }) }
 
-  let(:valid_file) { "db/sample_data_files/untagged_animal_assessment/Untagged_assessment_03122018.csv" }
-  let(:invalid_file) { "spec/support/csv/invalid_headers.csv" }
-  let(:incomplete_data_file) { "spec/support/csv/Untagged_assessment_03122018-invalid-rows.csv" }
+  let(:valid_file) { "#{Rails.root}/db/sample_data_files/untagged_animal_assessment/Untagged_assessment_03122018.csv" }
+  let(:invalid_file) { "#{Rails.root}/spec/support/csv/invalid_headers.csv" }
+  let(:incomplete_data_file) { "#{Rails.root}/spec/support/csv/Untagged_assessment_03122018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
   let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
 
