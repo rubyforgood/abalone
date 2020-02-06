@@ -1,35 +1,23 @@
 <section class="section">
   <div class="container">
-    <h1 class="title">File Uploads</h1>
-    <h2 class="subtitle">Upload a Spreadsheet to Import its Data</h2>
+    <h1 class="title">File Upload</h1>
 
-    <p class="subtitle is-size-6">Select the type of spreadsheet and upload a .xlsx or .csv spreadsheet. <br /> CSV files are recommended for large spreadsheets (over 1000 rows).</p>
+    <p class="subtitle is-size-6">Select the type of spreadsheet and select up to 10 .xlsx or .csv spreadsheets. <br /> CSV files are recommended for large spreadsheets (over 1000 rows).</p>
 
     <%= form_tag({action: :upload}, multipart: true, method: 'post') do %>
       <div class="field">
         <%= label_tag(:category, 'Category', class: 'label') %>
         <div class="control">
           <div class="select">
-            <%= select_tag(:category, options_for_select(@categories)) %>
+            <%= select_tag(:category, options_for_select(@categories), required: true) %>
           </div>
         </div>
       </div>
 
       <div class="field">
-        <div class="file">
-          <%= label_tag('input_file', 'Select a file to upload', class: 'file-label') do %>
-            <%= file_field_tag 'input_file', class: 'file-input' %>
-            <span class="file-cta"> 
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
-              <span class="file-label">
-                Choose a file...
-              </span>
-            </span>
-            <span class="file-name" id="file-name">
-            </span>
-          <% end %>
+        <div>
+          <%= label_tag('input_file', 'Select up to 10 files to upload', class: 'label') %>
+          <%= file_field_tag 'input_files[]', multiple: true, required: true %>
         </div>
       </div>
 
