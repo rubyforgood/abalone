@@ -18,7 +18,7 @@
 FactoryBot.define do
   factory :processed_file do
     filename { "Tagged_assessment_12172018 (original).csv" }
-    category { "Tagged Animal Assessment" }
+    category { "TaggedAnimalAssessment" }
     status { "Processed" }
     job_stats { "" }
     job_errors { "MyText" }

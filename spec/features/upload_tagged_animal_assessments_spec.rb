@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 describe "upload TaggedAnimalAssessment category", type: :feature do
-  let(:user) { User.create({ :email => "admin@test.com",
+  let(:user) { User.create!({ :email => "admin@test.com",
                 :password => "password",
                 :password_confirmation => "password" }) }
 
-  let(:valid_file) { "db/sample_data_files/tagged_animal_assessment/Tagged_assessment_12172018 (original).csv" }
-  let(:invalid_file) { "spec/support/csv/invalid_headers.csv" }
-  let(:incomplete_data_file) { "spec/support/csv/Tagged_assessment_03172018-invalid-rows.csv" }
+  let(:valid_file) { "#{Rails.root}/db/sample_data_files/tagged_animal_assessment/Tagged_assessment_12172018 (original).csv" }
+  let(:second_valid_file) { "#{Rails.root}/spec/support/csv/Tagged_assessment_03172018.csv" }
+  let(:invalid_file) { "#{Rails.root}/spec/support/csv/invalid_headers.csv" }
+  let(:incomplete_data_file) { "#{Rails.root}/spec/support/csv/Tagged_assessment_03172018-invalid-rows.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
   let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
 
@@ -16,20 +17,22 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
     visit new_file_upload_path
   end
 
-  context 'when user successfully uploads a CSV with no errors' do
-    it "creates new ProcessedFile record with 'Processed' status " do
-      upload_file("Tagged Animal Assessment", valid_file)
+  context 'when user successfully uploads two CSVs with no errors' do
+    it "creates two new ProcessedFile records with 'Processed' status " do
+      upload_file("Tagged Animal Assessment", [valid_file, second_valid_file])
 
-      processed_file = ProcessedFile.last
-      expect(ProcessedFile.count).to eq 1
-      expect(processed_file.status).to eq "Processed"
-      expect(processed_file.job_errors).to eq(nil)
-      expect(processed_file.job_stats).to eq(
-        { "row_count"=>201,
-          "rows_imported"=>201,
-          "shl_case_numbers" => {"SF16-9A"=>100, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69},
-        }
-      )
+      expect(ProcessedFile.count).to eq 2
+
+      ProcessedFile.all.each do |processed_file|
+        expect(processed_file.status).to eq "Processed"
+        expect(processed_file.job_errors).to eq(nil)
+        expect(processed_file.job_stats).to eq(
+          { "row_count"=>201,
+            "rows_imported"=>201,
+            "shl_case_numbers" => {"SF16-9A"=>100, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69},
+          }
+        )
+      end
       expect(page).to have_content expected_success_message
     end
   end
