@@ -2,7 +2,7 @@ var GrowthChart = function (element, data) {
   this.element = element;
   this.chart = Highcharts.chart('chart', {
     title: {
-      text: 'Growth Histogram For Measurement ' + data.processed_file_id
+      text: '' //'Growth Histogram For Measurement ' + data.processed_file_id
     },
     xAxis: {
       title: {text: 'Length (cm)'},
