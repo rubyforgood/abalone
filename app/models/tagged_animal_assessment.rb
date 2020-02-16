@@ -51,7 +51,8 @@ class TaggedAnimalAssessment < ApplicationRecord
     spawning_date
   ].freeze
 
-  validates :measurement_date, :shl_case_number, :spawning_date, :tag, :length, presence: true
+  validates :measurement_date, :spawning_date, presence: { message: "must be in the mm/dd/yy format" }
+  validates :shl_case_number, :tag, :length, presence: true
   validates :length, numericality: true
 
   def self.create_from_csv_data(attrs)
@@ -61,11 +62,8 @@ class TaggedAnimalAssessment < ApplicationRecord
   DATE_ATTRIBUTES.each do |name|
     define_method "#{name}=" do |argument|
       return unless argument
-      begin
-        write_attribute(name.to_sym, DateTime.strptime(argument, "%m/%d/%y"))
-      rescue ArgumentError
-        errors.add(name.to_sym, :invalid, message: "Invalid date format: #{argument}")
-      end
+      parsed_date = DateParser.parse(argument)
+      write_attribute(name.to_sym, parsed_date)
     end
   end
 

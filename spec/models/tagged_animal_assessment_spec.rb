@@ -30,12 +30,35 @@ require 'rails_helper'
 RSpec.describe TaggedAnimalAssessment, type: :model do
 
   describe 'validations' do
-    it { should validate_presence_of(:measurement_date) }
+    it { should validate_presence_of(:measurement_date).
+          with_message("must be in the mm/dd/yy format") }
+    it { should validate_presence_of(:spawning_date).
+          with_message("must be in the mm/dd/yy format") }
+
     it { should validate_presence_of(:shl_case_number) }
-    it { should validate_presence_of(:spawning_date) }
     it { should validate_presence_of(:tag) }
     it { should validate_presence_of(:length) }
 
     it { should validate_numericality_of(:length) }
+  end
+
+  context 'if measurement_date is not in the mm/dd/yy format' do
+    it 'is invalid' do
+      assessment = build(:tagged_animal_assessment, measurement_date: "09/08/2019")
+      expect { assessment.save! }.to raise_error ActiveRecord::RecordInvalid
+      expect(assessment.errors[:measurement_date][0]).to eq("must be in the mm/dd/yy format")
+    end
+
+    it 'is invalid' do
+      assessment = build(:tagged_animal_assessment, measurement_date: "99/99/99")
+      expect { assessment.save! }.to raise_error ActiveRecord::RecordInvalid
+      expect(assessment.errors[:measurement_date][0]).to eq("must be in the mm/dd/yy format")
+    end
+
+    it 'is invalid' do
+      assessment = FactoryBot.create(:tagged_animal_assessment)
+      assessment.measurement_date = "invalid"
+      expect { assessment.save! }.to raise_error ActiveRecord::RecordInvalid
+    end
   end
 end

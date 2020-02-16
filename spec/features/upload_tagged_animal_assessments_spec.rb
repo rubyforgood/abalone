@@ -1,10 +1,7 @@
 require 'rails_helper'
 
 describe "upload TaggedAnimalAssessment category", type: :feature do
-  let(:user) { User.create!({ :email => "admin@test.com",
-                :password => "password",
-                :password_confirmation => "password" }) }
-
+  let(:user) { create(:user) }
   let(:valid_file) { "#{Rails.root}/db/sample_data_files/tagged_animal_assessment/Tagged_assessment_12172018 (original).csv" }
   let(:second_valid_file) { "#{Rails.root}/spec/support/csv/Tagged_assessment_03172018.csv" }
   let(:invalid_file) { "#{Rails.root}/spec/support/csv/invalid_headers.csv" }
