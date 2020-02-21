@@ -1,12 +1,8 @@
 class DateParser
+  # Returns the parsed date if it's in the mm/dd/yy format, and nil otherwise 
   def self.parse(date)
-    if date_regex.match? date
-      DateTime.strptime(date, "%m/%d/%y")
-    else
-      nil
-    end
-  rescue ArgumentError
-    nil
+    DateTime.strptime(date, "%m/%d/%y") if date_regex.match? date
+    rescue ArgumentError
   end
 
   private
