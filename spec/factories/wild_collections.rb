@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: wild_collections
@@ -25,10 +25,9 @@
 #  updated_at                                 :datetime         not null
 #  processed_file_id                          :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 FactoryBot.define do
   factory :wild_collection do
-    
   end
 end

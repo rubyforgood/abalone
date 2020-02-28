@@ -2,15 +2,15 @@ class CsvImporter
   attr_reader :stats, :model, :temporary_file, :processed_file_id, :error_details
 
   CATEGORIES = [
-      'Spawning Success',
-      'Tagged Animal Assessment',
-      'Untagged Animal Assessment',
-      'Wild Collection',
-      'Population Estimate',
-      'Mortality Tracking'
+    'Spawning Success',
+    'Tagged Animal Assessment',
+    'Untagged Animal Assessment',
+    'Wild Collection',
+    'Population Estimate',
+    'Mortality Tracking'
   ].freeze
 
-  class InvalidCategoryError < StandardError; end;
+  class InvalidCategoryError < StandardError; end
 
   def initialize(temporary_file, category_name, processed_file_id)
     @temporary_file = temporary_file
@@ -59,11 +59,9 @@ class CsvImporter
   end
 
   def model_from_category(category_name)
-    if CATEGORIES.include?(category_name)
-      category_name.delete(' ').constantize
-    else
-      raise InvalidCategoryError
-    end
+    raise InvalidCategoryError unless CATEGORIES.include?(category_name)
+
+    category_name.delete(' ').constantize
   end
 
   def increment_stats(model)

@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: pedigrees
@@ -15,7 +15,7 @@
 #  updated_at                   :datetime         not null
 #  processed_file_id            :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Pedigree < ApplicationRecord
   include Raw
@@ -27,5 +27,5 @@ class Pedigree < ApplicationRecord
     MOTHER: 'Mother',
     FATHER: 'Father',
     SEPERATE_CROSS_WITHIN_COHORT: "Separate crosses within cohort (F = female, M=male)"
-  }
+  }.freeze
 end

@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: tagged_animal_assessments
@@ -23,12 +23,11 @@
 #  updated_at          :datetime         not null
 #  processed_file_id   :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 require 'rails_helper'
 
 RSpec.describe TaggedAnimalAssessment, type: :model do
-
   describe 'validations' do
     it { should validate_presence_of(:measurement_date) }
     it { should validate_presence_of(:shl_case_number) }

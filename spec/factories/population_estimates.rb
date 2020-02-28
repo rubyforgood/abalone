@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: population_estimates
@@ -16,16 +16,16 @@
 #  updated_at        :datetime         not null
 #  processed_file_id :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 FactoryBot.define do
   factory :population_estimate do
-    sample_date {Time.now}
+    sample_date { Time.now }
     shl_case_number { "SF#{rand(0..9)}#{rand(0..9)}-#{rand(0..9)}#{rand(0..9)}" }
-    spawning_date {Time.now -5.days}
+    spawning_date { Time.now - 5.days }
     lifestage { %w[y n].sample }
     abundance { rand(0..3000) }
     facility { (create :facility).code }
-    notes { Faker::Team.name}
+    notes { Faker::Team.name }
   end
 end

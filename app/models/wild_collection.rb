@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: wild_collections
@@ -25,7 +25,7 @@
 #  updated_at                                 :datetime         not null
 #  processed_file_id                          :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class WildCollection < ApplicationRecord
   include Raw
@@ -49,7 +49,7 @@ class WildCollection < ApplicationRecord
     INITIAL_HOLDING_FACILITY: "Initial holding facility",
     FINAL_HOLDING_FACILITY_AND_DATE_OF_ARRIVAL: "Final holding facility & date of arrival",
     OTC_TREATMENT_COMPLETION_DATE: "OTC treatment completion date"
-  }
+  }.freeze
 
   validates :tag, presence: true
   validates :collection_date, presence: true
@@ -68,7 +68,6 @@ class WildCollection < ApplicationRecord
   validate :initial_holding_facility_is_valid,
            :final_facility_and_date_of_arrival_is_valid
 
-
   def self.create_from_csv_data(attrs)
     attrs[:proximity_to_nearest_neighbor]              = attrs.delete(:proximity_to_nearest_neighbor_m)
     attrs[:collection_depth]                           = attrs.delete(:collection_depth_m)
@@ -76,7 +75,7 @@ class WildCollection < ApplicationRecord
     attrs[:final_holding_facility_and_date_of_arrival] = attrs.delete(:final_holding_facility_date_of_arrival)
     attrs[:collection_date] = Date.strptime(attrs[:collection_date], '%m/%d/%y') rescue nil
     attrs[:otc_treatment_completion_date] = Date.strptime(attrs[:otc_treatment_completion_date], '%m/%d/%y') rescue nil
-    
+
     new(attrs)
   end
 
@@ -116,6 +115,4 @@ class WildCollection < ApplicationRecord
 
     super(value)
   end
-
-
 end

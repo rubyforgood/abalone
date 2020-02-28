@@ -1,10 +1,7 @@
 require 'rails_helper'
 
 describe "upload UntaggedAnimalAssessment category", type: :feature do
-  let(:user) { User.create!({ :email => "admin@test.com",
-                :password => "password",
-                :password_confirmation => "password" }) }
-
+  let(:user) { create(:user) }
   let(:valid_file) { "#{Rails.root}/db/sample_data_files/untagged_animal_assessment/Untagged_assessment_03122018.csv" }
   let(:invalid_file) { "#{Rails.root}/spec/support/csv/invalid_headers.csv" }
   let(:incomplete_data_file) { "#{Rails.root}/spec/support/csv/Untagged_assessment_03122018-invalid-rows.csv" }
@@ -25,9 +22,10 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
       expect(processed_file.status).to eq "Processed"
       expect(processed_file.job_errors).to eq(nil)
       expect(processed_file.job_stats).to eq(
-        { "row_count"=>250,
-          "rows_imported"=>250,
-          "shl_case_numbers" => {"SF16-9A"=>50, "SF16-9B"=>50, "SF16-9C"=>50, "SF16-9D"=>50, "SF16-9E"=>50},
+        {
+          "row_count" => 250,
+          "rows_imported" => 250,
+          "shl_case_numbers" => {"SF16-9A"=>50, "SF16-9B"=>50, "SF16-9C"=>50, "SF16-9D"=>50, "SF16-9E"=>50}
         }
       )
       expect(page).to have_content expected_success_message
@@ -50,10 +48,10 @@ describe "upload UntaggedAnimalAssessment category", type: :feature do
   context 'when user upload a CSV that has been already processed' do
     before do
       FactoryBot.create :processed_file,
-        filename: 'Untagged_assessment_03122018.csv',
-        category: 'Untagged Animal Assessment',
-        status: 'Processed',
-        temporary_file_id: temporary_file.id
+                        filename: 'Untagged_assessment_03122018.csv',
+                        category: 'Untagged Animal Assessment',
+                        status: 'Processed',
+                        temporary_file_id: temporary_file.id
     end
 
     it "creates new ProcessedFile record with 'Failed' status" do

@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: population_estimates
@@ -16,7 +16,7 @@
 #  updated_at        :datetime         not null
 #  processed_file_id :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class PopulationEstimate < ApplicationRecord
   include Raw
@@ -29,9 +29,9 @@ class PopulationEstimate < ApplicationRecord
     ABUNDANCE: "abundance",
     FACILITY: "facility",
     NOTES: "Notes"
-  }
+  }.freeze
 
-  VALID_LIFESTAGES = ['embryo', 'embryos', 'larvae', 'juvenile', 'adult']
+  VALID_LIFESTAGES = %w[embryo embryos larvae juvenile adult].freeze
 
   validates :sample_date, :shl_case_number, :abundance, :facility, presence: true
   validates :abundance, numericality: true

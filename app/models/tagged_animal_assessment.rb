@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: tagged_animal_assessments
@@ -23,7 +23,7 @@
 #  updated_at          :datetime         not null
 #  processed_file_id   :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class TaggedAnimalAssessment < ApplicationRecord
   include Raw
@@ -42,8 +42,8 @@ class TaggedAnimalAssessment < ApplicationRecord
     LENGTH: "Length",
     GONAD_SCORE: "Gonad_Score",
     PREDICTED_SEX: "Predicted_Sex",
-    NOTES: "Notes",
-  }
+    NOTES: "Notes"
+  }.freeze
 
   # this is used to dynamically define argument setter for these attributes
   DATE_ATTRIBUTES = %w[
@@ -61,6 +61,7 @@ class TaggedAnimalAssessment < ApplicationRecord
   DATE_ATTRIBUTES.each do |name|
     define_method "#{name}=" do |argument|
       return unless argument
+
       begin
         write_attribute(name.to_sym, DateTime.strptime(argument, "%m/%d/%y"))
       rescue ArgumentError
