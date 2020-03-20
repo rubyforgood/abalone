@@ -52,7 +52,10 @@ class TaggedAnimalAssessment < ApplicationRecord
   ].freeze
 
   validates :measurement_date, :shl_case_number, :spawning_date, :tag, :length, presence: true
-  validates :length, numericality: true
+  validates :shl_case_number, format: { with: /SF[\w\d]{2}-[\w\d]{2}/ }, allow_blank: true
+  validates :gonad_score, format: { with: /\A(?:(?:NA)|(?:[0-3](?:-[13])?\??))/ }, allow_blank: true
+  validates :predicted_sex, format: { with: /\A[MF]\??/ }, allow_blank: true
+  validates_numericality_of :length, less_than: 100
 
   def self.create_from_csv_data(attrs)
     new(attrs)
