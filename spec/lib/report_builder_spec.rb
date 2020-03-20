@@ -51,25 +51,28 @@ describe ReportBuilder do
     context "when given a date and cohort" do
       it "returns the corresponding animal assessments" do
         @report_builder = ReportBuilder.new(cohort: "SF16-9A", date: "2018-09-20")
-        @report_builder.processed_file_id
+        expect(@report_builder.processed_file_id).to eq 1
       end
     end
 
     context "when given only a date" do
       it "returns the corresponding animal assessments" do
-        expect(1).to eq 1
+        @report_builder = ReportBuilder.new(cohort: nil, date: "2018-09-20")
+        expect(@report_builder.processed_file_id).to eq 1
       end
     end
 
     context "when given only a cohort" do
       it "returns the corresponding animal assessments" do
-        expect(1).to eq 1
+        @report_builder = ReportBuilder.new(cohort: "SF16-9A", date: nil)
+        expect(@report_builder.processed_file_id).to eq 1
       end
     end
 
     context "when given no cohort or date" do
-      it "returns the corresponding animal assessments" do
-        expect(1).to eq 1
+      it "returns no animal assessments" do
+        @report_builder = ReportBuilder.new(cohort: nil, date: nil)
+        expect(@report_builder.processed_file_id).to eq nil
       end
     end
   end

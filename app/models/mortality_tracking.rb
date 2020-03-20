@@ -58,6 +58,5 @@ class MortalityTracking < ApplicationRecord
     new(attrs)
   end
 
-
   validates_presence_of :shl_case_number
 end
