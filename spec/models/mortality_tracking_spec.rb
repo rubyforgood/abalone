@@ -69,10 +69,10 @@ RSpec.describe MortalityTracking, type: :model do
     end
   end
 
-  include_examples 'a required field', :mortality_date
+  # include_examples 'a required field', :mortality_date
   include_examples 'a required field', :shl_case_number
-  include_examples 'a required field', :spawning_date
-  include_examples 'a required field', :number_morts
+  # include_examples 'a required field', :spawning_date
+  # include_examples 'a required field', :number_morts
 
   include_examples 'an optional field', :cohort
   include_examples 'an optional field', :shell_box

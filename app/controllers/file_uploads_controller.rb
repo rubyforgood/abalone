@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Controller managegs uploading and displaying CSVs
+# Controller manages uploading and displaying CSVs
 class FileUploadsController < ApplicationController
   # The second value for each category entry will be used to determine the
   # job class that processes the data.

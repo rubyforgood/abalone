@@ -27,5 +27,24 @@
 
 FactoryBot.define do
   factory :tagged_animal_assessment do
+<<<<<<< HEAD
+=======
+    raw { false }
+    measurement_date { "09/20/18" }
+    shl_case_number { "SF16-9D" }
+    spawning_date { "03/02/16" }
+    tag { "Lav_203" }
+    from_growout_rack { "3" }
+    from_growout_column { "B" }
+    from_growout_trough { "3" }
+    to_growout_rack { "1" }
+    to_growout_column { "A" }
+    to_growout_trough { "2" }
+    length { 0.438e2 }
+    gonad_score { "1" }
+    predicted_sex { "M" }
+    notes { nil }
+    processed_file_id { 1 }
+>>>>>>> 1c646f28643c17cfde3bd8456cad9f7a7751e783
   end
 end

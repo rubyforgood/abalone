@@ -2,38 +2,32 @@ var GrowthChart = function (element, data) {
   this.element = element;
   this.chart = Highcharts.chart('chart', {
     title: {
-      text: 'Growth Histogram For Measurement ' + data.processed_file_id
+      text: '' //'Growth Histogram For Measurement ' + data.processed_file_id
     },
-    xAxis: [{
-      title: {text: 'Data'},
-      alignTicks: false
-    }, {
-      title: {text: 'Histogram'},
-      alignTicks: false,
-      opposite: true
-    }],
-
-    yAxis: [{
-      title: {text: 'Data'}
-    }, {
-      title: {text: 'Histogram'},
-      opposite: true
-    }],
-
-    series: [{
-      name: 'Histogram',
-      type: 'histogram',
-      xAxis: 1,
-      yAxis: 1,
-      baseSeries: 's1',
-      zIndex: -1
-    }, {
-      name: 'Data',
-      type: 'scatter',
-      data: data.total_animal_lengths,
-      id: 's1',
-      marker: {
-        radius: 1.5
+    xAxis: {
+      title: {text: 'Length (cm)'},
+      tickInterval: 1,
+    },
+    yAxis: {
+      title: {text: 'Count'},
+    },
+    series: [
+      {
+        visible:false,
+        showInLegend:false,
+        id:"id1",
+        data: data.total_animal_lengths,
+        color: '#FF0000'
+      },
+      {
+        name: 'Count',
+        type: 'histogram',
+        showInLegend:false,
+        baseSeries: "id1",
+        binWidth: 1.0,
+        tooltip: {
+          pointFormat: '<b>{series.name}: {point.y}</b><br/>{point.x}-{point.x}.99 cm',
+          shared: true
       }
     }]
   });
