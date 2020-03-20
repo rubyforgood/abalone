@@ -27,8 +27,6 @@
 
 FactoryBot.define do
   factory :tagged_animal_assessment do
-<<<<<<< HEAD
-=======
     raw { false }
     measurement_date { "09/20/18" }
     shl_case_number { "SF16-9D" }
@@ -45,6 +43,5 @@ FactoryBot.define do
     predicted_sex { "M" }
     notes { nil }
     processed_file_id { 1 }
->>>>>>> 1c646f28643c17cfde3bd8456cad9f7a7751e783
   end
 end

@@ -22,13 +22,8 @@ FactoryBot.define do
   factory :population_estimate do
     sample_date { Time.now }
     shl_case_number { "SF#{rand(0..9)}#{rand(0..9)}-#{rand(0..9)}#{rand(0..9)}" }
-<<<<<<< HEAD
-    spawning_date { Time.now - 5.days }
-    lifestage { %w[y n].sample }
-=======
     spawning_date { (Time.now - 5.days) }
     lifestage { %w[embryos larvae juvenile adult].sample }
->>>>>>> 1c646f28643c17cfde3bd8456cad9f7a7751e783
     abundance { rand(0..3000) }
     facility { (create :facility).code }
     notes { Faker::Team.name }

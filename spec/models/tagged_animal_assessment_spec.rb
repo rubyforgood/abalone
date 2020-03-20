@@ -28,8 +28,6 @@
 require 'rails_helper'
 
 RSpec.describe TaggedAnimalAssessment, type: :model do
-<<<<<<< HEAD
-=======
   let(:valid_attributes) do
     {
       raw: false,
@@ -49,7 +47,6 @@ RSpec.describe TaggedAnimalAssessment, type: :model do
     }
   end
 
->>>>>>> 1c646f28643c17cfde3bd8456cad9f7a7751e783
   describe 'validations' do
     it { should validate_presence_of(:measurement_date) }
     it { should validate_presence_of(:shl_case_number) }
