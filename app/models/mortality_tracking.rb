@@ -58,9 +58,6 @@ class MortalityTracking < ApplicationRecord
     new(attrs)
   end
 
-  validates_presence_of :mortality_date
-  # mortality_date has 'Unknown' and 'unkown' in csv
+
   validates_presence_of :shl_case_number
-  validates_presence_of :spawning_date
-  validates_presence_of :number_morts
 end
