@@ -44,14 +44,13 @@ class UntaggedAnimalAssessment < ApplicationRecord
   ].freeze
 
   validates(
-    :measurement_date,
     :cohort,
-    :spawning_date,
     :growout_trough,
     :growout_rack,
     :growout_column,
     :length, presence: true
   )
+  validates :measurement_date, :spawning_date, presence: { message: "must be in the mm/dd/yy format" }
   validates :length, numericality: true
 
   def self.create_from_csv_data(attrs)
@@ -72,11 +71,8 @@ class UntaggedAnimalAssessment < ApplicationRecord
     define_method "#{name}=" do |argument|
       return unless argument
 
-      begin
-        write_attribute(name.to_sym, DateTime.strptime(argument, "%m/%d/%y"))
-      rescue ArgumentError
-        errors.add(name.to_sym, :invalid, message: "Invalid date format: #{argument}")
-      end
+      parsed_date = DateParser.parse(argument)
+      write_attribute(name.to_sym, parsed_date)
     end
   end
 

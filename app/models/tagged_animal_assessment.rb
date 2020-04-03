@@ -51,7 +51,8 @@ class TaggedAnimalAssessment < ApplicationRecord
     spawning_date
   ].freeze
 
-  validates :measurement_date, :shl_case_number, :spawning_date, :tag, :length, presence: true
+  validates :measurement_date, :spawning_date, presence: { message: "must be in the mm/dd/yy format" }
+  validates :shl_case_number, :tag, :length, presence: true
   validates :shl_case_number, format: { with: /SF[\w\d]{2}-[\w\d]{2}/ }, allow_blank: true
   validates :gonad_score, format: { with: /\A(?:(?:NA)|(?:[0-3](?:-[13])?\??))/ }, allow_blank: true
   validates :predicted_sex, format: { with: /\A[MF]\??/ }, allow_blank: true
@@ -65,11 +66,8 @@ class TaggedAnimalAssessment < ApplicationRecord
     define_method "#{name}=" do |argument|
       return unless argument
 
-      begin
-        write_attribute(name.to_sym, DateTime.strptime(argument, "%m/%d/%y"))
-      rescue ArgumentError
-        errors.add(name.to_sym, :invalid, message: "Invalid date format: #{argument}")
-      end
+      parsed_date = DateParser.parse(argument)
+      write_attribute(name.to_sym, parsed_date)
     end
   end
 
