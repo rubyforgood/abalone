@@ -24,6 +24,17 @@
 
 FactoryBot.define do
   factory :untagged_animal_assessment do
-    
+    raw { false }
+    measurement_date { "09/20/18" }
+    shl_case_number { "SF16-9D" }
+    spawning_date { "03/02/16" }
+    growout_rack { "3" }
+    growout_column { "B" }
+    growout_trough { "3" }
+    length { 0.438e2 }
+    gonad_score { "1" }
+    predicted_sex { "M" }
+    notes { nil }
+    processed_file_id { 1 }
   end
 end
