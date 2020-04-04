@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_044451) do
+ActiveRecord::Schema.define(version: 2020_04_04_212335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,14 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.integer "processed_file_id"
   end
 
+  create_table "tanks", force: :cascade do |t|
+    t.bigint "facility_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facility_id"], name: "index_tanks_on_facility_id"
+  end
+
   create_table "temporary_files", force: :cascade do |t|
     t.text "contents"
     t.datetime "created_at", null: false
@@ -188,4 +196,5 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.integer "processed_file_id"
   end
 
+  add_foreign_key "tanks", "facilities"
 end
