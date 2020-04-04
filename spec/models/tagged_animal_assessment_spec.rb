@@ -48,10 +48,14 @@ RSpec.describe TaggedAnimalAssessment, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:measurement_date).
-          with_message("must be in the mm/dd/yy format") }
-    it { should validate_presence_of(:spawning_date).
-          with_message("must be in the mm/dd/yy format") }
+    it {
+      should validate_presence_of(:measurement_date)
+        .with_message("must be in the mm/dd/yy format")
+    }
+    it {
+      should validate_presence_of(:spawning_date)
+        .with_message("must be in the mm/dd/yy format")
+    }
 
     it { should validate_presence_of(:shl_case_number) }
     it { should validate_presence_of(:tag) }

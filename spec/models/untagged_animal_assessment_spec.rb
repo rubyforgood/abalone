@@ -26,10 +26,14 @@ require 'rails_helper'
 
 RSpec.describe UntaggedAnimalAssessment, type: :model do
   describe 'validations' do
-    it { should validate_presence_of(:measurement_date).
-          with_message("must be in the mm/dd/yy format") }
-    it { should validate_presence_of(:spawning_date).
-          with_message("must be in the mm/dd/yy format") }
+    it {
+      should validate_presence_of(:measurement_date)
+        .with_message("must be in the mm/dd/yy format")
+    }
+    it {
+      should validate_presence_of(:spawning_date)
+        .with_message("must be in the mm/dd/yy format")
+    }
 
     it { should validate_presence_of(:cohort) }
     it { should validate_presence_of(:growout_trough) }
