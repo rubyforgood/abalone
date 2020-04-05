@@ -1,5 +1,5 @@
 class Family < ApplicationRecord
-  has_one :male, class_name: :animal
-  has_one :female, class_name: :animal
+  belongs_to :male, class_name: 'Animal'
+  belongs_to :female, class_name: 'Animal'
 
 end
