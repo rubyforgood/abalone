@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Operation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "Operation has associations" do
+    is_expected.to belong_to(:tank)
+  end
 end
