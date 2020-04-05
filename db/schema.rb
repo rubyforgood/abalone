@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_225209) do
+ActiveRecord::Schema.define(version: 2020_04_05_190459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(version: 2020_04_04_225209) do
     t.index ["male_id"], name: "index_families_on_male_id"
   end
 
+  create_table "measurements", force: :cascade do |t|
+    t.string "name"
+    t.string "value_type"
+    t.jsonb "value"
+    t.bigint "tank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.index ["tank_id"], name: "index_measurements_on_tank_id"
+  end
+
   create_table "mortality_trackings", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.date "mortality_date"
@@ -87,6 +98,17 @@ ActiveRecord::Schema.define(version: 2020_04_04_225209) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
+  end
+
+  create_table "operations", force: :cascade do |t|
+    t.bigint "tank_id"
+    t.integer "animals_added"
+    t.integer "animals_added_family_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "operation_date"
+    t.string "operation_type"
+    t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 
   create_table "pedigrees", force: :cascade do |t|
@@ -237,6 +259,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_225209) do
   end
 
   add_foreign_key "consolidation_reports", "families"
+  add_foreign_key "measurements", "tanks"
+  add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
 end
