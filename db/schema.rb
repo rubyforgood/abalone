@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_222231) do
+ActiveRecord::Schema.define(version: 2020_04_04_225209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "animals", force: :cascade do |t|
+    t.integer "collection_year"
+    t.datetime "date_time_collected"
+    t.string "collection_position"
+    t.integer "pii_tag"
+    t.integer "tag_id"
+    t.string "sex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "consolidation_reports", force: :cascade do |t|
+    t.bigint "family_id"
+    t.bigint "tank_from_id"
+    t.bigint "tank_to_id"
+    t.string "total_animal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["family_id"], name: "index_consolidation_reports_on_family_id"
+    t.index ["tank_from_id"], name: "index_consolidation_reports_on_tank_from_id"
+    t.index ["tank_to_id"], name: "index_consolidation_reports_on_tank_to_id"
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -35,6 +58,15 @@ ActiveRecord::Schema.define(version: 2020_04_04_222231) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "families", force: :cascade do |t|
+    t.bigint "female_id"
+    t.bigint "male_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["female_id"], name: "index_families_on_female_id"
+    t.index ["male_id"], name: "index_families_on_male_id"
   end
 
   create_table "mortality_trackings", force: :cascade do |t|
@@ -204,6 +236,7 @@ ActiveRecord::Schema.define(version: 2020_04_04_222231) do
     t.integer "processed_file_id"
   end
 
+  add_foreign_key "consolidation_reports", "families"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
 end
