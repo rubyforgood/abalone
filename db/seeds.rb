@@ -20,7 +20,9 @@ facilities= { "Aquarium of the Pacific" => "AOP",
               "The Bay Foundation" => "TBF",
               "The Cultured Abalone Farm" => "TCAF",
               "UC Davis Bodega Marine Laboratory" => "BML",
-              "UC Santa Barbara" =>"UCSB" }
+              "UC Santa Barbara" =>"UCSB",
+              "Puget Sound Restoration Fund" => "PSRF",
+            }
 
 facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code: f_code)  }
 
@@ -42,3 +44,13 @@ Dir["db/sample_data_files/*"].each do |category_dir|
     end
   end
 end
+
+# Tanks can have Operations occur (add or remove animals, combine tank contents, etc)
+# Tanks can also have Measurements (number of animals, temperature of tank, etc)
+male = Animal.create(sex: 'male')
+female = Animal.create(sex: 'female')
+family = Family.create(male: male, female: female)
+tank = Tank.create(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17')
+Operation.create(tank: tank, animals_added: 800, animals_added_family: family, operation_date: 7.days.ago, operation_type: 'add')
+Measurement.create(name: 'count', value_type: 'integer', value: '743', tank: tank, date: 3.days.ago)
+Measurement.create(name: 'count', value_type: 'integer', value: '719', tank: tank, date: 1.days.ago)
