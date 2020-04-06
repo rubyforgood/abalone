@@ -10,9 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_044451) do
+ActiveRecord::Schema.define(version: 2020_04_05_190459) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "animals", force: :cascade do |t|
+    t.integer "collection_year"
+    t.datetime "date_time_collected"
+    t.string "collection_position"
+    t.integer "pii_tag"
+    t.integer "tag_id"
+    t.string "sex"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "consolidation_reports", force: :cascade do |t|
+    t.bigint "family_id"
+    t.bigint "tank_from_id"
+    t.bigint "tank_to_id"
+    t.string "total_animal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["family_id"], name: "index_consolidation_reports_on_family_id"
+    t.index ["tank_from_id"], name: "index_consolidation_reports_on_tank_from_id"
+    t.index ["tank_to_id"], name: "index_consolidation_reports_on_tank_to_id"
+  end
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -36,6 +60,26 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "families", force: :cascade do |t|
+    t.bigint "female_id"
+    t.bigint "male_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["female_id"], name: "index_families_on_female_id"
+    t.index ["male_id"], name: "index_families_on_male_id"
+  end
+
+  create_table "measurements", force: :cascade do |t|
+    t.string "name"
+    t.string "value_type"
+    t.jsonb "value"
+    t.bigint "tank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.index ["tank_id"], name: "index_measurements_on_tank_id"
+  end
+
   create_table "mortality_trackings", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.date "mortality_date"
@@ -54,6 +98,17 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
+  end
+
+  create_table "operations", force: :cascade do |t|
+    t.bigint "tank_id"
+    t.integer "animals_added"
+    t.integer "animals_added_family_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "operation_date"
+    t.string "operation_type"
+    t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 
   create_table "pedigrees", force: :cascade do |t|
@@ -81,6 +136,14 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
+  end
+
+  create_table "post_settlement_inventories", force: :cascade do |t|
+    t.datetime "inventory_date"
+    t.integer "mean_standard_length"
+    t.integer "total_per_tank"
+    t.bigint "tank_id"
+    t.index ["tank_id"], name: "index_post_settlement_inventories_on_tank_id"
   end
 
   create_table "processed_files", force: :cascade do |t|
@@ -126,6 +189,14 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
+  end
+
+  create_table "tanks", force: :cascade do |t|
+    t.bigint "facility_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["facility_id"], name: "index_tanks_on_facility_id"
   end
 
   create_table "temporary_files", force: :cascade do |t|
@@ -186,4 +257,10 @@ ActiveRecord::Schema.define(version: 2020_02_04_044451) do
     t.datetime "updated_at", null: false
     t.integer "processed_file_id"
   end
+
+  add_foreign_key "consolidation_reports", "families"
+  add_foreign_key "measurements", "tanks"
+  add_foreign_key "operations", "tanks"
+  add_foreign_key "post_settlement_inventories", "tanks"
+  add_foreign_key "tanks", "facilities"
 end

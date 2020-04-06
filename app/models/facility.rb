@@ -12,6 +12,7 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
+  has_many :tanks
   after_commit { Rails.cache.delete('facility_codes') }
 
   def self.valid_codes
