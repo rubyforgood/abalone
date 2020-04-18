@@ -21,6 +21,8 @@
     <%= form.text_field :code, class: 'input' %>
   </div>
 
+  <%= form.hidden_field(:organization_id, :value => current_user.organization.id) %>
+
   <div class="field">
     <div class="control">
       <%= form.submit('Submit', class: 'button is-primary') %>
