@@ -25,6 +25,7 @@ class FacilitiesController < ApplicationController
   # POST /facilities.json
   def create
     @facility = Facility.new(facility_params)
+    @facility.organization_id = current_user.organization_id
 
     respond_to do |format|
       if @facility.save
@@ -41,6 +42,7 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1.json
   def update
     respond_to do |format|
+      @facility.organization_id = current_user.organization_id
       if @facility.update(facility_params)
         format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
         format.json { render :show, status: :ok, location: @facility }
@@ -69,6 +71,6 @@ class FacilitiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facility_params
-      params.require(:facility).permit(:name, :code, :organization_id)
+      params.require(:facility).permit(:name, :code)
     end
 end
