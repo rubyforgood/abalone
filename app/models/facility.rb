@@ -13,6 +13,7 @@
 
 class Facility < ApplicationRecord
   has_many :tanks
+  belongs_to :organization
   after_commit { Rails.cache.delete('facility_codes') }
 
   def self.valid_codes
