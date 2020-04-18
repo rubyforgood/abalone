@@ -23,9 +23,15 @@ rake db:seed
 
 Then, run `bundle exec rails s` and browse to http://localhost:3000/.
 
-Login information:
+Login information for white abalone:
 ```
-Email: admin@test.com
+Email: admin@whiteabalone.com
+Password: password
+```
+
+Login information for pinto abalone:
+```
+Email: admin@pintoabalone.com
 Password: password
 ```
 
