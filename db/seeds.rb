@@ -5,9 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create({ :email => "admin@test.com",
+
+white_abalone = Organization.create(name: "White Abalone")
+pinto_abalone = Organization.create(name: "Pinto Abalone")
+
+User.create({ :email => "admin@whiteabalone.com",
               :password => "password",
-              :password_confirmation => "password" })
+              :password_confirmation => "password",
+              :organization_id => white_abalone.id }
+              )
+
+User.create({ :email => "admin@pintoabalone.com",
+              :password => "password",
+              :password_confirmation => "password",
+              :organization_id => pinto_abalone.id }
+              )
 
 facilities= { "Aquarium of the Pacific" => "AOP",
               "Cabrillo Marine Aquarium" => "CMA",
@@ -24,7 +36,7 @@ facilities= { "Aquarium of the Pacific" => "AOP",
               "Puget Sound Restoration Fund" => "PSRF",
             }
 
-facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code: f_code)  }
+facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)  }
 
 # import all sample_data_files (uncomment when importers are added for all CSV categories)
 # Dir["db/sample_data_files/*"].each do |category_dir|
