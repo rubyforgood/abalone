@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: mortality_trackings
@@ -22,7 +22,7 @@
 #  updated_at        :datetime         not null
 #  processed_file_id :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class MortalityTracking < ApplicationRecord
   include Raw
@@ -36,12 +36,12 @@ class MortalityTracking < ApplicationRecord
     SHELL_CONTAINER: "Shell_container",
     ANIMAL_LOCATION: "Animal_location",
     NUMBER_MORTS: "\# Morts",
-    APPROXIMATION:"Approximation?",
+    APPROXIMATION: "Approximation?",
     PROCESSED_BY_SHL: "Processed by SHL?",
     INITIALS: "Initials",
     TAGS: "Tag(s)",
     COMMENTS: "Comments"
-  }
+  }.freeze
 
   def self.create_from_csv_data(attrs)
     attrs[:shl_case_number] = attrs.delete(:shl_number)
@@ -57,7 +57,6 @@ class MortalityTracking < ApplicationRecord
 
     new(attrs)
   end
-
 
   validates_presence_of :shl_case_number
 end

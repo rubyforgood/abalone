@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: untagged_animal_assessments
@@ -20,7 +20,7 @@
 #  updated_at        :datetime         not null
 #  processed_file_id :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class UntaggedAnimalAssessment < ApplicationRecord
   HEADERS = {
@@ -35,7 +35,7 @@ class UntaggedAnimalAssessment < ApplicationRecord
     GONAD_SCORE: "Gonad Score",
     PREDICTED_SEX: "Predicted Sex",
     NOTES: "Notes"
-  }
+  }.freeze
 
   # this is used to dynamically define argument setter for these attributes
   DATE_ATTRIBUTES = %w[
@@ -64,12 +64,13 @@ class UntaggedAnimalAssessment < ApplicationRecord
   end
 
   def shl_case_number
-    self.cohort
+    cohort
   end
 
   DATE_ATTRIBUTES.each do |name|
     define_method "#{name}=" do |argument|
       return unless argument
+
       parsed_date = DateParser.parse(argument)
       write_attribute(name.to_sym, parsed_date)
     end

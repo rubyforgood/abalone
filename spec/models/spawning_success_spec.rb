@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: spawning_successes
@@ -15,7 +15,7 @@
 #  updated_at          :datetime         not null
 #  processed_file_id   :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 require 'rails_helper'
 

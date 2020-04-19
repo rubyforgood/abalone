@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: facilities
@@ -9,7 +9,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
   has_many :tanks

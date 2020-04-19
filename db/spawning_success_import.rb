@@ -9,8 +9,8 @@ end
 puts "SpawningSuccess.count=#{SpawningSuccess.count}"
 IOStreams.each_record(filename) do |record|
   attrs = translate_attribute_names(record)
-  spawning_success = SpawningSuccess.new(attrs.merge({raw: false}))
+  spawning_success = SpawningSuccess.new(attrs.merge({ raw: false }))
   spawning_success.cleanse_data!
   spawning_success.save
-  end
+end
 puts "SpawningSuccess.count=#{SpawningSuccess.count}"

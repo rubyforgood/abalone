@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: processed_files
@@ -15,7 +15,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class ProcessedFile < ApplicationRecord
   belongs_to :temporary_file, optional: true, inverse_of: :processed_file

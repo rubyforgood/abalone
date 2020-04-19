@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: tagged_animal_assessments
@@ -23,7 +23,7 @@
 #  updated_at          :datetime         not null
 #  processed_file_id   :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 require 'rails_helper'
 
@@ -48,10 +48,14 @@ RSpec.describe TaggedAnimalAssessment, type: :model do
   end
 
   describe 'validations' do
-    it { should validate_presence_of(:measurement_date).
-          with_message("must be in the mm/dd/yy format") }
-    it { should validate_presence_of(:spawning_date).
-          with_message("must be in the mm/dd/yy format") }
+    it {
+      should validate_presence_of(:measurement_date)
+        .with_message("must be in the mm/dd/yy format")
+    }
+    it {
+      should validate_presence_of(:spawning_date)
+        .with_message("must be in the mm/dd/yy format")
+    }
 
     it { should validate_presence_of(:shl_case_number) }
     it { should validate_presence_of(:tag) }
@@ -94,11 +98,11 @@ RSpec.describe TaggedAnimalAssessment, type: :model do
   describe 'shl case number' do
     include_examples 'validate values for field', :shl_case_number do
       let(:valid_values) do
-        %w[SF10-3D, SF10-10, SF1D-10]
+        %w[SF10-3D SF10-10 SF1D-10]
       end
 
       let(:invalid_values) do
-        %w[SX10-10, XS10-10, 5]
+        %w[SX10-10 XS10-10 5]
       end
     end
   end

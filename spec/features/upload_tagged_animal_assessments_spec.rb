@@ -24,9 +24,10 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
         expect(processed_file.status).to eq "Processed"
         expect(processed_file.job_errors).to eq(nil)
         expect(processed_file.job_stats).to eq(
-          { "row_count"=>201,
-            "rows_imported"=>201,
-            "shl_case_numbers" => {"SF16-9A"=>100, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69},
+          {
+            "row_count" => 201,
+            "rows_imported" => 201,
+            "shl_case_numbers" => {"SF16-9A"=>100, "SF16-9B"=>21, "SF16-9C"=>11, "SF16-9D"=>69}
           }
         )
       end
@@ -50,8 +51,8 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   context 'when user upload a CSV that has been already processed' do
     before do
       FactoryBot.create :processed_file,
-        status: 'Processed',
-        temporary_file_id: temporary_file.id
+                        status: 'Processed',
+                        temporary_file_id: temporary_file.id
     end
 
     it "creates new ProcessedFile record with 'Failed' status" do
