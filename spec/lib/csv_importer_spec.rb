@@ -36,4 +36,20 @@ RSpec.describe CsvImporter do
       end
     end
   end
+
+  describe "#process" do
+    let(:processed_file) { create(:processed_file) }
+    let(:category_name) { "Custom" }
+    let(:file) { File.read(Rails.root.join("spec/support/csv/Tagged_assessment_valid_values.csv")) }
+    context "allows the upload of custom measurements" do
+      it "doesn't crash" do
+        expect do
+          CsvImporter.new(file, category_name, processed_file.id).call
+        end.to_not raise_error
+      end
+
+      it "saves a custom measurement" do
+      end
+    end
+  end
 end
