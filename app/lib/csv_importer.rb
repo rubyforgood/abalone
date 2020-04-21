@@ -66,7 +66,7 @@ class CsvImporter
   end
 
   def increment_stats(model)
-    stats[:row_count] += 1model
+    stats[:row_count] += 1
     if model.persisted?
       stats[:rows_imported] += 1
       stats[:shl_case_numbers][model.shl_case_number] += 1 if model.respond_to?(:shl_case_number)
