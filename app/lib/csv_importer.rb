@@ -8,7 +8,7 @@ class CsvImporter
     'Wild Collection',
     'Population Estimate',
     'Mortality Tracking',
-    'Measurment'
+    'Measurement'
   ].freeze
 
   class InvalidCategoryError < StandardError; end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :tank do
-    facility { nil }
     name { "MyString" }
+    facility
   end
 end
