@@ -3,6 +3,6 @@ FactoryBot.define do
     name { "MyString" }
     value_type { "MyString" }
     value { "" }
-    tank { nil }
+    measurement_event
   end
 end

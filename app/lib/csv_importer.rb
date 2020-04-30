@@ -7,7 +7,8 @@ class CsvImporter
     'Untagged Animal Assessment',
     'Wild Collection',
     'Population Estimate',
-    'Mortality Tracking'
+    'Mortality Tracking',
+    'Measurement'
   ].freeze
 
   class InvalidCategoryError < StandardError; end
@@ -61,7 +62,7 @@ class CsvImporter
   def model_from_category(category_name)
     raise InvalidCategoryError unless CATEGORIES.include?(category_name)
 
-    category_name.delete(' ').constantize
+    @model_from_category ||= category_name.delete(' ').constantize
   end
 
   def increment_stats(model)

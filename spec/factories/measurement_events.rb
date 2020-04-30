@@ -1,6 +1,6 @@
 FactoryBot.define do
-  factory :tank do
+  factory :measurement_event do
     name { "MyString" }
-    facility
+    tank
   end
 end
