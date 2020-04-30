@@ -1,6 +1,14 @@
 class Measurement < ApplicationRecord
   belongs_to :measurement_event
 
+  HEADERS = {
+    MEASUREMENT_EVENT: "measurement_event",
+    ENTITY: "entity",
+    NAME: "name",
+    MEASUREMENT: "measurement",
+    VALUE: "value"
+  }.freeze
+
   delegate :tank, to: :measurement_event
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
