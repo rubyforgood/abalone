@@ -12,6 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+.tool-versions
 
 # Ignore uploaded files in development
 /storage/*

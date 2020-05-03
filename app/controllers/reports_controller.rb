@@ -1,5 +1,4 @@
 class ReportsController < ApplicationController
-
   def index
     @report_builder = ReportBuilder.new(date: params[:date], cohort: params[:cohort])
   end

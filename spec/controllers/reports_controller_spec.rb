@@ -8,7 +8,7 @@ describe ReportsController do
   before do
     sign_in user
   end
-  
+
   describe '#index' do
     it 'should have response code 200' do
       get :index
@@ -21,12 +21,12 @@ describe ReportsController do
       file = create(:processed_file)
       population_estimate = create(:population_estimate)
 
-      get :lengths_for_measurement, params: { 
-        processed_file_id: file.id, 
+      get :lengths_for_measurement, params: {
+        processed_file_id: file.id,
         shl_case_number: population_estimate.shl_case_number,
-        date: population_estimate.sample_date,
+        date: population_estimate.sample_date
       }, format: :json
-      
+
       expect(response.code).to eq '200'
       expect { JSON.parse(response.body) }.not_to raise_error
     end

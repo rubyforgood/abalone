@@ -7,7 +7,7 @@ shared_examples_for "import job" do
   let(:perform_job) { described_class.perform_now(temporary_file, filename) }
 
   it "saves ProcessedFile" do
-    expect{ perform_job }.to change { ProcessedFile.count }.by 1
+    expect { perform_job }.to change { ProcessedFile.count }.by 1
     expect(ProcessedFile.last.temporary_file_id).to eq(temporary_file.id)
   end
 

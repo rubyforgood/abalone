@@ -36,4 +36,25 @@ RSpec.describe CsvImporter do
       end
     end
   end
+
+  describe "#process" do
+    let(:processed_file) { create(:processed_file) }
+    let(:category_name) { "Measurement" }
+    let(:file) { File.read(Rails.root.join("spec/fixtures/basic_custom_measurement.csv")) }
+    context "allows the upload of custom tank measurments (without notes)" do
+      it "saves the measurements" do
+        expect do
+          CsvImporter.new(file, category_name, processed_file.id).call
+        end.to change { Measurement.count }.by(6)
+      end
+
+      it "attaches the proper info and relationships for measurements (existing tank)" do
+        CsvImporter.new(file, category_name, processed_file.id).call
+        tank = Tank.find_by!(name: "AB-17")
+        measurement = tank.measurements.find_by!(name: "Flavor")
+        expect(measurement.value).to eq "WAY too salty"
+        expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
+      end
+    end
+  end
 end

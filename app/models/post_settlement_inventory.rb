@@ -1,3 +1,3 @@
 class PostSettlementInventory < ApplicationRecord
-    belongs_to :tank
+  belongs_to :tank
 end

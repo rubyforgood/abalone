@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: wild_collections
@@ -25,11 +25,11 @@
 #  updated_at                                 :datetime         not null
 #  processed_file_id                          :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 require 'rails_helper'
 
-RSpec.describe WildCollection, type: :model do # rubocop:disable Metrics/BlockLength
+RSpec.describe WildCollection, type: :model do
   let(:valid_attributes) do
     {
       tag: 'Green_001',

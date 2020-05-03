@@ -34,7 +34,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem "factory_bot_rails"
   gem 'rubocop-rails'
-  gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+  gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'pry'

@@ -53,17 +53,18 @@ Dir["db/sample_data_files/*"].each do |category_dir|
   category_class_name = File.basename(category_dir).titleize
   if current_csv_importers.include?(category_class_name)
     Dir["#{category_dir}/*.csv"].each_with_index do |filename, i|
-      CsvImporter.new(filename, category_class_name, i+1).call
+      CsvImporter.new(filename, category_class_name, i + 1).call
     end
   end
 end
 
 # Tanks can have Operations occur (add or remove animals, combine tank contents, etc)
 # Tanks can also have Measurements (number of animals, temperature of tank, etc)
-male = Animal.create(sex: 'male')
-female = Animal.create(sex: 'female')
-family = Family.create(male: male, female: female)
-tank = Tank.create(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17')
-Operation.create(tank: tank, animals_added: 800, animals_added_family_id: family.id, operation_date: 7.days.ago, operation_type: 'add')
-Measurement.create(name: 'count', value_type: 'integer', value: '743', tank: tank, date: 3.days.ago)
-Measurement.create(name: 'count', value_type: 'integer', value: '719', tank: tank, date: 1.days.ago)
+male = Animal.create!(sex: 'male')
+female = Animal.create!(sex: 'female')
+family = Family.create!(male: male, female: female)
+tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17')
+Operation.create!(tank: tank, animals_added: 800, animals_added_family_id: family.id, operation_date: 7.days.ago, operation_type: 'add')
+measurement_event = MeasurementEvent.create!(name: "My first measurement", tank: tank)
+Measurement.create!(name: 'count', value_type: 'integer', value: '743', measurement_event: measurement_event, date: 3.days.ago)
+Measurement.create!(name: 'count', value_type: 'integer', value: '719', measurement_event: measurement_event, date: 1.days.ago)

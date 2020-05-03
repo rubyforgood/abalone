@@ -17,7 +17,7 @@ namespace :envvars do
         key, value = line.split("=")
 
         # Remove surrounding quotes if present
-        value = value.slice(1..-2) if value.start_with?('"') and value.end_with?('"')
+        value = value.slice(1..-2) if value.start_with?('"') && value.end_with?('"')
 
         # Store the value in our :default_env copy
         environment.store(key, value)
@@ -28,4 +28,3 @@ namespace :envvars do
     end
   end
 end
-

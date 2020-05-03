@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: mortality_trackings
@@ -22,7 +22,7 @@
 #  updated_at        :datetime         not null
 #  processed_file_id :integer
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 require 'rails_helper'
 
@@ -88,10 +88,10 @@ RSpec.describe MortalityTracking, type: :model do
     subject { described_class.create_from_csv_data(attrs) }
     let(:attrs) do
       {
-        :shl_number => 'UCSB 2012',
-        :morts => 9,
-        :spawning_date =>  spawning_date_str,
-        :mortality_date => mortality_date_str
+        shl_number: 'UCSB 2012',
+        morts: 9,
+        spawning_date: spawning_date_str,
+        mortality_date: mortality_date_str
       }
     end
     let(:spawning_date_str) { '01/11/20' }
@@ -116,6 +116,5 @@ RSpec.describe MortalityTracking, type: :model do
         expect { subject }.to raise_error(ArgumentError, 'invalid date')
       end
     end
-
   end
 end

@@ -1,4 +1,4 @@
-# rubocop:disable Lint/UnneededCopDisableDirective, Metrics/LineLength
+# rubocop:disable Lint/RedundantCopDisableDirective, Layout/LineLength
 # == Schema Information
 #
 # Table name: facilities
@@ -9,13 +9,12 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-# rubocop:enable Metrics/LineLength, Lint/UnneededCopDisableDirective
+# rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 require 'rails_helper'
 
 RSpec.describe Facility, type: :model do
- let(:facility) { FactoryBot.create :facility }
-
+  let(:facility) { FactoryBot.create :facility }
 
   it "Facility has associations" do
     is_expected.to have_many(:tanks)
