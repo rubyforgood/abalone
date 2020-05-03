@@ -21,13 +21,13 @@ RSpec.describe Facility, type: :model do
     is_expected.to belong_to(:organization)
   end
 
- describe 'structure' do
-   it { is_expected.to have_db_column :name }
-   it { is_expected.to have_db_column :code }
-   it { is_expected.to have_db_column :organization_id }
+  describe 'structure' do
+    it { is_expected.to have_db_column :name }
+    it { is_expected.to have_db_column :code }
+    it { is_expected.to have_db_column :organization_id }
 
-   describe 'it only has 6 columns' do
-     it { expect(Facility.columns.count).to eq 6 }
-   end
- end
+    describe 'it only has 6 columns' do
+      it { expect(Facility.columns.count).to eq 6 }
+    end
+  end
 end

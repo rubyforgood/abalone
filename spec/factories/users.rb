@@ -3,6 +3,6 @@ FactoryBot.define do
     email { "#{SecureRandom.hex}@test.com" }
     password { "password" }
     password_confirmation { "password" }
-    organization_id { FactoryBot.create(:organization).id}
+    organization_id { FactoryBot.create(:organization).id }
   end
 end
