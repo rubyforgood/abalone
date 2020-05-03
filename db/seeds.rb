@@ -5,11 +5,23 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create({ email: "admin@test.com",
-              password: "password",
-              password_confirmation: "password" })
 
-facilities= { "Aquarium of the Pacific" => "AOP",
+white_abalone = Organization.create(name: "White Abalone")
+pinto_abalone = Organization.create(name: "Pinto Abalone")
+
+User.create({ :email => "admin@whiteabalone.com",
+              :password => "password",
+              :password_confirmation => "password",
+              :organization_id => white_abalone.id }
+              )
+
+User.create({ :email => "admin@pintoabalone.com",
+              :password => "password",
+              :password_confirmation => "password",
+              :organization_id => pinto_abalone.id }
+              )
+
+white_abalone_facilities= { "Aquarium of the Pacific" => "AOP",
               "Cabrillo Marine Aquarium" => "CMA",
               "California Science Center" => "CSC",
               "CICESE" => "CICESE",
@@ -24,8 +36,9 @@ facilities= { "Aquarium of the Pacific" => "AOP",
               "Puget Sound Restoration Fund" => "PSRF",
             }
 
-facilities.each { |f_name, f_code| Facility.find_or_create_by(name: f_name, code: f_code) }
+white_abalone_facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)  }
 
+Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization_id: pinto_abalone.id)
 # import all sample_data_files (uncomment when importers are added for all CSV categories)
 # Dir["db/sample_data_files/*"].each do |category_dir|
 #   category_class_name = File.basename(category_dir).titleize

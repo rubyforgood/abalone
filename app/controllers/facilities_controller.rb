@@ -4,7 +4,7 @@ class FacilitiesController < ApplicationController
   # GET /facilities
   # GET /facilities.json
   def index
-    @facilities = Facility.all
+    @facilities = Facility.where(organization_id: current_user.organization_id)
   end
 
   # GET /facilities/1
@@ -23,6 +23,7 @@ class FacilitiesController < ApplicationController
   # POST /facilities.json
   def create
     @facility = Facility.new(facility_params)
+    @facility.organization_id = current_user.organization_id
 
     respond_to do |format|
       if @facility.save
@@ -39,6 +40,7 @@ class FacilitiesController < ApplicationController
   # PATCH/PUT /facilities/1.json
   def update
     respond_to do |format|
+      @facility.organization_id = current_user.organization_id
       if @facility.update(facility_params)
         format.html { redirect_to @facility, notice: 'Facility was successfully updated.' }
         format.json { render :show, status: :ok, location: @facility }

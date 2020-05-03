@@ -53,8 +53,9 @@ RSpec.describe WildCollection, type: :model do
   end
 
   before do
-    Facility.create!(name: 'Aquarium of the Pacific', code: 'AOP')
-    Facility.create!(name: 'UC Davis Bodega Marine Laboratory', code: 'BML')
+    organization = Organization.create!(name: "Organization for testing")
+    Facility.create!(name: 'Aquarium of the Pacific', code: 'AOP', organization_id: organization.id)
+    Facility.create!(name: 'UC Davis Bodega Marine Laboratory', code: 'BML', organization_id: organization.id)
   end
 
   include_examples 'happy path'

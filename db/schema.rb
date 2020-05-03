@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_04_21_024915) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_facilities_on_organization_id"
   end
 
   create_table "families", force: :cascade do |t|
@@ -117,6 +119,12 @@ ActiveRecord::Schema.define(version: 2020_04_21_024915) do
     t.datetime "operation_date"
     t.string "operation_type"
     t.index ["tank_id"], name: "index_operations_on_tank_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pedigrees", force: :cascade do |t|
@@ -239,7 +247,9 @@ ActiveRecord::Schema.define(version: 2020_04_21_024915) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
