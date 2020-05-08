@@ -67,8 +67,10 @@ ActiveRecord::Schema.define(version: 2020_05_06_175333) do
     t.bigint "male_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "tank_id"
     t.index ["female_id"], name: "index_families_on_female_id"
     t.index ["male_id"], name: "index_families_on_male_id"
+    t.index ["tank_id"], name: "index_families_on_tank_id"
   end
 
   create_table "measurement_events", force: :cascade do |t|
@@ -118,6 +120,8 @@ ActiveRecord::Schema.define(version: 2020_05_06_175333) do
     t.datetime "updated_at", null: false
     t.datetime "operation_date"
     t.string "action"
+    t.bigint "family_id"
+    t.index ["family_id"], name: "index_operations_on_family_id"
     t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 
