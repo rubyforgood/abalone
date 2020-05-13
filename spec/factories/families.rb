@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :family do
-    female { nil }
-    male { nil }
+    female factory: :animal
+    male factory: :animal
   end
 end

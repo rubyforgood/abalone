@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_175333) do
+ActiveRecord::Schema.define(version: 2020_05_13_172140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,12 @@ ActiveRecord::Schema.define(version: 2020_05_06_175333) do
     t.integer "processed_file_id"
   end
 
+  create_table "operation_batches", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "operations", force: :cascade do |t|
     t.bigint "tank_id"
     t.integer "animals_added"
@@ -121,7 +127,9 @@ ActiveRecord::Schema.define(version: 2020_05_06_175333) do
     t.datetime "operation_date"
     t.string "action"
     t.bigint "family_id"
+    t.bigint "operation_batch_id"
     t.index ["family_id"], name: "index_operations_on_family_id"
+    t.index ["operation_batch_id"], name: "index_operations_on_operation_batch_id"
     t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 

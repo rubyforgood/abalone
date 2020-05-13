@@ -1,5 +1,7 @@
 class Operation < ApplicationRecord
   belongs_to :tank
+
+  belongs_to :operation_batch, required: false
   belongs_to :family, required: false
 
   validates :family, presence: true, if: :add_family?
