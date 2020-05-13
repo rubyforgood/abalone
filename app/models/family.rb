@@ -3,4 +3,8 @@ class Family < ApplicationRecord
   belongs_to :female, class_name: 'Animal'
 
   belongs_to :tank, required: false
+
+  def name
+    "Male: #{male.id} / Female: #{female.id}"
+  end
 end
