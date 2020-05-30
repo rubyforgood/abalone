@@ -5,4 +5,8 @@ class Tank < ApplicationRecord
   has_many :measurements, through: :measurement_events
 
   has_one :family, required: false
+
+  def empty?
+    family.blank?
+  end
 end
