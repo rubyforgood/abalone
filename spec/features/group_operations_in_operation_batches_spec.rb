@@ -4,43 +4,42 @@ RSpec.describe "Group Operations in OperationBatches" do
   it "allows ordered sets of operations swapping families between two tanks" do
     # Swapping families between tanks A and B
 
-    tank_a = FactoryBot.create(:tank)
-    family_i = FactoryBot.create(:family, tank: tank_a)
-    tank_b = FactoryBot.create(:tank)
-    family_j = FactoryBot.create(:family, tank: tank_b)
+    tank_one = FactoryBot.create(:tank)
+    family_one = FactoryBot.create(:family, tank: tank_one)
+    tank_two = FactoryBot.create(:tank)
+    family_two = FactoryBot.create(:family, tank: tank_two)
 
-    tank_c = FactoryBot.create(:tank)
+    tank_three = FactoryBot.create(:tank)
 
     operation_batch = FactoryBot.create(:operation_batch)
 
-    operation_1 = FactoryBot.create(:operation, operation_batch: operation_batch,
-                                                action: :remove_family, tank: tank_a)
-    operation_2 = FactoryBot.create(:operation, operation_batch: operation_batch,
-                                                action: :add_family, tank: tank_c, family: family_i)
-    operation_3 = FactoryBot.create(:operation, operation_batch: operation_batch,
-                                                action: :remove_family, tank: tank_b)
-    operation_4 = FactoryBot.create(:operation, operation_batch: operation_batch,
-                                                action: :add_family, tank: tank_a, family: family_j)
-    operation_5 = FactoryBot.create(:operation, operation_batch: operation_batch,
-                                                action: :remove_family, tank: tank_c)
-    operation_6 = FactoryBot.create(:operation, operation_batch: operation_batch,
-                                                action: :add_family, tank: tank_b, family: family_i)
+    operation_one = FactoryBot.create(:operation, operation_batch: operation_batch,
+                                                  action: :remove_family, tank: tank_one)
+    operation_two = FactoryBot.create(:operation, operation_batch: operation_batch,
+                                                  action: :add_family, tank: tank_three, family: family_one)
+    operation_three = FactoryBot.create(:operation, operation_batch: operation_batch,
+                                                    action: :remove_family, tank: tank_two)
+    operation_four = FactoryBot.create(:operation, operation_batch: operation_batch,
+                                                   action: :add_family, tank: tank_one, family: family_two)
+    operation_five = FactoryBot.create(:operation, operation_batch: operation_batch,
+                                                   action: :remove_family, tank: tank_three)
+    operation_six = FactoryBot.create(:operation, operation_batch: operation_batch,
+                                                  action: :add_family, tank: tank_two, family: family_one)
 
-
-    operation_batch.operations.each(&:perform)
-    [tank_a, tank_b, tank_c].each(&:reload)
+    operation_batch.reload.operations.each(&:perform)
+    [operation_batch, family_one, family_two, tank_one, tank_two, tank_three].each(&:reload)
 
     aggregate_failures do
-      expect(operation_batch.operations[0]).to eq operation_1
-      expect(operation_batch.operations[1]).to eq operation_2
-      expect(operation_batch.operations[2]).to eq operation_3
-      expect(operation_batch.operations[3]).to eq operation_4
-      expect(operation_batch.operations[4]).to eq operation_5
-      expect(operation_batch.operations[5]).to eq operation_6
+      expect(operation_batch.operations[0]).to eq operation_one
+      expect(operation_batch.operations[1]).to eq operation_two
+      expect(operation_batch.operations[2]).to eq operation_three
+      expect(operation_batch.operations[3]).to eq operation_four
+      expect(operation_batch.operations[4]).to eq operation_five
+      expect(operation_batch.operations[5]).to eq operation_six
 
-      expect(tank_a.family).to eq(family_j)
-      expect(tank_b.family).to eq(family_i)
-      expect(tank_c).to be_empty
+      expect(tank_one.family).to eq(family_two)
+      expect(tank_two.family).to eq(family_one)
+      expect(tank_three).to be_empty
     end
   end
 end
