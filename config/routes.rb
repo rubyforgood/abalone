@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :operations
+
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
 
