@@ -1,5 +1,6 @@
 class Measurement < ApplicationRecord
   belongs_to :measurement_event
+  belongs_to :processed_file, optional: true
 
   HEADERS = {
     MEASUREMENT_EVENT: "measurement_event",
@@ -21,6 +22,7 @@ class Measurement < ApplicationRecord
     measurement_attrs[:measurement_event] = measurement_event
     measurement_attrs[:value] = attrs.delete(:value)
     measurement_attrs[:name] = attrs.delete(:measurement)
+    measurement_attrs[:processed_file_id] = attrs.delete(:processed_file_id)
 
     # create measurement
     Measurement.create!(measurement_attrs)

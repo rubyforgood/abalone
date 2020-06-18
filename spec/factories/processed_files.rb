@@ -21,6 +21,6 @@ FactoryBot.define do
     category { "TaggedAnimalAssessment" }
     status { "Processed" }
     job_stats { "" }
-    job_errors { "MyText" }
+    job_errors { }
   end
 end
