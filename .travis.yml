@@ -11,9 +11,9 @@ before_script:
 script:
   - bundle exec rspec
   - bundle exec rubocop
-deploy:
-  provider: heroku
-  app: abalonerescue
-  api_key:
-    secure: $HEROKU_DEPLOY_TOKEN
-  run: "rake db:migrate"
+# deploy:
+#   provider: heroku
+#   app: abalonerescue
+#   api_key:
+#     secure: $HEROKU_DEPLOY_TOKEN
+#   run: "rake db:migrate"
