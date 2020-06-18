@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_172140) do
+ActiveRecord::Schema.define(version: 2020_06_18_201524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,9 @@ ActiveRecord::Schema.define(version: 2020_05_13_172140) do
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.bigint "measurement_event_id"
+    t.bigint "processed_file_id"
     t.index ["measurement_event_id"], name: "index_measurements_on_measurement_event_id"
+    t.index ["processed_file_id"], name: "index_measurements_on_processed_file_id"
   end
 
   create_table "mortality_trackings", force: :cascade do |t|
@@ -291,6 +293,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_172140) do
   add_foreign_key "consolidation_reports", "families"
   add_foreign_key "measurement_events", "tanks"
   add_foreign_key "measurements", "measurement_events"
+  add_foreign_key "measurements", "processed_files"
   add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"

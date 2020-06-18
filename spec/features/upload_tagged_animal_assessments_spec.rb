@@ -16,9 +16,9 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
   context 'when user successfully uploads two CSVs with no errors' do
     it "creates two new ProcessedFile records with 'Processed' status " do
-      upload_file("Tagged Animal Assessment", [valid_file, second_valid_file])
-
-      expect(ProcessedFile.count).to eq 2
+      expect do
+        upload_file("Tagged Animal Assessment", [valid_file, second_valid_file])
+      end.to change{ ProcessedFile.count }.by(2)
 
       ProcessedFile.all.each do |processed_file|
         expect(processed_file.status).to eq "Processed"
