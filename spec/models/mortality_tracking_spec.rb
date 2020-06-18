@@ -63,6 +63,7 @@ RSpec.describe MortalityTracking, type: :model do
     it { is_expected.to have_db_column :initials }
     it { is_expected.to have_db_column :tags }
     it { is_expected.to have_db_column :comments }
+    it { should belong_to(:processed_file).optional }
 
     describe 'it only has 18 columns' do
       it { expect(MortalityTracking.columns.count).to eq 18 }

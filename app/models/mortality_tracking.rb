@@ -43,6 +43,8 @@ class MortalityTracking < ApplicationRecord
     COMMENTS: "Comments"
   }.freeze
 
+  belongs_to :processed_file, optional: true
+
   def self.create_from_csv_data(attrs)
     attrs[:shl_case_number] = attrs.delete(:shl_number)
     attrs[:number_morts] = attrs.delete(:morts)
