@@ -18,7 +18,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
     it "creates two new ProcessedFile records with 'Processed' status " do
       expect do
         upload_file("Tagged Animal Assessment", [valid_file, second_valid_file])
-      end.to change{ ProcessedFile.count }.by(2)
+      end.to change { ProcessedFile.count }.by(2)
 
       ProcessedFile.all.each do |processed_file|
         expect(processed_file.status).to eq "Processed"
