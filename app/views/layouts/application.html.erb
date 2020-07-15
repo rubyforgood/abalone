@@ -14,6 +14,10 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/css/bulma-calendar.min.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bulma-calendar@6.0.7/dist/js/bulma-calendar.min.js"></script>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -79,7 +83,7 @@
               <% if user_signed_in? %>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-grey-light" %>
               <% else %>
-                <%= link_to "Login", new_user_session_path, class: "button is-grey-light" %>
+                <%= link_to "Login", new_user_session_path, class: "button is-grey-light button-outline-primary" %>
               <% end %>
 
               <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-grey-light">

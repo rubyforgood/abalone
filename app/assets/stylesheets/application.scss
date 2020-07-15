@@ -1,0 +1,61 @@
+@import "bootstrap";
+@import "facilities";
+@import "file_uploads";
+@import "home";
+@import "sessions";
+@import "variables";
+@import "mixins";
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar-brand img {
+  padding-right: 0.5em;
+}
+
+.navbar {
+  background-color: #fff;
+  -webkit-box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.25);
+  box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.25);
+
+  h1 {
+    font-size: 20px;
+  }
+  @include tablet {
+    .navbar-brand {
+      display: flex;
+      width: 100%;
+    }
+    #nav-menu {
+      position: absolute;
+      top: 85px;
+      right: 17px;
+    }
+  }
+}
+
+.button-primary {
+  background: $color-primary-dark !important;
+  color: $color-light !important;
+  padding: 4px 20px !important;
+  font-weight: 500 !important;
+  border: 1.5px solid $color-primary-dark !important;
+  &:hover{
+    text-decoration: none !important;
+  }
+}
+
+.button-outline-primary {
+  background: transparent !important;
+  color: $color-primary-dark !important;
+  padding: 4px 20px !important;
+  font-weight: 500 !important;
+  border: 1.5px solid $color-primary !important;
+  &:hover {
+    background: $color-primary-dark !important;
+    color: $color-light !important;
+    text-decoration: none !important;
+  }
+}

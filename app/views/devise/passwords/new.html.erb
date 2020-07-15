@@ -1,0 +1,27 @@
+<div class="sessions">
+    <div class="sessions__container">
+        <div class="sessions__container__form">
+
+            <h2>Forgot your password?</h2>
+
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="field form-group">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+            </div>
+
+            <div class="actions">
+                <%= f.submit "Send me reset password instructions", class: "button-primary" %>
+            </div>
+            <% end %>
+
+            <%= render "users/shared/links" %>
+
+        </div>
+        <div class="sessions__container__illustration">
+            <%= image_tag 'fogg.png' %>
+        </div>
+    </div>
+</div>

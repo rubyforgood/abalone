@@ -1240,7 +1240,7 @@ Layout/SpaceInsideStringInterpolation:
     - space
     - no_space
 
-Layout/Tab:
+Layout/IndentationStyle:
   Description: 'No hard tabs.'
   StyleGuide: '#spaces-indentation'
   Enabled: true
@@ -1385,7 +1385,7 @@ Lint/EmptyWhen:
   Enabled: true
   VersionAdded: '0.45'
 
-Lint/EndInMethod:
+Style/EndBlock:
   Description: 'END blocks should not be placed inside method definitions.'
   Enabled: true
   VersionAdded: '0.9'
@@ -1860,7 +1860,7 @@ Metrics/CyclomaticComplexity:
                  of test cases needed to validate a method.
   Enabled: true
   VersionAdded: '0.25'
-  Max: 6
+  Max: 7
 
 Metrics/MethodLength:
   Description: 'Avoid methods longer than 10 lines of code.'

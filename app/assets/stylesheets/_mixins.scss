@@ -1,0 +1,29 @@
+@import './utils.scss';
+
+//Small Devices
+@mixin mobile {
+  @media (max-width: $mobile) {
+    @content;
+  }
+}
+
+//Medium (tablets)
+@mixin tablet {
+  @media (max-width: $tablet) {
+    @content;
+  }
+}
+
+//Small laptops and desktops
+@mixin mediaLg {
+  @media (max-width: $desktop-max) and (min-width: $tablet+1) {
+    @content;
+  }
+}
+
+//Large devices
+@mixin mediaXL {
+  @media (min-width: $desktop-max) and (min-width: $desktop-min) {
+    @content;
+  }
+}
