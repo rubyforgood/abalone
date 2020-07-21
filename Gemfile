@@ -49,7 +49,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 
   gem 'annotate',                      require: false
-  gem 'capistrano',         '~> 3.11', require: false
+  gem 'capistrano',         '~> 3.14', require: false
   gem 'capistrano-bundler', '~> 1.6',  require: false
   gem 'capistrano-rvm',     '~> 0.1',  require: false
   gem 'capistrano-rails',   '~> 1.6',  require: false
