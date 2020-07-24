@@ -7,7 +7,7 @@ The Bodega Marine Laboratory's White Abalone captive breeding program is working
 
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
-* Ruby (2.6.3)
+* Ruby (2.6.6)
 * Rails (5.2)
 * PostgreSQL (tested on 9.x)
 

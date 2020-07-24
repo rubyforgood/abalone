@@ -17,10 +17,6 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
-  username: postgres
-  password: password
-  pool: 5
 
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
@@ -29,6 +25,10 @@ default: &default
 development:
   <<: *default
   database: abalone_development
+  host: db
+  username: postgres
+  password: password
+  pool: 5
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
