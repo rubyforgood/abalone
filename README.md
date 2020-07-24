@@ -7,7 +7,7 @@ The Bodega Marine Laboratory's White Abalone captive breeding program is working
 
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
-* Ruby (2.6.3)
+* Ruby (2.6.6)
 * Rails (5.2)
 * PostgreSQL (tested on 9.x)
 
@@ -53,6 +53,9 @@ To clear background jobs, run:
 ```
 rake jobs:clear
 ```
+
+## Docker
+We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward.
 
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:

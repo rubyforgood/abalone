@@ -9,6 +9,12 @@
 white_abalone = Organization.create(name: "White Abalone")
 pinto_abalone = Organization.create(name: "Pinto Abalone")
 
+User.create({ :email => "test@example.com",
+              :password => "password",
+              :password_confirmation => "password",
+              :organization => white_abalone }
+              )
+
 User.create({ :email => "admin@whiteabalone.com",
               :password => "password",
               :password_confirmation => "password",

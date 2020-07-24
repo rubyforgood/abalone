@@ -39,7 +39,7 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :ssh_options, verify_host_key: :secure
 
 # capistrano/rvm
-set :rvm_ruby_version, '2.6.3@abalone'
+set :rvm_ruby_version, '2.6.6@abalone'
 set :rvm_custom_path, '/usr/share/rvm'
 
 # capistrano/rails
