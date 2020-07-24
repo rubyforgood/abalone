@@ -54,6 +54,9 @@ To clear background jobs, run:
 rake jobs:clear
 ```
 
+## Docker
+We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward.
+
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
 
