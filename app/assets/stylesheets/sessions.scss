@@ -1,0 +1,63 @@
+@import "variables";
+@import "mixins";
+
+.sessions{
+  display: flex;
+  justify-content: center;
+  background: #f1f1f1;
+  min-height: calc(100vh - 78px);
+  &__container{
+    width: 60%;
+    display: flex;
+    height: fit-content;
+    margin-top: 5rem;
+    box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.10);
+    &__form { 
+      background: #fff;
+      flex: 1;
+      padding: 1rem;
+      h2{
+        font-weight: 600;
+        font-size: 26px;
+        margin-bottom: 1rem;
+      }
+      input[type=submit]{
+        background: $color-primary;
+        border: 1px solid  $color-primary;
+        color: $color-light;
+        padding: 4px 25px;
+        font-weight: 600;
+      }
+      a{
+        color: #8181a9;
+        margin-top: 1rem;
+        background-color: none;
+        display: block;
+        font-size: 15px;
+        text-decoration: underline;
+      }
+    }
+    &__illustration{
+      flex: 1;
+      background: rgba(232, 232, 250, 0.6);
+      display: flex;
+      img{
+        width: 300px;
+        height: auto;
+        margin: auto;
+        margin-top: 0;
+      }
+    }
+  }
+
+  @include tablet {
+    &__container{
+      width: 100%;
+      margin-top: 0;
+      height: auto;
+      &__illustration{
+        display: none;
+      }
+    }
+  }
+}
