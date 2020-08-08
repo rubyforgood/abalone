@@ -15,6 +15,7 @@ services:
     image: abalone
     volumes:
       - .:/myapp
+      - apptmp:/myapp/tmp
     depends_on:
       db:
         condition: service_healthy
@@ -29,3 +30,4 @@ services:
 
 volumes:
   dbdata:
+  apptmp:
