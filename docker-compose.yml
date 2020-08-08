@@ -13,6 +13,8 @@ services:
   app: &app
     build: .
     image: abalone
+    environment:
+      RAILS_ENV: development
     volumes:
       - .:/myapp
       - apptmp:/myapp/tmp
