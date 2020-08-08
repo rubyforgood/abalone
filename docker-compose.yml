@@ -1,12 +1,15 @@
-version: '3'
+version: '2.4'
 services:
   db:
     image: postgres
     volumes:
       - dbdata:/var/lib/postgresql/data
+      - ./bin/dbinit:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_PORT: 5432
+    healthcheck:
+      test: pg_isready --host=db --user=postgres --dbname=abalone_development
+    
   web:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -15,14 +18,16 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
   delayed_job:
     build: .
     command: bundle exec rails jobs:work
     volumes:
       - .:/rails-docker
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
 volumes:
   dbdata:
