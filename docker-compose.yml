@@ -3,7 +3,7 @@ services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_PORT: 5432
@@ -23,3 +23,6 @@ services:
       - .:/rails-docker
     depends_on:
       - db
+
+volumes:
+  dbdata:
