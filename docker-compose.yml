@@ -30,6 +30,23 @@ services:
   delayed_job:
     <<: *app
     command: bundle exec rails jobs:work
+  # These are convenience "services" intended to be "run" once and removed
+  # not "docker-compose up"'d for a long running process
+  schema_migrate:
+    <<: *app
+    command: bundle exec rails db:migrate
+  pending_migrations:
+    <<: *app
+    command: bundle exec rails db:migrate:status
+  console:
+    <<: *app
+    command: bundle exec rails console
+  rspec:
+    <<: *app
+    command: bundle exec rspec
+  rubocop:
+    <<: *app
+    command: bundle exec rubocop
 
 volumes:
   dbdata:
