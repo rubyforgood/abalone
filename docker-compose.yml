@@ -12,6 +12,7 @@ services:
 
   app: &app
     build: .
+    image: abalone
     volumes:
       - .:/myapp
     depends_on:
