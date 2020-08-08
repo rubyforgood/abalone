@@ -9,25 +9,22 @@ services:
       POSTGRES_PASSWORD: password
     healthcheck:
       test: pg_isready --host=db --user=postgres --dbname=abalone_development
-    
-  web:
+
+  app: &app
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/myapp
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    <<: *app
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
-    depends_on:
-      db:
-        condition: service_healthy
   delayed_job:
-    build: .
+    <<: *app
     command: bundle exec rails jobs:work
-    volumes:
-      - .:/rails-docker
-    depends_on:
-      db:
-        condition: service_healthy
 
 volumes:
   dbdata:
