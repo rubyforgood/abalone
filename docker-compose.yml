@@ -1,25 +1,53 @@
-version: '3'
+version: '2.4'
 services:
   db:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
+      - ./bin/dbinit:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_PORT: 5432
-  web:
+    healthcheck:
+      test: pg_isready --host=db --user=postgres --dbname=abalone_development
+
+  app: &app
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    image: abalone
+    environment:
+      RAILS_ENV: development
     volumes:
       - .:/myapp
+      - apptmp:/myapp/tmp
+    tmpfs:
+      - /myapp/tmp/pids
+    depends_on:
+      db:
+        condition: service_healthy
+  web:
+    <<: *app
     ports:
-      - "3000:3000"
-    depends_on:
-      - db
+      - "127.0.0.1:3000:3000"
   delayed_job:
-    build: .
+    <<: *app
     command: bundle exec rails jobs:work
-    volumes:
-      - .:/rails-docker
-    depends_on:
-      - db
+  # These are convenience "services" intended to be "run" once and removed
+  # not "docker-compose up"'d for a long running process
+  schema_migrate:
+    <<: *app
+    command: bundle exec rails db:migrate
+  pending_migrations:
+    <<: *app
+    command: bundle exec rails db:migrate:status
+  console:
+    <<: *app
+    command: bundle exec rails console
+  rspec:
+    <<: *app
+    command: bundle exec rspec
+  rubocop:
+    <<: *app
+    command: bundle exec rubocop
+
+volumes:
+  dbdata:
+  apptmp:
