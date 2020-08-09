@@ -7,6 +7,8 @@ services:
       - ./bin/dbinit:/docker-entrypoint-initdb.d
     environment:
       POSTGRES_PASSWORD: password
+    ports:
+      - "127.0.0.1:5432:5432"
     healthcheck:
       test: pg_isready --host=db --user=postgres --dbname=abalone_development
 
@@ -15,6 +17,7 @@ services:
     image: abalone
     environment:
       RAILS_ENV: development
+      ABALONE_DATABASE_HOSTNAME: db
     volumes:
       - .:/myapp
       - apptmp:/myapp/tmp
