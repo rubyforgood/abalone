@@ -76,7 +76,7 @@ GEM
       i18n
       rake (>= 10.0.0)
       sshkit (>= 1.9.0)
-    capistrano-bundler (1.6.0)
+    capistrano-bundler (2.0.1)
       capistrano (~> 3.1)
     capistrano-rails (1.6.1)
       capistrano (~> 3.1)
@@ -304,7 +304,7 @@ DEPENDENCIES
   bootstrap (~> 4.5.0)
   byebug
   capistrano (~> 3.14)
-  capistrano-bundler (~> 1.6)
+  capistrano-bundler (~> 2.0)
   capistrano-rails (~> 1.6)
   capistrano-rvm (~> 0.1)
   capistrano3-delayed-job (~> 1.0)
