@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "upload TaggedAnimalAssessment category", type: :feature do
   let(:user) { create(:user) }
-  let(:valid_file) { "#{Rails.root}/db/sample_data_files/tagged_animal_assessment/Tagged_assessment_12172018 (original).csv" }
+  let(:valid_file) { "#{Rails.root}/db/sample_data_files/tagged_animal_assessment/Tagged_assessment_12172018(original).csv" }
   let(:second_valid_file) { "#{Rails.root}/spec/support/csv/Tagged_assessment_03172018.csv" }
   let(:invalid_file) { "#{Rails.root}/spec/support/csv/invalid_headers.csv" }
   let(:incomplete_data_file) { "#{Rails.root}/spec/support/csv/Tagged_assessment_03172018-invalid-rows.csv" }
@@ -60,7 +60,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
 
       processed_file = ProcessedFile.where(status: "Failed").first
       expect(ProcessedFile.count).to eq 2
-      expect(processed_file.job_errors).to eq "Already processed a file on #{processed_file.created_at.strftime('%m/%d/%Y')} with the same name: Tagged_assessment_12172018 (original).csv. Data not imported!"
+      expect(processed_file.job_errors).to eq "Already processed a file on #{processed_file.created_at.strftime('%m/%d/%Y')} with the same name: Tagged_assessment_12172018(original).csv. Data not imported!"
       expect(processed_file.job_stats).to eq({})
       expect(page).to have_content expected_success_message
     end
