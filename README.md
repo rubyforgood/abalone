@@ -55,7 +55,33 @@ rake jobs:clear
 ```
 
 ## Docker
-We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward.
+
+We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward. You will need Docker and docker-compose.
+
+* [Docker Desktop](https://www.docker.com/products/docker-desktop) is recommended for Windows and Mac computers.
+* The `make` utility can also make your development life easier. It it usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
+
+### Starting Fresh
+
+To start the application in development mode:
+
+* `docker-compose up --detach db` to start the database
+* `docker-compose up --rm schema_migrate` to bring the database schema up-to-date
+* `docker-compose up --detach web delayed_job` to start the web and background job processes
+
+Or, run only this:
+
+* `make minty_fresh` to do all of the above
+
+The web app will be available on your host at `http://localhost:3000`. The logs for the web app and delayed_job processes can be seen and followed with the `make watch` command.
+
+### Some Routine Tasks
+
+* `make spec` will run the RSpec tests
+* `make lint` will run the Rubocop linting and style checks
+* `make test` will run both of the above
+* `make build` will build the Docker image for the abalone application. You'll need to run this occasionally if the gem libraries for the project are updated.
+* `make nuke` will stop all Abalone docker services, remove containers, and delete the development and test databases. This is also used in the `make minty_fresh` command to restart the development and test environment with a clean slate.
 
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
