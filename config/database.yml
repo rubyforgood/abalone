@@ -22,10 +22,10 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-development:
+development: &development
   <<: *default
   database: abalone_development
-  host: db
+  host: <%= ENV['ABALONE_DATABASE_HOSTNAME'] || 'localhost' %>
   username: postgres
   password: password
   pool: 5
@@ -61,7 +61,7 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  <<: *development
   database: abalone_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
