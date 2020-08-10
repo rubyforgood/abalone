@@ -1,10 +1,10 @@
-minty_fresh: nuke schema_migrate dev_env
-
 dev_env:
 	docker-compose up --detach web delayed_job
 	@echo -
 	@echo - Services started! Watch development logs with 'make watch'.
 	@echo -
+
+minty_fresh: nuke schema_migrate dev_env
 
 watch:
 	docker-compose logs --follow web delayed_job
