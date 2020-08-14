@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/stympy/faker.git
-  revision: 9beadbdab45e7c41e5f2462b0901f9d0c37684c6
+  revision: f0a84aad8970d8d9f73dfd6e7ed68ccc84f4f9e6
   branch: master
   specs:
     faker (2.13.0)
@@ -100,7 +100,7 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     coderay (1.1.3)
-    concurrent-ruby (1.1.6)
+    concurrent-ruby (1.1.7)
     crass (1.0.6)
     creek (2.5.2)
       nokogiri (>= 1.10.0)
@@ -128,7 +128,7 @@ GEM
     ffi (1.13.1)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    i18n (1.8.3)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     iostreams (1.3.0)
     jbuilder (2.10.0)
