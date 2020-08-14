@@ -5,6 +5,7 @@
 @import "sessions";
 @import "variables";
 @import "mixins";
+@import "pages/**/*";
 
 * {
   font-family: "Poppins", sans-serif;
@@ -42,7 +43,7 @@
   padding: 4px 20px !important;
   font-weight: 500 !important;
   border: 1.5px solid $color-primary-dark !important;
-  &:hover{
+  &:hover {
     text-decoration: none !important;
   }
 }
@@ -58,4 +59,16 @@
     color: $color-light !important;
     text-decoration: none !important;
   }
+}
+
+.button-back {
+  color: #333;
+  padding: 0 11px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input, .textarea{
+  box-shadow: unset;
+  border-radius: 2px;
 }

@@ -1,0 +1,12 @@
+@import "variables";
+@import "mixins";
+
+.operations__index{
+  background: #f3f7fa;
+  min-height: $body-height;
+  padding: 2rem 4rem;
+  &__container{
+    background: white;
+    min-height: 70vh;
+  }
+}

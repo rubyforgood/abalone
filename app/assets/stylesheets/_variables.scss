@@ -3,9 +3,12 @@ $color-secondary: #eb5757;
 $color-dark: #333333;
 $color-light: #ffffff;
 $color-primary-light: rgba($color: $color-primary, $alpha: 0.7);
-$color-primary-dark: #5e5e98;
+$color-primary-dark: #6767ca;
 $color-warning: #f2994a;
 $color-success: #27ae60;
+$color-dark-light: #eee;
+
+$body-height: calc(100vh - 38px);
 
 .color-primary {
   color: $color-primary !important;
@@ -23,8 +26,12 @@ $color-success: #27ae60;
   background-color: $color-secondary !important;
 }
 
-.color-dark {
-  color: $color-dark !important;
+.bg-secondary {
+  background-color: $color-secondary !important;
+}
+
+.bg-dark-light {
+  background-color: $color-dark-light !important;
 }
 
 .bg-dark {

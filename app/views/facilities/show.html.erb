@@ -1,18 +1,23 @@
-<section class="section">
-  <div class="container">
+<section class="section facilities__show">
+  <div class="container facilities__show__container">
     <p id="notice"><%= notice %></p>
+    <div class="facilities__show__container__header">
+      <h1 class="title">Facility</h1>
+    </div>
+    <div class="facilities__show__container__body mb-5">
+      <p>
+        <strong>Name:</strong>
+        <%= @facility.name %>
+      </p>
 
-    <p>
-      <strong>Name:</strong>
-      <%= @facility.name %>
-    </p>
+      <p>
+        <strong>Code:</strong>
+        <%= @facility.code %>
+      </p>
+    </div>
 
-    <p>
-      <strong>Code:</strong>
-      <%= @facility.code %>
-    </p>
-
-    <%= link_to 'Edit', edit_facility_path(@facility) %> |
-    <%= link_to 'Back', facilities_path %>
+    <%= link_to '<< BACK', facilities_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_facility_path(@facility), class: "button-outline-primary mt-4" %>
+    
   </div>
 </section>

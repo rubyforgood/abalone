@@ -1,16 +1,10 @@
-<section class="section">
-  <div class="container">
-    <div class="columns">
-      <div class="column"></div>
-      <div class="column">
-        <h1 class="title">Editing Facility</h1>
-
-        <%= render 'form', facility: @facility %>
-
-        <%= link_to 'Show', @facility %> |
-        <%= link_to 'Back', facilities_path %>
-      </div>
-      <div class="column"></div>
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Editing Facility</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', facility: @facility %>
     </div>
+    <%= link_to '<< Back', facilities_path, class: "button-outline-primary" %>
+    <%= link_to 'Show', @facility,  class: "button-outline-primary" %>
   </div>
 </section>
