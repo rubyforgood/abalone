@@ -1,20 +1,24 @@
-<table class="table">
-<thead>
-  <tr>
-  <th>Tank</th>
-  <th>Family</th>
-  <th>Action</th>
-  <th>CSV Data Uploaded At</th>
-  </tr>
-</thead>
-<tbody>
-<%- @operations.each do |operation|%>
-  <tr>
-    <td><%= operation.tank.name %> </td>
-    <td><%= operation.family&.name %> </td>
-    <td><%= operation.action %></td>
-    <td><%= operation.created_at %></td>
-  </tr>
-<% end %>
-</tbody>
-</table>
+<section class="section operations__index">
+  <div class="section operations__index__container">
+    <table class="table table-hover">
+    <thead>
+      <tr>
+      <th>Tank</th>
+      <th>Family</th>
+      <th>Action</th>
+      <th>CSV Data Uploaded At</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%- @operations.each do |operation|%>
+      <tr>
+        <td><%= operation.tank.name %> </td>
+        <td><%= operation.family&.name %> </td>
+        <td><%= operation.action %></td>
+        <td><%= operation.created_at %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>
+</section>

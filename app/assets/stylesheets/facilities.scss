@@ -1,0 +1,81 @@
+/*
+  Place all the styles related to the matching controller here.
+  They will automatically be included in application.css.
+*/
+@import "variables";
+@import "mixins";
+
+.facilities__index {
+  background-color: #f3f7fa;
+  &__container {
+    background: #fff;
+    box-shadow: 0px 0px 103px -94px rgba(0, 0, 0, 1);
+    padding: 1rem 3rem;
+    a {
+      color: $color-primary-dark;
+      height: fit-content;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  @include tablet {
+    padding: 0;
+    &__container {
+      padding: 0 0.25rem;
+    }
+  }
+}
+
+.facilities__show {
+  background-color: #f3f7fa;
+  min-height: $body-height;
+  &__container {
+    background-color: #fff;
+    min-height: 4vh;
+    width: 50%;
+    padding: 2rem;
+    padding-top: 1rem;
+    a{
+      height: fit-content;
+    }
+    &__header{
+      display: flex;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @include tablet{
+    padding: 0;
+    &__container{
+      width: 100%;
+      height: $body-height;
+    }
+  }
+}
+
+.facilities__form{
+  background-color: #f3f7fa;
+  min-height: $body-height;
+  &__container {
+    background-color: #fff;
+    min-height: 4vh;
+    width: 40%;
+    padding: 2rem;
+    padding-top: 1rem;
+    a{
+      height: fit-content;
+    }
+    &__header{
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    &__body{
+      margin-bottom: 3rem;
+    }
+  }
+}
