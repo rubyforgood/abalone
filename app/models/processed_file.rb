@@ -18,5 +18,8 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class ProcessedFile < ApplicationRecord
-  belongs_to :temporary_file, optional: true, inverse_of: :processed_file
+  belongs_to :temporary_file,
+             optional: true,
+             inverse_of: :processed_file,
+             dependent: :destroy
 end
