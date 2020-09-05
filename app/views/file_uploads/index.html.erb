@@ -51,6 +51,8 @@
       </div>
       <%- if pf.status == 'Processed' %>
         <%= link_to "<button class='button is-link'>Show records loaded by this file</button>".html_safe, show_processed_file_path(pf.id) %>
+      <%- else %>
+        <%= button_to "Remove upload", file_upload_path(pf), method: :delete, class: "button button-danger" %>
       <%- end %>
       <hr />
     <% end %>
