@@ -41,6 +41,9 @@ services:
   pending_migrations:
     <<: *app
     command: bundle exec rails db:migrate:status
+  seeds:
+    <<: *app
+    command: bundle exec rails db:seed
   console:
     <<: *app
     command: bundle exec rails console
