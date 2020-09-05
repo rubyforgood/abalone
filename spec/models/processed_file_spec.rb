@@ -18,5 +18,5 @@
 require 'rails_helper'
 
 RSpec.describe ProcessedFile, type: :model do
-  it { should belong_to(:temporary_file).optional }
+  it { should belong_to(:temporary_file).dependent(:destroy).optional }
 end
