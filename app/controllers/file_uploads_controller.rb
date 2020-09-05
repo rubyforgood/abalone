@@ -42,9 +42,9 @@ class FileUploadsController < ApplicationController
   def destroy
     processed_file = ProcessedFile.find(params[:id])
     if processed_file.destroy
-      redirect_to file_uploads_path(notice: 'File sucessfully deleted')
+      redirect_to file_uploads_path, notice: 'File successfully deleted'
     else
-      redirect_to file_uploads_path(alert: 'There was an issue deleting this file upload')
+      redirect_to file_uploads_path, alert: 'There was an issue deleting this file upload'
     end
   end
 
