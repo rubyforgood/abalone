@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_201524) do
+ActiveRecord::Schema.define(version: 2020_09_05_154358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2020_06_18_201524) do
     t.string "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "measurement_id"
+    t.index ["measurement_id"], name: "index_animals_on_measurement_id"
   end
 
   create_table "consolidation_reports", force: :cascade do |t|
@@ -68,8 +70,10 @@ ActiveRecord::Schema.define(version: 2020_06_18_201524) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "tank_id"
+    t.bigint "measurement_id"
     t.index ["female_id"], name: "index_families_on_female_id"
     t.index ["male_id"], name: "index_families_on_male_id"
+    t.index ["measurement_id"], name: "index_families_on_measurement_id"
     t.index ["tank_id"], name: "index_families_on_tank_id"
   end
 
@@ -90,8 +94,14 @@ ActiveRecord::Schema.define(version: 2020_06_18_201524) do
     t.datetime "date"
     t.bigint "measurement_event_id"
     t.bigint "processed_file_id"
+    t.bigint "animal_id"
+    t.bigint "family_id"
+    t.bigint "tank_id"
+    t.index ["animal_id"], name: "index_measurements_on_animal_id"
+    t.index ["family_id"], name: "index_measurements_on_family_id"
     t.index ["measurement_event_id"], name: "index_measurements_on_measurement_event_id"
     t.index ["processed_file_id"], name: "index_measurements_on_processed_file_id"
+    t.index ["tank_id"], name: "index_measurements_on_tank_id"
   end
 
   create_table "mortality_trackings", force: :cascade do |t|
@@ -226,7 +236,9 @@ ActiveRecord::Schema.define(version: 2020_06_18_201524) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "measurement_id"
     t.index ["facility_id"], name: "index_tanks_on_facility_id"
+    t.index ["measurement_id"], name: "index_tanks_on_measurement_id"
   end
 
   create_table "temporary_files", force: :cascade do |t|
@@ -290,11 +302,17 @@ ActiveRecord::Schema.define(version: 2020_06_18_201524) do
     t.integer "processed_file_id"
   end
 
+  add_foreign_key "animals", "measurements"
   add_foreign_key "consolidation_reports", "families"
+  add_foreign_key "families", "measurements"
   add_foreign_key "measurement_events", "tanks"
+  add_foreign_key "measurements", "animals"
+  add_foreign_key "measurements", "families"
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "processed_files"
+  add_foreign_key "measurements", "tanks"
   add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
+  add_foreign_key "tanks", "measurements"
 end

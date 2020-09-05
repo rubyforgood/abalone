@@ -1,6 +1,9 @@
 class Measurement < ApplicationRecord
   belongs_to :measurement_event
   belongs_to :processed_file, optional: true
+  belongs_to :animal, optional: true
+  belongs_to :tank, optional: true
+  belongs_to :family, optional: true
 
   HEADERS = {
     MEASUREMENT_EVENT: "measurement_event",
@@ -10,7 +13,7 @@ class Measurement < ApplicationRecord
     VALUE: "value"
   }.freeze
 
-  delegate :tank, to: :measurement_event
+  # delegate :tank, to: :measurement_event
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
     measurement_event_name = attrs.delete(:measurement_event)
