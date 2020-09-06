@@ -39,7 +39,7 @@ class CsvImporter
       CSV.parse(
         temporary_file,
         headers: true,
-        header_converters: lambda {|header| header.strip.downcase.to_sym},
+        header_converters: :symbol,
         converters: lambda {|value| value ? value.strip : nil}
         ).each do |csv_row|
 
