@@ -32,7 +32,7 @@ module ImportJob
   def validate_headers(temporary_file)
     raise "No input file specified" unless temporary_file
 
-    headers = CSV.parse(temporary_file.contents, headers: true).headers.compact
+    headers = CSV.parse(temporary_file.contents, headers: true, header_converters: lambda {|header| header.strip}).headers.compact
     valid_headers = category_model::HEADERS.values
 
     log("Headers in file: #{headers}", :debug)

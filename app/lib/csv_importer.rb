@@ -36,7 +36,13 @@ class CsvImporter
     row_number = 2 # assuming 1 is headers
 
     model.transaction do
-      CSV.parse(temporary_file, headers: true, header_converters: :symbol).each do |csv_row|
+      CSV.parse(
+        temporary_file,
+        headers: true,
+        header_converters: lambda {|header| header.strip.to_sym},
+        converters: lambda {|value| value ? value.strip : nil}
+        ).each do |csv_row|
+
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
         record = model.create_from_csv_data(csv_row.to_h)
