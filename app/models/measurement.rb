@@ -9,7 +9,9 @@ class Measurement < ApplicationRecord
     MEASUREMENT_EVENT: "measurement_event",
     MEASUREMENT: "measurement",
     VALUE: "value",
-    TANK_NAME: "tank_name"
+    TANK_NAME: "tank_name",
+    ANIMAL_PII_TAG: "animal_pii_tag",
+    FAMILY_NAME: "family_name"
   }.freeze
 
   # delegate :tank, to: :measurement_event
