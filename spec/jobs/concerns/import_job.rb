@@ -7,7 +7,7 @@ shared_examples_for "import job" do
   let(:perform_job) { described_class.perform_now(temporary_file, filename) }
 
   before do
-    FactoryBot.create(:family, name:"Adams Family") if described_class.is_a? Measurement
+    FactoryBot.create(:family, name:"Adams Family") if described_class.is_a? MeasurementJob
   end
 
   it "saves ProcessedFile" do
