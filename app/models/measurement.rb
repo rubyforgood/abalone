@@ -17,7 +17,7 @@ class Measurement < ApplicationRecord
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
     measurement_event_name = attrs.delete(:measurement_event)
-    tank = Tank.find_or_create_by!(name: attrs.delete(:name))
+    tank = Tank.find_or_create_by!(name: attrs.delete(:tank_name))
     measurement_event = MeasurementEvent.find_or_create_by!(name: measurement_event_name)
 
     # create attributes for Measurement
