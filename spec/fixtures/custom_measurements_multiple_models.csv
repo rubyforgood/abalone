@@ -1,7 +1,2 @@
-measurement_event,tank_name,measurement,value,
-Michael Drinks the Water,Support Rack 3,Flavor,Salty,
-Michael Drinks the Water,AB-17,Flavor,WAY too salty,
-Michael Drinks the Water,Flavor,Good,
-Michael Drinks the Correct Water,The Water Bottle at My Desk,Flavor,Good,The Water Bottle at My Desk
-Michael Drinks the Correct Water,Office Water Cooler,Flavor,Excellent,
-Michael last known test,CB Husband Tanning Salon,Tanning Lotion Smell,Sort of like Sardine Oil,
+measurement_event,measurement,value,tank_name,animal_pii_tag,family_name,
+Michael Drinks the Water,Flavor,Salty,Support Rack 3,123,Adams Family,

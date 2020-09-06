@@ -40,8 +40,9 @@ RSpec.describe CsvImporter do
   describe "#process" do
     let(:processed_file) { create(:processed_file) }
     let(:category_name) { "Measurement" }
-    let(:file) { File.read(Rails.root.join("spec/fixtures/basic_custom_measurement.csv")) }
+    
     context "allows the upload of custom tank measurments (without notes)" do
+      let(:file) { File.read(Rails.root.join("spec/fixtures/basic_custom_measurement.csv")) }
       it "saves the measurements" do
         expect do
           CsvImporter.new(file, category_name, processed_file.id).call
@@ -54,6 +55,29 @@ RSpec.describe CsvImporter do
         measurement = tank.measurements.find_by!(name: "Flavor")
         expect(measurement.value).to eq "WAY too salty"
         expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
+      end
+    end
+
+    context "allows the upload of expanded custom tank measurements (without notes)" do
+      let(:file) { File.read(Rails.root.join("spec/fixtures/custom_measurements_multiple_models.csv")) }
+      before do
+        FactoryBot.create(:family, name:"Adams Family")
+      end
+
+      it "saves the measurements" do
+        expect do
+          CsvImporter.new(file, category_name, processed_file.id).call
+        end.to change { Measurement.count }.by(1)
+      end
+
+      it "attaches the proper info and relationships for measurements (existing tank)" do
+        CsvImporter.new(file, category_name, processed_file.id).call
+        tank = Tank.find_by!(name: "Support Rack 3")
+        measurement = tank.measurements.find_by!(name: "Flavor")
+        expect(measurement.value).to eq "Salty"
+        expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
+        expect(measurement.family.name).to eq "Adams Family"
+        expect(measurement.animal.pii_tag).to eq 123
       end
     end
   end
