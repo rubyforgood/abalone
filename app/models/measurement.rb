@@ -7,10 +7,9 @@ class Measurement < ApplicationRecord
 
   HEADERS = {
     MEASUREMENT_EVENT: "measurement_event",
-    ENTITY: "entity",
-    NAME: "name",
     MEASUREMENT: "measurement",
-    VALUE: "value"
+    VALUE: "value",
+    TANK_NAME: "tank_name"
   }.freeze
 
   # delegate :tank, to: :measurement_event
