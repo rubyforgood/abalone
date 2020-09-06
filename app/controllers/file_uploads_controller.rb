@@ -24,6 +24,11 @@ class FileUploadsController < ApplicationController
     record_class = @processed_file.category.constantize
     @headers = record_class::HEADERS.keys.map(&:downcase)
     @records = record_class.where(processed_file_id: @processed_file.id)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @processed_file.temporary_file.contents, filename: @processed_file.filename }
+    end
   end
 
   def upload
