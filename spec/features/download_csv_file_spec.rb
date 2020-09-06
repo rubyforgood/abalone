@@ -9,6 +9,6 @@ describe "download CSV file from upload files", type: :feature do
     visit file_uploads_path
     click_on(file.filename)
 
-    expect(page.response_headers['Content-Disposition']).to include("#{file.filename}")
+    expect(page.response_headers['Content-Disposition']).to include(file.filename)
   end
 end
