@@ -25,6 +25,7 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   context 'when user successfully uploads a CSV file with spaces in the header and values' do
     it "strips spaces and generates no errors" do
       expect do
+        Measurement.delete_all
         upload_file("Measurement", [file_with_spaces])
       end.to change { ProcessedFile.count }.by(1)
 
