@@ -22,5 +22,6 @@ FactoryBot.define do
     status { "Processed" }
     job_stats { "" }
     job_errors {}
+    temporary_file
   end
 end

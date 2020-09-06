@@ -9,7 +9,7 @@
           <%- if pf.job_stats["rows_not_imported"].to_i > 0 %>
             <%= link_to pf.filename, show_processing_csv_errors_path(pf.id) %>
           <% else %>
-            <%= pf.filename %>
+            <%= link_to pf.filename, show_processed_file_path(pf.id, format: :csv) %>
           <%- end %>
         </div>
       </div>
