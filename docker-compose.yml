@@ -6,11 +6,12 @@ services:
       - dbdata:/var/lib/postgresql/data
       - ./bin/dbinit:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: dockerpg
+      POSTGRES_PASSWORD: supersecret
     ports:
       - "127.0.0.1:5432:5432"
     healthcheck:
-      test: pg_isready --host=db --user=postgres --dbname=abalone_development
+      test: pg_isready --host=db --user=dockerpg --dbname=abalone_development
 
   app: &app
     build: .
@@ -18,6 +19,7 @@ services:
     environment:
       RAILS_ENV: development
       ABALONE_DATABASE_HOSTNAME: db
+      DATABASE_URL: postgres://dockerpg:supersecret@db
     volumes:
       - .:/myapp
       - apptmp:/myapp/tmp
