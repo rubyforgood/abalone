@@ -72,13 +72,13 @@ GEM
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
     ast (2.4.1)
-    autoprefixer-rails (9.8.5)
+    autoprefixer-rails (9.8.6.3)
       execjs
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
-    bootstrap (4.5.0)
+    bootstrap (4.5.2)
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
@@ -324,7 +324,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootsnap (>= 1.1.0)
-  bootstrap (~> 4.5.0)
+  bootstrap (~> 4.5.2)
   byebug
   capistrano (~> 3.14)
   capistrano-bundler (~> 2.0)
