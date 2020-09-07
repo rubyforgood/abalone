@@ -81,7 +81,7 @@ The web app will be available on your host at `http://localhost:3000`. The logs 
 * `make lint` will run the Rubocop linting and style checks
 * `make test` will run both of the above
 * `make build` will build the Docker image for the abalone application. You'll need to run this occasionally if the gem libraries for the project are updated.
-* `make database_seed` will seed the database according to `seeds.rb`.
+* `make database_seeds` will seed the database according to `seeds.rb`.
 * `make nuke` will stop all Abalone docker services, remove containers, and delete the development and test databases. This is also used in the `make minty_fresh` command to restart the development and test environment with a clean slate.
 
 ## Contribute
