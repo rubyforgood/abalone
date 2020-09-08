@@ -52,7 +52,7 @@ services:
     command: bundle exec rspec
   rubocop:
     <<: *app
-    command: bundle exec rubocop
+    command: bundle exec rubocop -a
 
 volumes:
   dbdata:
