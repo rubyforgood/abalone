@@ -27,8 +27,6 @@ development: &development
   database: abalone_development
   host: <%= ENV['ABALONE_DATABASE_HOSTNAME'] || 'localhost' %>
   pool: 5
-  username: postgres
-  password: password
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
