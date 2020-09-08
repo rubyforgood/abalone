@@ -63,6 +63,15 @@ development: &development
 test:
   <<: *development
   database: abalone_test
+  # You wouldn't think you need to do this, but adding
+  # the url: key if there is a URL set in the environment
+  # ensures that the URL is used to merge the test DB config
+  # when rake db:* tasks try to manipulate both development
+  # and test databases. The db name given above will still
+  # override the db name given in the URL. Trying to manipulate
+  # both dev and test databases when there is a URL was turned
+  # off in rails/rails#37351, but that hasn't been released yet.
+  <%= "url: #{ENV['DATABASE_URL']}" if ENV['DATABASE_URL'] %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

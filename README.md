@@ -84,6 +84,15 @@ The web app will be available on your host at `http://localhost:3000`. The logs 
 * `make database_seeds` will seed the database according to `seeds.rb`.
 * `make nuke` will stop all Abalone docker services, remove containers, and delete the development and test databases. This is also used in the `make minty_fresh` command to restart the development and test environment with a clean slate.
 
+### Only the Database
+
+Some developers prefer to run the Ruby and Rails processes directly on their host computers instead of running everything in contianers.
+It might still be convenient for those developers to run the database in a container and not deal with the installation of yet another server on their computer.
+To do so:
+
+* set an environment variable on your host: `export DATABASE_URL="postgres://dockerpg:supersecret@localhost:54321"`
+* start the database with `make database_started`
+
 ## Contribute
 We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
 
