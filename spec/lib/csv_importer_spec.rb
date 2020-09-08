@@ -40,7 +40,7 @@ RSpec.describe CsvImporter do
   describe "#process" do
     let(:processed_file) { create(:processed_file) }
     let(:category_name) { "Measurement" }
-    
+
     context "allows the upload of custom tank measurments (without notes)" do
       let(:file) { File.read(Rails.root.join("spec/fixtures/basic_custom_measurement.csv")) }
       it "saves the measurements" do
@@ -61,7 +61,7 @@ RSpec.describe CsvImporter do
     context "allows the upload of expanded custom tank measurements (without notes)" do
       let(:file) { File.read(Rails.root.join("spec/fixtures/custom_measurements_multiple_models.csv")) }
       before do
-        FactoryBot.create(:family, name:"Adams Family")
+        FactoryBot.create(:family, name: "Adams Family")
       end
 
       it "saves the measurements" do
