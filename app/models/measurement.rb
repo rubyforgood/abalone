@@ -7,17 +7,21 @@ class Measurement < ApplicationRecord
 
   HEADERS = {
     MEASUREMENT_EVENT: "measurement_event",
-    ENTITY: "entity",
-    NAME: "name",
     MEASUREMENT: "measurement",
-    VALUE: "value"
+    VALUE: "value",
+    TANK_NAME: "tank_name",
+    ANIMAL_PII_TAG: "animal_pii_tag",
+    FAMILY_NAME: "family_name"
   }.freeze
 
   # delegate :tank, to: :measurement_event
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
     measurement_event_name = attrs.delete(:measurement_event)
-    tank = Tank.find_or_create_by!(name: attrs.delete(:name))
+    tank = Tank.find_or_create_by!(name: attrs.delete(:tank_name)) if attrs[:tank_name]
+    animal = Animal.find_or_create_by!(pii_tag: attrs.delete(:animal_pii_tag)) if attrs[:animal_pii_tag]
+    family = Family.find_by!(name: attrs.delete(:family_name)) if attrs[:family_name]
+
     measurement_event = MeasurementEvent.find_or_create_by!(name: measurement_event_name)
 
     # create attributes for Measurement
@@ -26,7 +30,10 @@ class Measurement < ApplicationRecord
     measurement_attrs[:value] = attrs.delete(:value)
     measurement_attrs[:name] = attrs.delete(:measurement)
     measurement_attrs[:processed_file_id] = attrs.delete(:processed_file_id)
-    measurement_attrs[:tank_id] = tank.id
+    measurement_attrs[:tank_id] = tank.id if tank
+    measurement_attrs[:animal_id] = animal.id if animal
+    measurement_attrs[:family_id] = family.id if family
+
     # create measurement
     Measurement.create!(measurement_attrs)
 

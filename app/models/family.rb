@@ -5,7 +5,7 @@ class Family < ApplicationRecord
 
   belongs_to :tank, required: false
 
-  def name
-    "Male: #{male.id} / Female: #{female.id}"
-  end
+  # def name
+  # "Male: #{male.id} / Female: #{female.id}"
+  # end
 end
