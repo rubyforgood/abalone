@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "upload TaggedAnimalAssessment category", type: :feature do
+describe "remove leading and trailing spaces from csv headers and values", type: :feature do
   let(:user) { create(:user) }
   let(:file_with_spaces) { "#{Rails.root}/spec/fixtures/basic_custom_measurement_with_spaces.csv" }
   let(:file_without_spaces) { "#{Rails.root}/spec/fixtures/basic_custom_measurement.csv" }
@@ -8,12 +8,12 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
   let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
   let(:measurements_comparison) { 
     [
-      {name: "Flavor", value: "Salty", measurement_event_name: "Salty", tank_name: "Support Rack 3"},
-      {name: "Flavor", value: "WAY too salty", measurement_event_name: "WAY too salty", tank_name: "AB-17"},
-      {name: "Good", value: nil, measurement_event_name: nil, tank_name: "Flavor"},
-      {name: "Flavor", value: "Good", measurement_event_name: "Good", tank_name: "The Water Bottle at My Desk"},
-      {name: "Flavor", value: "Excellent", measurement_event_name: "Excellent", tank_name: "Office Water Cooler"},
-      {name: "Tanning Lotion Smell", value: "Sort of like Sardine Oil", measurement_event_name: "Sort of like Sardine Oil", tank_name: "CB Husband Tanning Salon"}
+      {name: "Flavor", value: "Salty", measurement_event_name: "Michael Drinks the Water", tank_name: "Support Rack 3"},
+      {name: "Flavor", value: "WAY too salty", measurement_event_name: "Michael Drinks the Water", tank_name: "AB-17"},
+      {name: "Flavor", value: "Good", measurement_event_name: "Michael Drinks the Water", tank_name: nil},
+      {name: "Flavor", value: "Good", measurement_event_name: "Michael Drinks the Correct Water", tank_name: "The Water Bottle at My Desk"},
+      {name: "Flavor", value: "Excellent", measurement_event_name: "Michael Drinks the Correct Water", tank_name: "Office Water Cooler"},
+      {name: "Tanning Lotion Smell", value: "Sort of like Sardine Oil", measurement_event_name: "Michael last known test", tank_name: "CB Husband Tanning Salon"}
     ]
   }
 
@@ -45,8 +45,8 @@ describe "upload TaggedAnimalAssessment category", type: :feature do
         measurements << {
           name: measurement.name,
           value: measurement.value,
-          measurement_event_name: measurement.value,
-          tank_name: measurement.tank.name
+          measurement_event_name: measurement&.measurement_event&.name,
+          tank_name: measurement&.tank&.name
         }
       end
       expect(measurements).to eq(measurements_comparison)

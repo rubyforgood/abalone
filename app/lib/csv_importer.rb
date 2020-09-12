@@ -44,7 +44,7 @@ class CsvImporter
         temporary_file,
         headers: true,
         header_converters: lambda {|header| CsvImporter.header_conversion(header).to_sym},
-        converters: lambda {|value| value ? value.strip : nil}
+        converters: lambda {|value| value&.strip}
         ).each do |csv_row|
 
         csv_row[:processed_file_id] = processed_file_id
