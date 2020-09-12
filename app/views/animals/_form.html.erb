@@ -1,0 +1,49 @@
+<%= form_with(model: animal, local: true) do |form| %>
+  <% if animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% animal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :collection_year, class: 'label' %>
+    <%= form.text_field :collection_year, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date_time_collected, class: 'label' %>
+    <%= form.text_field :date_time_collected, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :collection_year, class: 'label' %>
+    <%= form.text_field :collection_year, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pii_tag, class: 'label' %>
+    <%= form.text_field :pii_tag, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tag_id, class: 'label' %>
+    <%= form.text_field :tag_id, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sex, class: 'label' %>
+    <%= form.text_field :sex, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.submit('Submit', class: 'button-primary') %>
+    </div>
+  </div>
+<% end %>

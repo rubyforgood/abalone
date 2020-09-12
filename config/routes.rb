@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :facilities
+  resources :animals
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   post '/file_uploads', to: 'file_uploads#upload'
