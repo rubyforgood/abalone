@@ -13,6 +13,10 @@ class CsvImporter
 
   class InvalidCategoryError < StandardError; end
 
+  def self.header_conversion(header)
+    header&.strip&.downcase&.gsub(' ','_').gsub(/[^a-z0-9_]/, '').gsub(/[_]+/, '_').gsub(/^[_]+/, '')
+  end
+
   def initialize(temporary_file, category_name, processed_file_id)
     @temporary_file = temporary_file
     @processed_file_id = processed_file_id
@@ -39,7 +43,7 @@ class CsvImporter
       CSV.parse(
         temporary_file,
         headers: true,
-        header_converters: :symbol,
+        header_converters: lambda {|header| CsvImporter.header_conversion(header).to_sym},
         converters: lambda {|value| value ? value.strip : nil}
         ).each do |csv_row|
 

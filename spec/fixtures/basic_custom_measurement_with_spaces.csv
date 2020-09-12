@@ -1,4 +1,4 @@
-measurement_event,entity,name,measurement,value,
+    measurement_event     ,   entity,name   , measurement,value ,
 Michael Drinks the Water  ,tank   ,        Support Rack 3,Flavor,Salty,
   Michael Drinks the Water,  tank,AB-17         ,Flavor,WAY too salty,
   Michael Drinks the Water  ,  tank  ,         Flavor        ,Good   ,
