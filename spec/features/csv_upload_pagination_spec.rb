@@ -14,7 +14,7 @@ describe "pagination for file uploads page", type: :feature do
 
     it "should display page numbers" do
       Pagy::VARS[:items] = 3
-      files = FactoryBot.create_list(:processed_file, 5)
+      FactoryBot.create_list(:processed_file, 5)
       sign_in user
       visit file_uploads_path
       expect(page).to have_link("2")
