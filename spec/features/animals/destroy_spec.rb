@@ -9,7 +9,6 @@ describe "When I visit the animal Index page" do
 
   it "Then I click the delete button, animal should be deleted" do
     animal1 = FactoryBot.create(:animal, collection_year: 2, tag_id: 2, pii_tag: 1234)
-    animal2 = FactoryBot.create(:animal, collection_year: 1, tag_id: 1, pii_tag: 1)
     animal_count = Animal.count
 
     visit animals_path
@@ -17,9 +16,9 @@ describe "When I visit the animal Index page" do
     link = find("a[data-method='delete'][href='#{animal_path(animal1.id)}']")
 
     within('tbody') do
-      expect(page).to have_xpath('.//tr', :count => animal_count)
+      expect(page).to have_xpath('.//tr', count: animal_count)
       link.click
-      expect(page).to have_xpath('.//tr', :count => (animal_count - 1))
+      expect(page).to have_xpath('.//tr', count: (animal_count - 1))
     end
   end
 end
