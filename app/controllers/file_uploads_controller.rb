@@ -12,7 +12,7 @@ class FileUploadsController < ApplicationController
   end.freeze
 
   def index
-    @processed_files = ProcessedFile.all.order(updated_at: :desc)
+    @pagy, @processed_files = pagy(ProcessedFile.all.order(updated_at: :desc))
   end
 
   def new
