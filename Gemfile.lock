@@ -161,6 +161,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pagy (3.8.3)
     parallel (1.19.2)
     parser (2.7.1.4)
       ast (~> 2.4.1)
@@ -319,6 +320,7 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.3)
   newrelic_rpm
+  pagy (~> 3.5)
   pg (>= 0.18, < 2.0)
   pry
   pry-byebug
