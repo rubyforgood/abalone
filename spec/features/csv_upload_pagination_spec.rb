@@ -3,12 +3,21 @@ require 'rails_helper'
 describe "pagination for file uploads page", type: :feature do
   let(:user) { create(:user) }
 
-  context "When I visit Files List containing more than the default amount of items" do
+  context "when viewing the list of file uploads" do
     it "should paginate the list" do
-      files = FactoryBot.create_list(:processed_file, 30)
+      Pagy::VARS[:items] = 3
+      files = FactoryBot.create_list(:processed_file, 5)
       sign_in user
       visit file_uploads_path
-      expect(page).to have_content(files.first.filename, count: 20)
+      expect(page).to have_content(files.first.filename, count: 3)
+    end
+
+    it "should display page numbers" do
+      Pagy::VARS[:items] = 3
+      files = FactoryBot.create_list(:processed_file, 5)
+      sign_in user
+      visit file_uploads_path
+      expect(page).to have_link('some link')
     end
   end
 end
