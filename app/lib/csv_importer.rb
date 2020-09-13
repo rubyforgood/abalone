@@ -14,7 +14,7 @@ class CsvImporter
   class InvalidCategoryError < StandardError; end
 
   def self.header_conversion(header)
-    header&.strip&.downcase&.gsub(' ','_').gsub(/[^a-z0-9_]/, '').gsub(/[_]+/, '_').gsub(/^[_]+/, '')
+    header&.strip&.downcase&.gsub(' ', '_')&.gsub(/[^a-z0-9_]/, '')&.gsub(/[_]+/, '_')&.gsub(/^[_]+/, '')
   end
 
   def initialize(temporary_file, category_name, processed_file_id)
@@ -43,10 +43,9 @@ class CsvImporter
       CSV.parse(
         temporary_file,
         headers: true,
-        header_converters: lambda {|header| CsvImporter.header_conversion(header).to_sym},
-        converters: lambda {|value| value&.strip}
-        ).each do |csv_row|
-
+        header_converters: ->(header) { CsvImporter.header_conversion(header).to_sym },
+        converters: ->(value) { value&.strip }
+      ).each do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
         record = model.create_from_csv_data(csv_row.to_h)
