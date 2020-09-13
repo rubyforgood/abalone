@@ -1,0 +1,9 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">New Animal</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', animal: @animal %>
+    </div>
+    <%= link_to '<< Back', animals_path, class: "button-outline-primary" %>
+  </div>
+</section>

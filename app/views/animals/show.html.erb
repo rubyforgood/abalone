@@ -1,0 +1,44 @@
+<section class="section facilities__show">
+  <div class="container facilities__show__container">
+    <p id="notice"><%= notice %></p>
+    <div class="facilities__show__container__header">
+      <h1 class="title">Animal</h1>
+    </div>
+    <div class="facilities__show__container__body mb-5">
+      <p>
+        <strong>Collection Year:</strong>
+        <%= @animal.collection_year %>
+      </p>
+
+      <p>
+        <strong>Date Collected:</strong>
+        <%= @animal.date_time_collected %>
+      </p>
+
+      <p>
+        <strong>Collection Position:</strong>
+        <%= @animal.collection_position %>
+      </p>
+
+      <p>
+        <strong>PII Tag:</strong>
+        <%= @animal.pii_tag %>
+      </p>
+
+      <p>
+        <strong>Tag ID:</strong>
+        <%= @animal.tag_id %>
+      </p>
+
+      <p>
+        <strong>Sex:</strong>
+        <%= @animal.sex %>
+      </p>
+
+    </div>
+
+    <%= link_to '<< BACK', animals_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_animal_path(@animal), class: "button-outline-primary mt-4" %>
+
+  </div>
+</section>
