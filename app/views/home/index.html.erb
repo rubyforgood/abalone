@@ -1,6 +1,13 @@
-<section class="hero is-large has-bg-img">
+<section class="hero is-large">
   <div class="hero-body">
     <div class="container">
+      <% unless current_user.nil? %>
+        <% if "White Abalone" == current_user&.organization&.name %>
+          <%= image_tag "white-abalone.png" %>
+        <% elsif "Pinto Abalone" == current_user&.organization&.name %>
+          <%= image_tag "pinto-abalone.jpg" %>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </section>

@@ -3,3 +3,7 @@
   background-repeat: no-repeat;
   background-position: center center;
 }
+
+.hero.is-large .hero-body {
+  padding: 0px;
+}
