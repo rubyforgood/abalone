@@ -6,7 +6,7 @@ describe "remove leading and trailing spaces from csv headers and values", type:
   let(:file_without_spaces) { "#{Rails.root}/spec/fixtures/basic_custom_measurement.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
   let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
-  let(:measurements_comparison) { 
+  let(:measurements_comparison) do
     [
       {name: "Flavor", value: "Salty", measurement_event_name: "Michael Drinks the Water", tank_name: "Support Rack 3"},
       {name: "Flavor", value: "WAY too salty", measurement_event_name: "Michael Drinks the Water", tank_name: "AB-17"},
@@ -15,7 +15,7 @@ describe "remove leading and trailing spaces from csv headers and values", type:
       {name: "Flavor", value: "Excellent", measurement_event_name: "Michael Drinks the Correct Water", tank_name: "Office Water Cooler"},
       {name: "Tanning Lotion Smell", value: "Sort of like Sardine Oil", measurement_event_name: "Michael last known test", tank_name: "CB Husband Tanning Salon"}
     ]
-  }
+  end
 
   before do
     sign_in user
@@ -36,7 +36,7 @@ describe "remove leading and trailing spaces from csv headers and values", type:
           {
             "row_count" => 6,
             "rows_imported" => 6,
-            "shl_case_numbers"=>{}
+            "shl_case_numbers" => {}
           }
         )
       end
@@ -53,5 +53,4 @@ describe "remove leading and trailing spaces from csv headers and values", type:
       expect(page).to have_content expected_success_message
     end
   end
-
 end
