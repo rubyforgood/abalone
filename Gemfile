@@ -31,6 +31,7 @@ gem 'jquery-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'newrelic_rpm'
+gem 'webpacker', '~> 5.x'
 
 # Pagination helper
 gem 'pagy', '~> 3.5'

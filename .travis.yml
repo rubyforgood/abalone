@@ -3,7 +3,9 @@ branches:
     - master
 sudo: false
 language: ruby
-before_install: gem install bundler
+before_install:
+  - gem install bundler
+  - nvm install --lts
 services:
   - postgresql
 # documentation for why we use these before_script commands for setting up postgres:
@@ -12,6 +14,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.yml.travis config/database.yml
 script:
+  - yarn install
   - bundle exec rspec
   - bundle exec rubocop
 # deploy:

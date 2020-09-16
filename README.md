@@ -14,16 +14,21 @@ This application is built on following and you must have these installed before 
 * Ruby (2.6.6)
 * Rails (5.2)
 * PostgreSQL (tested on 9.x)
+* Yarn
 
 ### Setup
 After *forking* this repo and cloning your own copy onto your local machine, execute the following commands in your CLI:
 ```
 gem install bundler
 bundle install
+yarn install
+bin/webpack
 rake db:create
 rake db:migrate
 rake db:seed
 ```
+
+Webpack dependencies can be rebuilt on command with `bin/webpack`. Alternatively you can run `bin/webpack-dev-server` in another terminal window. This will effectively run `bin/webpack` for you whenever files change.
 
 Then, run `bundle exec rails s` and browse to http://localhost:3000/.
 
