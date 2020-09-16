@@ -50,7 +50,7 @@ shared_examples_for 'validate values for field' do |field_name|
   it 'cannot be saved with invalid values' do
     invalid_values.each do |value|
       described_class.new(valid_attributes).tap do |instance|
-        instance.update_attributes(field_name => value)
+        instance.update(field_name => value)
 
         begin
           expect { instance.save! }.to raise_error ActiveRecord::RecordInvalid
