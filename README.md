@@ -1,4 +1,7 @@
 # Abalone Analytics
+
+[![Build Status](https://travis-ci.org/rubyforgood/abalone.svg?branch=master)](https://travis-ci.org/rubyforgood/abalone)
+
 The Abalone project is a data tracking and analytics system aimed at storing and measuring data for population trends, mortality rates, and breeding programs. Designed as a multi-tenant application, Abalone will initially serve two stakeholders, the [Bodega Marine Laboratory](https://marinescience.ucdavis.edu/bml/about) at UC Davis and the [Puget Sound Restoration Fund](https://restorationfund.org/) in Washington State.  
 
 The Bodega Marine Laboratory's White Abalone captive breeding program is working to prevent the extinction of the [White Abalone](https://www.fisheries.noaa.gov/species/white-abalone) (Haliotis sorenseni), an endangered marine snail. White abalone are one of seven species found in California and are culturally significant to the native people of the area. White abalone were perilously overfished throughout the 20th century, resulting in a 99 percent population decrease by the end of the 1970s. This group is working to reverse their decline and have already seen some great success, they currently have more abalone in the lab than exist in the wild! 
