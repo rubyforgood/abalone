@@ -19,7 +19,12 @@ class Measurement < ApplicationRecord
     # remove relational (non-attribute) data from hash to be handled separately
     measurement_event_name = attrs.delete(:measurement_event)
     tank = Tank.find_or_create_by!(name: attrs.delete(:tank_name)) if attrs[:tank_name]
-    animal = Animal.find_or_create_by!(pii_tag: attrs.delete(:animal_pii_tag)) if attrs[:animal_pii_tag]
+    if attrs[:animal_pii_tag]
+      animal = Animal.find_or_create_by!(
+        pii_tag: attrs.delete(:animal_pii_tag),
+        organization_id: attrs.delete(:organization_id)
+      )
+    end
     family = Family.find_by!(name: attrs.delete(:family_name)) if attrs[:family_name]
 
     measurement_event = MeasurementEvent.find_or_create_by!(name: measurement_event_name)

@@ -2,7 +2,7 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
 
   def index
-    @animals = Animal.all
+    @animals = Animal.for_organization(current_user.organization)
   end
 
   def new
@@ -54,6 +54,13 @@ class AnimalsController < ApplicationController
   end
 
   def animal_params
-    params.require(:animal).permit(:collection_year, :date_time_collected, :collection_position, :pii_tag, :tag_id, :sex)
+    params.require(:animal).permit(
+      :collection_year,
+      :date_time_collected,
+      :collection_position,
+      :pii_tag,
+      :tag_id,
+      :sex
+    ).merge(organization: current_organization)
   end
 end

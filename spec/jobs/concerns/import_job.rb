@@ -5,6 +5,7 @@ shared_examples_for "import job" do
   let(:sample_csv_text) { File.read(local_sample_data_filepath, encoding: 'bom|utf-8') }
   let(:temporary_file) { create(:temporary_file, contents: sample_csv_text) }
   let(:perform_job) { described_class.perform_now(temporary_file, filename) }
+  let(:organization) { create(:organization) }
 
   before do
     FactoryBot.create(:family, name: "Adams Family") if described_class.is_a? MeasurementJob
@@ -36,7 +37,7 @@ shared_examples_for "import job" do
     instance = described_class.new
     record_count_before = instance.category.constantize.count
 
-    expect { instance.perform(temporary_file, filename) }.to change { instance.category.constantize.count }
+    expect { instance.perform(temporary_file, filename, organization) }.to change { instance.category.constantize.count }
 
     record_count_after = instance.category.constantize.count
     expect(
