@@ -6,7 +6,7 @@ class TanksController < ApplicationController
   end
 
   def show; end
-  
+
   def new
     @tank = Tank.new
   end
