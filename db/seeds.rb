@@ -42,7 +42,10 @@ white_abalone_facilities= { "Aquarium of the Pacific" => "AOP",
               "Puget Sound Restoration Fund" => "PSRF",
             }
 
-white_abalone_facilities.each{ |f_name, f_code|  Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)  }
+white_abalone_facilities.each do |f_name, f_code|
+  facility = Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)
+  Tank.find_or_create_by(name: "Tank", facility: facility)
+end
 
 Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization_id: pinto_abalone.id)
 # import all sample_data_files (uncomment when importers are added for all CSV categories)
