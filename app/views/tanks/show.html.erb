@@ -1,6 +1,5 @@
 <section class="section facilities__show">
   <div class="container facilities__show__container">
-    <p id="notice"><%= notice %></p>
     <div class="facilities__show__container__header">
       <h1 class="title">Tank</h1>
     </div>
@@ -12,7 +11,7 @@
 
       <p>
         <strong>Facility:</strong>
-        <%= @tank.facility.name %>
+        <%= @tank.facility&.name %>
       </p>
 
     </div>

@@ -16,6 +16,8 @@ class Facility < ApplicationRecord
   belongs_to :organization
   after_commit { Rails.cache.delete('facility_codes') }
 
+  scope :for_organization, -> (organization_id) { where organization_id: organization_id }
+
   def self.valid_codes
     Rails.cache.fetch('facility_codes') do
       Facility.all.map { |facility| facility.code.upcase }
