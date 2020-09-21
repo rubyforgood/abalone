@@ -7,8 +7,8 @@ class TanksController < ApplicationController
 
   def show; end
 
-  # DELETE /families/1
-  # DELETE /families/1.json
+  # DELETE /tanks/1
+  # DELETE /tanks/1.json
   def destroy
     @tank.destroy
     respond_to do |format|
