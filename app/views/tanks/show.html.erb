@@ -1,0 +1,20 @@
+<section class="section facilities__show">
+  <div class="container facilities__show__container">
+    <p id="notice"><%= notice %></p>
+    <div class="facilities__show__container__header">
+      <h1 class="title">Tank</h1>
+    </div>
+    <div class="facilities__show__container__body mb-5">
+      <p>
+        <strong>Name:</strong>
+        <%= @tank.name %>
+      </p>
+
+      <p>
+        <strong>Facility:</strong>
+        <%= @tank.facility.name %>
+      </p>
+
+    </div>
+  </div>
+</section>
