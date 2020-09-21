@@ -12,9 +12,9 @@ describe "When I visit the tank index page" do
 
     visit tanks_path
 
-    tanks.each do |tank|  
+    tanks.each do |tank|
       expect(page).to have_content(tank.name)
-      expect(page).to have_content(tank.facility_name)  
+      expect(page).to have_content(tank.facility_name)
     end
   end
 end
