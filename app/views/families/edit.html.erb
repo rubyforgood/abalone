@@ -1,0 +1,10 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Editing Family</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', family: @family %>
+    </div>
+    <%= link_to '<< Back', families_path, class: "button-outline-primary" %>
+    <%= link_to 'Show', @family,  class: "button-outline-primary" %>
+  </div>
+</section>
