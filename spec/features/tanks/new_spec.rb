@@ -16,4 +16,15 @@ describe "When I visit the tank New page" do
     expect(page).to have_content("Name")
     expect(page).to have_select("tank_facility_id", with_options: [facility.name])
   end
+
+  it "I can create a new tank" do
+    visit new_tank_path
+
+    select(facility.name, from: 'Facility')
+    fill_in('Name', with: "Frank's Tank")
+    click_button('Submit')
+
+    expect(page).to have_content("Frank's Tank")
+    expect(page).to have_content(facility.name)
+  end
 end
