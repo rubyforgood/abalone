@@ -7,6 +7,8 @@ class Tank < ApplicationRecord
 
   has_one :family, required: false
 
+  delegate :name, to: :facility, prefix: true
+  
   def empty?
     family.blank?
   end
