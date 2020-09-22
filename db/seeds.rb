@@ -71,7 +71,7 @@ end
 # Tanks can also have Measurements (number of animals, temperature of tank, etc)
 male = Animal.create!(sex: 'male', organization_id: white_abalone.id)
 female = Animal.create!(sex: 'female', organization_id: pinto_abalone.id)
-family = Family.create!(male: male, female: female)
+family = Family.create!(male: male, female: female, organization: white_abalone)
 tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17')
 Operation.create!(tank: tank, animals_added: 800, family: family, operation_date: 7.days.ago, action: :add_family)
 measurement_event = MeasurementEvent.create!(name: "My first measurement", tank: tank)

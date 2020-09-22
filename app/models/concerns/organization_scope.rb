@@ -4,6 +4,6 @@ module OrganizationScope
   included do
     belongs_to :organization
 
-    scope :for_organization, ->(organization_id) { where(organization_id: organization_id) }
+    scope :for_organization, ->(organization) { where(organization: organization) }
   end
 end

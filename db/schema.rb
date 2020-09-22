@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_21_193217) do
+ActiveRecord::Schema.define(version: 2020_09_21_205459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,8 +71,10 @@ ActiveRecord::Schema.define(version: 2020_09_21_193217) do
     t.datetime "updated_at", null: false
     t.bigint "tank_id"
     t.string "name"
+    t.bigint "organization_id"
     t.index ["female_id"], name: "index_families_on_female_id"
     t.index ["male_id"], name: "index_families_on_male_id"
+    t.index ["organization_id"], name: "index_families_on_organization_id"
     t.index ["tank_id"], name: "index_families_on_tank_id"
   end
 
@@ -301,6 +303,7 @@ ActiveRecord::Schema.define(version: 2020_09_21_193217) do
 
   add_foreign_key "animals", "organizations"
   add_foreign_key "consolidation_reports", "families"
+  add_foreign_key "families", "organizations"
   add_foreign_key "measurement_events", "tanks"
   add_foreign_key "measurements", "animals"
   add_foreign_key "measurements", "families"
