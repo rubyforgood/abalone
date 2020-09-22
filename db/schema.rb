@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_06_162226) do
+ActiveRecord::Schema.define(version: 2020_09_22_172429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,19 +192,6 @@ ActiveRecord::Schema.define(version: 2020_09_06_162226) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "temporary_file_id"
-  end
-
-  create_table "spawning_successes", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "tag"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.date "date_attempted"
-    t.string "spawning_success"
-    t.decimal "nbr_of_eggs_spawned"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
   end
 
   create_table "tagged_animal_assessments", force: :cascade do |t|

@@ -5,8 +5,8 @@ class FileUploadsController < ApplicationController
   # The second value for each category entry will be used to determine the
   # job class that processes the data.
   #
-  # Ex: Selecting "Spawning Success" in the form will post "SpawningSuccess"
-  # and process the data with a SpawningSuccessJob.
+  # Ex: Selecting "Measurement" in the form will post "Measurement"
+  # and process the data with a MeasurementJob.
   FILE_UPLOAD_CATEGORIES = CsvImporter::CATEGORIES.map do |category|
     [category, category.delete(' ')]
   end.freeze
