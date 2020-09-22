@@ -12,11 +12,11 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
-  has_many :tanks
-  belongs_to :organization
-  after_commit { Rails.cache.delete('facility_codes') }
+  include OrganizationSpec
 
-  scope :for_organization, ->(organization) { where organization: organization }
+  has_many :tanks
+
+  after_commit { Rails.cache.delete('facility_codes') }
 
   def self.valid_codes
     Rails.cache.fetch('facility_codes') do
