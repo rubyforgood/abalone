@@ -3,7 +3,6 @@ class CsvImporter
 
   CATEGORIES = [
     'Tagged Animal Assessment',
-    'Untagged Animal Assessment',
     'Wild Collection',
     'Population Estimate',
     'Measurement'
