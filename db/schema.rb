@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_172429) do
+ActiveRecord::Schema.define(version: 2020_09_22_214542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_enum :animal_sex, [
+    "male",
+    "female",
+  ], force: :cascade
 
   create_table "animals", force: :cascade do |t|
     t.integer "collection_year"
@@ -21,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_172429) do
     t.string "collection_position"
     t.integer "pii_tag"
     t.integer "tag_id"
-    t.string "sex"
+    t.enum "sex", enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
