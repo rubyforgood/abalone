@@ -1,0 +1,29 @@
+<%= form_with(model: tank, local: true) do |form| %>
+  <% if tank.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tank.errors.count, "error") %> prohibited this tank from being saved:</h2>
+
+      <ul>
+      <% tank.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :facility_id, class: 'label' %>
+    <%= form.collection_select :facility_id, Facility.for_organization(current_user.organization), :id, :name, include_blank: true, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.submit('Submit', class: 'button-primary') %>
+    </div>
+  </div>
+<% end %>
