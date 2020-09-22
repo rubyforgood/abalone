@@ -241,24 +241,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_195820) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "untagged_animal_assessments", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "measurement_date"
-    t.string "cohort"
-    t.date "spawning_date"
-    t.decimal "growout_rack"
-    t.string "growout_column"
-    t.decimal "growout_trough"
-    t.decimal "length"
-    t.decimal "mass"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
