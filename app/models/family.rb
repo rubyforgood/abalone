@@ -1,7 +1,8 @@
 class Family < ApplicationRecord
+  include OrganizationScope
+
   belongs_to :male, class_name: 'Animal'
   belongs_to :female, class_name: 'Animal'
-  belongs_to :organization
 
   has_many :measurements
 
