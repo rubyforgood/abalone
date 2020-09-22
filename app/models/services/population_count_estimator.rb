@@ -10,7 +10,7 @@ module Services
     end
 
     def run
-      population_count - number_of_mortalities
+      population_count
     end
 
     private
@@ -31,12 +31,6 @@ module Services
                           .where('sample_date <= ?', date)
                           .order(sample_date: :desc)
                           .first
-    end
-
-    def number_of_mortalities
-      MortalityTracking.where(shl_case_number: shl_case_number)
-                       .where('mortality_date >= ?', population_estimate_date)
-                       .sum(&:number_morts)
     end
   end
 end
