@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of :password }
 
   it "should set a default role of 'user' when created" do
-    expect(user.role).to eq :user
-    expect(user.role).to_not eq :admin
+    expect(user.role).to eq 'user'
+    expect(user.role).to_not eq 'admin'
   end
 end
