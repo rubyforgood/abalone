@@ -13,6 +13,4 @@ class User < ApplicationRecord
          :rememberable, :validatable
 
   belongs_to :organization
-
-  delegate :name, to: :organization, prefix: true, allow_nil: true
 end

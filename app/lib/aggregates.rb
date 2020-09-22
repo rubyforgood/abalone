@@ -9,16 +9,6 @@ module Aggregates
                         .map(&:to_i).reduce(:+)
     end
 
-    # spawning history of the broodstock (i.e., when we attempted to spawn them, were they successful in releasing gametes)
-    # => {date => n, date1 => n1, date2 => n2... }
-    def self.spawning_history(spawning_date, successful = %w[y Y])
-      query = SpawningSuccess.not_raw
-                             .where(spawning_date: spawning_date, spawning_success: successful)
-                             .group_by(&:date_attempted)
-
-      query.each { |k, v| query[k] = v.map(&:spawning_success).count }
-    end
-
     # total egg, larval, or juvenile production by year (esp. how many year-old animals are produced annually)
     def self.offspring_production(_life_stage, _year)
       # TODO
