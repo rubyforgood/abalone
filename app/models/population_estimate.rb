@@ -44,7 +44,7 @@ class PopulationEstimate < ApplicationRecord
     attrs[:sample_date] = Date.strptime(attrs[:sample_date], '%m/%d/%y') rescue nil
     attrs[:spawning_date] = Date.strptime(attrs[:spawning_date], '%m/%d/%y') rescue nil
 
-    new(attrs)
+    new(attrs.except(:organization_id))
   end
 
   def facility_is_valid

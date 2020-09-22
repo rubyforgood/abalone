@@ -35,7 +35,7 @@ class SpawningSuccess < ApplicationRecord
     attrs[:nbr_of_eggs_spawned] = attrs.delete(:number_of_eggs_spawned_if_female)
     attrs[:shl_case_number]     = attrs.delete(:shl_number)
 
-    new(attrs)
+    new(attrs.except(:organization_id))
   end
 
   # Note: Case is meaningful for spawning_success. n, Y and y mean different things.

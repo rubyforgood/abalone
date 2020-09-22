@@ -37,7 +37,8 @@ class FileUploadsController < ApplicationController
     input_files.each do |input_file|
       @file_uploads << FileUploader.new(
         category: params[:category],
-        input_file: input_file
+        input_file: input_file,
+        organization: current_organization
       ).process
     end
   rescue NoMethodError

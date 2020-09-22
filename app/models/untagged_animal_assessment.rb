@@ -54,7 +54,7 @@ class UntaggedAnimalAssessment < ApplicationRecord
   validates :length, numericality: true
 
   def self.create_from_csv_data(attrs)
-    new(attrs)
+    new(attrs.except(:organization_id))
   end
 
   # Cohort is translated to shl_case_number to compute stats.

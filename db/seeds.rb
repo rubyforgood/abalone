@@ -44,7 +44,7 @@ white_abalone_facilities= { "Aquarium of the Pacific" => "AOP",
 
 white_abalone_facilities.each do |f_name, f_code|
   facility = Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)
-  Tank.find_or_create_by(name: "Tank", facility: facility)
+  Tank.find_or_create_by(name: "Tank", facility: facility, organization: white_abalone)
 end
 
 Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization_id: pinto_abalone.id)
@@ -71,8 +71,8 @@ end
 # Tanks can also have Measurements (number of animals, temperature of tank, etc)
 male = Animal.create!(sex: 'male', organization_id: white_abalone.id)
 female = Animal.create!(sex: 'female', organization_id: pinto_abalone.id)
-family = Family.create!(male: male, female: female, organization: white_abalone)
-tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17')
+family = Family.create!(male: male, female: female, organization_id: white_abalone.id)
+tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17', organization_id: white_abalone.id)
 Operation.create!(tank: tank, animals_added: 800, family: family, operation_date: 7.days.ago, action: :add_family)
 measurement_event = MeasurementEvent.create!(name: "My first measurement", tank: tank)
 Measurement.create!(name: 'count', value_type: 'integer', value: '743', measurement_event: measurement_event, date: 3.days.ago)

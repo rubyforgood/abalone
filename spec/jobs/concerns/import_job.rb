@@ -4,8 +4,8 @@ shared_examples_for "import job" do
   let(:local_sample_data_filepath) { Rails.root.join("db", "sample_data_files", described_class.category.underscore, filename) }
   let(:sample_csv_text) { File.read(local_sample_data_filepath, encoding: 'bom|utf-8') }
   let(:temporary_file) { create(:temporary_file, contents: sample_csv_text) }
-  let(:perform_job) { described_class.perform_now(temporary_file, filename) }
   let(:organization) { create(:organization) }
+  let(:perform_job) { described_class.perform_now(temporary_file, filename, organization) }
 
   before do
     FactoryBot.create(:family, name: "Adams Family") if described_class.is_a? MeasurementJob

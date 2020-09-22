@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe CsvImporter do
-  let(:organization) { create(:organization) }
+  let!(:organization) { create(:organization) }
 
   describe "#process" do
     let(:processed_file) { create(:processed_file) }
@@ -53,7 +53,7 @@ RSpec.describe CsvImporter do
 
       it "attaches the proper info and relationships for measurements (existing tank)" do
         CsvImporter.new(file, category_name, processed_file.id, organization).call
-        tank = Tank.find_by!(name: "AB-17")
+        tank = Tank.where(name: "AB-17").last
         measurement = tank.measurements.find_by!(name: "Flavor")
         expect(measurement.value).to eq "WAY too salty"
         expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
