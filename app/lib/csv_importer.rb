@@ -1,9 +1,8 @@
 class CsvImporter
-  attr_reader :stats, :model, :temporary_file, :processed_file_id, :error_details
+  attr_reader :stats, :model, :temporary_file, :processed_file_id, :error_details, :organization
 
   CATEGORIES = [
     'Tagged Animal Assessment',
-    'Untagged Animal Assessment',
     'Wild Collection',
     'Population Estimate',
     'Mortality Tracking',
@@ -16,11 +15,12 @@ class CsvImporter
     header&.strip&.downcase&.gsub(' ', '_')&.gsub(/[^a-z0-9_]/, '')&.gsub(/[_]+/, '_')&.gsub(/^[_]+/, '')
   end
 
-  def initialize(temporary_file, category_name, processed_file_id)
+  def initialize(temporary_file, category_name, processed_file_id, organization = nil)
     @temporary_file = temporary_file
     @processed_file_id = processed_file_id
     @model = model_from_category(category_name)
     @stats = Hash.new(0)
+    @organization = organization
     @error_details = {}
     @stats[:shl_case_numbers] = Hash.new(0)
   end
@@ -47,7 +47,7 @@ class CsvImporter
       ).each do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
-        record = model.create_from_csv_data(csv_row.to_h)
+        record = model.create_from_csv_data(create_attributes(csv_row.to_h))
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
         if record.valid?
@@ -81,5 +81,11 @@ class CsvImporter
     else
       stats[:rows_not_imported] += 1
     end
+  end
+
+  def create_attributes(row_hash)
+    return row_hash unless organization
+
+    row_hash.merge(organization_id: organization.id)
   end
 end

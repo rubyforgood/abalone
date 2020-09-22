@@ -8,7 +8,7 @@ describe "When I visit the tank index page" do
   end
 
   it "Then I see a list of tanks" do
-    tanks = FactoryBot.create_list(:tank, 3)
+    tanks = FactoryBot.create_list(:tank, 3, organization: user.organization)
 
     visit tanks_path
 

@@ -57,7 +57,7 @@ class MortalityTracking < ApplicationRecord
     attrs[:spawning_date] = DateTime.strptime(attrs.delete(:spawning_date), '%m/%d/%y')
     attrs[:mortality_date] = DateTime.strptime(attrs.delete(:mortality_date), '%m/%d/%y')
 
-    new(attrs)
+    new(attrs.except(:organization_id))
   end
 
   validates_presence_of :shl_case_number

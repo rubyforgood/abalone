@@ -8,8 +8,8 @@ describe "When I visit the animal Index page" do
   end
 
   it "Then I see a list of all the animals" do
-    animal = FactoryBot.create(:animal, collection_year: 2, tag_id: 2)
-    animal_count = Animal.count
+    animal = FactoryBot.create(:animal, collection_year: 2, tag_id: 2, organization: user.organization)
+    animal_count = Animal.for_organization(user.organization).count
 
     visit animals_path
 

@@ -6,5 +6,6 @@ FactoryBot.define do
     pii_tag { 1 }
     tag_id { 1 }
     sex { Animal.sexes.keys.sample }
+    organization
   end
 end

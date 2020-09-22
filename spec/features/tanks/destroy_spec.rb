@@ -8,8 +8,8 @@ describe "When I visit the tank Index page" do
   end
 
   it "Then I click the delete button, tank should be deleted" do
-    tank1 = create(:tank)
-    tank_count = Tank.count
+    tank1 = create(:tank, organization: user.organization)
+    tank_count = Tank.for_organization(user.organization).count
 
     visit tanks_path
 

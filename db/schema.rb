@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
     t.enum "sex", enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_animals_on_organization_id"
   end
 
   create_table "consolidation_reports", force: :cascade do |t|
@@ -74,8 +76,10 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
     t.datetime "updated_at", null: false
     t.bigint "tank_id"
     t.string "name"
+    t.bigint "organization_id"
     t.index ["female_id"], name: "index_families_on_female_id"
     t.index ["male_id"], name: "index_families_on_male_id"
+    t.index ["organization_id"], name: "index_families_on_organization_id"
     t.index ["tank_id"], name: "index_families_on_tank_id"
   end
 
@@ -225,31 +229,15 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
     t.index ["facility_id"], name: "index_tanks_on_facility_id"
+    t.index ["organization_id"], name: "index_tanks_on_organization_id"
   end
 
   create_table "temporary_files", force: :cascade do |t|
     t.text "contents"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "untagged_animal_assessments", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "measurement_date"
-    t.string "cohort"
-    t.date "spawning_date"
-    t.decimal "growout_rack"
-    t.string "growout_column"
-    t.decimal "growout_trough"
-    t.decimal "length"
-    t.decimal "mass"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -290,7 +278,9 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
     t.integer "processed_file_id"
   end
 
+  add_foreign_key "animals", "organizations"
   add_foreign_key "consolidation_reports", "families"
+  add_foreign_key "families", "organizations"
   add_foreign_key "measurement_events", "tanks"
   add_foreign_key "measurements", "animals"
   add_foreign_key "measurements", "families"
@@ -300,4 +290,5 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
   add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
+  add_foreign_key "tanks", "organizations"
 end
