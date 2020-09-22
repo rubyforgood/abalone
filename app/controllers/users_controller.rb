@@ -1,5 +1,7 @@
-class UsersController < ApplicationControler
+class UsersController < ApplicationController
   before_action :admin?, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :set_user, only: [:show]
+  before_action :redirect_non_admin_users, only: [:show]
 
   def index; end
 
@@ -19,5 +21,13 @@ class UsersController < ApplicationControler
 
   def admin?
     current_user.admin?
+  end
+
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  def redirect_non_admin_users
+    redirect_to root_path unless current_user.admin?
   end
 end
