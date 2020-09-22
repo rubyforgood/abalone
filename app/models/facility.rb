@@ -12,7 +12,7 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
-  include OrganizationSpec
+  include OrganizationScope
 
   has_many :tanks
 
