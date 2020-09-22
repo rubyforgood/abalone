@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, path_prefix: 'app'
+  resources :users
   resources :facilities
   resources :families
   resources :animals

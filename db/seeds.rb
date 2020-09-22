@@ -12,19 +12,22 @@ pinto_abalone = Organization.create(name: "Pinto Abalone")
 User.create({ :email => "test@example.com",
               :password => "password",
               :password_confirmation => "password",
-              :organization => white_abalone }
+              :organization => white_abalone,
+              :role => :user }
               )
 
 User.create({ :email => "admin@whiteabalone.com",
               :password => "password",
               :password_confirmation => "password",
-              :organization_id => white_abalone.id }
+              :organization_id => white_abalone.id,
+              :role => :admin }
               )
 
 User.create({ :email => "admin@pintoabalone.com",
               :password => "password",
               :password_confirmation => "password",
-              :organization_id => pinto_abalone.id }
+              :organization_id => pinto_abalone.id,
+              :role => :admin }
               )
 
 white_abalone_facilities= { "Aquarium of the Pacific" => "AOP",
