@@ -1,17 +1,46 @@
-FROM ruby:2.6
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client npm
-RUN mkdir /myapp
-WORKDIR /myapp
-COPY Gemfile /myapp/Gemfile
-COPY Gemfile.lock /myapp/Gemfile.lock
-COPY package.json /myapp/package.json
-COPY yarn.lock /myapp/yarn.lock
-RUN npm install -g yarn
-RUN bundle install
-RUN yarn install
-COPY . /myapp
+FROM ruby:2.6.6-alpine AS builder
+
+LABEL maintainer="jeanine@littleforestconsulting.com"
+
+RUN apk update && apk upgrade && apk add --update --no-cache \
+  build-base \
+  curl-dev \
+  nodejs \
+  postgresql-dev \
+  tzdata \
+  git \
+  vim \
+  yarn && rm -rf /var/cache/apk/*
+
+ARG RAILS_ROOT=/usr/src/app/
+WORKDIR $RAILS_ROOT
+
+COPY package*.json yarn.lock Gemfile* $RAILS_ROOT
+RUN yarn install --check-files --frozen-lockfile &&\
+      bundle config --global frozen 1 && bundle install
+
+### BUILD STEP DONE ###
+
+FROM ruby:2.6.6-alpine
+
+ARG RAILS_ROOT=/usr/src/app/
+
+RUN apk update && apk upgrade && apk add --update --no-cache \
+  bash \
+  nodejs \
+  postgresql-client \
+  tzdata \
+  vim \
+  yarn && rm -rf /var/cache/apk/*
+
+WORKDIR $RAILS_ROOT
+
+COPY --from=builder $RAILS_ROOT $RAILS_ROOT
+COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
+
+COPY . .
 
 EXPOSE 3000
 
-# Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["bin/rails", "s", "-b", "0.0.0.0"]
