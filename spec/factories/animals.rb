@@ -5,6 +5,7 @@ FactoryBot.define do
     collection_position { "MyString" }
     pii_tag { 1 }
     tag_id { 1 }
+    organization
     sex { "MyString" }
   end
 end

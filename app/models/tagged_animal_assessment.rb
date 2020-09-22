@@ -59,7 +59,7 @@ class TaggedAnimalAssessment < ApplicationRecord
   validates_numericality_of :length, less_than: 100
 
   def self.create_from_csv_data(attrs)
-    new(attrs)
+    new(attrs.except(:organization_id))
   end
 
   DATE_ATTRIBUTES.each do |name|

@@ -8,8 +8,8 @@ describe "When I visit the animal Index page" do
   end
 
   it "Then I click the delete button, animal should be deleted" do
-    animal1 = FactoryBot.create(:animal, collection_year: 2, tag_id: 2, pii_tag: 1234)
-    animal_count = Animal.count
+    animal1 = FactoryBot.create(:animal, collection_year: 2, tag_id: 2, pii_tag: 1234, organization: user.organization)
+    animal_count = Animal.for_organization(user.organization).count
 
     visit animals_path
 

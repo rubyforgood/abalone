@@ -17,19 +17,29 @@ class Measurement < ApplicationRecord
   # delegate :tank, to: :measurement_event
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
-    measurement_event_name = attrs.delete(:measurement_event)
-    tank = Tank.find_or_create_by!(name: attrs.delete(:tank_name)) if attrs[:tank_name]
-    animal = Animal.find_or_create_by!(pii_tag: attrs.delete(:animal_pii_tag)) if attrs[:animal_pii_tag]
-    family = Family.find_by!(name: attrs.delete(:family_name)) if attrs[:family_name]
+    measurement_event_name = attrs.fetch(:measurement_event)
+    if attrs[:tank_name]
+      tank = Tank.find_or_create_by!(
+        name: attrs.fetch(:tank_name),
+        organization_id: attrs.fetch(:organization_id)
+      )
+    end
+    if attrs[:animal_pii_tag]
+      animal = Animal.find_or_create_by!(
+        pii_tag: attrs.fetch(:animal_pii_tag),
+        organization_id: attrs.fetch(:organization_id)
+      )
+    end
+    family = Family.find_by!(name: attrs.fetch(:family_name)) if attrs[:family_name]
 
     measurement_event = MeasurementEvent.find_or_create_by!(name: measurement_event_name)
 
     # create attributes for Measurement
     measurement_attrs = {}
     measurement_attrs[:measurement_event] = measurement_event
-    measurement_attrs[:value] = attrs.delete(:value)
-    measurement_attrs[:name] = attrs.delete(:measurement)
-    measurement_attrs[:processed_file_id] = attrs.delete(:processed_file_id)
+    measurement_attrs[:value] = attrs.fetch(:value)
+    measurement_attrs[:name] = attrs.fetch(:measurement)
+    measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs[:tank_id] = tank.id if tank
     measurement_attrs[:animal_id] = animal.id if animal
     measurement_attrs[:family_id] = family.id if family
@@ -39,8 +49,8 @@ class Measurement < ApplicationRecord
 
     ## TODO: allow attachment to any model, and attach measurement directly, not through the event
     ## this will require making a polymorphic "measurable"
-    # klass = attrs.delete(:entity).strip.classify.constantize # this only supports "tank" right now
-    # name = attrs.delete(:name)
+    # klass = attrs.fetch(:entity).strip.classify.constantize # this only supports "tank" right now
+    # name = attrs.fetch(:name)
     # model = klass.find_or_create_by!(name: name) # this will always be set to tank
     # model.measurements << measurement
   end

@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2020_09_22_182535) do
     t.string "sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_animals_on_organization_id"
   end
 
   create_table "consolidation_reports", force: :cascade do |t|
@@ -69,8 +71,10 @@ ActiveRecord::Schema.define(version: 2020_09_22_182535) do
     t.datetime "updated_at", null: false
     t.bigint "tank_id"
     t.string "name"
+    t.bigint "organization_id"
     t.index ["female_id"], name: "index_families_on_female_id"
     t.index ["male_id"], name: "index_families_on_male_id"
+    t.index ["organization_id"], name: "index_families_on_organization_id"
     t.index ["tank_id"], name: "index_families_on_tank_id"
   end
 
@@ -220,7 +224,9 @@ ActiveRecord::Schema.define(version: 2020_09_22_182535) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
     t.index ["facility_id"], name: "index_tanks_on_facility_id"
+    t.index ["organization_id"], name: "index_tanks_on_organization_id"
   end
 
   create_table "temporary_files", force: :cascade do |t|
@@ -267,7 +273,9 @@ ActiveRecord::Schema.define(version: 2020_09_22_182535) do
     t.integer "processed_file_id"
   end
 
+  add_foreign_key "animals", "organizations"
   add_foreign_key "consolidation_reports", "families"
+  add_foreign_key "families", "organizations"
   add_foreign_key "measurement_events", "tanks"
   add_foreign_key "measurements", "animals"
   add_foreign_key "measurements", "families"
@@ -277,4 +285,5 @@ ActiveRecord::Schema.define(version: 2020_09_22_182535) do
   add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
+  add_foreign_key "tanks", "organizations"
 end
