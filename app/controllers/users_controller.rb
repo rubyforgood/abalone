@@ -1,7 +1,9 @@
-class UsersController < ApplicationControler
+class UsersController < ApplicationController
   before_action :admin?, only: [:index, :show, :new, :create, :edit, :update, :destroy]
 
-  def index; end
+  def index
+    @users = current_user.organization.users
+  end
 
   def show; end
 
@@ -18,6 +20,6 @@ class UsersController < ApplicationControler
   private
 
   def admin?
-    current_user.admin?
+    redirect_to root_path, alert: "Not authorized" if !current_user.admin?
   end
 end
