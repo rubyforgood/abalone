@@ -1,5 +1,5 @@
 class TanksController < ApplicationController
-  before_action :set_tank, only: [:show, :destroy]
+  before_action :set_tank, only: [:show, :edit, :update, :destroy]
 
   def index
     @tanks = Tank.all
@@ -17,6 +17,16 @@ class TanksController < ApplicationController
       redirect_to tank_path(@tank), notice: 'Tank was successfully created.'
     else
       render :new
+    end
+  end
+
+  def edit; end
+
+  def update
+    if @tank.update(tank_params)
+      redirect_to tank_path(@tank), notice: 'Tank was successfully updated.'
+    else
+      render :edit
     end
   end
 
