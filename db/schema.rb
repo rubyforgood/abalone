@@ -157,19 +157,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pedigrees", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "cohort"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.string "mother"
-    t.string "father"
-    t.string "seperate_cross_within_cohort"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
   create_table "population_estimates", force: :cascade do |t|
     t.boolean "raw", default: true, null: false
     t.date "sample_date"
