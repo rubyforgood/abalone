@@ -105,26 +105,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_202022) do
     t.index ["tank_id"], name: "index_measurements_on_tank_id"
   end
 
-  create_table "mortality_trackings", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "mortality_date"
-    t.string "cohort"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.integer "shell_box"
-    t.string "shell_container"
-    t.string "animal_location"
-    t.integer "number_morts"
-    t.string "approximation"
-    t.string "processed_by_shl"
-    t.string "initials"
-    t.string "tags"
-    t.string "comments"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
   create_table "operation_batches", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
