@@ -81,6 +81,8 @@ class TaggedAnimalAssessment < ApplicationRecord
 
     # count = count of all animals from that spreadsheet
     sample = measurements.count.to_f
+
+    [grouped_measurements, sample]
   end
 
   def cleanse_data!
