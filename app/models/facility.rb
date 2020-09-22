@@ -16,7 +16,7 @@ class Facility < ApplicationRecord
   belongs_to :organization
   after_commit { Rails.cache.delete('facility_codes') }
 
-  scope :for_organization, ->(organization_id) { where organization_id: organization_id }
+  scope :for_organization, ->(organization) { where organization: organization }
 
   def self.valid_codes
     Rails.cache.fetch('facility_codes') do
