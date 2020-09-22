@@ -1,11 +1,34 @@
 class TanksController < ApplicationController
-  before_action :set_tank, only: [:show, :destroy]
+  before_action :set_tank, only: [:show, :edit, :update, :destroy]
 
   def index
     @tanks = Tank.all
   end
 
   def show; end
+
+  def new
+    @tank = Tank.new
+  end
+
+  def create
+    @tank = Tank.new(tank_params)
+    if @tank.save
+      redirect_to tank_path(@tank), notice: 'Tank was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  def edit; end
+
+  def update
+    if @tank.update(tank_params)
+      redirect_to tank_path(@tank), notice: 'Tank was successfully updated.'
+    else
+      render :edit
+    end
+  end
 
   # DELETE /tanks/1
   # DELETE /tanks/1.json
@@ -21,5 +44,9 @@ class TanksController < ApplicationController
 
   def set_tank
     @tank = Tank.find(params[:id])
+  end
+
+  def tank_params
+    params.require(:tank).permit(:facility_id, :name)
   end
 end
