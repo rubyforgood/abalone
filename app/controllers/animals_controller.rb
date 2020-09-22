@@ -2,7 +2,7 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
 
   def index
-    @animals = Animal.for_organization(current_user.organization)
+    @animals = Animal.for_organization(current_organization)
   end
 
   def new
@@ -61,6 +61,6 @@ class AnimalsController < ApplicationController
       :pii_tag,
       :tag_id,
       :sex
-    ).merge(organization: current_organization)
+    ).merge(organization_id: current_organization.id)
   end
 end
