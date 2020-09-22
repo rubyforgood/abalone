@@ -1,19 +1,16 @@
 FROM ruby:2.6.6-alpine AS builder
 
-LABEL maintainer="jeanine@littleforestconsulting.com"
+ARG RAILS_ROOT=/usr/src/app/
+WORKDIR $RAILS_ROOT
 
-RUN apk update && apk upgrade && apk add --update --no-cache \
+RUN apk add --update --no-cache  \
   build-base \
   curl-dev \
   nodejs \
   postgresql-dev \
   tzdata \
   git \
-  vim \
-  yarn && rm -rf /var/cache/apk/*
-
-ARG RAILS_ROOT=/usr/src/app/
-WORKDIR $RAILS_ROOT
+  yarn
 
 COPY package*.json yarn.lock Gemfile* $RAILS_ROOT
 RUN yarn install --check-files --frozen-lockfile &&\
@@ -24,23 +21,30 @@ RUN yarn install --check-files --frozen-lockfile &&\
 FROM ruby:2.6.6-alpine
 
 ARG RAILS_ROOT=/usr/src/app/
+WORKDIR $RAILS_ROOT
 
-RUN apk update && apk upgrade && apk add --update --no-cache \
-  bash \
+RUN set -eux; \
+	addgroup -S app; \
+	adduser -S -D -G app -H -h $RAILS_ROOT -s /bin/sh app; \
+	chown -R app:app $RAILS_ROOT
+
+RUN apk add --update --no-cache \
+  bash\
   nodejs \
   postgresql-client \
+  su-exec \
   tzdata \
-  vim \
-  yarn && rm -rf /var/cache/apk/*
-
-WORKDIR $RAILS_ROOT
+  yarn \
+  && rm -rf /var/cache/apk/*
 
 COPY --from=builder $RAILS_ROOT $RAILS_ROOT
 COPY --from=builder /usr/local/bundle/ /usr/local/bundle/
 
 COPY . .
 
+RUN chown -R app:app $RAILS_ROOT
+
 EXPOSE 3000
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["bin/rails", "s", "-b", "0.0.0.0"]
+CMD ["abalone"]
