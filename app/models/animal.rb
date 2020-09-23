@@ -10,7 +10,6 @@ class Animal < ApplicationRecord
     male: 'male',
     female: 'female'
   }
-  has_many :measurements
 
   def set_default_sex
     self.sex ||= :unknown
