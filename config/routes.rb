@@ -13,11 +13,7 @@ Rails.application.routes.draw do
 
   get '/file_uploads/errors/:id', to: 'file_uploads#show_processing_csv_errors', as: 'show_processing_csv_errors'
 
-  resources :reports, only: [:index] do
-    collection do
-      get '/lengths/:processed_file_id', action: 'lengths_for_measurement', controller: 'reports'
-    end
-  end
+  resources :reports, only: [:index]
 
   resources :operations
 
