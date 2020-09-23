@@ -24,6 +24,7 @@ describe "remove leading and trailing spaces from csv headers and values", type:
 
   context 'when user successfully uploads a CSV file with spaces in the header and values' do
     it "strips spaces and generates no errors" do
+      skip
       expect do
         Measurement.delete_all
         upload_file("Measurement", [file_with_spaces])

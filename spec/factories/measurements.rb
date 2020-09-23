@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :measurement do
-    name { "MyString" }
-    value_type { "MyString" }
     value { "" }
+    measurement_type
+    association :subject, factory: :tank
     measurement_event
-    organizations
+    organization
   end
 end

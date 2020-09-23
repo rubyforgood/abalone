@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_130852) do
+ActiveRecord::Schema.define(version: 2020_09_23_154527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,33 +68,37 @@ ActiveRecord::Schema.define(version: 2020_09_23_130852) do
 
   create_table "measurement_events", force: :cascade do |t|
     t.string "name"
-    t.bigint "tank_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_measurement_events_on_organization_id"
-    t.index ["tank_id"], name: "index_measurement_events_on_tank_id"
+  end
+
+  create_table "measurement_types", force: :cascade do |t|
+    t.string "name"
+    t.string "unit"
+    t.bigint "organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_measurement_types_on_organization_id"
   end
 
   create_table "measurements", force: :cascade do |t|
-    t.string "name"
-    t.string "value_type"
-    t.jsonb "value"
+    t.string "value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.bigint "measurement_event_id"
     t.bigint "processed_file_id"
-    t.bigint "animal_id"
-    t.bigint "family_id"
-    t.bigint "tank_id"
     t.bigint "organization_id"
-    t.index ["animal_id"], name: "index_measurements_on_animal_id"
-    t.index ["family_id"], name: "index_measurements_on_family_id"
+    t.string "subject_type", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "measurement_type_id"
     t.index ["measurement_event_id"], name: "index_measurements_on_measurement_event_id"
+    t.index ["measurement_type_id"], name: "index_measurements_on_measurement_type_id"
     t.index ["organization_id"], name: "index_measurements_on_organization_id"
     t.index ["processed_file_id"], name: "index_measurements_on_processed_file_id"
-    t.index ["tank_id"], name: "index_measurements_on_tank_id"
+    t.index ["subject_type", "subject_id"], name: "index_measurements_on_subject_type_and_subject_id"
   end
 
   create_table "operation_batches", force: :cascade do |t|
@@ -223,13 +227,9 @@ ActiveRecord::Schema.define(version: 2020_09_23_130852) do
   add_foreign_key "animals", "organizations"
   add_foreign_key "families", "organizations"
   add_foreign_key "measurement_events", "organizations"
-  add_foreign_key "measurement_events", "tanks"
-  add_foreign_key "measurements", "animals"
-  add_foreign_key "measurements", "families"
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
-  add_foreign_key "measurements", "tanks"
   add_foreign_key "operations", "organizations"
   add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
