@@ -15,9 +15,9 @@ describe "When I visit the users Index page" do
 
     link = find("a[data-method='delete'][href='#{user_path(user1.id)}']")
     within('tbody') do
-      expect {
+      expect do
         link.click
-      }.to change { page.all(:xpath, './/tr').count }.by(-1)
+      end.to change { page.all(:xpath, './/tr').count }.by(-1)
     end
   end
   
