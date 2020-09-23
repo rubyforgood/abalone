@@ -15,13 +15,19 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_enum :animal_sex, [
+    "unknown",
+    "male",
+    "female",
+  ], force: :cascade
+
   create_table "animals", force: :cascade do |t|
     t.integer "collection_year"
     t.datetime "date_time_collected"
     t.string "collection_position"
     t.integer "pii_tag"
     t.integer "tag_id"
-    t.string "sex"
+    t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
