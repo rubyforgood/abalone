@@ -15,6 +15,10 @@ class FileUploadsController < ApplicationController
     @pagy, @processed_files = pagy(ProcessedFile.all.order(updated_at: :desc))
   end
 
+  def csv_index
+    @pagy, @file_uploads = pagy(FileUpload.for_organization(current_organization).order(created_at: :desc))
+  end
+
   def new
     @categories = [['Select One', '']] + FILE_UPLOAD_CATEGORIES
   end
