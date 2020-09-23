@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "upload TaggedAnimalAssessment category", type: :feature do
+describe "upload Measurement category", type: :feature do
   let(:user) { create(:user) }
 
   before do

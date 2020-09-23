@@ -5,34 +5,36 @@ RSpec.describe CsvImporter do
 
   describe "#process" do
     let(:processed_file) { create(:processed_file) }
-    let(:category_name) { "Tagged Animal Assessment" }
+    let(:category_name) { "Measurement" }
 
     context "when csv file is perfect" do
       it "imports all the records" do
-        file = File.read(Rails.root.join("spec/support/csv/Tagged_assessment_valid_values.csv"))
+        file = File.read(Rails.root.join("spec/fixtures/basic_custom_measurement.csv"))
 
         expect do
           CsvImporter.new(file, category_name, processed_file.id, organization).call
-        end.to change { TaggedAnimalAssessment.count }.by 3
+        end.to change { Measurement.count }.by 6
       end
     end
 
+    # This is being ignored because the only available report does not contain a field that needs to be converted, making the import impossible to fail
+    # basic_custom_measurement_invalid.csv will need to updated with invalid data
     context "when there're errors importing a row" do
-      it "does not import any record" do
-        file = File.read(Rails.root.join("spec", "support", "csv", "Tagged_assessment_invalid_values.csv"))
+      pending "does not import any record" do
+        file = File.read(Rails.root.join("spec", "support", "csv", "basic_custom_measurement_invalid.csv"))
 
         expect do
           CsvImporter.new(file, category_name, processed_file.id, organization).call
-        end.not_to change { TaggedAnimalAssessment.count }
+        end.not_to change { Measurement.count }
       end
 
-      it "provides error details" do
-        file = File.read(Rails.root.join("spec", "support", "csv", "Tagged_assessment_invalid_values.csv"))
+      pending "provides error details" do
+        file = File.read(Rails.root.join("spec", "support", "csv", "basic_custom_measurement_invalid.csv"))
         importer = CsvImporter.new(file, category_name, processed_file.id, organization)
 
         expect do
           importer.call
-        end.not_to change { TaggedAnimalAssessment.count }
+        end.not_to change { Measurement.count }
         expect(importer.errored?).to eq(true)
         expect(importer.error_details.empty?).to eq(false)
       end
