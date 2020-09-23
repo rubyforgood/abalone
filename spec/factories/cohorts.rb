@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :family do
+  factory :cohort do
     female factory: :animal
     male factory: :animal
     organization

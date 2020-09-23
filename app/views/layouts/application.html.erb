@@ -43,9 +43,9 @@
           <% if current_user %>
             <%= link_to 'Reports', reports_path, class: 'navbar-item'%>
             <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
-            <%= link_to 'Tanks', tanks_path, class: 'navbar-item'%>
+            <%= link_to 'Enclosures', enclosures_path, class: 'navbar-item'%>
             <%= link_to 'Animals', animals_path, class: 'navbar-item'%>
-            <%= link_to 'Families', families_path, class: 'navbar-item'%>
+            <%= link_to 'Cohorts', cohorts_path, class: 'navbar-item'%>
             <%= link_to 'Operations', operations_path, class: 'navbar-item'%>
             <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
             <% if current_user.admin? %>

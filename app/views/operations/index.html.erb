@@ -3,8 +3,8 @@
     <table class="table table-hover">
     <thead>
       <tr>
-      <th>Tank</th>
-      <th>Family</th>
+      <th>Enclosure</th>
+      <th>Cohort</th>
       <th>Action</th>
       <th>CSV Data Uploaded At</th>
       </tr>
@@ -12,8 +12,8 @@
     <tbody>
     <%- @operations.each do |operation|%>
       <tr>
-        <td><%= operation.tank.name %> </td>
-        <td><%= operation.family&.name %> </td>
+        <td><%= operation.enclosure.name %> </td>
+        <td><%= operation.cohort&.name %> </td>
         <td><%= operation.action %></td>
         <td><%= operation.created_at %></td>
       </tr>

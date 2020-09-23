@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_134705) do
+ActiveRecord::Schema.define(version: 2020_09_23_202015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,27 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     "male",
     "female",
   ], force: :cascade
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "animals", force: :cascade do |t|
     t.integer "collection_year"
@@ -32,6 +53,21 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
+    t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
+  end
+
+  create_table "cohorts", force: :cascade do |t|
+    t.bigint "female_id"
+    t.bigint "male_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "enclosure_id"
+    t.string "name"
+    t.bigint "organization_id"
+    t.index ["enclosure_id"], name: "index_cohorts_on_enclosure_id"
+    t.index ["female_id"], name: "index_cohorts_on_female_id"
+    t.index ["male_id"], name: "index_cohorts_on_male_id"
+    t.index ["organization_id"], name: "index_cohorts_on_organization_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -49,6 +85,16 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "enclosures", force: :cascade do |t|
+    t.bigint "facility_id"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["facility_id"], name: "index_enclosures_on_facility_id"
+    t.index ["organization_id"], name: "index_enclosures_on_organization_id"
+  end
+
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -58,18 +104,14 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["organization_id"], name: "index_facilities_on_organization_id"
   end
 
-  create_table "families", force: :cascade do |t|
-    t.bigint "female_id"
-    t.bigint "male_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "tank_id"
-    t.string "name"
+  create_table "file_uploads", force: :cascade do |t|
+    t.bigint "user_id"
     t.bigint "organization_id"
-    t.index ["female_id"], name: "index_families_on_female_id"
-    t.index ["male_id"], name: "index_families_on_male_id"
-    t.index ["organization_id"], name: "index_families_on_organization_id"
-    t.index ["tank_id"], name: "index_families_on_tank_id"
+    t.text "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_file_uploads_on_organization_id"
+    t.index ["user_id"], name: "index_file_uploads_on_user_id"
   end
 
   create_table "measurement_events", force: :cascade do |t|
@@ -114,20 +156,20 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
   end
 
   create_table "operations", force: :cascade do |t|
-    t.bigint "tank_id"
+    t.bigint "enclosure_id"
     t.integer "animals_added"
-    t.integer "animals_added_family_id"
+    t.integer "animals_added_cohort_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "operation_date"
     t.string "action"
-    t.bigint "family_id"
+    t.bigint "cohort_id"
     t.bigint "operation_batch_id"
     t.bigint "organization_id"
-    t.index ["family_id"], name: "index_operations_on_family_id"
+    t.index ["cohort_id"], name: "index_operations_on_cohort_id"
+    t.index ["enclosure_id"], name: "index_operations_on_enclosure_id"
     t.index ["operation_batch_id"], name: "index_operations_on_operation_batch_id"
     t.index ["organization_id"], name: "index_operations_on_organization_id"
-    t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -168,16 +210,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.integer "processed_file_id"
   end
 
-  create_table "tanks", force: :cascade do |t|
-    t.bigint "facility_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "organization_id"
-    t.index ["facility_id"], name: "index_tanks_on_facility_id"
-    t.index ["organization_id"], name: "index_tanks_on_organization_id"
-  end
-
   create_table "temporary_files", force: :cascade do |t|
     t.text "contents"
     t.datetime "created_at", null: false
@@ -199,37 +231,17 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "wild_collections", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "tag"
-    t.date "collection_date"
-    t.string "general_location"
-    t.string "precise_location"
-    t.point "collection_coordinates"
-    t.string "proximity_to_nearest_neighbor"
-    t.string "collection_method_notes"
-    t.string "foot_condition_notes"
-    t.decimal "collection_depth"
-    t.decimal "length"
-    t.decimal "weight"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.string "initial_holding_facility"
-    t.string "final_holding_facility_and_date_of_arrival"
-    t.date "otc_treatment_completion_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animals", "organizations"
-  add_foreign_key "families", "organizations"
+  add_foreign_key "cohorts", "organizations"
+  add_foreign_key "enclosures", "facilities"
+  add_foreign_key "enclosures", "organizations"
+  add_foreign_key "file_uploads", "organizations"
+  add_foreign_key "file_uploads", "users"
   add_foreign_key "measurement_events", "organizations"
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
+  add_foreign_key "operations", "enclosures"
   add_foreign_key "operations", "organizations"
-  add_foreign_key "operations", "tanks"
-  add_foreign_key "tanks", "facilities"
-  add_foreign_key "tanks", "organizations"
 end

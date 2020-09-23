@@ -1,4 +1,4 @@
-class Family < ApplicationRecord
+class Cohort < ApplicationRecord
   include OrganizationScope
 
   belongs_to :male, class_name: 'Animal'
@@ -6,7 +6,7 @@ class Family < ApplicationRecord
 
   has_many :measurements, as: :subject
 
-  belongs_to :tank, required: false
+  belongs_to :enclosure, required: false
 
   def female_pii_tag
     female.pii_tag

@@ -1,10 +1,10 @@
-<%= form_with(model: family, local: true) do |form| %>
-  <% if family.errors.any? %>
+<%= form_with(model: cohort, local: true) do |form| %>
+  <% if cohort.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(family.errors.count, "error") %> prohibited this family from being saved:</h2>
+      <h2><%= pluralize(cohort.errors.count, "error") %> prohibited this cohort from being saved:</h2>
 
       <ul>
-        <% family.errors.full_messages.each do |message| %>
+        <% cohort.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -27,8 +27,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :tank, class: 'label' %>
-    <%= form.collection_select :tank_id, Tank.for_organization(current_organization), :id, :name, include_blank: 'Select Tank', class: 'input' %>
+    <%= form.label :enclosure, class: 'label' %>
+    <%= form.collection_select :enclosure_id, Enclosure.for_organization(current_organization), :id, :name, include_blank: 'Select Enclosure', class: 'input' %>
   </div>
 
   <div class="field">

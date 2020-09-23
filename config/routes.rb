@@ -2,9 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, path_prefix: 'app'
   resources :users
   resources :facilities
-  resources :families
+  resources :cohorts
   resources :animals
-  resources :tanks
+  resources :enclosures
   resources :measurement_types, except: %i[show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

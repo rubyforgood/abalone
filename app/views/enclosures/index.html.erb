@@ -1,0 +1,32 @@
+<section class="section facilities__index">
+  <div class="container facilities__index__container">
+    <div class="facilities__index__container__header">
+      <h1 class="title">Enclosures</h1>
+      <%= link_to new_enclosure_path, class: "button-primary" do %>
+        New Enclosure <%= image_tag  "icons/plus.png", size: 17 %>
+      <% end %>
+    </div>
+
+    <table class="table  table-hover table-responsive-sm">
+      <thead>
+        <tr class="bg-dark-light">
+          <th>Name</th>
+          <th>Facility</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @enclosures.each do |enclosure| %>
+          <tr>
+            <td><%= enclosure.name %></td>
+            <td><%= enclosure.facility_name %></td>
+            <td><%= link_to 'Show', enclosure %></td>
+            <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_enclosure_path(enclosure) %></td>
+            <td><%= link_to image_tag("icons/trash.svg", size: 24), enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

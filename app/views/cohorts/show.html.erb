@@ -2,33 +2,33 @@
   <div class="container facilities__show__container">
     <p id="notice"><%= notice %></p>
     <div class="facilities__show__container__header">
-      <h1 class="title">Family</h1>
+      <h1 class="title">Cohort</h1>
     </div>
     <div class="facilities__show__container__body mb-5">
       <p>
         <strong>Name:</strong>
-        <%= @family.name %>
+        <%= @cohort.name %>
       </p>
 
       <p>
         <strong>Female:</strong>
-        <%= @family.female.pii_tag %>
+        <%= @cohort.female.pii_tag %>
       </p>
 
       <p>
         <strong>Male:</strong>
-        <%= @family.male.pii_tag %>
+        <%= @cohort.male.pii_tag %>
       </p>
 
       <p>
-        <strong>Tank Name:</strong>
-        <%= @family.tank&.name %>
+        <strong>Enclosure Name:</strong>
+        <%= @cohort.enclosure&.name %>
       </p>
 
     </div>
 
-    <%= link_to '<< BACK', families_path, class: "mr-3 mb-3 button-outline-primary" %>
-    <%= link_to "Edit", edit_family_path(@family), class: "button-outline-primary mt-4" %>
+    <%= link_to '<< BACK', cohorts_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_cohort_path(@cohort), class: "button-outline-primary mt-4" %>
 
   </div>
 </section>

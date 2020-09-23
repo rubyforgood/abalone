@@ -1,4 +1,4 @@
-class Tank < ApplicationRecord
+class Enclosure < ApplicationRecord
   include OrganizationScope
 
   belongs_to :facility, optional: true
@@ -6,7 +6,7 @@ class Tank < ApplicationRecord
   has_many :post_settlement_inventories
   has_many :measurements, as: :subject
 
-  has_one :family, required: false
+  has_one :cohort, required: false
 
   validates :name, uniqueness: { scope: :organization }
 

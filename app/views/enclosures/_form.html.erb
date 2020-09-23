@@ -1,10 +1,10 @@
-<%= form_with(model: tank, local: true) do |form| %>
-  <% if tank.errors.any? %>
+<%= form_with(model: enclosure, local: true) do |form| %>
+  <% if enclosure.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(tank.errors.count, "error") %> prohibited this tank from being saved:</h2>
+      <h2><%= pluralize(enclosure.errors.count, "error") %> prohibited this enclosure from being saved:</h2>
 
       <ul>
-      <% tank.errors.full_messages.each do |message| %>
+      <% enclosure.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
