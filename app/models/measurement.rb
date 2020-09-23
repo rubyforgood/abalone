@@ -28,13 +28,6 @@ class Measurement < ApplicationRecord
       organization_id: attrs.fetch(:organization_id)
     )
 
-    if attrs[:animal_pii_tag]
-      animal = Animal.find_or_create_by!(
-        pii_tag: attrs.fetch(:animal_pii_tag),
-        organization_id: attrs.fetch(:organization_id)
-      )
-    end
-    family = Family.find_by!(name: attrs.fetch(:family_name)) if attrs[:family_name]
     measurement_type = MeasurementType.find_or_create_by!(name: "length", unit: "cm", organization_id: attrs.fetch(:organization_id))
 
     measurement_event = MeasurementEvent.find_or_create_by!(
