@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_134705) do
+ActiveRecord::Schema.define(version: 2020_09_23_153522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,29 +187,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "wild_collections", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "tag"
-    t.date "collection_date"
-    t.string "general_location"
-    t.string "precise_location"
-    t.point "collection_coordinates"
-    t.string "proximity_to_nearest_neighbor"
-    t.string "collection_method_notes"
-    t.string "foot_condition_notes"
-    t.decimal "collection_depth"
-    t.decimal "length"
-    t.decimal "weight"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.string "initial_holding_facility"
-    t.string "final_holding_facility_and_date_of_arrival"
-    t.date "otc_treatment_completion_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
   end
 
   add_foreign_key "animals", "organizations"

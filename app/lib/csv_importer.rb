@@ -3,7 +3,6 @@ class CsvImporter
 
   CATEGORIES = [
     'Tagged Animal Assessment',
-    'Wild Collection',
     'Measurement'
   ].freeze
 
