@@ -47,6 +47,21 @@ class AnimalsController < ApplicationController
 
   def edit; end
 
+  def csv_upload; end
+
+  def import
+    if params[:animal_csv].content_type == 'text/csv'
+      upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
+                                 file: params[:animal_csv])
+
+      ImportAnimalsJob.perform_later(upload)
+
+      redirect_to animals_path, notice: 'Processing file...'
+    else
+      redirect_to csv_upload_animals_path, error: 'Invalid file type. Please upload a CSV.'
+    end
+  end
+
   private
 
   def set_animal

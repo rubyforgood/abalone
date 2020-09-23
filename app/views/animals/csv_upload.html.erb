@@ -1,0 +1,24 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Upload Animals</h1>
+    <div class="facilities__form__container__body">
+      <%= link_to 'Click here', root_path + 'samples/animal.csv' %> for a sample csv file.
+    </div>
+
+    <div class="facilities__form__container__body">
+      <%= form_with(local: true) do |form| %>
+        <div class="field">
+          <%= form.file_field :animal_csv, required: true, accept: 'text/csv' %>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= form.submit('Submit', class: 'button-primary') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= link_to '<< Back', animals_path, class: 'button-outline-primary' %>
+  </div>
+</section>

@@ -8,8 +8,8 @@ describe "When I visit the family New page" do
   end
 
   it "And fill out the form and click the submit button, family should be created" do
-    female = create(:animal, sex: 'female', organization_id: user.organization_id)
-    male = create(:animal, sex: 'male', pii_tag: 2, organization_id: user.organization_id)
+    female = create(:animal, sex: :female, organization_id: user.organization_id)
+    male = create(:animal, sex: :male, pii_tag: 2, organization_id: user.organization_id)
 
     visit new_family_path
 
