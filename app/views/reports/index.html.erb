@@ -2,7 +2,14 @@
   <div class="container">
     <h1 class="title">Reports</h1>
 
-    <%= render_report 'total_animals_by_location', context_params: { organization_id: current_user.organization_id } %>
+    <%= render_report 'total_tanks_by_facility',
+                      context_params: { organization_id: current_user.organization_id },
+                      actions: [] do |builder| %>
+      <div style="text-align: right">
+        <%= builder.export_csv_button 'Download CSV', class: 'button-primary' %>
+        <%= builder.export_xls_button 'Download Excel', class: 'button-primary' %>
+      </div>
+    <% end %>
 
     <div class="tabs is-centered is-boxed">
       <ul>
