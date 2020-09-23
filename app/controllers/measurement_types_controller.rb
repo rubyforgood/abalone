@@ -12,7 +12,7 @@ class MeasurementTypesController < ApplicationController
   def create
     @measurement_type = MeasurementType.new(measurement_type_params)
     if @measurement_type.save
-      redirect_to measurement_types_path, notice: 'MeasurementType was successfully created.'
+      redirect_to measurement_types_path, notice: 'Measurement Type was successfully created.'
     else
       render :new
     end
@@ -20,7 +20,7 @@ class MeasurementTypesController < ApplicationController
 
   def update
     if @measurement_type.update(measurement_type_params)
-      redirect_to measurement_types_path, notice: 'MeasurementType was successfully updated.'
+      redirect_to measurement_types_path, notice: 'Measurement Type was successfully updated.'
     else
       render :edit
     end
@@ -28,7 +28,7 @@ class MeasurementTypesController < ApplicationController
 
   def destroy
     @measurement_type.destroy
-    redirect_to measurement_types_url, notice: 'MeasurementType was successfully destroyed.'
+    redirect_to measurement_types_url, notice: 'Measurement Type was successfully destroyed.'
   end
 
   def edit; end
