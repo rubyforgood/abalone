@@ -33,7 +33,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(
       :email,
       :password,
-      :role).merge(organization_id: current_organization.id)
+      :role
+    ).merge(organization_id: current_organization.id)
   end
 
   def set_user
