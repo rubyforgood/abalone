@@ -24,7 +24,7 @@ describe "When I visit the User New page" do
       fill_in("Password", with: "password")
       select("Admin", from: 'Role')
       click_button('Submit')
-    
+
       expect(page).to have_content("test@example.com")
       expect(page).to have_content("User")
       expect(page).to have_content(user.organization.name)
