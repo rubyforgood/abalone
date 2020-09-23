@@ -47,7 +47,7 @@ class TanksController < ApplicationController
       upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
                                  file: params[:tank_csv])
 
-      TanksJob.perform_later(upload)
+      ImportTanksJob.perform_later(upload)
 
       redirect_to tanks_path, notice: 'Processing file...'
     else

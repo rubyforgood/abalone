@@ -1,4 +1,4 @@
-class TanksJob < ApplicationJob
+class ImportTanksJob < ApplicationJob
   TANK_COLUMNS = Tank.column_names.freeze
 
   def perform(upload)
