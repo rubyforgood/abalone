@@ -16,3 +16,4 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require reports_kit/application

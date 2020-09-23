@@ -64,7 +64,10 @@ group :development do
   gem 'capistrano3-puma',   '~> 4.0',  require: false
 end
 
-#  Excel and CSV support
+# Report builder
+gem 'reports_kit'
+
+# Excel and CSV support
 gem 'creek'
 gem 'iostreams'
 
