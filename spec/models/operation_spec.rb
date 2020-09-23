@@ -7,6 +7,7 @@ RSpec.describe Operation, type: :model do
   let(:family) { FactoryBot.build(:family) }
 
   it { is_expected.to belong_to(:tank) }
+  it { is_expected.to belong_to(:organization) }
   it { is_expected.to belong_to(:family).required(false) }
 
   describe "validations" do

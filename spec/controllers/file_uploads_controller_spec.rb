@@ -61,10 +61,10 @@ describe FileUploadsController do
 
   def valid_files_params
     {
-      'category': 'PopulationEstimate',
+      'category': 'Measurement',
       'input_files': [
-        fixture_file_upload('population_estimate.csv', 'text/csv'),
-        fixture_file_upload('population_estimate2.csv', 'text/csv')
+        fixture_file_upload('basic_custom_measurement.csv', 'text/csv'),
+        fixture_file_upload('basic_custom_measurement_with_spaces.csv', 'text/csv')
       ]
     }
   end
@@ -73,14 +73,14 @@ describe FileUploadsController do
     {
       'category': 'Invalid Category',
       'input_files': [
-        fixture_file_upload('population_estimate.csv', 'text/csv')
+        fixture_file_upload('basic_custom_measurement.csv', 'text/csv')
       ]
     }
   end
 
   def invalid_file_params
     {
-      'category': 'PopulationEstimate',
+      'category': 'Measurement',
       'input_files': []
     }
   end

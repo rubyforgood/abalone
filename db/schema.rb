@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_203301) do
+ActiveRecord::Schema.define(version: 2020_09_23_130852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,18 +48,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
     t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
-  end
-
-  create_table "consolidation_reports", force: :cascade do |t|
-    t.bigint "family_id"
-    t.bigint "tank_from_id"
-    t.bigint "tank_to_id"
-    t.string "total_animal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["family_id"], name: "index_consolidation_reports_on_family_id"
-    t.index ["tank_from_id"], name: "index_consolidation_reports_on_tank_from_id"
-    t.index ["tank_to_id"], name: "index_consolidation_reports_on_tank_to_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -115,6 +103,8 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.bigint "tank_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_measurement_events_on_organization_id"
     t.index ["tank_id"], name: "index_measurement_events_on_tank_id"
   end
 
@@ -130,9 +120,11 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.bigint "animal_id"
     t.bigint "family_id"
     t.bigint "tank_id"
+    t.bigint "organization_id"
     t.index ["animal_id"], name: "index_measurements_on_animal_id"
     t.index ["family_id"], name: "index_measurements_on_family_id"
     t.index ["measurement_event_id"], name: "index_measurements_on_measurement_event_id"
+    t.index ["organization_id"], name: "index_measurements_on_organization_id"
     t.index ["processed_file_id"], name: "index_measurements_on_processed_file_id"
     t.index ["tank_id"], name: "index_measurements_on_tank_id"
   end
@@ -153,8 +145,10 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.string "action"
     t.bigint "family_id"
     t.bigint "operation_batch_id"
+    t.bigint "organization_id"
     t.index ["family_id"], name: "index_operations_on_family_id"
     t.index ["operation_batch_id"], name: "index_operations_on_operation_batch_id"
+    t.index ["organization_id"], name: "index_operations_on_organization_id"
     t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 
@@ -162,20 +156,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "population_estimates", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "sample_date"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.string "lifestage"
-    t.integer "abundance"
-    t.string "facility"
-    t.string "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
   end
 
   create_table "post_settlement_inventories", force: :cascade do |t|
@@ -274,16 +254,18 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animals", "organizations"
-  add_foreign_key "consolidation_reports", "families"
   add_foreign_key "families", "organizations"
   add_foreign_key "file_uploads", "organizations"
   add_foreign_key "file_uploads", "users"
+  add_foreign_key "measurement_events", "organizations"
   add_foreign_key "measurement_events", "tanks"
   add_foreign_key "measurements", "animals"
   add_foreign_key "measurements", "families"
   add_foreign_key "measurements", "measurement_events"
+  add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
   add_foreign_key "measurements", "tanks"
+  add_foreign_key "operations", "organizations"
   add_foreign_key "operations", "tanks"
   add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
