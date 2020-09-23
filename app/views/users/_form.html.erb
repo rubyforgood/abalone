@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= form.label :role, class: 'label' %>
-    <%= form.select :role, options_for_select([['User', 'user'], ['Admin', 'admin']]), id: :role %>
+    <%= form.select(:role, User.roles.keys) %>
   </div>
 
   <div class="field">

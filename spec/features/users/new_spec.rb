@@ -14,7 +14,7 @@ describe "When I visit the User New page" do
       expect(page).to have_content("New User")
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
-      expect(page).to have_select("user_role", with_options: %w[User Admin])
+      expect(page).to have_select("user_role", with_options: %w[user admin])
     end
 
     it "I can create a new user" do
@@ -22,11 +22,11 @@ describe "When I visit the User New page" do
 
       fill_in("Email", with: "test@example.com")
       fill_in("Password", with: "password")
-      select("Admin", from: 'Role')
+      select("user", from: 'Role')
       click_button('Submit')
 
       expect(page).to have_content("test@example.com")
-      expect(page).to have_content("User")
+      expect(page).to have_content("user")
       expect(page).to have_content(user.organization.name)
     end
   end
