@@ -203,6 +203,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["facility_id"], name: "index_tanks_on_facility_id"
+    t.index ["name", "facility_id", "organization_id"], name: "index_tanks_on_name_and_facility_id_and_organization_id", unique: true
     t.index ["organization_id"], name: "index_tanks_on_organization_id"
   end
 
