@@ -26,7 +26,6 @@ describe "When I visit the User New page" do
       click_button('Submit')
 
       expect(page).to have_content("test@example.com")
-      expect(page).to have_content("user")
       expect(page).to have_content(user.organization.name)
     end
   end
