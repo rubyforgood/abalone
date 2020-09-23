@@ -179,27 +179,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.integer "temporary_file_id"
   end
 
-  create_table "tagged_animal_assessments", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "measurement_date"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.string "tag"
-    t.string "from_growout_rack"
-    t.string "from_growout_column"
-    t.string "from_growout_trough"
-    t.string "to_growout_rack"
-    t.string "to_growout_column"
-    t.string "to_growout_trough"
-    t.decimal "length"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
   create_table "tanks", force: :cascade do |t|
     t.bigint "facility_id"
     t.string "name"
