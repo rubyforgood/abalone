@@ -1,4 +1,4 @@
-class AnimalsJob < ApplicationJob
+class ImportAnimalsJob < ApplicationJob
   ANIMAL_COLUMNS = Animal.column_names.freeze
 
   def perform(upload)
