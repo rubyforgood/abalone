@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def index
-    @users = current_user.organization.users
+    @users = current_organization.users
   end
 
   def show; end
@@ -20,11 +20,11 @@ class UsersController < ApplicationController
 
   private
 
-  def admin?
-    redirect_to root_path, alert: "Not authorized" unless current_user.admin?
-  end
-
   def set_user
     @user = User.find(params[:id])
+  end
+
+  def admin?
+    redirect_to root_path, alert: "Not authorized" unless current_user.admin?
   end
 end
