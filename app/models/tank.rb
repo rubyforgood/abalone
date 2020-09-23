@@ -3,9 +3,7 @@ class Tank < ApplicationRecord
 
   belongs_to :facility, optional: true
   has_many :operations, dependent: :destroy
-  has_many :measurement_events, dependent: :destroy
-  # has_many :measurements, through: :measurement_events
-  has_many :measurements
+  has_many :measurements, as: :subject
 
   has_one :family, required: false
 

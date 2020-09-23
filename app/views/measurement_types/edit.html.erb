@@ -1,0 +1,10 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Editing Measurement Type</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', measurement_type: @measurement_type %>
+    </div>
+    <%= link_to '<< Back', measurement_type_path, class: "button-outline-primary" %>
+    <%= link_to 'Show', @measurement_type,  class: "button-outline-primary" %>
+  </div>
+</section>
