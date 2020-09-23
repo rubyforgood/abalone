@@ -42,7 +42,6 @@ describe "When I visit the user index page" do
     expect(page).to have_content 'Users'
 
     users.each do |user|
-      expect(page).to_not have_content user.id
       expect(page).to_not have_content user.email
       expect(page).to_not have_content user.role
       expect(page).to_not have_content user.organization.name
