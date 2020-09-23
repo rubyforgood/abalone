@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   before_action :admin?, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :destroy]
 
   def index
-    @users = current_organization.users
+    @users = current_organization.users.reject { |user| user == current_user }
   end
 
   def show; end
@@ -25,7 +25,11 @@ class UsersController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @user.destroy
+
+    redirect_to users_url, notice: 'User was successfully destroyed.'
+  end
 
   private
 
