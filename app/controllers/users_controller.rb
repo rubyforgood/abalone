@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :admin?, only: %i[index show new create edit update destroy]
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :admin?, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
     @users = current_organization.users
