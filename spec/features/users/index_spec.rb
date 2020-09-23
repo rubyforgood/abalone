@@ -15,7 +15,7 @@ describe "When I visit the user index page" do
   end
 
   it "As an admin user, I should have access to the users index page for my organization" do
-    user.update(role: 'admin')
+    user.update(role: :admin)
 
     users = FactoryBot.create_list(:user, 3, organization: organization)
 
@@ -31,7 +31,7 @@ describe "When I visit the user index page" do
   end
 
   it "As an admin user, I should not see users that belong to a different organization than me" do
-    user.update(role: 'admin')
+    user.update(role: :admin)
 
     other_organization = create(:organization)
     users = FactoryBot.create_list(:user, 3, organization: other_organization)

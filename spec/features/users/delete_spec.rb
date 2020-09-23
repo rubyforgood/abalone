@@ -28,7 +28,7 @@ describe "When I visit the users Index page" do
     visit users_path
 
     within('tbody') do
-      expect(page).to have_xpath('.//tr', count: (users_count - 1))
+      expect(page).to have_xpath('.//tr', count: users_count)
       expect(page).not_to have_selector("a[data-method='delete'][href='#{user_path(user.id)}']")
     end
   end
