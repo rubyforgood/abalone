@@ -79,5 +79,8 @@ tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17', org
 Operation.create!(tank: tank, animals_added: 800, family: family, operation_date: 7.days.ago, action: :add_family, organization_id: white_abalone.id)
 measurement_event = MeasurementEvent.create!(name: "My first measurement", organization_id: white_abalone.id)
 measurement_type = MeasurementType.create!(name: "length", unit: "cm", organization: white_abalone)
+measurement_type = MeasurementType.create!(name: "count", unit: "number", organization: white_abalone)
+measurement_type = MeasurementType.create!(name: "weight", unit: "g", organization: white_abalone)
+measurement_type = MeasurementType.create!(name: "gonad score", unit: "number", organization: white_abalone)
 Measurement.create!(value: '743', measurement_event: measurement_event, date: 3.days.ago, organization_id: white_abalone.id, subject: male, measurement_type: measurement_type)
 Measurement.create!(value: '719', measurement_event: measurement_event, date: 1.days.ago, organization_id: white_abalone.id, subject: female, measurement_type: measurement_type)

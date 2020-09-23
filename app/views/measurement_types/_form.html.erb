@@ -1,0 +1,29 @@
+<%= form_with(model: measurement_type, local: true) do |form| %>
+  <% if measurement_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(measurement_type.errors.count, "error") %> prohibited this measurement_type from being saved:</h2>
+
+      <ul>
+      <% measurement_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :unit, class: 'label' %>
+    <%= form.text_field :unit, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.submit('Submit', class: 'button-primary') %>
+    </div>
+  </div>
+<% end %>

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :families
   resources :animals
   resources :tanks
+  resources :measurement_types, except: %i[show]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   post '/file_uploads', to: 'file_uploads#upload'
