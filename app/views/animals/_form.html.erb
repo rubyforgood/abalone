@@ -38,7 +38,7 @@
 
   <div class="field">
     <%= form.label :sex, class: 'label' %>
-    <%= form.text_field :sex, class: 'input' %>
+    <%= form.collection_select :sex, Animal.sexes.map { |sex| [sex.first, sex.first.humanize] }, :first, :second, class: 'input' %>
   </div>
 
   <div class="field">

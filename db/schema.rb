@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_154527) do
+ActiveRecord::Schema.define(version: 2020_09_23_134705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_enum :animal_sex, [
+    "unknown",
+    "male",
+    "female",
+  ], force: :cascade
 
   create_table "animals", force: :cascade do |t|
     t.integer "collection_year"
@@ -21,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.string "collection_position"
     t.integer "pii_tag"
     t.integer "tag_id"
-    t.string "sex"
+    t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
@@ -130,14 +136,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "post_settlement_inventories", force: :cascade do |t|
-    t.datetime "inventory_date"
-    t.integer "mean_standard_length"
-    t.integer "total_per_tank"
-    t.bigint "tank_id"
-    t.index ["tank_id"], name: "index_post_settlement_inventories_on_tank_id"
-  end
-
   create_table "processed_files", force: :cascade do |t|
     t.string "filename"
     t.string "category"
@@ -232,7 +230,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
   add_foreign_key "measurements", "processed_files"
   add_foreign_key "operations", "organizations"
   add_foreign_key "operations", "tanks"
-  add_foreign_key "post_settlement_inventories", "tanks"
   add_foreign_key "tanks", "facilities"
   add_foreign_key "tanks", "organizations"
 end
