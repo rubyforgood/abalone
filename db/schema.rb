@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
   enable_extension "plpgsql"
 
   create_enum :animal_sex, [
-      "unknown",
-      "male",
-      "female",
+    "unknown",
+    "male",
+    "female",
   ], force: :cascade
 
   create_table "active_storage_attachments", force: :cascade do |t|
