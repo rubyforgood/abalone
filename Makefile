@@ -39,7 +39,7 @@ schema_migrate: database_started
 schema_status:
 	docker-compose run --rm pending_migrations
 
-database_seeds:
+database_seeds: schema_migrate
 	docker-compose run --rm seeds
 
 build:

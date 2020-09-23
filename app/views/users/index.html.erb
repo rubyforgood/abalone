@@ -27,7 +27,11 @@
             <td><%= user.organization.name %></td>
             <td><%= link_to 'Show', user %></td>
             <td><%= link_to image_tag("icons/edit.svg", size: 24), "#" %></td>
-            <td><%= link_to image_tag("icons/trash.svg", size: 24), "#" %></td>
+            <td>
+              <% unless user == current_user %>
+                <%= link_to image_tag("icons/trash.svg", size: 24), user, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

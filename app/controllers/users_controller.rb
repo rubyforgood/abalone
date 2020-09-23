@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :admin?, only: [:index, :show, :new, :create, :edit, :update, :destroy]
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :destroy]
 
   def index
     @users = current_organization.users
@@ -25,7 +25,16 @@ class UsersController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    notice_message = 'User cannot delete itself.'
+
+    unless @user == current_user
+      @user.destroy
+      notice_message = 'User was successfully destroyed.'
+    end
+
+    redirect_to users_url, notice: notice_message
+  end
 
   private
 
