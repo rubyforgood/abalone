@@ -1,4 +1,6 @@
 class Operation < ApplicationRecord
+  include OrganizationScope
+
   belongs_to :tank
 
   belongs_to :operation_batch, required: false

@@ -5,7 +5,7 @@ FactoryBot.define do
     collection_position { "MyString" }
     pii_tag { 1 }
     tag_id { 1 }
+    sex { Animal.sexes.keys.sample }
     organization
-    sex { "MyString" }
   end
 end
