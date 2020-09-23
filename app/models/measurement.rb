@@ -1,4 +1,6 @@
 class Measurement < ApplicationRecord
+  include OrganizationScope
+
   belongs_to :measurement_event
   belongs_to :processed_file, optional: true
   belongs_to :animal, optional: true
@@ -32,7 +34,10 @@ class Measurement < ApplicationRecord
     end
     family = Family.find_by!(name: attrs.fetch(:family_name)) if attrs[:family_name]
 
-    measurement_event = MeasurementEvent.find_or_create_by!(name: measurement_event_name)
+    measurement_event = MeasurementEvent.find_or_create_by!(
+      name: measurement_event_name,
+      organization_id: attrs.fetch(:organization_id)
+    )
 
     # create attributes for Measurement
     measurement_attrs = {}
@@ -40,6 +45,7 @@ class Measurement < ApplicationRecord
     measurement_attrs[:value] = attrs.fetch(:value)
     measurement_attrs[:name] = attrs.fetch(:measurement)
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
+    measurement_attrs[:organization_id] = attrs.fetch(:organization_id)
     measurement_attrs[:tank_id] = tank.id if tank
     measurement_attrs[:animal_id] = animal.id if animal
     measurement_attrs[:family_id] = family.id if family

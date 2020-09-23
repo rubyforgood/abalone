@@ -4,5 +4,6 @@ FactoryBot.define do
     value_type { "MyString" }
     value { "" }
     measurement_event
+    organizations
   end
 end
