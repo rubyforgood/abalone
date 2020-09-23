@@ -72,8 +72,8 @@ end
 
 # Tanks can have Operations occur (add or remove animals, combine tank contents, etc)
 # Tanks can also have Measurements (number of animals, temperature of tank, etc)
-male = Animal.create!(sex: 'male', organization_id: white_abalone.id)
-female = Animal.create!(sex: 'female', organization_id: pinto_abalone.id)
+male = Animal.create!(sex: :male, organization_id: white_abalone.id)
+female = Animal.create!(sex: :female, organization_id: pinto_abalone.id)
 family = Family.create!(male: male, female: female, organization_id: white_abalone.id)
 tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17', organization_id: white_abalone.id)
 Operation.create!(tank: tank, animals_added: 800, family: family, operation_date: 7.days.ago, action: :add_family, organization_id: white_abalone.id)

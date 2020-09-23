@@ -40,6 +40,21 @@ class TanksController < ApplicationController
     end
   end
 
+  def csv_upload; end
+
+  def import
+    if params[:tank_csv].content_type == 'text/csv'
+      upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
+                                 file: params[:tank_csv])
+
+      ImportTanksJob.perform_later(upload)
+
+      redirect_to tanks_path, notice: 'Processing file...'
+    else
+      redirect_to csv_upload_tanks_path, error: 'Invalid file type. Please upload a CSV.'
+    end
+  end
+
   private
 
   def set_tank
