@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :tank do
-    name { "MyString" }
+    sequence(:name) { |n| "MyString#{n}" }
     facility
+    organization
   end
 end

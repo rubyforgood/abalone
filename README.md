@@ -136,7 +136,7 @@ Our stakeholder, the Bodega Marine Laboratory, has more data that they can keep 
 
 ### The Solution
 We are building an app which has the following capabilities:
-1. _Store Raw Data_: There are several different types of CSVs that the lab has been amassing (Mortality Tracking Data, Pedigree Data, Population Estimate Data, Spawning Success Data, Tagged Animal Assessment Data, Untagged Animal Assessment Data, and Wild Collection Data). Examples of these CSVs can be found in the [`db/sample_data_files`](https://github.com/rubyforgood/abalone/tree/master/db/sample_data_files) directory.
+1. _Store Raw Data_: There are several different types of CSVs that the lab has been amassing (Mortality Tracking Data, Population Estimate Data, Tagged Animal Assessment Data, and Wild Collection Data). Examples of these CSVs can be found in the [`db/sample_data_files`](https://github.com/rubyforgood/abalone/tree/master/db/sample_data_files) directory.
 2. _Import CSVs_: Users are able to import single and bulk CSVs. Users should generally submit cleaned CSVs, but the app should alert users if there are parsing problems and which row(s) need to be fixed.
 3. _Display Charts and Analytics_: For MVP, we would like to display a Histogram binned in 1cm increments of different body lengths for a certain cohort or group of cohorts.
 4. _Export CSVs_: TBD.

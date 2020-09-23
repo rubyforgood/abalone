@@ -8,8 +8,8 @@ describe "When I visit the family Index page" do
   end
 
   it "Then I click the delete button, family should be deleted" do
-    family1 = create(:family)
-    family_count = Family.count
+    family1 = create(:family, organization: user.organization)
+    family_count = Family.for_organization(user.organization).count
 
     visit families_path
 

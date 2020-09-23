@@ -8,7 +8,7 @@ describe "When I visit the family Index page" do
   end
 
   it "Then I see a list of all the families" do
-    family = create(:family)
+    family = create(:family, organization: user.organization)
 
     visit families_path
 

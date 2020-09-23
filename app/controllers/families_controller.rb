@@ -3,8 +3,7 @@ class FamiliesController < ApplicationController
 
   # GET /families
   def index
-    # TODO: Scope to org after #334
-    @families = Family.all
+    @families = Family.for_organization(current_organization)
   end
 
   # GET /families/1
@@ -54,6 +53,11 @@ class FamiliesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def family_params
-    params.require(:family).permit(:name, :male_id, :female_id, :tank_id)
+    params.require(:family).permit(
+      :name,
+      :male_id,
+      :female_id,
+      :tank_id
+    ).merge(organization_id: current_organization.id)
   end
 end

@@ -11,6 +11,7 @@ module ImportJob
   def perform(*args)
     temporary_file = args[0]
     @filename = args[1]
+    @organization = args[2]
     initialize_processed_file(temporary_file, filename)
     if already_processed?
       fail_processed_file("Already processed a file on #{already_processed_file.first.created_at.strftime('%m/%d/%Y')} with the same name: #{filename}. Data not imported!")
@@ -43,7 +44,7 @@ module ImportJob
   def import_records(temporary_file)
     raise "No input file specified" unless temporary_file
 
-    csv_importer = CsvImporter.new(temporary_file.contents, category_model.name.underscore.humanize.titleize, @processed_file.id)
+    csv_importer = CsvImporter.new(temporary_file.contents, category_model.name.underscore.humanize.titleize, @processed_file.id, @organization)
     csv_importer.call
 
     if csv_importer.errored?
