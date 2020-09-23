@@ -20,9 +20,9 @@ describe "When I visit the users Index page" do
       end.to change { page.all(:xpath, './/tr').count }.by(-1)
     end
   end
-  
+
   it "Then I cannot delete myself" do
-    user1 = create(:user, organization: user.organization)
+    create(:user, organization: user.organization)
     users_count = User.for_organization(user.organization).count
 
     visit users_path
