@@ -18,17 +18,17 @@
 
   <div class="field">
     <%= form.label :male, class: 'label' %>
-    <%= form.collection_select :male_id, Animal.all, :id, :pii_tag, prompt: true, class: 'input' %>
+    <%= form.collection_select :male_id, Animal.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
   </div>
 
   <div class="field">
     <%= form.label :female, class: 'label' %>
-    <%= form.collection_select :female_id, Animal.all, :id, :pii_tag, prompt: true, class: 'input' %>
+    <%= form.collection_select :female_id, Animal.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
   </div>
 
   <div class="field">
     <%= form.label :tank, class: 'label' %>
-    <%= form.collection_select :tank_id, Tank.all, :id, :name, include_blank: 'Select Tank', class: 'input' %>
+    <%= form.collection_select :tank_id, Tank.for_organization(current_organization), :id, :name, include_blank: 'Select Tank', class: 'input' %>
   </div>
 
   <div class="field">
