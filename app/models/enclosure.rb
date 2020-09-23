@@ -8,7 +8,7 @@ class Enclosure < ApplicationRecord
 
   has_one :cohort, required: false
 
-  validates :name, uniqueness: { scope: :organization }
+  validates :name, uniqueness: { scope: %i[organization_id facility_id] }
 
   delegate :name, to: :facility, prefix: true, allow_nil: true
 

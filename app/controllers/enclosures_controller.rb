@@ -35,6 +35,21 @@ class EnclosuresController < ApplicationController
     redirect_to enclosures_url, notice: 'Enclosure was successfully destroyed.'
   end
 
+  def csv_upload; end
+
+  def import
+    if params[:enclosure_csv].content_type == 'text/csv'
+      upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
+                                 file: params[:enclosure_csv])
+
+      ImportEnclosuersJob.perform_later(upload)
+
+      redirect_to enclosures_path, notice: 'Processing file...'
+    else
+      redirect_to csv_upload_enclosures_path, error: 'Invalid file type. Please upload a CSV.'
+    end
+  end
+
   private
 
   def set_enclosure

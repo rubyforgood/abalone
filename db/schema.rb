@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_202015) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["facility_id"], name: "index_enclosures_on_facility_id"
+    t.index ["name", "facility_id", "organization_id"], name: "index_enclosures_on_name_and_facility_id_and_organization_id", unique: true
     t.index ["organization_id"], name: "index_enclosures_on_organization_id"
   end
 
@@ -187,27 +188,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_202015) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "temporary_file_id"
-  end
-
-  create_table "tagged_animal_assessments", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "measurement_date"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.string "tag"
-    t.string "from_growout_rack"
-    t.string "from_growout_column"
-    t.string "from_growout_trough"
-    t.string "to_growout_rack"
-    t.string "to_growout_column"
-    t.string "to_growout_trough"
-    t.decimal "length"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
   end
 
   create_table "temporary_files", force: :cascade do |t|
