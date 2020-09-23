@@ -14,5 +14,9 @@
         <%= @user.email %>
       </p>
     </div>
+    
+    <%= link_to '<< BACK', users_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_user_path(@user), class: "button-outline-primary mt-4" %>
+
   </div>
 </section>
