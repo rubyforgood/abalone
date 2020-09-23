@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_124428) do
+ActiveRecord::Schema.define(version: 2020_09_23_130852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,18 +26,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_124428) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
-  end
-
-  create_table "consolidation_reports", force: :cascade do |t|
-    t.bigint "family_id"
-    t.bigint "tank_from_id"
-    t.bigint "tank_to_id"
-    t.string "total_animal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["family_id"], name: "index_consolidation_reports_on_family_id"
-    t.index ["tank_from_id"], name: "index_consolidation_reports_on_tank_from_id"
-    t.index ["tank_to_id"], name: "index_consolidation_reports_on_tank_to_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -233,7 +221,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_124428) do
   end
 
   add_foreign_key "animals", "organizations"
-  add_foreign_key "consolidation_reports", "families"
   add_foreign_key "families", "organizations"
   add_foreign_key "measurement_events", "organizations"
   add_foreign_key "measurement_events", "tanks"
