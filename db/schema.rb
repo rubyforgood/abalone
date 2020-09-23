@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
   enable_extension "plpgsql"
 
   create_enum :animal_sex, [
+    "unknown",
     "male",
     "female",
   ], force: :cascade
@@ -26,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_09_22_214542) do
     t.string "collection_position"
     t.integer "pii_tag"
     t.integer "tag_id"
-    t.enum "sex", enum_name: "animal_sex"
+    t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"

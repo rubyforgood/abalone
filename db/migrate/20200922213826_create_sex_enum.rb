@@ -1,6 +1,6 @@
 class CreateSexEnum < ActiveRecord::Migration[6.0]
   def up
-    create_enum :animal_sex, %w[male female]
+    create_enum :animal_sex, %w[unknown male female]
   end
 
   def down
