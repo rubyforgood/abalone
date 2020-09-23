@@ -2,7 +2,7 @@ class TanksController < ApplicationController
   before_action :set_tank, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tanks = Tank.for_organization(current_organization)
+    @tanks = Tank.for_organization(current_organization).includes(:facility)
   end
 
   def show; end
