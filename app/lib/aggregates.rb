@@ -54,15 +54,5 @@ module Aggregates
 
       animal_growth
     end
-
-    # mortality within a cohort/population over time
-    # => { date => death_count, death2 => death_count2,... }
-    def self.deaths_by_cohort_for_date_range(cohort, date_range)
-      query_results = MortalityTracking.not_raw
-                                       .where(cohort: cohort, mortality_date: date_range)
-                                       .group_by(&:mortality_date)
-
-      query_results.each { |k, v| query_results[k] = v.map(&:number_morts).sum }
-    end
   end
 end

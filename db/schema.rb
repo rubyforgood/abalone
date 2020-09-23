@@ -137,26 +137,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.index ["tank_id"], name: "index_measurements_on_tank_id"
   end
 
-  create_table "mortality_trackings", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "mortality_date"
-    t.string "cohort"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.integer "shell_box"
-    t.string "shell_container"
-    t.string "animal_location"
-    t.integer "number_morts"
-    t.string "approximation"
-    t.string "processed_by_shl"
-    t.string "initials"
-    t.string "tags"
-    t.string "comments"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
   create_table "operation_batches", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -182,19 +162,6 @@ ActiveRecord::Schema.define(version: 2020_09_22_203301) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "pedigrees", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "cohort"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.string "mother"
-    t.string "father"
-    t.string "seperate_cross_within_cohort"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
   end
 
   create_table "population_estimates", force: :cascade do |t|

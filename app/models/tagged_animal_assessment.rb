@@ -82,20 +82,7 @@ class TaggedAnimalAssessment < ApplicationRecord
     # count = count of all animals from that spreadsheet
     sample = measurements.count.to_f
 
-    # total = total number of estimated animals from cohort (will need PopulationEstimate minus Mortality)
-    total = Services::PopulationCountEstimator.run(shl_case_number, measurement_date)
-
-    # for each group, num / count * total. will come up with a whole number, like 20. keep 20 with the size bin {"2cm" => 20}
-    extrapolated_grouped_measurements = grouped_measurements.map do |group|
-      { group.first => (group.last.count / sample * total).round }
-    end
-
-    # for each group, shovel in x.times to an array e.g. data = [20,20]
-    extrapolated_lengths = []
-    extrapolated_grouped_measurements.each do |group|
-      group.values.first.times { extrapolated_lengths << group.keys.first }
-    end
-    extrapolated_lengths
+    [grouped_measurements, sample]
   end
 
   def cleanse_data!
