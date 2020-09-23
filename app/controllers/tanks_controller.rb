@@ -2,7 +2,7 @@ class TanksController < ApplicationController
   before_action :set_tank, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tanks = Tank.all
+    @tanks = Tank.for_organization(current_organization).includes(:facility)
   end
 
   def show; end
@@ -47,6 +47,6 @@ class TanksController < ApplicationController
   end
 
   def tank_params
-    params.require(:tank).permit(:facility_id, :name)
+    params.require(:tank).permit(:facility_id, :name).merge(organization_id: current_organization.id)
   end
 end

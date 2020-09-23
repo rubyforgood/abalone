@@ -76,7 +76,7 @@ class WildCollection < ApplicationRecord
     attrs[:collection_date] = Date.strptime(attrs[:collection_date], '%m/%d/%y') rescue nil
     attrs[:otc_treatment_completion_date] = Date.strptime(attrs[:otc_treatment_completion_date], '%m/%d/%y') rescue nil
 
-    new(attrs)
+    new(attrs.except(:organization_id))
   end
 
   def initial_holding_facility_is_valid
