@@ -72,3 +72,6 @@ gem 'iostreams'
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'capistrano3-delayed-job', '~> 1.0'
+
+# Auditing
+gem 'paper_trail'

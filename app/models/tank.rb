@@ -1,4 +1,6 @@
 class Tank < ApplicationRecord
+  has_paper_trail
+
   include OrganizationScope
 
   belongs_to :facility, optional: true

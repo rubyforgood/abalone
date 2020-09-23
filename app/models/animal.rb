@@ -1,4 +1,6 @@
 class Animal < ApplicationRecord
+  has_paper_trail
+
   include OrganizationScope
 
   after_initialize :set_default_sex, if: :new_record?

@@ -12,6 +12,8 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
+  has_paper_trail
+
   include OrganizationScope
 
   has_many :tanks
