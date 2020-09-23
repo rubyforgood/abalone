@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include OrganizationScope
+
   enum role: %i[user admin]
   after_initialize :set_default_role, if: :new_record?
 
@@ -11,6 +13,4 @@ class User < ApplicationRecord
   # :registerable, and :omniauthable
   devise :database_authenticatable, :recoverable,
          :rememberable, :validatable
-
-  belongs_to :organization
 end

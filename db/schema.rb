@@ -16,10 +16,31 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
   enable_extension "plpgsql"
 
   create_enum :animal_sex, [
-    "unknown",
-    "male",
-    "female",
+      "unknown",
+      "male",
+      "female",
   ], force: :cascade
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "animals", force: :cascade do |t|
     t.integer "collection_year"
@@ -32,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
+    t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -70,6 +92,16 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.index ["male_id"], name: "index_families_on_male_id"
     t.index ["organization_id"], name: "index_families_on_organization_id"
     t.index ["tank_id"], name: "index_families_on_tank_id"
+  end
+
+  create_table "file_uploads", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "organization_id"
+    t.text "status", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_file_uploads_on_organization_id"
+    t.index ["user_id"], name: "index_file_uploads_on_user_id"
   end
 
   create_table "measurement_events", force: :cascade do |t|
@@ -175,6 +207,7 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["facility_id"], name: "index_tanks_on_facility_id"
+    t.index ["name", "facility_id", "organization_id"], name: "index_tanks_on_name_and_facility_id_and_organization_id", unique: true
     t.index ["organization_id"], name: "index_tanks_on_organization_id"
   end
 
@@ -199,31 +232,11 @@ ActiveRecord::Schema.define(version: 2020_09_23_154527) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "wild_collections", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "tag"
-    t.date "collection_date"
-    t.string "general_location"
-    t.string "precise_location"
-    t.point "collection_coordinates"
-    t.string "proximity_to_nearest_neighbor"
-    t.string "collection_method_notes"
-    t.string "foot_condition_notes"
-    t.decimal "collection_depth"
-    t.decimal "length"
-    t.decimal "weight"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.string "initial_holding_facility"
-    t.string "final_holding_facility_and_date_of_arrival"
-    t.date "otc_treatment_completion_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animals", "organizations"
   add_foreign_key "families", "organizations"
+  add_foreign_key "file_uploads", "organizations"
+  add_foreign_key "file_uploads", "users"
   add_foreign_key "measurement_events", "organizations"
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"

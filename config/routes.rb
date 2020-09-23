@@ -3,9 +3,20 @@ Rails.application.routes.draw do
   resources :users
   resources :facilities
   resources :families
-  resources :animals
-  resources :tanks
   resources :measurement_types, except: %i[show]
+  resources :animals do
+    collection do
+      get '/csv_upload', action: 'csv_upload'
+      post '/csv_upload', action: 'import'
+    end
+  end
+  resources :tanks do
+    collection do
+      get '/csv_upload', action: 'csv_upload'
+      post '/csv_upload', action: 'import'
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   post '/file_uploads', to: 'file_uploads#upload'
