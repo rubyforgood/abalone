@@ -1,14 +1,5 @@
 module Aggregates
   class Calculations
-    # total number of animals in the program, by spawning date and holding facility
-    # spawndate acts as the cohort designator here
-    def self.total_animals_by_spawndate_and_facility(spawning_date, facility)
-      PopulationEstimate.not_raw
-                        .where(facility: facility, spawning_date: spawning_date)
-                        .pluck(:abundance)
-                        .map(&:to_i).reduce(:+)
-    end
-
     # total egg, larval, or juvenile production by year (esp. how many year-old animals are produced annually)
     def self.offspring_production(_life_stage, _year)
       # TODO
