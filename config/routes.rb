@@ -9,7 +9,13 @@ Rails.application.routes.draw do
       post '/csv_upload', action: 'import'
     end
   end
-  resources :tanks
+  resources :tanks do
+    collection do
+      get '/csv_upload', action: 'csv_upload'
+      post '/csv_upload', action: 'import'
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   post '/file_uploads', to: 'file_uploads#upload'

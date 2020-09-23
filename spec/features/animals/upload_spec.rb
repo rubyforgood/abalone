@@ -22,8 +22,8 @@ describe "When I visit the animal Upload Csv page" do
     within('tbody') { expect(page).to have_xpath('.//tr', count: 2) }
 
     # Verify no duplicates and assigned to correct org
-    animal = Animal.where(pii_tag: 2)
-    expect(animal.count).to eql(1)
-    expect(animal.first.organization_id).to eql(user.organization.id)
+    animals = Animal.where(pii_tag: 2)
+    expect(animals.count).to eql(1)
+    expect(animals.first.organization_id).to eql(user.organization.id)
   end
 end

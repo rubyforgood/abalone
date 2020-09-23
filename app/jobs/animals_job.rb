@@ -6,6 +6,8 @@ class AnimalsJob < ApplicationJob
     CSV.parse(upload.file.download, headers: true) do |animal|
       headers = animal.headers & ANIMAL_COLUMNS
       attrs = animal.to_hash.delete_if { |k, _v| !headers.include? k }.deep_symbolize_keys
+      next if attrs.values.compact.empty?
+
       attrs.merge!({ organization_id: upload.organization.id })
       begin
         status[:created_count] += 1 if Animal.create(attrs)
