@@ -54,7 +54,7 @@ class AnimalsController < ApplicationController
       upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
                                  file: params[:animal_csv])
 
-      AnimalsJob.perform_later(upload)
+      ImportAnimalsJob.perform_later(upload)
 
       redirect_to animals_path, notice: 'Processing file...'
     else
