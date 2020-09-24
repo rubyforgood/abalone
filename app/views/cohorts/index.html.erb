@@ -1,0 +1,57 @@
+<section class="section facilities__index">
+  <div class="container facilities__index__container">
+    <p id="notice"><%= notice %></p>
+
+    <div class="facilities__index__container__header">
+      <h1 class="title">Cohorts</h1>
+      <%= link_to new_cohort_path, class: "button-primary" do %>
+        New Cohort <%= image_tag  "icons/plus.png", size: 17 %>
+      <% end %>
+      <%#= link_to csv_upload_cohorts_path, class: "button-primary" do %>
+      <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
+      <%# end %>
+      <%= link_to cohorts_path(format: :csv), class: "button-primary" do %>
+        Export to CSV
+      <% end %>
+    </div>
+
+    <table class="table  table-hover table-responsive-sm">
+      <thead>
+      <tr class="bg-dark-light">
+        <th>Name</th>
+        <th>Female</th>
+        <th>Male</th>
+        <th>Enclosure</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cohorts.each do |cohort| %>
+        <tr>
+          <td><%= cohort.name %></td>
+          <td>
+            <% if cohort.female.present? %>
+              <%= link_to cohort.female_pii_tag, animal_path(cohort.female) %>
+            <% else %>
+                No female present
+            <% end %>
+          </td>
+          <td>
+            <% if cohort.male.present? %>
+              <%= link_to family.male_pii_tag, animal_path(cohort.male) %>
+            <% else %>
+                No male present
+            <% end %>
+          </td>
+          <td><%= cohort.enclosure&.name %></td>
+          <td><%= link_to 'Show', cohort_path(cohort) %></td>
+          <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_cohort_path(cohort) %></td>
+          <td><%= link_to image_tag("icons/trash.svg", size: 24), cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</section>

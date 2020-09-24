@@ -2,6 +2,7 @@ class Animal < ApplicationRecord
   has_paper_trail
 
   include OrganizationScope
+  include CsvExportable
 
   has_many :measurements, as: :subject
 

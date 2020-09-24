@@ -1,4 +1,4 @@
-   measurement_event,   measurement   , value ,tank_name   ,   animal_pii_tag,    family_name,
+   measurement_event,   measurement   , value ,enclosure_name   ,   animal_pii_tag,    cohort_name,
 Michael Drinks the Water,Flavor,    Salty,Support Rack 3,,,
 Michael Drinks the Water  ,    Flavor,   WAY too salty,   AB-17,,,
    Michael Drinks the Water   ,Flavor   ,Good,,,,
