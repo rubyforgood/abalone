@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, path_prefix: 'app'
   resources :users
-  resources :passwords
+  resources :passwords, only: [:edit, :update]
   resources :facilities
   resources :families
   resources :measurement_types, except: %i[show]
