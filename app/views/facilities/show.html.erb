@@ -1,23 +1,26 @@
-<section class="section facilities__show">
-  <div class="container facilities__show__container">
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
-    <div class="facilities__show__container__header">
-      <h1 class="title">Facility</h1>
+    <div class="flex justify-between items-start mb-4">
+      <%= link_to facilities_path do %>
+        <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center">
+          <span><< Back</span>
+        </button>
+      <% end %>
+      <%= link_to edit_facility_path(@facility) do %>
+        <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <span>Edit Facility</span>
+        </button>
+      <% end %>
     </div>
-    <div class="facilities__show__container__body mb-5">
-      <p>
-        <strong>Name:</strong>
+    <div>
+      <h1 class="text-3xl mb-4">Facility</h1>
+    </div>
+    <div class="block">
+        <div class="text-sm text-caption-light font-medium uppercase">Name</div>
         <%= @facility.name %>
-      </p>
-
-      <p>
-        <strong>Code:</strong>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Code</div>
         <%= @facility.code %>
-      </p>
     </div>
-
-    <%= link_to '<< BACK', facilities_path, class: "mr-3 mb-3 button-outline-primary" %>
-    <%= link_to "Edit", edit_facility_path(@facility), class: "button-outline-primary mt-4" %>
-
   </div>
 </section>
