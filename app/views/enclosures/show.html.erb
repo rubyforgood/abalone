@@ -1,0 +1,21 @@
+<section class="section facilities__show">
+  <div class="container facilities__show__container">
+    <div class="facilities__show__container__header">
+      <h1 class="title">Enclosure</h1>
+    </div>
+    <div class="facilities__show__container__body mb-5">
+      <p>
+        <strong>Facility:</strong>
+        <%= @enclosure.facility_name %>
+      </p>
+
+      <p>
+        <strong>Name:</strong>
+        <%= @enclosure.name %>
+      </p>
+    </div>
+
+    <%= link_to '<< BACK', enclosures_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_enclosure_path(@enclosure), class: "button-outline-primary mt-4" %>
+  </div>
+</section>
