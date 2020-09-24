@@ -3,6 +3,11 @@ class EnclosuresController < ApplicationController
 
   def index
     @enclosures = Enclosure.for_organization(current_organization).includes(:facility)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @enclosures.to_csv, filename: "#{Date.today.iso8601}-enclosures.csv" }
+    end
   end
 
   def show; end

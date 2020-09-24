@@ -23,4 +23,17 @@ describe "When I visit the cohort Index page" do
     expect(page).to have_link(nil, href: edit_cohort_path(cohort.id))
     expect(page).to have_selector("a[data-method='delete'][href='#{cohort_path(cohort.id)}']")
   end
+
+  it "should allow exporting to csv" do
+    cohorts = create_list(:cohort, 5, organization: user.organization)
+
+    visit cohorts_path
+
+    click_on "Export to CSV"
+
+    expect(page.response_headers['Content-Type']).to eql "text/csv"
+    expect(page).to have_content(Cohort.exportable_columns.join(','))
+
+    cohorts.each { |cohort| expect(page).to have_content(cohort.name) }
+  end
 end

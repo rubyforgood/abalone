@@ -1,8 +1,11 @@
 class Animal < ApplicationRecord
   include OrganizationScope
+  include CsvExportable
 
   belongs_to :cohort, optional: true
   has_many :measurements, as: :subject
+  has_many :animals_shl_numbers, dependent: :destroy
+  has_many :shl_numbers, through: :animals_shl_numbers
 
   after_initialize :set_default_sex, if: :new_record?
 
@@ -14,5 +17,9 @@ class Animal < ApplicationRecord
 
   def set_default_sex
     self.sex ||= :unknown
+  end
+
+  def shl_number_codes(join = ",")
+    shl_numbers.pluck(:code).join(join)
   end
 end
