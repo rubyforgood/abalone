@@ -40,10 +40,14 @@
         <strong>Cohort:</strong>
         <%= @animal.cohort.name %>
       </p>
+
+      <p>
+        <strong>SHL Numbers:</strong>
+        <%= @animal.shl_number_codes(", ") %>
+      </p>
     </div>
 
     <%= link_to '<< BACK', animals_path, class: "mr-3 mb-3 button-outline-primary" %>
     <%= link_to "Edit", edit_animal_path(@animal), class: "button-outline-primary mt-4" %>
-
   </div>
 </section>

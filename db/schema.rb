@@ -58,6 +58,15 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
     t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
   end
 
+  create_table "animals_shl_numbers", force: :cascade do |t|
+    t.bigint "animal_id"
+    t.bigint "shl_number_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id"], name: "index_animals_shl_numbers_on_animal_id"
+    t.index ["shl_number_id"], name: "index_animals_shl_numbers_on_shl_number_id"
+  end
+
   create_table "cohorts", force: :cascade do |t|
     t.bigint "female_id"
     t.bigint "male_id"
@@ -190,6 +199,12 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "temporary_file_id"
+  end
+
+  create_table "shl_numbers", force: :cascade do |t|
+    t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "temporary_files", force: :cascade do |t|

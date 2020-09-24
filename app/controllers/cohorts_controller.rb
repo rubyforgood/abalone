@@ -3,6 +3,11 @@ class CohortsController < ApplicationController
 
   def index
     @cohorts = Cohort.for_organization(current_organization)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @cohorts.to_csv, filename: "#{Date.today.iso8601}-cohorts.csv" }
+    end
   end
 
   def show; end
