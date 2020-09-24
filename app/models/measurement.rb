@@ -6,25 +6,25 @@ class Measurement < ApplicationRecord
   belongs_to :subject, polymorphic: true
   belongs_to :measurement_type
 
-  validates :subject_type, presence: true, inclusion: { in: %w(Family Tank Animal) }
+  validates :subject_type, presence: true, inclusion: { in: %w(Cohort Enclosure Animal) }
   validates :value, presence: true
 
   HEADERS = {
     MEASUREMENT_EVENT: "measurement_event",
     MEASUREMENT: "measurement",
     VALUE: "value",
-    TANK_NAME: "tank_name",
+    ENCLOSURE_NAME: "enclosure_name",
     ANIMAL_PII_TAG: "animal_pii_tag",
-    FAMILY_NAME: "family_name"
+    COHORT_NAME: "cohort_name"
   }.freeze
 
   # The below code is unstable. This is retrofitting the values from the seeded CSV
-  # In reality, for instance, the subject would not always be a tank
+  # In reality, for instance, the subject would not always be a enclosure
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
     measurement_event_name = attrs.fetch(:measurement_event)
-    tank = Tank.find_or_create_by!(
-      name: attrs.fetch(:tank_name),
+    enclosure = Enclosure.find_or_create_by!(
+      name: attrs.fetch(:enclosure_name),
       organization_id: attrs.fetch(:organization_id)
     )
 
@@ -42,7 +42,7 @@ class Measurement < ApplicationRecord
     measurement_attrs[:name] = attrs.fetch(:measurement)
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs[:organization_id] = attrs.fetch(:organization_id)
-    measurement_attrs[:subject] = tank.id
+    measurement_attrs[:subject] = enclosure.id
     measurement_attrs[:measurement_type_id] = measurement_type.id
 
     # create measurement
@@ -50,9 +50,9 @@ class Measurement < ApplicationRecord
 
     ## TODO: allow attachment to any model, and attach measurement directly, not through the event
     ## this will require making a polymorphic "measurable"
-    # klass = attrs.fetch(:entity).strip.classify.constantize # this only supports "tank" right now
+    # klass = attrs.fetch(:entity).strip.classify.constantize # this only supports "enclosure" right now
     # name = attrs.fetch(:name)
-    # model = klass.find_or_create_by!(name: name) # this will always be set to tank
+    # model = klass.find_or_create_by!(name: name) # this will always be set to enclosure
     # model.measurements << measurement
   end
 end

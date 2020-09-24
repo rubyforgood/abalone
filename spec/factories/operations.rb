@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :operation do
-    tank { nil }
+    enclosure { nil }
     organization
   end
 end

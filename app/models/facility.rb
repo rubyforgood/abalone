@@ -15,7 +15,7 @@ class Facility < ApplicationRecord
   include OrganizationScope
   include CsvExportable
 
-  has_many :tanks
+  has_many :enclosures
 
   after_commit { Rails.cache.delete('facility_codes') }
 
