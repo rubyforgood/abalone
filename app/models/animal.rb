@@ -7,6 +7,8 @@ class Animal < ApplicationRecord
   has_many :animals_shl_numbers, dependent: :destroy
   has_many :shl_numbers, through: :animals_shl_numbers
 
+  delegate :name, to: :cohort, prefix: true, allow_nil: true
+
   after_initialize :set_default_sex, if: :new_record?
 
   enum sex: {
