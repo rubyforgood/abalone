@@ -89,7 +89,7 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if user_signed_in? %>
-                <%= link_to "Change password", edit_password_users_path(current_user), class: "button is-grey-light" %>
+                <%= link_to "Change password", edit_password_path(current_user), class: "button is-grey-light" %>
                 <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-grey-light" %>
               <% else %>
                 <%= link_to "Login", new_user_session_path, class: "button is-grey-light button-outline-primary" %>

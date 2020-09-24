@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, path_prefix: 'app'
-  resources :users do
-    collection do
-      get '/edit_password/:id', action: 'edit_password', as: :edit_password
-      post '/edit_password/:id', action: 'update_password', as: :update_password
-    end
-  end
+  resources :users
+  resources :passwords
   resources :facilities
   resources :families
   resources :measurement_types, except: %i[show]

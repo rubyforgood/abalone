@@ -2,7 +2,7 @@
   <div class="container facilities__form__container">
     <h1 class="title">Change Password</h1>
     <div class="facilities__form__container__body">
-      <%= form_with(url: update_password_users_path(@user), model: @user, local: true, method: :post) do |form| %>
+      <%= form_with(url: password_path(@user), model: @user, local: true) do |form| %>
         <% if @user.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>

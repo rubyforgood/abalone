@@ -9,7 +9,7 @@ describe "When I visit the user Change password page" do
 
   context "As an regular user" do
     it "Then I can update my own the password" do
-      visit edit_password_users_path(user)
+      visit edit_password_path(user)
 
       within('form') do
         fill_in('Password', with: "anewpassword")
@@ -22,7 +22,7 @@ describe "When I visit the user Change password page" do
     it "Then I should not authorized to change other user password" do
       another_user = create(:user)
 
-      visit edit_password_users_path(another_user)
+      visit edit_password_path(another_user)
 
       expect(page).to have_content('Not authorized')
     end
