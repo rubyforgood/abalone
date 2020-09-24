@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-white_abalone = Organization.create(name: "White Abalone")
-pinto_abalone = Organization.create(name: "Pinto Abalone")
+white_abalone = Organization.find_or_create_by(name: "White Abalone")
+pinto_abalone = Organization.find_or_create_by(name: "Pinto Abalone")
 
 User.create({ :email => "test@example.com",
               :password => "password",
@@ -46,11 +46,12 @@ white_abalone_facilities= { "Aquarium of the Pacific" => "AOP",
             }
 
 white_abalone_facilities.each do |f_name, f_code|
-  facility = Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)
-  Enclosure.find_or_create_by(name: "Enclosure", facility: facility, organization: white_abalone)
+  facility = Facility.find_or_create_by(name: f_name, code: f_code, organization: white_abalone)
+  location = Location.find_or_create_by(name: "#{f_name} location", facility: facility, organization: white_abalone)
+  Enclosure.find_or_create_by(name: "Enclosure", location: location, organization: white_abalone)
 end
 
-Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization_id: pinto_abalone.id)
+Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization: pinto_abalone)
 # import all sample_data_files (uncomment when importers are added for all CSV categories)
 # Dir["db/sample_data_files/*"].each do |category_dir|
 #   category_class_name = File.basename(category_dir).titleize
@@ -75,7 +76,7 @@ end
 male = Animal.create!(sex: :male, organization_id: white_abalone.id)
 female = Animal.create!(sex: :female, organization_id: pinto_abalone.id)
 cohort = Cohort.create!(male: male, female: female, organization_id: white_abalone.id)
-enclosure = Enclosure.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17', organization_id: white_abalone.id)
+enclosure = Enclosure.create!(location: Location.first, name: 'AB-17', organization_id: white_abalone.id)
 Operation.create!(enclosure: enclosure, animals_added: 800, cohort: cohort, operation_date: 7.days.ago, action: :add_cohort, organization_id: white_abalone.id)
 measurement_event = MeasurementEvent.create!(name: "My first measurement", organization_id: white_abalone.id)
 measurement_type = MeasurementType.create!(name: "length", unit: "cm", organization: white_abalone)

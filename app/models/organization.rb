@@ -6,6 +6,5 @@ class Organization < ApplicationRecord
   has_many :measurement_events
   has_many :operations
   has_many :facilities
-  has_many :enclosures, through: :facilities
   has_many :animals
 end
