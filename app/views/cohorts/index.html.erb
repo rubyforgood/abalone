@@ -39,7 +39,7 @@
           </td>
           <td>
             <% if cohort.male.present? %>
-              <%= link_to family.male_pii_tag, animal_path(cohort.male) %>
+              <%= link_to cohort.male_pii_tag, animal_path(cohort.male) %>
             <% else %>
                 No male present
             <% end %>
