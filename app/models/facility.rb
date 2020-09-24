@@ -13,6 +13,7 @@
 
 class Facility < ApplicationRecord
   include OrganizationScope
+  include CsvExportable
 
   has_many :tanks
 
