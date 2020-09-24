@@ -5,10 +5,8 @@ contextual_filters:
 - for_organization
 
 filters:
-- key: created_at
-  criteria:
-    operator: between
-    value: -90d - now
+- created_at
+- cohort
 
 # columns/associations we're grouping by (x-axis)
 dimensions:
