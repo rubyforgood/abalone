@@ -1,0 +1,3 @@
+measure: user
+dimensions:
+- created_at
