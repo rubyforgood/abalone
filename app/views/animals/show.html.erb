@@ -36,6 +36,10 @@
         <%= @animal.sex.humanize %>
       </p>
 
+      <p>
+        <strong>SHL Numbers:</strong>
+        <%= @animal.shl_number_codes(", ") %>
+      </p>
     </div>
 
     <%= link_to '<< BACK', animals_path, class: "mr-3 mb-3 button-outline-primary" %>
