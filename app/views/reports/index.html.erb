@@ -2,12 +2,17 @@
   <div class="container">
     <h1 class="title">Reports</h1>
 
-    <%= render_report 'total_animals_by_location',
+    <%= render_report 'total_animals_by_cohort',
                       context_params: { organization_id: current_user.organization_id },
-                      actions: [] do |builder| %>
+                      actions: [] do |report| %>
+      <%= report.form do |f| %>
+        <div>
+          <%= f.date_range :created_at %>
+        </div>
+      <% end %>
       <div style="text-align: right">
-        <%= builder.export_csv_button 'Download CSV', class: 'button-primary' %>
-        <%= builder.export_xls_button 'Download Excel', class: 'button-primary' %>
+        <%= report.export_csv_button 'Download CSV', class: 'button-primary' %>
+        <%= report.export_xls_button 'Download Excel', class: 'button-primary' %>
       </div>
     <% end %>
 

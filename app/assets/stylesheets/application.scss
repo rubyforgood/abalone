@@ -1,3 +1,6 @@
+/*
+*= "reports_kit/application";
+*/
 @import "facilities";
 @import "file_uploads";
 @import "home";
@@ -5,7 +8,6 @@
 @import "variables";
 @import "mixins";
 @import "pages/**/*";
-@import "reports_kit/application";
 
 * {
   font-family: "Poppins", sans-serif;
