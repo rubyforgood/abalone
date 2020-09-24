@@ -70,8 +70,8 @@ Dir["db/sample_data_files/*"].each do |category_dir|
   end
 end
 
-# Tanks can have Operations occur (add or remove animals, combine enclosure contents, etc)
-# Tanks can also have Measurements (number of animals, temperature of enclosure, etc)
+# Enclosures can have Operations occur (add or remove animals, combine enclosure contents, etc)
+# Enclosures can also have Measurements (number of animals, temperature of enclosure, etc)
 male = Animal.create!(sex: :male, organization_id: white_abalone.id)
 female = Animal.create!(sex: :female, organization_id: pinto_abalone.id)
 cohort = Cohort.create!(male: male, female: female, organization_id: white_abalone.id)

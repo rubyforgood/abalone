@@ -1,24 +1,24 @@
 require 'rails_helper'
 
-describe "When I visit the tank Index page" do
+describe "When I visit the enclosure Index page" do
   let(:user) { create(:user) }
 
   before do
     sign_in user
   end
 
-  it "Then I click the delete button, tank should be deleted" do
-    tank1 = create(:tank, organization: user.organization)
-    tank_count = Tank.for_organization(user.organization).count
+  it "Then I click the delete button, enclosure should be deleted" do
+    enclosure1 = create(:enclosure, organization: user.organization)
+    enclosure_count = Enclosure.for_organization(user.organization).count
 
-    visit tanks_path
+    visit enclosures_path
 
-    link = find("a[data-method='delete'][href='#{tank_path(tank1.id)}']")
+    link = find("a[data-method='delete'][href='#{enclosure_path(enclosure1.id)}']")
 
     within('tbody') do
-      expect(page).to have_xpath('.//tr', count: tank_count)
+      expect(page).to have_xpath('.//tr', count: enclosure_count)
       link.click
-      expect(page).to have_xpath('.//tr', count: (tank_count - 1))
+      expect(page).to have_xpath('.//tr', count: (enclosure_count - 1))
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "When I visit the tank Edit page" do
+describe "When I visit the enclosure Edit page" do
   let(:user) { create(:user) }
   let!(:facility) { create(:facility, organization_id: user.organization_id) }
 
@@ -8,19 +8,19 @@ describe "When I visit the tank Edit page" do
     sign_in user
   end
 
-  it "And fill out the form and click the submit button, tank should be updated" do
-    tank = create(:tank)
+  it "And fill out the form and click the submit button, enclosure should be updated" do
+    enclosure = create(:enclosure)
 
-    visit edit_tank_path(tank)
+    visit edit_enclosure_path(enclosure)
 
     within('form') do
       select(facility.name, from: 'Facility')
-      fill_in 'tank_name', with: "Gary's old tank"
+      fill_in 'enclosure_name', with: "Gary's old enclosure"
       click_on 'Submit'
     end
 
-    expect(page).to have_content 'Tank was successfully updated.'
+    expect(page).to have_content 'Enclosure was successfully updated.'
     expect(page).to have_content(facility.name)
-    expect(page).to have_content "Gary's old tank"
+    expect(page).to have_content "Gary's old enclosure"
   end
 end

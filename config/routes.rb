@@ -3,16 +3,14 @@ Rails.application.routes.draw do
   resources :users
   resources :facilities
   resources :cohorts
-  resources :animals
-  resources :enclosures
-  resources :measurement_types, except: %i[show]
-  resources :animals do
+  resources :enclosures do 
     collection do
       get '/csv_upload', action: 'csv_upload'
       post '/csv_upload', action: 'import'
     end
   end
-  resources :tanks do
+  resources :measurement_types, except: %i[show]
+  resources :animals do
     collection do
       get '/csv_upload', action: 'csv_upload'
       post '/csv_upload', action: 'import'

@@ -13,6 +13,6 @@ class Enclosure < ApplicationRecord
   delegate :name, to: :facility, prefix: true, allow_nil: true
 
   def empty?
-    family.blank?
+    cohort.blank?
   end
 end

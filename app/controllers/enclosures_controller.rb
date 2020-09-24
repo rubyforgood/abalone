@@ -42,7 +42,7 @@ class EnclosuresController < ApplicationController
       upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
                                  file: params[:enclosure_csv])
 
-      ImportEnclosuersJob.perform_later(upload)
+      ImportEnclosuresJob.perform_later(upload)
 
       redirect_to enclosures_path, notice: 'Processing file...'
     else

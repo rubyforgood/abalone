@@ -17,7 +17,7 @@ describe "When I visit the measurement_type Edit page" do
       click_on 'Submit'
     end
 
-    expect(page).to have_content 'MeasurementType was successfully updated.'
+    expect(page).to have_content 'Measurement Type was successfully updated.'
     expect(page).to have_content "width"
   end
 end

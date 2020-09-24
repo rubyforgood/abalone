@@ -1,26 +1,26 @@
 require 'rails_helper'
 
-describe "When I visit the family Index page" do
+describe "When I visit the cohort Index page" do
   let(:user) { create(:user) }
 
   before do
     sign_in user
   end
 
-  it "Then I see a list of all the families" do
-    family = create(:family, organization: user.organization)
+  it "Then I see a list of all the cohorts" do
+    cohort = create(:cohort, organization: user.organization)
 
-    visit families_path
+    visit cohorts_path
 
     expect(page).to have_content("Name")
     expect(page).to have_content("Female")
     expect(page).to have_content("Male")
-    expect(page).to have_content("Tank")
+    expect(page).to have_content("Cohort")
 
-    expect(page).to have_link("New Family")
+    expect(page).to have_link("New Cohort")
 
     expect(page).to have_link("Show")
-    expect(page).to have_link(nil, href: edit_family_path(family.id))
-    expect(page).to have_selector("a[data-method='delete'][href='#{family_path(family.id)}']")
+    expect(page).to have_link(nil, href: edit_cohort_path(cohort.id))
+    expect(page).to have_selector("a[data-method='delete'][href='#{cohort_path(cohort.id)}']")
   end
 end
