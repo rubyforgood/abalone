@@ -1,4 +1,6 @@
 class Enclosure < ApplicationRecord
+  has_paper_trail
+
   include OrganizationScope
   include CsvExportable
 
