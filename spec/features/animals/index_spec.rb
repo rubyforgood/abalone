@@ -15,6 +15,7 @@ describe "When I visit the animal Index page" do
 
     expect(page).to have_content("Collection Year")
     expect(page).to have_content("Tag ID")
+    expect(page).to have_content("Cohort")
     expect(page).to have_content("SHL Numbers")
     expect(page).to have_link("New Animal")
     expect(page).to have_link("Show")
@@ -23,6 +24,7 @@ describe "When I visit the animal Index page" do
 
     expect(page).to have_content(animal.collection_year)
     expect(page).to have_content(animal.tag_id)
+    expect(page).to have_content(animal.cohort.name)
     expect(page).to have_content(animal.shl_number_codes(", "))
 
     within('tbody') do

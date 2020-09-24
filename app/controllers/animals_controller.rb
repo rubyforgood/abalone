@@ -67,6 +67,7 @@ class AnimalsController < ApplicationController
       :collection_year,
       :date_time_collected,
       :collection_position,
+      :cohort_id,
       :pii_tag,
       :tag_id,
       :sex

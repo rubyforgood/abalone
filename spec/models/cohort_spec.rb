@@ -6,5 +6,6 @@ RSpec.describe Cohort, type: :model do
     is_expected.to belong_to(:female).class_name("Animal").optional
     is_expected.to belong_to(:organization)
     is_expected.to have_many(:measurements)
+    is_expected.to have_many(:animals)
   end
 end

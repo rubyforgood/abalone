@@ -20,6 +20,7 @@
         <tr class="bg-dark-light">
           <th>Tag ID</th>
           <th>Collection Year</th>
+          <th>Cohort</th>
           <th>SHL Numbers</th>
           <th colspan="3"></th>
         </tr>
@@ -30,6 +31,7 @@
           <tr>
             <td><%= animal.tag_id %></td>
             <td><%= animal.collection_year %></td>
+            <td><%= animal.cohort_name %></td>
             <td><%= link_to 'Show', animal %></td>
             <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_animal_path(animal) %></td>
             <td><%= link_to image_tag("icons/trash.svg", size: 24), animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
