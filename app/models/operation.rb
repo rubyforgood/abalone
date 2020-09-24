@@ -1,19 +1,19 @@
 class Operation < ApplicationRecord
   include OrganizationScope
 
-  belongs_to :tank
+  belongs_to :enclosure
 
   belongs_to :operation_batch, required: false
-  belongs_to :family, required: false
+  belongs_to :cohort, required: false
 
-  validates :family, presence: true, if: :add_family?
+  validates :cohort, presence: true, if: :add_cohort?
 
   def perform
     case action.to_sym
-    when :remove_family
-      tank.update(family: nil)
-    when :add_family
-      tank.update(family: family)
+    when :remove_cohort
+      enclosure.update(cohort: nil)
+    when :add_cohort
+      enclosure.update(cohort: cohort)
     else
       raise InvalidActionError, action
     end
@@ -21,8 +21,8 @@ class Operation < ApplicationRecord
 
   private
 
-  def add_family?
-    action&.to_sym == :add_family
+  def add_cohort?
+    action&.to_sym == :add_cohort
   end
 
   class InvalidActionError < StandardError; end

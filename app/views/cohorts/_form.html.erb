@@ -1,0 +1,39 @@
+<%= form_with(model: cohort, local: true) do |form| %>
+  <% if cohort.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cohort.errors.count, "error") %> prohibited this cohort from being saved:</h2>
+
+      <ul>
+        <% cohort.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :male, class: 'label' %>
+    <%= form.collection_select :male_id, Animal.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :female, class: 'label' %>
+    <%= form.collection_select :female_id, Animal.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :enclosure, class: 'label' %>
+    <%= form.collection_select :enclosure_id, Enclosure.for_organization(current_organization), :id, :name, include_blank: 'Select Enclosure', class: 'input' %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.submit('Submit', class: 'button-primary') %>
+    </div>
+  </div>
+<% end %>

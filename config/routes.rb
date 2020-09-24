@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, path_prefix: 'app'
   resources :users
   resources :facilities
-  resources :families
+  resources :cohorts
   resources :measurement_types, except: %i[show]
   resources :animals do
     collection do
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       post '/csv_upload', action: 'import'
     end
   end
-  resources :tanks do
+  resources :enclosures do
     collection do
       get '/csv_upload', action: 'csv_upload'
       post '/csv_upload', action: 'import'
