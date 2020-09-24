@@ -1,9 +1,9 @@
 # what we're counting/aggregating (y-axis)
-measure: tank
+measure: animal
 
 contextual_filters:
 - for_organization
 
 # columns/associations we're grouping by (x-axis)
 dimensions:
-- facility
+- cohort
