@@ -57,10 +57,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
+    allowed_params = [:email, :password]
+    allowed_params << :role if current_user.admin?
     params.require(:user).permit(
-      :email,
-      :password,
-      :role
+      allowed_params
     ).merge(organization_id: current_organization.id)
   end
 
