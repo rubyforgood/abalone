@@ -3,6 +3,11 @@ class AnimalsController < ApplicationController
 
   def index
     @animals = Animal.for_organization(current_organization).includes(animals_shl_numbers: :shl_number)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @animals.to_csv, filename: "#{Date.today.iso8601}-animals.csv" }
+    end
   end
 
   def new

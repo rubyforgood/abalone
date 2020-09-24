@@ -4,11 +4,14 @@
 
     <div class="facilities__index__container__header">
       <h1 class="title">Animals</h1>
+      <%= link_to new_animal_path, class: "button-primary" do %>
+        New Animal <%= image_tag  "icons/plus.png", size: 17 %>
+      <% end %>
       <%= link_to csv_upload_animals_path, class: "button-primary" do %>
         CSV Upload <%= image_tag  "icons/plus.png", size: 17 %>
       <% end %>
-      <%= link_to new_animal_path, class: "button-primary" do %>
-        New Animal <%= image_tag  "icons/plus.png", size: 17 %>
+      <%= link_to animals_path(format: :csv), class: "button-primary" do %>
+        Export to CSV
       <% end %>
     </div>
 

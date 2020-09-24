@@ -7,6 +7,12 @@
       <%= link_to new_cohort_path, class: "button-primary" do %>
         New Cohort <%= image_tag  "icons/plus.png", size: 17 %>
       <% end %>
+      <%#= link_to csv_upload_cohorts_path, class: "button-primary" do %>
+      <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
+      <%# end %>
+      <%= link_to cohorts_path(format: :csv), class: "button-primary" do %>
+        Export to CSV
+      <% end %>
     </div>
 
     <table class="table  table-hover table-responsive-sm">
