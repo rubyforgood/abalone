@@ -1,5 +1,6 @@
 class Animal < ApplicationRecord
   include OrganizationScope
+  include CsvExportable
 
   has_many :measurements, as: :subject
 
