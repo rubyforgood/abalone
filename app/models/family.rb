@@ -10,13 +10,8 @@ class Family < ApplicationRecord
 
   belongs_to :tank, required: false
 
-  def female_pii_tag
-    female&.pii_tag
-  end
-
-  def male_pii_tag
-    male&.pii_tag
-  end
+  delegate :pii_tag, to: :female, prefix: true, allow_nil: true
+  delegate :pii_tag, to: :male, prefix: true, allow_nil: true
 
   # def name
   # "Male: #{male.id} / Female: #{female.id}"

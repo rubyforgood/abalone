@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= form.label :male, class: 'label' %>
-    <%= form.collection_select :male_id, Animal.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
+    <%= form.collection_select :male_id, Animal.male.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
   </div>
 
   <div class="field">
     <%= form.label :female, class: 'label' %>
-    <%= form.collection_select :female_id, Animal.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
+    <%= form.collection_select :female_id, Animal.female.for_organization(current_organization), :id, :pii_tag, prompt: true, class: 'input' %>
   </div>
 
   <div class="field">
