@@ -3,6 +3,13 @@ class Animal < ApplicationRecord
 
   include OrganizationScope
   include CsvExportable
+  include ReportsKit::Model
+
+  reports_kit do
+    contextual_filter :for_organization, ->(relation, context_params){
+      relation.for_organization(context_params[:organization_id])
+    }
+  end
 
   belongs_to :cohort, optional: true
   has_many :measurements, as: :subject
