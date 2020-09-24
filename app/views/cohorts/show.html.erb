@@ -12,12 +12,12 @@
 
       <p>
         <strong>Female:</strong>
-        <%= @cohort.female.pii_tag %>
+        <%= @cohort.female_pii_tag %>
       </p>
 
       <p>
         <strong>Male:</strong>
-        <%= @cohort.male.pii_tag %>
+        <%= @cohort.male_pii_tag %>
       </p>
 
       <p>
@@ -25,6 +25,12 @@
         <%= @cohort.enclosure&.name %>
       </p>
 
+      <p>
+        <strong>Animals :</strong>
+        <% @cohort.animals.each do |animal| %>
+          <%= link_to animal.pii_tag, animal_path(animal) %>
+        <% end %>
+      </p>
     </div>
 
     <%= link_to '<< BACK', cohorts_path, class: "mr-3 mb-3 button-outline-primary" %>

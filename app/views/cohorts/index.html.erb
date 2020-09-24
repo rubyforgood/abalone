@@ -7,6 +7,12 @@
       <%= link_to new_cohort_path, class: "button-primary" do %>
         New Cohort <%= image_tag  "icons/plus.png", size: 17 %>
       <% end %>
+      <%#= link_to csv_upload_cohorts_path, class: "button-primary" do %>
+      <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
+      <%# end %>
+      <%= link_to cohorts_path(format: :csv), class: "button-primary" do %>
+        Export to CSV
+      <% end %>
     </div>
 
     <table class="table  table-hover table-responsive-sm">
@@ -24,8 +30,20 @@
       <% @cohorts.each do |cohort| %>
         <tr>
           <td><%= cohort.name %></td>
-          <td><%= link_to cohort.female_pii_tag, animal_path(cohort.female) %></td>
-          <td><%= link_to cohort.male_pii_tag, animal_path(cohort.male) %></td>
+          <td>
+            <% if cohort.female.present? %>
+              <%= link_to cohort.female_pii_tag, animal_path(cohort.female) %>
+            <% else %>
+                No female present
+            <% end %>
+          </td>
+          <td>
+            <% if cohort.male.present? %>
+              <%= link_to cohort.male_pii_tag, animal_path(cohort.male) %>
+            <% else %>
+                No male present
+            <% end %>
+          </td>
           <td><%= cohort.enclosure&.name %></td>
           <td><%= link_to 'Show', cohort_path(cohort) %></td>
           <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_cohort_path(cohort) %></td>

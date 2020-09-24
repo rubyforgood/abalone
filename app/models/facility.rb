@@ -12,7 +12,10 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
+  has_paper_trail
+
   include OrganizationScope
+  include CsvExportable
 
   has_many :locations
 

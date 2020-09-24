@@ -14,7 +14,7 @@ describe "When I visit the enclosure Upload Csv page" do
 
     expect(page).to have_link("Click here")
     expect(page).to have_content("Click here for a sample csv file.")
-    expect(page).to have_content("Click here to view facilities codes.")
+    expect(page).to have_content("Click here to view facilities codes and location names.")
 
     attach_file('enclosure_csv', "#{Rails.root}/spec/fixtures/enclosures.csv")
 

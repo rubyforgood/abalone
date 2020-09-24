@@ -2,9 +2,14 @@ class FacilitiesController < ApplicationController
   before_action :set_facility, only: [:edit, :update, :destroy]
 
   # GET /facilities
-  # GET /facilities.json
+  # GET /facilities.csv
   def index
     @facilities = Facility.where(organization_id: current_user.organization_id)
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @facilities.to_csv, filename: "#{Date.today.iso8601}-facilities.csv" }
+    end
   end
 
   # GET /facilities/1
