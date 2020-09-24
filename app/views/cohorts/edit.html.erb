@@ -1,0 +1,10 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Editing Cohort</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', cohort: @cohort %>
+    </div>
+    <%= link_to '<< Back', cohorts_path, class: "button-outline-primary" %>
+    <%= link_to 'Show', @cohort,  class: "button-outline-primary" %>
+  </div>
+</section>

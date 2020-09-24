@@ -48,7 +48,7 @@ RSpec.describe CsvImporter do
     let(:processed_file) { create(:processed_file) }
     let(:category_name) { "Measurement" }
 
-    context "allows the upload of custom tank measurments (without notes)" do
+    context "allows the upload of custom enclosure measurments (without notes)" do
       let(:file) { File.read(Rails.root.join("spec/fixtures/basic_custom_measurement.csv")) }
       it "saves the measurements" do
         skip
@@ -57,20 +57,20 @@ RSpec.describe CsvImporter do
         end.to change { Measurement.count }.by(6)
       end
 
-      it "attaches the proper info and relationships for measurements (existing tank)" do
+      it "attaches the proper info and relationships for measurements (existing enclosure)" do
         skip
         CsvImporter.new(file, category_name, processed_file.id, organization).call
-        tank = Tank.where(name: "AB-17").last
-        measurement = tank.measurements.find_by!(name: "Flavor")
+        enclosure = Enclosure.where(name: "AB-17").last
+        measurement = enclosure.measurements.find_by!(name: "Flavor")
         expect(measurement.value).to eq "WAY too salty"
         expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
       end
     end
 
-    context "allows the upload of expanded custom tank measurements (without notes)" do
+    context "allows the upload of expanded custom enclosure measurements (without notes)" do
       let(:file) { File.read(Rails.root.join("spec/fixtures/custom_measurements_multiple_models.csv")) }
       before do
-        FactoryBot.create(:family, name: "Adams Family")
+        FactoryBot.create(:cohort, name: "Adams Family")
       end
 
       it "saves the measurements" do
@@ -80,14 +80,14 @@ RSpec.describe CsvImporter do
         end.to change { Measurement.count }.by(1)
       end
 
-      it "attaches the proper info and relationships for measurements (existing tank)" do
+      it "attaches the proper info and relationships for measurements (existing enclosure)" do
         skip
         CsvImporter.new(file, category_name, processed_file.id, organization).call
-        tank = Tank.find_by!(name: "Support Rack 3")
-        measurement = tank.measurements.find_by!(name: "Flavor")
+        enclosure = Enclosure.find_by!(name: "Support Rack 3")
+        measurement = enclosure.measurements.find_by!(name: "Flavor")
         expect(measurement.value).to eq "Salty"
         expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
-        expect(measurement.family.name).to eq "Adams Family"
+        expect(measurement.cohort.name).to eq "Adams Family"
         expect(measurement.animal.pii_tag).to eq 123
       end
     end

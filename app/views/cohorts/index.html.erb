@@ -1,0 +1,39 @@
+<section class="section facilities__index">
+  <div class="container facilities__index__container">
+    <p id="notice"><%= notice %></p>
+
+    <div class="facilities__index__container__header">
+      <h1 class="title">Cohorts</h1>
+      <%= link_to new_cohort_path, class: "button-primary" do %>
+        New Cohort <%= image_tag  "icons/plus.png", size: 17 %>
+      <% end %>
+    </div>
+
+    <table class="table  table-hover table-responsive-sm">
+      <thead>
+      <tr class="bg-dark-light">
+        <th>Name</th>
+        <th>Female</th>
+        <th>Male</th>
+        <th>Enclosure</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @cohorts.each do |cohort| %>
+        <tr>
+          <td><%= cohort.name %></td>
+          <td><%= link_to cohort.female_pii_tag, animal_path(cohort.female) %></td>
+          <td><%= link_to cohort.male_pii_tag, animal_path(cohort.male) %></td>
+          <td><%= cohort.enclosure&.name %></td>
+          <td><%= link_to 'Show', cohort_path(cohort) %></td>
+          <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_cohort_path(cohort) %></td>
+          <td><%= link_to image_tag("icons/trash.svg", size: 24), cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</section>
