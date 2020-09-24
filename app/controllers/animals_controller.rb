@@ -2,7 +2,7 @@ class AnimalsController < ApplicationController
   before_action :set_animal, only: [:show, :edit, :update, :destroy]
 
   def index
-    @animals = Animal.for_organization(current_organization)
+    @animals = Animal.for_organization(current_organization).includes(animals_shl_numbers: :shl_number)
   end
 
   def new
@@ -12,11 +12,7 @@ class AnimalsController < ApplicationController
   def create
     @animal = Animal.new(animal_params)
 
-    params[:animal][:shl_numbers_codes].split(",").each do |code|
-      @animal.shl_numbers.find_or_initialize_by(code: code)
-    end
-
-    if @animal.save
+    if built_animal.save
       redirect_to @animal, notice: 'Animal was successfully created.'
     else
       render :new
@@ -24,15 +20,7 @@ class AnimalsController < ApplicationController
   end
 
   def update
-    @animal.assign_attributes(animal_params)
-
-    new_codes = params[:animal][:shl_numbers_codes].split(",").map do |code|
-      @animal.shl_numbers.find_or_initialize_by(code: code.strip)
-    end
-
-    @animal.shl_numbers.where.not(id: new_codes.map(&:id)).destroy_all
-
-    if @animal.save
+    if built_animal.save
       redirect_to @animal, notice: 'Animal was successfully updated.'
     else
       render :edit
@@ -78,5 +66,17 @@ class AnimalsController < ApplicationController
       :tag_id,
       :sex
     ).merge(organization_id: current_organization.id)
+  end
+
+  def built_animal
+    @animal.assign_attributes(animal_params)
+
+    new_codes = params[:animal][:shl_numbers_codes].split(",").map do |code|
+      @animal.shl_numbers.find_or_initialize_by(code: code.strip)
+    end
+
+    @animal.shl_numbers.where.not(id: new_codes.map(&:id)).destroy_all
+
+    @animal
   end
 end
