@@ -1,5 +1,5 @@
 class FacilitiesController < ApplicationController
-  before_action :set_facility, only: [:show, :edit, :update, :destroy]
+  before_action :set_facility, only: [:edit, :update, :destroy]
 
   # GET /facilities
   # GET /facilities.json
@@ -9,7 +9,9 @@ class FacilitiesController < ApplicationController
 
   # GET /facilities/1
   # GET /facilities/1.json
-  def show; end
+  def show
+    @facility = Facility.includes(:locations).find(params[:id])
+  end
 
   # GET /facilities/new
   def new

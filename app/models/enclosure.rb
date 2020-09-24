@@ -1,7 +1,7 @@
 class Enclosure < ApplicationRecord
   include OrganizationScope
 
-  belongs_to :facility, optional: true
+  belongs_to :location, optional: true
   has_many :operations, dependent: :destroy
   has_many :measurements, as: :subject
 

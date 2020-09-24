@@ -1,29 +1,34 @@
-<p id="notice"><%= notice %></p>
+<section class="section facilities__index">
+  <div class="container facilities__index__container">
 
-<h1>Locations</h1>
+    <div class="facilities__index__container__header">
+      <h1 class="title">Locations</h1>
+      <%= link_to new_facility_location_path(@facility), class: "button-primary" do %>
+        New Location <%= image_tag  "icons/plus.png", size: 17 %>
+      <% end %>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Facility</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+    <table class="table  table-hover table-responsive-sm">
+      <thead>
+        <tr class="bg-dark-light">
+          <th>Name</th>
+          <th>Facility</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @locations.each do |location| %>
-      <tr>
-        <td><%= location.name %></td>
-        <td><%= location.facility_id %></td>
-        <td><%= link_to 'Show', location %></td>
-        <td><%= link_to 'Edit', edit_location_path(location) %></td>
-        <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @locations.each do |location| %>
+          <tr>
+            <td><%= location.name %></td>
+            <td><%= location.facility_name %></td>
+            <td><%= link_to 'Show', facility_location_path(@facility, location) %></td>
+            <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_facility_location_path(@facility, location) %></td>
+            <td><%= link_to image_tag("icons/trash.svg", size: 24), facility_location_path(@facility, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<br>
-
-<%= link_to 'New Location', new_location_path %>
+  </div>
+</section>
