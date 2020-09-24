@@ -15,6 +15,7 @@ describe "When I visit the animal Index page" do
 
     expect(page).to have_content("Collection Year")
     expect(page).to have_content("Tag ID")
+    expect(page).to have_content("SHL Numbers")
     expect(page).to have_link("New Animal")
     expect(page).to have_link("Show")
     expect(page).to have_link(nil, href: edit_animal_path(animal.id))
@@ -22,6 +23,7 @@ describe "When I visit the animal Index page" do
 
     expect(page).to have_content(animal.collection_year)
     expect(page).to have_content(animal.tag_id)
+    expect(page).to have_content(animal.shl_number_codes(", "))
 
     within('tbody') do
       expect(page).to have_xpath('.//tr', count: animal_count)
