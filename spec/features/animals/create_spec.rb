@@ -13,7 +13,7 @@ describe "When I visit the animal New page" do
     visit new_animal_path
 
     within('form') do
-      fill_in 'animal_pii_tag', with: "An Animal"
+      fill_in 'animal_tag', with: "An Animal"
       select "Male", from: 'animal_sex'
       select cohort.name, from: 'animal_cohort_id'
       fill_in 'animal_shl_numbers_codes', with: "c123,k123-32"

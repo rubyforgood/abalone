@@ -15,11 +15,11 @@ class Cohort < ApplicationRecord
   delegate :name, to: :enclosure, prefix: true, allow_nil: true
 
   def self.exportable_columns
-    %w[id name female_pii_tag male_pii_tag enclosure_name created_at updated_at]
+    %w[id name female_tag male_tag enclosure_name created_at updated_at]
   end
 
-  delegate :pii_tag, to: :female, prefix: true, allow_nil: true
-  delegate :pii_tag, to: :male, prefix: true, allow_nil: true
+  delegate :tag, to: :female, prefix: true, allow_nil: true
+  delegate :tag, to: :male, prefix: true, allow_nil: true
 
   # def name
   # "Male: #{male.id} / Female: #{female.id}"

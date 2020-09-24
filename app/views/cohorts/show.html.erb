@@ -12,12 +12,12 @@
 
       <p>
         <strong>Female:</strong>
-        <%= @cohort.female_pii_tag %>
+        <%= @cohort.female_tag %>
       </p>
 
       <p>
         <strong>Male:</strong>
-        <%= @cohort.male_pii_tag %>
+        <%= @cohort.male_tag %>
       </p>
 
       <p>
@@ -28,7 +28,7 @@
       <p>
         <strong>Animals :</strong>
         <% @cohort.animals.each do |animal| %>
-          <%= link_to animal.pii_tag, animal_path(animal) %>
+          <%= link_to animal.tag, animal_path(animal) %>
         <% end %>
       </p>
     </div>

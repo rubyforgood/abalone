@@ -88,7 +88,7 @@ RSpec.describe CsvImporter do
         expect(measurement.value).to eq "Salty"
         expect(measurement.measurement_event.name).to eq "Michael Drinks the Water"
         expect(measurement.cohort.name).to eq "Adams Family"
-        expect(measurement.animal.pii_tag).to eq 123
+        expect(measurement.animal.tag).to eq "G123"
       end
     end
   end
