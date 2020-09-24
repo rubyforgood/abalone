@@ -7,9 +7,10 @@ class Enclosure < ApplicationRecord
 
   has_one :cohort, required: false
 
-  validates :name, uniqueness: { scope: %i[organization_id facility_id] }
+  validates :name, uniqueness: { scope: %i[organization_id location_id] }
 
-  delegate :name, to: :facility, prefix: true, allow_nil: true
+  delegate :name, to: :location, prefix: true, allow_nil: true
+  delegate :facility_name, to: :location, allow_nil: true
 
   def empty?
     cohort.blank?

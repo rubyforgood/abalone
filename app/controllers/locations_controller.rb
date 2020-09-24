@@ -3,7 +3,7 @@ class LocationsController < ApplicationController
   before_action :set_facility
 
   def index
-    @locations = Location.all
+    @locations = @facility.locations
   end
 
   def show
@@ -20,7 +20,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
 
     if @location.save
-      redirect_to @location, notice: 'Location was successfully created.'
+      redirect_to facility_location_path(@facility, @location), notice: 'Location was successfully created.'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class LocationsController < ApplicationController
 
   def update
     if @location.update(location_params)
-      redirect_to @location, notice: 'Location was successfully updated.'
+      redirect_to facility_location_path(@facility, @location), notice: 'Location was successfully updated.'
     else
       render :edit
     end
@@ -36,7 +36,7 @@ class LocationsController < ApplicationController
 
   def destroy
     @location.destroy
-    redirect_to locations_url, notice: 'Location was successfully destroyed.'
+    redirect_to facility_locations_url(@facility), notice: 'Location was successfully destroyed.'
   end
 
   private
@@ -49,6 +49,6 @@ class LocationsController < ApplicationController
     end
 
     def location_params
-      params.require(:location).permit(:name, :facility_id)
+      params.require(:location).permit(:name).merge(organization_id: current_organization.id, facility_id: params[:facility_id])
     end
 end

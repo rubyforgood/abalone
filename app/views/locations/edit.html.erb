@@ -1,6 +1,11 @@
 <h1>Editing Location</h1>
-
-<%= render 'form', location: @location %>
-
-<%= link_to 'Show', @location %> |
-<%= link_to 'Back', locations_path %>
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Editing Animal</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', location: @location, facility: @facility %>
+    </div>
+    <%= link_to 'Show', location: @location, facility: @facility %> |
+    <%= link_to 'Back', facility_locations_path %>
+  </div>
+</section>

@@ -1,8 +1,9 @@
 class EnclosuresController < ApplicationController
   before_action :set_enclosure, only: [:show, :edit, :update, :destroy]
+  before_action :set_locations, only: [:new, :edit]
 
   def index
-    @enclosures = Enclosure.for_organization(current_organization).includes(:facility)
+    @enclosures = Enclosure.for_organization(current_organization).includes(location: :facility)
   end
 
   def show; end
@@ -13,6 +14,7 @@ class EnclosuresController < ApplicationController
 
   def create
     @enclosure = Enclosure.new(enclosure_params)
+
     if @enclosure.save
       redirect_to enclosure_path(@enclosure), notice: 'Enclosure was successfully created.'
     else
@@ -57,6 +59,12 @@ class EnclosuresController < ApplicationController
   end
 
   def enclosure_params
-    params.require(:enclosure).permit(:facility_id, :name).merge(organization_id: current_organization.id)
+    params.require(:enclosure).permit(:location_id, :name).merge(organization_id: current_organization.id)
+  end
+
+  def set_locations
+    @locations = Location.for_organization(current_user.organization).sort_by do |location|
+      location.name_with_facility.downcase
+    end
   end
 end

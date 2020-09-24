@@ -1,4 +1,4 @@
-<%= form_with(model: location, local: true) do |form| %>
+<%= form_with(model: location, local: true, url: [facility, location]) do |form| %>
   <% if location.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(location.errors.count, "error") %> prohibited this location from being saved:</h2>
@@ -17,11 +17,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :facility_id %>
-    <%= form.text_field :facility_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+    <div class="control">
+      <%= form.submit('Submit', class: 'button-primary') %>
+    </div>
   </div>
 <% end %>

@@ -1,14 +1,20 @@
-<p id="notice"><%= notice %></p>
+<section class="section facilities__show">
+  <div class="container facilities__show__container">
+    <div class="facilities__show__container__header">
+      <h1 class="title">Location</h1>
+    </div>
+    <div class="facilities__show__container__body mb-5">
+      <p>
+        <strong>Name:</strong>
+        <%= @location.name %>
+      </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @location.name %>
-</p>
-
-<p>
-  <strong>Facility:</strong>
-  <%= @location.facility_id %>
-</p>
-
-<%= link_to 'Edit', edit_location_path(@location) %> |
-<%= link_to 'Back', locations_path %>
+      <p>
+        <strong>Facility:</strong>
+        <%= @location.facility_name %>
+      </p>
+    </div>
+    <%= link_to 'Edit', edit_facility_location_path(@facility, @location) %> |
+    <%= link_to 'Back', facility_locations_path(@facility) %>
+  </div>
+</section>

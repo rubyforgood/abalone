@@ -7,4 +7,8 @@ class Location < ApplicationRecord
   validates :name, :facility_id, presence: true
 
   delegate :name, to: :facility, prefix: true
+
+  def name_with_facility
+    facility_name + " - " + name
+  end
 end
