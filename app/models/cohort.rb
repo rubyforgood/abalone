@@ -1,10 +1,11 @@
 class Cohort < ApplicationRecord
   include OrganizationScope
 
-  belongs_to :male, class_name: 'Animal'
-  belongs_to :female, class_name: 'Animal'
+  belongs_to :male, class_name: 'Animal', optional: true
+  belongs_to :female, class_name: 'Animal', optional: true
 
   has_many :measurements, as: :subject
+  has_many :animals
 
   belongs_to :enclosure, required: false
 

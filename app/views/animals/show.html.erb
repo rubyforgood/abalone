@@ -36,6 +36,10 @@
         <%= @animal.sex.humanize %>
       </p>
 
+      <p>
+        <strong>Cohort:</strong>
+        <%= @animal.cohort.name %>
+      </p>
     </div>
 
     <%= link_to '<< BACK', animals_path, class: "mr-3 mb-3 button-outline-primary" %>
