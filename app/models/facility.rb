@@ -14,7 +14,7 @@
 class Facility < ApplicationRecord
   include OrganizationScope
 
-  has_many :enclosures
+  has_many :locations
 
   after_commit { Rails.cache.delete('facility_codes') }
 
