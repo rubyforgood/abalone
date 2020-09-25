@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :facility_id, class: 'label' %>
-    <%= form.collection_select :facility_id, Facility.for_organization(current_user.organization), :id, :name, include_blank: true, class: 'input' %>
+    <%= form.label :location_id, class: 'label' %>
+    <%= form.collection_select :location_id, @locations, :id, :name_with_facility, include_blank: true, class: 'input' %>
   </div>
 
   <div class="field">

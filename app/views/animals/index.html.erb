@@ -18,7 +18,7 @@
     <table class="table  table-hover table-responsive-sm">
       <thead>
         <tr class="bg-dark-light">
-          <th>Tag ID</th>
+          <th>Tag</th>
           <th>Collection Year</th>
           <th>Cohort</th>
           <th>SHL Numbers</th>
@@ -29,7 +29,7 @@
       <tbody>
         <% @animals.each do |animal| %>
           <tr>
-            <td><%= animal.tag_id %></td>
+            <td><%= animal.tag %></td>
             <td><%= animal.collection_year %></td>
             <td><%= animal.cohort_name %></td>
             <td><%= link_to 'Show', animal %></td>

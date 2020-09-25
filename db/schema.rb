@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_153501) do
+ActiveRecord::Schema.define(version: 2020_09_24_210137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,16 +46,15 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
     t.integer "collection_year"
     t.datetime "date_time_collected"
     t.string "collection_position"
-    t.integer "pii_tag"
-    t.integer "tag_id"
     t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.bigint "cohort_id"
+    t.string "tag"
     t.index ["cohort_id"], name: "index_animals_on_cohort_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
-    t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
+    t.index ["tag", "cohort_id"], name: "index_animals_on_tag_and_cohort_id", unique: true
   end
 
   create_table "animals_shl_numbers", force: :cascade do |t|
@@ -97,13 +96,12 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
   end
 
   create_table "enclosures", force: :cascade do |t|
-    t.bigint "facility_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
-    t.index ["facility_id"], name: "index_enclosures_on_facility_id"
-    t.index ["name", "facility_id", "organization_id"], name: "index_enclosures_on_name_and_facility_id_and_organization_id", unique: true
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_enclosures_on_location_id"
     t.index ["organization_id"], name: "index_enclosures_on_organization_id"
   end
 
@@ -124,6 +122,16 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["organization_id"], name: "index_file_uploads_on_organization_id"
     t.index ["user_id"], name: "index_file_uploads_on_user_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "facility_id", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["facility_id"], name: "index_locations_on_facility_id"
+    t.index ["organization_id"], name: "index_locations_on_organization_id"
   end
 
   create_table "measurement_events", force: :cascade do |t|
@@ -242,10 +250,11 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animals", "organizations"
   add_foreign_key "cohorts", "organizations"
-  add_foreign_key "enclosures", "facilities"
   add_foreign_key "enclosures", "organizations"
   add_foreign_key "file_uploads", "organizations"
   add_foreign_key "file_uploads", "users"
+  add_foreign_key "locations", "facilities"
+  add_foreign_key "locations", "organizations"
   add_foreign_key "measurement_events", "organizations"
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"

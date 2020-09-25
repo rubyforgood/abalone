@@ -13,7 +13,7 @@ class ImportAnimalsJob < ApplicationJob
         status[:created_count] += 1 if Animal.create(attrs)
       rescue ActiveRecord::RecordNotUnique, ActiveRecord::RecordInvalid => e
         message = e.instance_of?(ActiveRecord::RecordNotUnique) ? :duplicate : :invalid
-        status[:errors] << { pii_tag: attrs[:pii_tag], type: message }
+        status[:errors] << { tag: attrs[:tag], type: message }
         status[:error_count] += 1
       end
     end
@@ -36,7 +36,7 @@ class ImportAnimalsJob < ApplicationJob
                 else
                   'could not be created'
                 end
-      "Animal with PII Tag #{error[:pii_tag]} #{message}"
+      "Animal with Tag #{error[:tag]} #{message}"
     end.join(', ')
   end
 end

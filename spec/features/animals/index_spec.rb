@@ -8,13 +8,13 @@ describe "When I visit the animal Index page" do
   end
 
   it "Then I see a list of all the animals" do
-    animal = FactoryBot.create(:animal, collection_year: 2, tag_id: 2, organization: user.organization)
+    animal = FactoryBot.create(:animal, collection_year: 2, tag: "G222", organization: user.organization)
     animal_count = Animal.for_organization(user.organization).count
 
     visit animals_path
 
     expect(page).to have_content("Collection Year")
-    expect(page).to have_content("Tag ID")
+    expect(page).to have_content("Tag")
     expect(page).to have_content("Cohort")
     expect(page).to have_content("SHL Numbers")
     expect(page).to have_link("New Animal")
@@ -23,7 +23,7 @@ describe "When I visit the animal Index page" do
     expect(page).to have_selector("a[data-method='delete'][href='#{animal_path(animal.id)}']")
 
     expect(page).to have_content(animal.collection_year)
-    expect(page).to have_content(animal.tag_id)
+    expect(page).to have_content(animal.tag)
     expect(page).to have_content(animal.cohort.name)
     expect(page).to have_content(animal.shl_number_codes(", "))
 
@@ -42,6 +42,6 @@ describe "When I visit the animal Index page" do
     expect(page.response_headers['Content-Type']).to eql "text/csv"
     expect(page).to have_content(Animal.exportable_columns.join(','))
 
-    animals.each { |animal| expect(page).to have_content(animal.pii_tag) }
+    animals.each { |animal| expect(page).to have_content(animal.tag) }
   end
 end
