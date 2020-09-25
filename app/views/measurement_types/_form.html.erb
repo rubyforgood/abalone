@@ -1,4 +1,4 @@
-<%= form_with(model: measurement_type, local: true) do |form| %>
+<%= form_with(model: measurement_type, local: true, html: { class: "w-full max-w-md" }) do |form| %>
   <% if measurement_type.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(measurement_type.errors.count, "error") %> prohibited this measurement_type from being saved:</h2>
@@ -11,19 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name, class: 'label' %>
-    <%= form.text_field :name, class: 'input' %>
-  </div>
+  <div>
+    <div>
+      <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :name, class: 'input mb-2' %>
+    </div>
 
-  <div class="field">
-    <%= form.label :unit, class: 'label' %>
-    <%= form.text_field :unit, class: 'input' %>
-  </div>
+    <div>
+      <%= form.label :unit, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :unit, class: 'input mb-2' %>
+    </div>
 
-  <div class="field">
-    <div class="control">
-      <%= form.submit('Submit', class: 'button-primary') %>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
     </div>
   </div>
 <% end %>
