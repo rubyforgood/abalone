@@ -1,17 +1,22 @@
-<section class="section facilities__index">
-  <div class="container facilities__index__container">
-    <div class="facilities__index__container__header">
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <div class="flex justify-between items-center mb-4">
       <h1 class="title">Measurement Types</h1>
-      <%= link_to new_measurement_type_path, class: "button-primary" do %>
-        New Measurement Type <%= image_tag  "icons/plus.png", size: 17 %>
-      <% end %>
+      <div class="flex items-center">
+        <%= link_to new_measurement_type_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2">New Measurement Type</span>
+          </button>
+        <% end %>
+      </div>
     </div>
 
-    <table class="table  table-hover table-responsive-sm">
+    <table class="table-auto w-full border">
       <thead>
-        <tr class="bg-dark-light">
-          <th>Name</th>
-          <th>Unit</th>
+        <tr class="border">
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Unit</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -19,10 +24,10 @@
       <tbody>
         <% @measurement_types.each do |measurement_type| %>
           <tr>
-            <td><%= measurement_type.name %></td>
-            <td><%= measurement_type.unit %></td>
-            <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_measurement_type_path(measurement_type) %></td>
-            <td><%= link_to image_tag("icons/trash.svg", size: 24), measurement_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2"><%= measurement_type.name %></td>
+            <td class="px-4 py-2"><%= measurement_type.unit %></td>
+            <td class="px-4 py-2 text-primary-dark"><%= link_to image_tag("icons/edit.svg", size: 24), edit_measurement_type_path(measurement_type) %></td>
+            <td class="px-4 py-2 text-primary-dark"><%= link_to image_tag("icons/trash.svg", size: 24), measurement_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
