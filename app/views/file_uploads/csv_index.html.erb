@@ -1,35 +1,35 @@
-<section class="section facilities__index">
-  <div class="container facilities__index__container">
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
 
-    <div class="facilities__index__container__header">
+    <div class="flex justify-between items-center mb-4">
       <h1 class="title">File Uploads</h1>
     </div>
 
-    <table class="table  table-hover table-responsive-sm" style="width: 100%">
+    <table class="table-auto w-full border" style="width: 100%">
       <colgroup>
         <col span="3">
         <col span="1" style="width: 5%;">
         <col span="1" style="width: 30%;">
       </colgroup>
       <thead>
-      <tr class="bg-dark-light">
-        <th>User</th>
-        <th>File</th>
-        <th>Created At</th>
-        <th></th>
-        <th>Status</th>
+      <tr class="border">
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">User</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">File</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Created At</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase"></th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Status</th>
       </tr>
       </thead>
 
       <tbody>
       <% @file_uploads.each do |upload| %>
         <tr>
-          <td><%= upload.user.email %></td>
-          <td><%= link_to upload.file.filename, rails_blob_path(upload.file, disposition: 'attachment') %></td>
-          <td><%= upload.created_at.strftime('%Y-%m-%d %H:%M') %></td>
-          <td><div class="<%= file_upload_status_style(upload.status) %>"></div></td>
-          <td><%= upload.status %></td>
+          <td class="px-4 py-2"><%= upload.user.email %></td>
+          <td class="px-4 py-2 text-primary-dark"><%= link_to upload.file.filename, rails_blob_path(upload.file, disposition: 'attachment') %></td>
+          <td class="px-4 py-2"><%= upload.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td class="px-4 py-2"><div class="<%= file_upload_status_style(upload.status) %>"></div></td>
+          <td class="px-4 py-2"><%= upload.status %></td>
         </tr>
       <% end %>
       </tbody>
