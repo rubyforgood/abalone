@@ -1,11 +1,13 @@
-<h1>Editing Location</h1>
-<section class="section facilities__form">
-  <div class="container facilities__form__container">
-    <h1 class="title">Editing Animal</h1>
-    <div class="facilities__form__container__body">
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <%= link_to facility_locations_path do %>
+      <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center mb-4">
+        <span><< Cancel</span>
+      </button>
+    <% end %>
+    <h1 class="text-title3 mb-4">Editing Location</h1>
+    <div>
       <%= render 'form', location: @location, facility: @facility %>
     </div>
-    <%= link_to 'Show', location: @location, facility: @facility %> |
-    <%= link_to 'Back', facility_locations_path %>
   </div>
 </section>
