@@ -1,0 +1,40 @@
+<section class="section facilities__show">
+  <div class="container facilities__show__container">
+    <p id="notice"><%= notice %></p>
+    <div class="facilities__show__container__header">
+      <h1 class="title">Cohort</h1>
+    </div>
+    <div class="facilities__show__container__body mb-5">
+      <p>
+        <strong>Name:</strong>
+        <%= @cohort.name %>
+      </p>
+
+      <p>
+        <strong>Female:</strong>
+        <%= @cohort.female_pii_tag %>
+      </p>
+
+      <p>
+        <strong>Male:</strong>
+        <%= @cohort.male_pii_tag %>
+      </p>
+
+      <p>
+        <strong>Enclosure Name:</strong>
+        <%= @cohort.enclosure&.name %>
+      </p>
+
+      <p>
+        <strong>Animals :</strong>
+        <% @cohort.animals.each do |animal| %>
+          <%= link_to animal.pii_tag, animal_path(animal) %>
+        <% end %>
+      </p>
+    </div>
+
+    <%= link_to '<< BACK', cohorts_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_cohort_path(@cohort), class: "button-outline-primary mt-4" %>
+
+  </div>
+</section>

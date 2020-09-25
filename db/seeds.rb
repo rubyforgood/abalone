@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-white_abalone = Organization.create(name: "White Abalone")
-pinto_abalone = Organization.create(name: "Pinto Abalone")
+white_abalone = Organization.find_or_create_by(name: "White Abalone")
+pinto_abalone = Organization.find_or_create_by(name: "Pinto Abalone")
 
 User.create({ :email => "test@example.com",
               :password => "password",
@@ -46,11 +46,12 @@ white_abalone_facilities= { "Aquarium of the Pacific" => "AOP",
             }
 
 white_abalone_facilities.each do |f_name, f_code|
-  facility = Facility.find_or_create_by(name: f_name, code: f_code, organization_id: white_abalone.id)
-  Tank.find_or_create_by(name: "Tank", facility: facility, organization: white_abalone)
+  facility = Facility.find_or_create_by(name: f_name, code: f_code, organization: white_abalone)
+  location = Location.find_or_create_by(name: "#{f_name} location", facility: facility, organization: white_abalone)
+  Enclosure.find_or_create_by(name: "Enclosure", location: location, organization: white_abalone)
 end
 
-Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization_id: pinto_abalone.id)
+Facility.create(name: "Pinto Abalone Facility", code: "TBD", organization: pinto_abalone)
 # import all sample_data_files (uncomment when importers are added for all CSV categories)
 # Dir["db/sample_data_files/*"].each do |category_dir|
 #   category_class_name = File.basename(category_dir).titleize
@@ -70,13 +71,18 @@ Dir["db/sample_data_files/*"].each do |category_dir|
   end
 end
 
-# Tanks can have Operations occur (add or remove animals, combine tank contents, etc)
-# Tanks can also have Measurements (number of animals, temperature of tank, etc)
+# Enclosures can have Operations occur (add or remove animals, combine enclosure contents, etc)
+# Enclosures can also have Measurements (number of animals, temperature of enclosure, etc)
+cohort = Cohort.create!(organization_id: white_abalone.id)
 male = Animal.create!(sex: :male, organization_id: white_abalone.id)
 female = Animal.create!(sex: :female, organization_id: pinto_abalone.id)
-family = Family.create!(male: male, female: female, organization_id: white_abalone.id)
-tank = Tank.create!(facility: Facility.find_by(code: 'PSRF'), name: 'AB-17', organization_id: white_abalone.id)
-Operation.create!(tank: tank, animals_added: 800, family: family, operation_date: 7.days.ago, action: :add_family, organization_id: white_abalone.id)
-measurement_event = MeasurementEvent.create!(name: "My first measurement", tank: tank, organization_id: white_abalone.id)
-Measurement.create!(name: 'count', value_type: 'integer', value: '743', measurement_event: measurement_event, date: 3.days.ago, organization_id: white_abalone.id)
-Measurement.create!(name: 'count', value_type: 'integer', value: '719', measurement_event: measurement_event, date: 1.days.ago, organization_id: white_abalone.id)
+cohort.update!(male: male, female: female)
+enclosure = Enclosure.create!(location: Location.first, name: 'AB-17', organization_id: white_abalone.id)
+Operation.create!(enclosure: enclosure, animals_added: 800, cohort: cohort, operation_date: 7.days.ago, action: :add_cohort, organization_id: white_abalone.id)
+measurement_event = MeasurementEvent.create!(name: "My first measurement", organization_id: white_abalone.id)
+measurement_type = MeasurementType.create!(name: "length", unit: "cm", organization: white_abalone)
+measurement_type = MeasurementType.create!(name: "count", unit: "number", organization: white_abalone)
+measurement_type = MeasurementType.create!(name: "weight", unit: "g", organization: white_abalone)
+measurement_type = MeasurementType.create!(name: "gonad score", unit: "number", organization: white_abalone)
+Measurement.create!(value: '743', measurement_event: measurement_event, date: 3.days.ago, organization_id: white_abalone.id, subject: male, measurement_type: measurement_type)
+Measurement.create!(value: '719', measurement_event: measurement_event, date: 1.days.ago, organization_id: white_abalone.id, subject: female, measurement_type: measurement_type)

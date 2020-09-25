@@ -3,19 +3,29 @@
     <p id="notice"><%= notice %></p>
     <div class="flex justify-between items-center mb-4">
       <h1 class="text-4xl">Facilities</h1>
-      <%= link_to new_facility_path do %>
-        <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
-          <%= image_tag  "icons/plus.png", size: 17 %>
-          <span class="ml-2">New Facility</span>
-        </button>
-      <% end %>
+      <div class="flex items-center">
+        <%= link_to new_facility_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2">New Facility</span>
+          </button>
+        <% end %>
+        <%#= link_to csv_upload_facilities_path, class: "button-primary" do %>
+  <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
+        <%# end %>
+        <%= link_to facilities_path(format: :csv) do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+            <span>Export to CSV</span>
+          </button>
+        <% end %>
+      </div>
     </div>
     <table class="table-auto w-full border">
       <thead>
         <tr class="border">
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Name</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Code</th>
-          <th colspan="3"></th>
+          <th colspan="4"></th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +34,7 @@
             <td class="px-4 py-2"><%= facility.name %></td>
             <td class="px-4 py-2"><%= facility.code %></td>
             <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', facility %></td>
+            <td class="text-primary-dark px-4 py-2"><%= link_to 'Locations', facility_locations_path(facility) %></td>
             <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_facility_path(facility) %></td>
             <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), facility, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>

@@ -1,0 +1,29 @@
+<%= form_with(model: enclosure, local: true) do |form| %>
+  <% if enclosure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(enclosure.errors.count, "error") %> prohibited this enclosure from being saved:</h2>
+
+      <ul>
+      <% enclosure.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :location_id, class: 'label' %>
+    <%= form.collection_select :location_id, @locations, :id, :name_with_facility, include_blank: true, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name, class: 'label' %>
+    <%= form.text_field :name, class: 'input' %>
+  </div>
+
+  <div class="field">
+    <div class="control">
+      <%= form.submit('Submit', class: 'button-primary') %>
+    </div>
+  </div>
+<% end %>

@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_23_134705) do
+ActiveRecord::Schema.define(version: 2020_09_24_153501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_enum :animal_sex, [
-      "unknown",
-      "male",
-      "female",
+    "unknown",
+    "male",
+    "female",
   ], force: :cascade
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -52,8 +52,33 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
+    t.bigint "cohort_id"
+    t.index ["cohort_id"], name: "index_animals_on_cohort_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
     t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
+  end
+
+  create_table "animals_shl_numbers", force: :cascade do |t|
+    t.bigint "animal_id"
+    t.bigint "shl_number_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id"], name: "index_animals_shl_numbers_on_animal_id"
+    t.index ["shl_number_id"], name: "index_animals_shl_numbers_on_shl_number_id"
+  end
+
+  create_table "cohorts", force: :cascade do |t|
+    t.bigint "female_id"
+    t.bigint "male_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "enclosure_id"
+    t.string "name"
+    t.bigint "organization_id"
+    t.index ["enclosure_id"], name: "index_cohorts_on_enclosure_id"
+    t.index ["female_id"], name: "index_cohorts_on_female_id"
+    t.index ["male_id"], name: "index_cohorts_on_male_id"
+    t.index ["organization_id"], name: "index_cohorts_on_organization_id"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -71,6 +96,16 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "enclosures", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "organization_id"
+    t.bigint "location_id"
+    t.index ["location_id"], name: "index_enclosures_on_location_id"
+    t.index ["organization_id"], name: "index_enclosures_on_organization_id"
+  end
+
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -78,20 +113,6 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_facilities_on_organization_id"
-  end
-
-  create_table "families", force: :cascade do |t|
-    t.bigint "female_id"
-    t.bigint "male_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "tank_id"
-    t.string "name"
-    t.bigint "organization_id"
-    t.index ["female_id"], name: "index_families_on_female_id"
-    t.index ["male_id"], name: "index_families_on_male_id"
-    t.index ["organization_id"], name: "index_families_on_organization_id"
-    t.index ["tank_id"], name: "index_families_on_tank_id"
   end
 
   create_table "file_uploads", force: :cascade do |t|
@@ -104,35 +125,49 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["user_id"], name: "index_file_uploads_on_user_id"
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.bigint "facility_id", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["facility_id"], name: "index_locations_on_facility_id"
+    t.index ["organization_id"], name: "index_locations_on_organization_id"
+  end
+
   create_table "measurement_events", force: :cascade do |t|
     t.string "name"
-    t.bigint "tank_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.index ["organization_id"], name: "index_measurement_events_on_organization_id"
-    t.index ["tank_id"], name: "index_measurement_events_on_tank_id"
+  end
+
+  create_table "measurement_types", force: :cascade do |t|
+    t.string "name"
+    t.string "unit"
+    t.bigint "organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_measurement_types_on_organization_id"
   end
 
   create_table "measurements", force: :cascade do |t|
-    t.string "name"
-    t.string "value_type"
-    t.jsonb "value"
+    t.string "value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "date"
     t.bigint "measurement_event_id"
     t.bigint "processed_file_id"
-    t.bigint "animal_id"
-    t.bigint "family_id"
-    t.bigint "tank_id"
     t.bigint "organization_id"
-    t.index ["animal_id"], name: "index_measurements_on_animal_id"
-    t.index ["family_id"], name: "index_measurements_on_family_id"
+    t.string "subject_type", null: false
+    t.bigint "subject_id", null: false
+    t.bigint "measurement_type_id"
     t.index ["measurement_event_id"], name: "index_measurements_on_measurement_event_id"
+    t.index ["measurement_type_id"], name: "index_measurements_on_measurement_type_id"
     t.index ["organization_id"], name: "index_measurements_on_organization_id"
     t.index ["processed_file_id"], name: "index_measurements_on_processed_file_id"
-    t.index ["tank_id"], name: "index_measurements_on_tank_id"
+    t.index ["subject_type", "subject_id"], name: "index_measurements_on_subject_type_and_subject_id"
   end
 
   create_table "operation_batches", force: :cascade do |t|
@@ -142,20 +177,20 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
   end
 
   create_table "operations", force: :cascade do |t|
-    t.bigint "tank_id"
+    t.bigint "enclosure_id"
     t.integer "animals_added"
-    t.integer "animals_added_family_id"
+    t.integer "animals_added_cohort_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "operation_date"
     t.string "action"
-    t.bigint "family_id"
+    t.bigint "cohort_id"
     t.bigint "operation_batch_id"
     t.bigint "organization_id"
-    t.index ["family_id"], name: "index_operations_on_family_id"
+    t.index ["cohort_id"], name: "index_operations_on_cohort_id"
+    t.index ["enclosure_id"], name: "index_operations_on_enclosure_id"
     t.index ["operation_batch_id"], name: "index_operations_on_operation_batch_id"
     t.index ["organization_id"], name: "index_operations_on_organization_id"
-    t.index ["tank_id"], name: "index_operations_on_tank_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -175,35 +210,10 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.integer "temporary_file_id"
   end
 
-  create_table "tagged_animal_assessments", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.date "measurement_date"
-    t.string "shl_case_number"
-    t.date "spawning_date"
-    t.string "tag"
-    t.string "from_growout_rack"
-    t.string "from_growout_column"
-    t.string "from_growout_trough"
-    t.string "to_growout_rack"
-    t.string "to_growout_column"
-    t.string "to_growout_trough"
-    t.decimal "length"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.text "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
-  end
-
-  create_table "tanks", force: :cascade do |t|
-    t.bigint "facility_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "organization_id"
-    t.index ["facility_id"], name: "index_tanks_on_facility_id"
-    t.index ["organization_id"], name: "index_tanks_on_organization_id"
+  create_table "shl_numbers", force: :cascade do |t|
+    t.string "code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "temporary_files", force: :cascade do |t|
@@ -227,44 +237,29 @@ ActiveRecord::Schema.define(version: 2020_09_23_134705) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "wild_collections", force: :cascade do |t|
-    t.boolean "raw", default: true, null: false
-    t.string "tag"
-    t.date "collection_date"
-    t.string "general_location"
-    t.string "precise_location"
-    t.point "collection_coordinates"
-    t.string "proximity_to_nearest_neighbor"
-    t.string "collection_method_notes"
-    t.string "foot_condition_notes"
-    t.decimal "collection_depth"
-    t.decimal "length"
-    t.decimal "weight"
-    t.string "gonad_score"
-    t.string "predicted_sex"
-    t.string "initial_holding_facility"
-    t.string "final_holding_facility_and_date_of_arrival"
-    t.date "otc_treatment_completion_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "processed_file_id"
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.bigint "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object"
+    t.datetime "created_at"
+    t.text "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "animals", "organizations"
-  add_foreign_key "families", "organizations"
+  add_foreign_key "cohorts", "organizations"
+  add_foreign_key "enclosures", "organizations"
   add_foreign_key "file_uploads", "organizations"
   add_foreign_key "file_uploads", "users"
+  add_foreign_key "locations", "facilities"
+  add_foreign_key "locations", "organizations"
   add_foreign_key "measurement_events", "organizations"
-  add_foreign_key "measurement_events", "tanks"
-  add_foreign_key "measurements", "animals"
-  add_foreign_key "measurements", "families"
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
-  add_foreign_key "measurements", "tanks"
+  add_foreign_key "operations", "enclosures"
   add_foreign_key "operations", "organizations"
-  add_foreign_key "operations", "tanks"
-  add_foreign_key "tanks", "facilities"
-  add_foreign_key "tanks", "organizations"
 end

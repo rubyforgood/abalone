@@ -12,9 +12,12 @@
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
 class Facility < ApplicationRecord
-  include OrganizationScope
+  has_paper_trail
 
-  has_many :tanks
+  include OrganizationScope
+  include CsvExportable
+
+  has_many :locations
 
   after_commit { Rails.cache.delete('facility_codes') }
 

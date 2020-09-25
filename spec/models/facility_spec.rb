@@ -17,7 +17,7 @@ RSpec.describe Facility, type: :model do
   let(:facility) { FactoryBot.create :facility }
 
   it "Facility has associations" do
-    is_expected.to have_many(:tanks)
+    is_expected.to have_many(:locations)
     is_expected.to belong_to(:organization)
   end
 
