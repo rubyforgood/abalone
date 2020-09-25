@@ -1,9 +1,13 @@
-<section class="section facilities__form">
-  <div class="container facilities__form__container">
-    <h1 class="title">New User</h1>
-    <div class="facilities__form__container__body">
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <%= link_to users_path do %>
+      <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center mb-4">
+        <span><< Cancel</span>
+      </button>
+    <% end %>
+    <h1 class="text-title3 mb-4">New User</h1>
+    <div>
       <%= render 'form', user: @user %>
     </div>
-    <%= link_to '<< Back', users_path, class: "button-outline-primary" %>
   </div>
 </section>
