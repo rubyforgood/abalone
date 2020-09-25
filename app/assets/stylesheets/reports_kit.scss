@@ -1,0 +1,33 @@
+@import "variables";
+@import "mixins";
+
+.abalone-chart {
+  position: relative;
+}
+
+.reports_kit_report {
+  form {
+    select.select2, span.select2 {
+      display: inline-block;
+      width: 200px;
+    }
+    .select2-search {
+      input {
+        height: 2.1em !important;
+      }
+    }
+  }
+}
+
+.reports_kit_visualization {
+  width: 100%;
+}
+
+/*
+** stick download buttons to upper-right of chart
+*/
+.reports_kit_actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
