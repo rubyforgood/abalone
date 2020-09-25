@@ -37,7 +37,7 @@
       <%= form.label :role, class: 'text-sm text-caption-light font-medium uppercase' %>
     </div>
     <div>
-      <%= form.select(:role, User.roles.keys) %>
+      <%= form.select(:role, User.roles.keys, {}, class: "input mb-2") %>
     </div>
   </div>
   <div>
