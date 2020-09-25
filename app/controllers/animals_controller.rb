@@ -68,8 +68,7 @@ class AnimalsController < ApplicationController
       :date_time_collected,
       :collection_position,
       :cohort_id,
-      :pii_tag,
-      :tag_id,
+      :tag,
       :sex
     ).merge(organization_id: current_organization.id)
   end

@@ -32,14 +32,14 @@
           <td><%= cohort.name %></td>
           <td>
             <% if cohort.female.present? %>
-              <%= link_to cohort.female_pii_tag, animal_path(cohort.female) %>
+              <%= link_to cohort.female_tag || "No Tag", animal_path(cohort.female) %>
             <% else %>
                 No female present
             <% end %>
           </td>
           <td>
             <% if cohort.male.present? %>
-              <%= link_to cohort.male_pii_tag, animal_path(cohort.male) %>
+              <%= link_to cohort.male_tag || "No Tag", animal_path(cohort.male) %>
             <% else %>
                 No male present
             <% end %>

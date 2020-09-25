@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_24_153501) do
+ActiveRecord::Schema.define(version: 2020_09_24_210137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,16 +46,15 @@ ActiveRecord::Schema.define(version: 2020_09_24_153501) do
     t.integer "collection_year"
     t.datetime "date_time_collected"
     t.string "collection_position"
-    t.integer "pii_tag"
-    t.integer "tag_id"
     t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.bigint "cohort_id"
+    t.string "tag"
     t.index ["cohort_id"], name: "index_animals_on_cohort_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
-    t.index ["pii_tag", "organization_id"], name: "index_animals_on_pii_tag_and_organization_id", unique: true
+    t.index ["tag", "cohort_id"], name: "index_animals_on_tag_and_cohort_id", unique: true
   end
 
   create_table "animals_shl_numbers", force: :cascade do |t|

@@ -12,8 +12,7 @@ describe "When I visit the animal Show page" do
     expect(page).to have_content(animal.collection_year)
     expect(page).to have_content(animal.date_time_collected)
     expect(page).to have_content(animal.collection_position)
-    expect(page).to have_content(animal.pii_tag)
-    expect(page).to have_content(animal.tag_id)
+    expect(page).to have_content(animal.tag)
     expect(page).to have_content(animal.sex.titleize)
     expect(page).to have_content(animal.cohort.name)
   end
