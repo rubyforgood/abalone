@@ -9,6 +9,6 @@ class Location < ApplicationRecord
   delegate :name, :code, to: :facility, prefix: true
 
   def name_with_facility
-    facility_name + " - " + name
+    "#{facility_name} - #{name}"
   end
 end
