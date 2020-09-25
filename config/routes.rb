@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :measurements, only: %i[new]
+  post '/data_import', to: 'measurements#data_import', as: 'data_import'
 
   post '/file_uploads', to: 'file_uploads#upload'
   resources :file_uploads, only: [:index, :new, :destroy]
