@@ -15,16 +15,16 @@
       <%= render_report 'total_animals_by_cohort',
                           context_params: { organization_id: current_user.organization_id },
                           actions: [] do |report| %>
-      <%= report.form do |f| %>
-      <div>
-        <%= f.multi_autocomplete :cohort, placeholder: 'Cohort...' %>
-        <%= f.date_range :created_at %>
-      </div>
-      <% end %>
-      <div class="reports_kit_actions">
-        <%= report.export_csv_button 'Download CSV', class: 'button-primary' %>
-        <%= report.export_xls_button 'Download XLS', class: 'button-primary' %>
-      </div>
+        <%= report.form do |f| %>
+          <div>
+            <%= f.multi_autocomplete :cohort, placeholder: 'Cohort...' %>
+            <%= f.date_range :created_at %>
+          </div>
+        <% end %>
+        <div class="reports_kit_actions">
+          <%= report.export_csv_button 'Download CSV', class: 'button-primary' %>
+          <%= report.export_xls_button 'Download XLS', class: 'button-primary' %>
+        </div>
       <% end %>
     </section>
   </div>
