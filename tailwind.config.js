@@ -7,14 +7,13 @@ module.exports = {
       center: true,
     },
     prefix: 'tw-',
-    theme: {
-      fontSize: {
-        'title1': '2.5rem',
-        'title2': '2.25rem',
-        'title3': '1.875rem',
-        'body': '1rem',
-        'caption': '0.875rem',
-      },
+    fontSize: {
+      'title1': '2.5rem',
+      'title2': '2.25rem',
+      'title3': '1.875rem',
+      'body': '1rem',
+      'caption': '0.875rem',
+    },
     extend: {
       colors: {
         'primary-dark': '#6767ca',
