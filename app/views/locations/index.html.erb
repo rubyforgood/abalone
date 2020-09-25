@@ -1,18 +1,26 @@
-<section class="section facilities__index">
-  <div class="container facilities__index__container">
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
 
-    <div class="facilities__index__container__header">
-      <h1 class="title">Locations</h1>
-      <%= link_to new_facility_location_path(@facility), class: "button-primary" do %>
-        New Location <%= image_tag  "icons/plus.png", size: 17 %>
+    <div class="flex justify-between items-start mb-4">
+      <%= link_to facilities_path do %>
+        <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center">
+          << Back
+        </button>
+      <% end %>
+      <%= link_to new_facility_location_path(@facility) do %>
+        <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <%= image_tag  "icons/plus.png", size: 17 %>
+          <span class="ml-2">New Location</span>
+        </button>
       <% end %>
     </div>
+    <h1 class="text-title3 mb-4">Locations</h1>
 
-    <table class="table  table-hover table-responsive-sm">
+    <table class="table-auto w-full border">
       <thead>
-        <tr class="bg-dark-light">
-          <th>Name</th>
-          <th>Facility</th>
+        <tr class="border">
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Facility</th>
           <th colspan="3"></th>
         </tr>
       </thead>
@@ -20,15 +28,14 @@
       <tbody>
         <% @locations.each do |location| %>
           <tr>
-            <td><%= location.name %></td>
-            <td><%= location.facility_name %></td>
-            <td><%= link_to 'Show', facility_location_path(@facility, location) %></td>
-            <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_facility_location_path(@facility, location) %></td>
-            <td><%= link_to image_tag("icons/trash.svg", size: 24), facility_location_path(@facility, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2"><%= location.name %></td>
+            <td class="px-4 py-2"><%= location.facility_name %></td>
+            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', facility_location_path(@facility, location) %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_facility_location_path(@facility, location) %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), facility_location_path(@facility, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-    <%= link_to '<< Back', facilities_path, class: "button-outline-primary" %>
   </div>
 </section>
