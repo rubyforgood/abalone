@@ -1,0 +1,13 @@
+# what we're counting/aggregating (y-axis)
+measure: animal
+
+contextual_filters:
+- for_organization
+
+filters:
+- created_at
+- cohort
+
+# columns/associations we're grouping by (x-axis)
+dimensions:
+- cohort

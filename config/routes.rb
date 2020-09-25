@@ -39,5 +39,7 @@ Rails.application.routes.draw do
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
 
+  mount ReportsKit::Engine, at: '/'
+
   root 'home#index'
 end

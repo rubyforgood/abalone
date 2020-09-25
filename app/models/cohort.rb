@@ -7,6 +7,7 @@ class Cohort < ApplicationRecord
   belongs_to :male, class_name: 'Animal', optional: true
   belongs_to :female, class_name: 'Animal', optional: true
 
+  has_many :animals
   has_many :measurements, as: :subject
   has_many :animals
 
@@ -20,6 +21,10 @@ class Cohort < ApplicationRecord
 
   delegate :tag, to: :female, prefix: true, allow_nil: true
   delegate :tag, to: :male, prefix: true, allow_nil: true
+
+  def to_s
+    name.blank? ? "Cohort #{id}" : name
+  end
 
   # def name
   # "Male: #{male.id} / Female: #{female.id}"
