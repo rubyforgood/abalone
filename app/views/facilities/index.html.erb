@@ -13,9 +13,9 @@
         <%#= link_to csv_upload_facilities_path, class: "button-primary" do %>
   <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
         <%# end %>
-        <%= link_to facilities_path(format: :csv) do %>
+        <%= link_to facilities_path(format: :csv), id: "export_button" do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
-            <span>Export to CSV</span>
+            Export to CSV
           </button>
         <% end %>
       </div>

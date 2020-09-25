@@ -33,7 +33,7 @@ describe "When I visit the facility Index page" do
 
     visit facilities_path
 
-    click_on "Export to CSV"
+    find('#export_button').click
 
     expect(page.response_headers['Content-Type']).to eql "text/csv"
     expect(page).to have_content(Facility.exportable_columns.join(','))
