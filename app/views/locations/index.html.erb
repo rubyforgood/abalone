@@ -1,23 +1,8 @@
-<section class="section facilities__show">
-  <div class="container facilities__show__container">
-    <p id="notice"><%= notice %></p>
-    <div class="facilities__show__container__header">
-      <h1 class="title">Facility</h1>
-    </div>
-    <div class="facilities__show__container__body mb-5">
-      <p>
-        <strong>Name:</strong>
-        <%= @facility.name %>
-      </p>
-
-      <p>
-        <strong>Code:</strong>
-        <%= @facility.code %>
-      </p>
-    </div>
+<section class="section facilities__index">
+  <div class="container facilities__index__container">
 
     <div class="facilities__index__container__header">
-      <h2 class="title">Locations</h2>
+      <h1 class="title">Locations</h1>
       <%= link_to new_facility_location_path(@facility), class: "button-primary" do %>
         New Location <%= image_tag  "icons/plus.png", size: 17 %>
       <% end %>
@@ -27,14 +12,16 @@
       <thead>
         <tr class="bg-dark-light">
           <th>Name</th>
+          <th>Facility</th>
           <th colspan="3"></th>
         </tr>
       </thead>
 
       <tbody>
-        <% @facility.locations.each do |location| %>
+        <% @locations.each do |location| %>
           <tr>
             <td><%= location.name %></td>
+            <td><%= location.facility_name %></td>
             <td><%= link_to 'Show', facility_location_path(@facility, location) %></td>
             <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_facility_location_path(@facility, location) %></td>
             <td><%= link_to image_tag("icons/trash.svg", size: 24), facility_location_path(@facility, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -42,9 +29,6 @@
         <% end %>
       </tbody>
     </table>
-
-    <%= link_to '<< BACK', facilities_path, class: "mr-3 mb-3 button-outline-primary" %>
-    <%= link_to "Edit", edit_facility_path(@facility), class: "button-outline-primary mt-4" %>
-
+    <%= link_to '<< Back', facilities_path, class: "button-outline-primary" %>
   </div>
 </section>

@@ -5,17 +5,23 @@
     </div>
     <div class="facilities__show__container__body mb-5">
       <p>
+        <strong>Name:</strong>
+        <%= @enclosure.name %>
+      </p>
+
+      <p>
         <strong>Facility:</strong>
         <%= @enclosure.facility_name %>
       </p>
 
       <p>
-        <strong>Name:</strong>
-        <%= @enclosure.name %>
+        <strong>Location:</strong>
+        <%= @enclosure.location_name %>
       </p>
     </div>
 
     <%= link_to '<< BACK', enclosures_path, class: "mr-3 mb-3 button-outline-primary" %>
     <%= link_to "Edit", edit_enclosure_path(@enclosure), class: "button-outline-primary mt-4" %>
+
   </div>
 </section>
