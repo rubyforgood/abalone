@@ -2,15 +2,11 @@
   <div class="container px-8 py-6 mx-auto bg-white lg:max-w-xl rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
     <div class="flex items-start justify-between mb-4">
-      <%= link_to enclosures_path do %>
-        <button class="inline-flex items-center py-2 font-bold rounded text-primary-dark hover:text-primary">
-          <span><< Back</span>
-        </button>
+      <%= link_to enclosures_path, class: "inline-flex items-center py-2 font-bold rounded text-primary-dark hover:text-primary" do %>
+        <span><< Back</span>
       <% end %>
-      <%= link_to edit_enclosure_path(@enclosure) do %>
-        <button class="inline-flex items-center px-4 py-2 font-bold text-white rounded bg-primary-dark hover:bg-primary">
-          <span>Edit Enclosure</span>
-        </button>
+      <%= link_to edit_enclosure_path(@enclosure), class: "inline-flex items-center px-4 py-2 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+        <span>Edit Enclosure</span>
       <% end %>
     </div>
     <div>

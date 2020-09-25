@@ -4,16 +4,12 @@
     <div class="flex items-center justify-between mb-4">
       <h1 class="text-title2">Enclosures</h1>
       <div class="flex items-center">
-        <%= link_to new_enclosure_path do %>
-          <button class="inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary">
-            <%= image_tag  "icons/plus.png", size: 17 %>
-            <span class="ml-2">New Enclosure</span>
-          </button>
+        <%= link_to new_enclosure_path, class: "inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+          <%= image_tag  "icons/plus.png", size: 17 %>
+          <span class="ml-2">New Enclosure</span>
         <% end %>
-        <%= link_to csv_upload_enclosures_path do %>
-          <button class="inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary">
-            CSV Upload <%= image_tag  "icons/plus.png", size: 17 %>
-          </button>
+        <%= link_to csv_upload_enclosures_path, class: "inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+          CSV Upload <%= image_tag  "icons/plus.png", size: 17 %>
         <% end %>
         <%= link_to enclosures_path(format: :csv), id: "export_button", class: "inline-flex items-center px-4 py-2 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
           Export to CSV

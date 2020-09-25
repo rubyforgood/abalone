@@ -1,9 +1,7 @@
 <section class="h-screen p-12 bg-background">
   <div class="container px-8 py-6 mx-auto bg-white lg:max-w-xl rounded-md shadow-sm">
-    <%= link_to enclosures_path do %>
-      <button class="inline-flex items-center py-2 mb-4 font-bold rounded text-primary-dark hover:text-primary">
-        <span><< Cancel</span>
-      </button>
+    <%= link_to enclosures_path, class: "inline-flex items-center py-2 mb-4 font-bold rounded text-primary-dark hover:text-primary" do %>
+      <span><< Cancel</span>
     <% end %>
     <h1 class="mb-4 text-title3">New Enclosure</h1>
     <div>
