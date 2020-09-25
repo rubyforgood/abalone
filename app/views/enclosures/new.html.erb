@@ -1,9 +1,13 @@
-<section class="section facilities__form">
-  <div class="container facilities__form__container">
-    <h1 class="title">New Enclosure</h1>
-    <div class="facilities__form__container__body">
+<section class="h-screen p-12 bg-background">
+  <div class="container px-8 py-6 mx-auto bg-white lg:max-w-xl rounded-md shadow-sm">
+    <%= link_to enclosures_path do %>
+      <button class="inline-flex items-center py-2 mb-4 font-bold rounded text-primary-dark hover:text-primary">
+        <span><< Cancel</span>
+      </button>
+    <% end %>
+    <h1 class="mb-4 text-title3">New Enclosure</h1>
+    <div>
       <%= render 'form', enclosure: @enclosure %>
     </div>
-    <%= link_to '<< Back', enclosures_path, class: "button-outline-primary" %>
   </div>
 </section>
