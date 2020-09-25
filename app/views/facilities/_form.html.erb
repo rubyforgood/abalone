@@ -1,8 +1,7 @@
-<%= form_with(model: facility, local: true) do |form| %>
+<%= form_with(model: facility, local: true, html: { class: "w-full max-w-md" }) do |form| %>
   <% if facility.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(facility.errors.count, "error") %> prohibited this facility from being saved:</h2>
-
       <ul>
       <% facility.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,20 +9,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name, class: 'label' %>
-    <%= form.text_field :name, class: 'input' %>
+  <div>
+    <div>
+      <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :name, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :code, class: 'label' %>
-    <%= form.text_field :code, class: 'input' %>
+  <div>
+    <div>
+      <%= form.label :code, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :code, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <div class="control">
-      <%= form.submit('Submit', class: 'button-primary') %>
+  <div>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
     </div>
   </div>
 <% end %>

@@ -13,6 +13,6 @@ describe "When I visit the enclosure Show page" do
     visit enclosure_path(enclosure)
 
     expect(page).to have_content(enclosure.name)
-    expect(page).to have_content(enclosure.facility.name)
+    expect(page).to have_content(enclosure.location.name)
   end
 end

@@ -1,0 +1,9 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">New Location</h1>
+    <div class="facilities__form__container__body">
+      <%= render 'form', location: @location, facility: @facility %>
+    </div>
+    <%= link_to '<< Back', facility_locations_path(@facility), class: "button-outline-primary" %>
+  </div>
+</section>
