@@ -1,4 +1,4 @@
-<%= form_with(model: user, local: true) do |form| %>
+<%= form_with(model: user, local: true, html: { class: "w-full max-w-md" }) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -11,28 +11,38 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.hidden_field :organization_id, value: current_user.organization.id %>
+  <div>
+    <div>
+      <%= form.hidden_field :organization_id, value: current_user.organization.id %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :email, class: 'label' %>
-    <%= form.text_field :email, class: 'input' %>
+  <div>
+    <div>
+      <%= form.label :email, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :email, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :password, class: 'label' %>
-    <%= form.password_field :password, class: 'input' %>
+  <div>
+    <div>
+      <%= form.label :password, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :password, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :role, class: 'label' %>
-    <%= form.select(:role, User.roles.keys) %>
+  <div>
+    <div>
+      <%= form.label :role, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.select(:role, User.roles.keys, {}, class: "input mb-2") %>
+    </div>
   </div>
-
-  <div class="field">
+  <div>
     <div class="control">
-      <%= form.submit('Submit', class: 'button-primary') %>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
     </div>
   </div>
 <% end %>
