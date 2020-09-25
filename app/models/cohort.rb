@@ -23,7 +23,7 @@ class Cohort < ApplicationRecord
   delegate :pii_tag, to: :male, prefix: true, allow_nil: true
 
   def to_s
-    name || "Cohort #{id}"
+    name.blank? ? "Cohort #{id}" : name
   end
 
   # def name
