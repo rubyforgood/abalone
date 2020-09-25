@@ -1,40 +1,43 @@
-<section class="section facilities__index">
-  <div class="container facilities__index__container">
-    <div class="facilities__index__container__header">
-      <h1 class="title">Enclosures</h1>
-      <%= link_to new_enclosure_path, class: "button-primary" do %>
-        New Enclosure <%= image_tag  "icons/plus.png", size: 17 %>
-      <% end %>
-      <%= link_to csv_upload_enclosures_path, class: "button-primary" do %>
-        CSV Upload <%= image_tag  "icons/plus.png", size: 17 %>
-      <% end %>
-      <%= link_to enclosures_path(format: :csv), class: "button-primary" do %>
-        Export to CSV
-      <% end %>
+<section class="h-screen p-12 bg-background">
+  <div class="container px-8 py-6 mx-auto bg-white rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-title2">Enclosures</h1>
+      <div class="flex items-center">
+        <%= link_to new_enclosure_path, class: "inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+          <%= image_tag  "icons/plus.png", size: 17 %>
+          <span class="ml-2">New Enclosure</span>
+        <% end %>
+        <%= link_to csv_upload_enclosures_path, class: "inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+          CSV Upload <%= image_tag  "icons/plus.png", size: 17 %>
+        <% end %>
+        <%= link_to enclosures_path(format: :csv), id: "export_button", class: "inline-flex items-center px-4 py-2 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+          Export to CSV
+        <% end %>
+      </div>
     </div>
-
-    <table class="table  table-hover table-responsive-sm">
+    <table class="w-full border table-auto">
       <thead>
-        <tr class="bg-dark-light">
-          <th>Name</th>
-          <th>Facility</th>
-          <th>Location</th>
-          <th colspan="3"></th>
+        <tr class="border">
+          <th class="px-4 py-2 text-sm font-medium uppercase text-caption-light">Name</th>
+          <th class="px-4 py-2 text-sm font-medium uppercase text-caption-light">Facility</th>
+          <th class="px-4 py-2 text-sm font-medium uppercase text-caption-light">Location</th>
+          <th colspan="4"></th>
         </tr>
       </thead>
-
       <tbody>
         <% @enclosures.each do |enclosure| %>
           <tr>
-            <td><%= enclosure.name %></td>
-            <td><%= enclosure.facility_name %></td>
-            <td><%= enclosure.location_name %></td>
-            <td><%= link_to 'Show', enclosure %></td>
-            <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_enclosure_path(enclosure) %></td>
-            <td><%= link_to image_tag("icons/trash.svg", size: 24), enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2"><%= enclosure.name %></td>
+            <td class="px-4 py-2"><%= enclosure.facility_name %></td>
+            <td class="px-4 py-2"><%= enclosure.location_name %></td>
+            <td class="px-4 py-2 text-primary-dark"><%= link_to 'Show', enclosure %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_enclosure_path(enclosure) %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
 </section>
+

@@ -1,23 +1,24 @@
-<section class="section facilities__show">
-  <div class="container facilities__show__container">
-    <div class="facilities__show__container__header">
-      <h1 class="title">Enclosure</h1>
+<section class="h-screen p-12 bg-background">
+  <div class="container px-8 py-6 mx-auto bg-white lg:max-w-xl rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex items-start justify-between mb-4">
+      <%= link_to enclosures_path, class: "inline-flex items-center py-2 font-bold rounded text-primary-dark hover:text-primary" do %>
+        <span><< Back</span>
+      <% end %>
+      <%= link_to edit_enclosure_path(@enclosure), class: "inline-flex items-center px-4 py-2 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
+        <span>Edit Enclosure</span>
+      <% end %>
     </div>
-    <div class="facilities__show__container__body mb-5">
-      <p>
-        <strong>Name:</strong>
+    <div>
+      <h1 class="mb-4 text-title3">Enclosure</h1>
+    </div>
+    <div class="block">
+        <div class="text-sm font-medium uppercase text-caption-light">Name</div>
         <%= @enclosure.name %>
-      </p>
-
-      <p>
-        <strong>Facility:</strong>
+        <div class="mt-2 text-sm font-medium uppercase text-caption-light">Facility</div>
         <%= @enclosure.facility_name %>
-      </p>
-
-      <p>
-        <strong>Location:</strong>
+        <div class="mt-2 text-sm font-medium uppercase text-caption-light">Location</div>
         <%= @enclosure.location_name %>
-      </p>
     </div>
 
     <%= link_to '<< BACK', enclosures_path, class: "mr-3 mb-3 button-outline-primary" %>
@@ -25,3 +26,4 @@
 
   </div>
 </section>
+
