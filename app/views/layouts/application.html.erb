@@ -57,6 +57,7 @@
                 Uploads
               </a>
               <div class="navbar-dropdown">
+                <%= link_to 'Data Import', new_measurement_path, class: 'navbar-item'%>
                 <%= link_to 'CSV Uploads', csv_index_path, class: 'navbar-item' %>
                 <%= link_to 'Files List', file_uploads_path, class: 'navbar-item'%>
                 <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
