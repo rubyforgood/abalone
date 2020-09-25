@@ -1,39 +1,50 @@
-<%= form_with(model: cohort, local: true) do |form| %>
+<%= form_with(model: cohort, local: true, html: { class: "w-full max-w-md" }) do |form| %>
   <% if cohort.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(cohort.errors.count, "error") %> prohibited this cohort from being saved:</h2>
-
+      <h2><%= pluralize(animal.errors.count, "error") %> prohibited this cohort from being saved:</h2>
       <ul>
-        <% cohort.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+      <% cohort.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name, class: 'label' %>
-    <%= form.text_field :name, class: 'input' %>
+  <div>
+    <div>
+      <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :name, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :male, class: 'label' %>
-    <%= form.collection_select :male_id, Animal.male.for_organization(current_organization), :id, :tag, prompt: true, class: 'input' %>
+  <div class="mb-2">
+    <div>
+      <%= form.label :male, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.collection_select :male_id, Animal.male.for_organization(current_organization), :id, :tag, prompt: true, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :female, class: 'label' %>
-    <%= form.collection_select :female_id, Animal.female.for_organization(current_organization), :id, :tag, prompt: true, class: 'input' %>
+  <div class="mb-2">
+    <div>
+      <%= form.label :female, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.collection_select :female_id, Animal.female.for_organization(current_organization), :id, :tag, prompt: true, class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :enclosure, class: 'label' %>
-    <%= form.collection_select :enclosure_id, Enclosure.for_organization(current_organization), :id, :name, include_blank: 'Select Enclosure', class: 'input' %>
+  <div>
+    <div>
+      <%= form.label :enclosure, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.collection_select :enclosure_id, Enclosure.for_organization(current_organization), :id, :name, include_blank: 'Select Enclosure', class: 'input mb-2' %>
+    </div>
   </div>
-
-  <div class="field">
-    <div class="control">
-      <%= form.submit('Submit', class: 'button-primary') %>
+  <div>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
     </div>
   </div>
 <% end %>
+

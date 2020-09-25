@@ -1,57 +1,51 @@
-<section class="section facilities__index">
-  <div class="container facilities__index__container">
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
-
-    <div class="facilities__index__container__header">
-      <h1 class="title">Cohorts</h1>
-      <%= link_to new_cohort_path, class: "button-primary" do %>
-        New Cohort <%= image_tag  "icons/plus.png", size: 17 %>
-      <% end %>
-      <%#= link_to csv_upload_cohorts_path, class: "button-primary" do %>
-      <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
-      <%# end %>
-      <%= link_to cohorts_path(format: :csv), class: "button-primary" do %>
-        Export to CSV
-      <% end %>
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-4xl">Cohorts</h1>
+      <div class="flex items-center">
+        <%= link_to new_cohort_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2">New Cohort</span>
+          </button>
+        <% end %>
+      </div>
     </div>
-
-    <table class="table  table-hover table-responsive-sm">
+    <table class="table-auto w-full border">
       <thead>
-      <tr class="bg-dark-light">
-        <th>Name</th>
-        <th>Female</th>
-        <th>Male</th>
-        <th>Enclosure</th>
-        <th colspan="3"></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <% @cohorts.each do |cohort| %>
-        <tr>
-          <td><%= cohort.name %></td>
-          <td>
-            <% if cohort.female.present? %>
-              <%= link_to cohort.female_tag || "No Tag", animal_path(cohort.female) %>
-            <% else %>
-                No female present
-            <% end %>
-          </td>
-          <td>
-            <% if cohort.male.present? %>
-              <%= link_to cohort.male_tag || "No Tag", animal_path(cohort.male) %>
-            <% else %>
-                No male present
-            <% end %>
-          </td>
-          <td><%= cohort.enclosure&.name %></td>
-          <td><%= link_to 'Show', cohort_path(cohort) %></td>
-          <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_cohort_path(cohort) %></td>
-          <td><%= link_to image_tag("icons/trash.svg", size: 24), cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <tr class="border">
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Female</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Male</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Enclosure</th>
+          <th colspan="3"></th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+        <% @cohorts.each do |cohort| %>
+          <tr>
+            <td class="px-4 py-2"><%= cohort.name %></td>
+            <td class="px-4 py-2">
+              <% if cohort.female.present? %>
+                <%= link_to cohort.female_tag || "No Tag", animal_path(cohort.female) %>
+              <% else %>
+                No female present
+              <% end %>
+            </td>
+            <td class="px-4 py-2">
+              <% if cohort.male.present? %>
+                <%= link_to cohort.male_tag || "No Tag", animal_path(cohort.male) %>
+              <% else %>
+                No male present
+              <% end %>
+            </td>
+            <td class="px-4 py-2"><%= cohort.enclosure&.name %></td>
+            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', cohort %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_cohort_path(cohort) %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
-
   </div>
-</section>
