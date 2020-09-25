@@ -1,3 +1,4 @@
 subject_type,subject_id,measurement_type,value,date,measurement_event
 Cohort,1,count,24,2020-09-24,September Survey
 Enclosure,1,count,42,2020-09-24,September Survey
+,,,,,
