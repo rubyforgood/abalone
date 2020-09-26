@@ -1,9 +1,13 @@
-<section class="section facilities__form">
-  <div class="container facilities__form__container">
-    <h1 class="title">New Animal</h1>
-    <div class="facilities__form__container__body">
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <%= link_to animals_path do %>
+      <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center mb-4">
+        <span><< Cancel</span>
+      </button>
+    <% end %>
+    <h1 class="text-3xl mb-4">New Animal</h1>
+    <div>
       <%= render 'form', animal: @animal %>
     </div>
-    <%= link_to '<< Back', animals_path, class: "button-outline-primary" %>
   </div>
 </section>

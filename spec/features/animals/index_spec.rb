@@ -37,7 +37,7 @@ describe "When I visit the animal Index page" do
 
     visit animals_path
 
-    click_on "Export to CSV"
+    find('#export_button').click
 
     expect(page.response_headers['Content-Type']).to eql "text/csv"
     expect(page).to have_content(Animal.exportable_columns.join(','))
