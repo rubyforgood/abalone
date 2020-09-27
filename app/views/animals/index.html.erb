@@ -1,45 +1,47 @@
-<section class="section facilities__index">
-  <div class="container facilities__index__container">
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
-
-    <div class="facilities__index__container__header">
-      <h1 class="title">Animals</h1>
-      <%= link_to new_animal_path, class: "button-primary" do %>
-        New Animal <%= image_tag  "icons/plus.png", size: 17 %>
-      <% end %>
-      <%= link_to csv_upload_animals_path, class: "button-primary" do %>
-        CSV Upload <%= image_tag  "icons/plus.png", size: 17 %>
-      <% end %>
-      <%= link_to animals_path(format: :csv), class: "button-primary" do %>
-        Export to CSV
-      <% end %>
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-4xl">Animals</h1>
+      <div class="flex items-center">
+        <%= link_to new_animal_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2">New Animal</span>
+          </button>
+        <% end %>
+        <%#= link_to csv_upload_animals_path, class: "button-primary" do %>
+  <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
+        <%# end %>
+        <%= link_to animals_path(format: :csv), id: "export_button" do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+            Export to CSV
+          </button>
+        <% end %>
+      </div>
     </div>
-
-    <table class="table  table-hover table-responsive-sm">
+    <table class="table-auto w-full border">
       <thead>
-        <tr class="bg-dark-light">
-          <th>Tag</th>
-          <th>Collection Year</th>
-          <th>Cohort</th>
-          <th>SHL Numbers</th>
+        <tr class="border">
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Tag</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Collection Year</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Cohort</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">SHL Numbers</th>
           <th colspan="3"></th>
         </tr>
       </thead>
-
       <tbody>
         <% @animals.each do |animal| %>
           <tr>
-            <td><%= animal.tag %></td>
-            <td><%= animal.collection_year %></td>
-            <td><%= animal.cohort_name %></td>
-            <td><%= link_to 'Show', animal %></td>
-            <td><%= link_to image_tag("icons/edit.svg", size: 24), edit_animal_path(animal) %></td>
-            <td><%= link_to image_tag("icons/trash.svg", size: 24), animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <td><%= animal.shl_number_codes(", ") %></td>
+            <td class="px-4 py-2"><%= animal.tag %></td>
+            <td class="px-4 py-2"><%= animal.collection_year %></td>
+            <td class="px-4 py-2"><%= animal.cohort_name %></td>
+            <td class="px-4 py-2"><%= animal.shl_number_codes(", ") %></td>
+            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', animal %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_animal_path(animal) %></td>
+            <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-
   </div>
-</section>
