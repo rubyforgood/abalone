@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "When I visit the user Show page" do
   it "as an admin, I see information of a specific user" do
-    user = create(:user, role: "admin")
+    user = create(:user, :as_admin)
     sign_in user
 
     visit user_path(user)
@@ -12,7 +12,7 @@ describe "When I visit the user Show page" do
   end
 
   it "as a user, I see information of a specific user" do
-    user = create(:user, role: "user")
+    user = create(:user, :as_user)
     sign_in user
 
     visit user_path(user)

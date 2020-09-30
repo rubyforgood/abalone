@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "When I visit the User New page" do
-  let(:user) { create(:user, role: "admin") }
+  let(:user) { create(:user, :as_admin) }
 
   before do
     sign_in user
