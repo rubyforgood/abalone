@@ -6,7 +6,7 @@ class PasswordsController < ApplicationController
 
   def update
     if @user.update(user_params)
-      sign_in(@user, bypass: true)
+      bypass_sign_in(@user)
       redirect_to edit_password_url, notice: 'Password was successfully updated.'
     else
       render :edit
