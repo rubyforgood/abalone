@@ -11,7 +11,9 @@ class Cohort < ApplicationRecord
   has_many :measurements, as: :subject
   has_many :animals
 
-  belongs_to :enclosure, required: false
+  belongs_to :enclosure, required: true
+
+  validates :name, presence: true, uniqueness: { scope: :organization_id }
 
   delegate :name, to: :enclosure, prefix: true, allow_nil: true
 
