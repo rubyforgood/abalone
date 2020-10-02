@@ -16,10 +16,10 @@ RSpec.describe 'Home Page Statistics' do
     end
 
     it 'When I login and view the home page I see my company data' do
-      sign_in user
       animal.reload
       facility.reload
       cohort.reload
+      sign_in user
       visit root_path
       expect(page.all('.card-content')[0].find('.title').text).to eq('1')
       expect(page.all('.card-content')[1].find('.title').text).to eq('1')
