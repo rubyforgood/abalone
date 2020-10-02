@@ -19,6 +19,9 @@ class Facility < ApplicationRecord
 
   has_many :locations
 
+  validates :name, presence: true
+  validates :code, presence: true, uniqueness: { scope: :organization_id }
+
   after_commit { Rails.cache.delete('facility_codes') }
 
   # ReportsKit uses this for default labeling

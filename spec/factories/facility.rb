@@ -1,7 +1,10 @@
 FactoryBot.define do
   factory :facility do
-    name { Faker::Games::HalfLife.location.to_s }
-    code { name.gsub(/[^A-Z]/, '') }
+    val = Faker::Name.unique.name
+    name { val }
+    sequence :code do |idx|
+      "#{val.gsub(/[aeiou|AEIOU|\s]+/, '').strip}-#{idx}"
+    end
     organization
   end
 end

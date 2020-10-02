@@ -85,3 +85,7 @@ shared_examples_for 'organization presence validation' do
     end
   end
 end
+
+shared_examples_for OrganizationScope do
+  it { is_expected.to validate_presence_of :organization }
+end
