@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   helper_method def current_organization
     current_user.organization
   end
+
+  def authorize_admin!
+    redirect_to root_path, alert: "Not authorized" unless current_user.admin?
+  end
 end
