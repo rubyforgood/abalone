@@ -65,4 +65,8 @@ RSpec.describe Operation, type: :model do
       it { is_expected.to raise_error(Operation::InvalidActionError) }
     end
   end
+
+  include_examples 'organization presence validation' do
+    let(:model) { described_class.new enclosure: create(:enclosure), organization: organization }
+  end
 end
