@@ -13,11 +13,7 @@
         <div class="card">
           <div class="card-content">
             <h2 class="subtitle">Total No. of Animals</h2>
-            <% if current_user %>
-              <h1 class="title"><%= current_user&.organization&.animals.count %></h1>
-            <% else %>
-              <h1 class="title">41</h1>
-            <% end %>
+            <h1 class="title"><%= @animal_count %></h1>
           </div>
         </div>
       </div>
@@ -30,11 +26,7 @@
         <div class="card">
           <div class="card-content">
             <h2 class="subtitle">No. of Facilities</h2>
-            <% if current_user %>
-              <h1 class="title"><%= current_user&.organization&.facilities.count %></h1>
-            <% else %>
-              <h1 class="title">3</h1>
-            <% end %>
+            <h1 class="title"><%= @facility_count %></h1>
           </div>
         </div>
       </div>
@@ -43,11 +35,7 @@
         <div class="card">
           <div class="card-content">
             <h2 class="subtitle">No. of Spawn Dates</h2>
-            <% if current_user %>
-              <h1 class="title"><%= current_user&.organization&.cohorts.count %></h1>
-            <% else %>
-              <h1 class="title">7</h1>
-            <% end %>
+            <h1 class="title"><%= @cohort_count %></h1>
           </div>
         </div>
       </div>
