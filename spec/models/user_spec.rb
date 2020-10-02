@@ -10,4 +10,8 @@ RSpec.describe User, type: :model do
     expect(user.role).to eq 'user'
     expect(user.role).to_not eq 'admin'
   end
+
+  include_examples 'organization presence validation' do
+    let(:model) { described_class.new email: 'test@gmail.com', password: 'secret-token', organization: organization }
+  end
 end
