@@ -5,11 +5,11 @@ FactoryBot.define do
     organization
 
     trait :with_enclosures do
-      transient { enclosures_count { 5 } }
+      transient { enclosures_count { 1 } }
 
-      after(:create) do |loc, eval|
-        create_list :enclosure, eval.enclosures_count, location: loc
-        loc.reload
+      after(:create) do |location, eval|
+        create_list :enclosure, eval.enclosures_count, location: location
+        location.reload
       end
     end
   end

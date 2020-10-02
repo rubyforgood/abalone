@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "When I visit the user Edit page" do
-  let(:admin) { create(:user, :as_admin) }
+  let(:admin) { create(:user, :admin) }
 
   before do
     sign_in admin

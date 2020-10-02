@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "When I visit the users Index page" do
   let(:organization) { create(:organization) }
-  let(:user) { create(:user, :as_admin, organization: organization) }
+  let(:user) { create(:user, :admin, organization: organization) }
 
   before do
     sign_in user
