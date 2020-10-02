@@ -3,5 +3,6 @@ FactoryBot.define do
     sequence(:name) { |n| "Enclosure #{n}" }
     location
     organization
+    cohort
   end
 end

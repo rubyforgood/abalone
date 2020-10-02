@@ -29,7 +29,7 @@ describe "When I visit the cohort Index page" do
 
     visit cohorts_path
 
-    click_on "Export to CSV"
+    find('#export_button').click
 
     expect(page.response_headers['Content-Type']).to eql "text/csv"
     expect(page).to have_content(Cohort.exportable_columns.join(','))

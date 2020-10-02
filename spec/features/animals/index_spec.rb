@@ -8,7 +8,8 @@ describe "When I visit the animal Index page" do
   end
 
   it "Then I see a list of all the animals" do
-    animal = FactoryBot.create(:animal, collection_year: 2, tag: "G222", organization: user.organization)
+    cohort = create(:cohort)
+    animal = create(:animal, cohort: cohort, collection_year: 2, tag: "G222", organization: user.organization)
     animal_count = Animal.for_organization(user.organization).count
 
     visit animals_path
@@ -37,7 +38,7 @@ describe "When I visit the animal Index page" do
 
     visit animals_path
 
-    click_on "Export to CSV"
+    find('#export_button').click
 
     expect(page.response_headers['Content-Type']).to eql "text/csv"
     expect(page).to have_content(Animal.exportable_columns.join(','))

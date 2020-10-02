@@ -8,4 +8,6 @@ RSpec.describe Animal, type: :model do
     is_expected.to have_many(:animals_shl_numbers).dependent(:destroy)
     is_expected.to have_many(:shl_numbers).through(:animals_shl_numbers)
   end
+
+  include_examples 'organization presence validation'
 end

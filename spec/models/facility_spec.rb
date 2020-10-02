@@ -30,4 +30,6 @@ RSpec.describe Facility, type: :model do
       it { expect(Facility.columns.count).to eq 6 }
     end
   end
+
+  include_examples 'organization presence validation'
 end

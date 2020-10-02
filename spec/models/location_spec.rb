@@ -13,4 +13,8 @@ RSpec.describe Location, type: :model do
       expect(location.name_with_facility).to eq "#{location.facility_name} - #{location.name}"
     end
   end
+
+  include_examples 'organization presence validation' do
+    let(:model) { described_class.new name: 'Name of location', facility: create(:facility), organization: organization }
+  end
 end
