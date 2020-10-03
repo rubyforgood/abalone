@@ -18,7 +18,7 @@ RSpec.describe 'Home Page Statistics' do
       visit root_path
       expect(page.all('.card-content')[0].find('.title').text).to eq('1') # Total No. of Animals
       expect(page.all('.card-content')[1].find('.title').text).to eq('1') # No. of Facilities
-      expect(page.all('.card-content')[2].find('.title').text).to eq('1') # No. of Spawn Dates
+      expect(page.all('.card-content')[2].find('.title').text).to eq('1') # No. of Cohorts
     end
   end
 end
