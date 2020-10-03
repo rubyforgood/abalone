@@ -47,8 +47,8 @@
             <%= link_to 'Animals', animals_path, class: 'navbar-item'%>
             <%= link_to 'Cohorts', cohorts_path, class: 'navbar-item'%>
             <%= link_to 'Operations', operations_path, class: 'navbar-item'%>
-            <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
             <% if current_user.admin? %>
+              <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
               <%= link_to 'Users', users_path, class: 'navbar-item'%>
             <% end %>
 

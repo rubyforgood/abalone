@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "When I visit the measurement_type Index page" do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, role: "admin") }
 
   before do
     sign_in user
@@ -19,6 +19,16 @@ describe "When I visit the measurement_type Index page" do
       expect(page).to have_xpath('.//tr', count: measurement_type_count)
       link.click
       expect(page).to have_xpath('.//tr', count: (measurement_type_count - 1))
+    end
+  end
+
+  context "As a non-admin user" do
+    it "Then I should not have access to the measurement types action form" do
+      user.update(role: "user")
+
+      visit measurement_types_path
+
+      expect(page).to have_content 'Not authorized'
     end
   end
 end
