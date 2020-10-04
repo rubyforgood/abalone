@@ -63,3 +63,29 @@ shared_examples_for 'validate values for field' do |field_name|
     end
   end
 end
+
+shared_examples_for 'organization presence validation' do
+  let(:model) { described_class.new organization: organization }
+
+  context 'with organization' do
+    context 'when organization is nil' do
+      let(:organization) { nil }
+
+      it 'is invalid' do
+        expect(model).not_to be_valid
+      end
+    end
+
+    context 'when organization is present' do
+      let(:organization) { create(:organization) }
+
+      it 'is valid' do
+        expect(model).to be_valid
+      end
+    end
+  end
+end
+
+shared_examples_for OrganizationScope do
+  it { is_expected.to validate_presence_of :organization }
+end

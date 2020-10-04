@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     current_user.organization
   end
 
+  def authorize_admin!
+    redirect_to root_path, alert: "Not authorized" unless current_user.admin?
+  end
+
   # Auth check for Blazer reporting
   def require_organization
     redirect_to root_path unless current_user && current_organization
@@ -17,7 +21,9 @@ class ApplicationController < ActionController::Base
     User.current = current_user
   end
 
-  # Blazer's before_action_method call
+  # Blazer's before_action_method call to
+  # make sure a user is logged in and associated
+  # with an organization as the app does.
   def blazer_setup
     require_organization
     set_current_user

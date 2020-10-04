@@ -27,7 +27,20 @@ RSpec.describe Facility, type: :model do
     it { is_expected.to have_db_column :organization_id }
 
     describe 'it only has 6 columns' do
-      it { expect(Facility.columns.count).to eq 6 }
+      it { expect(described_class.columns.count).to eq 6 }
     end
   end
+
+  describe 'validation' do
+    it 'validates presence of' do
+      is_expected.to validate_presence_of :name
+      is_expected.to validate_presence_of :code
+    end
+
+    it 'validate uniqueness of' do
+      is_expected.to validate_uniqueness_of(:code).scoped_to(:organization_id)
+    end
+  end
+
+  it_behaves_like OrganizationScope
 end

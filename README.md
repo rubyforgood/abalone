@@ -153,7 +153,7 @@ We are building an app which has the following capabilities:
 [See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
 ## Deployment
-The application is currently deployed on Heroku at https://abalonerescue.herokuapp.com/.
+The application is currently deployed on Heroku at https://abalone-staging.herokuapp.com/.
 
 ## And Don't Forget...
 
