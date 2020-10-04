@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :measurements, only: %[new]
   post '/file_uploads', to: 'file_uploads#upload'
   resources :file_uploads, only: [:index, :new, :destroy]
   get '/file_uploads/csv_index', to: 'file_uploads#csv_index', as: 'csv_index'
