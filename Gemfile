@@ -66,6 +66,7 @@ end
 
 # Report builder
 gem 'reports_kit'
+gem 'blazer'
 
 # Excel and CSV support
 gem 'creek'
