@@ -1,4 +1,5 @@
 class MeasurementTypesController < ApplicationController
+  before_action :authorize_admin!
   before_action :set_measurement_type, only: [:edit, :update, :destroy]
 
   def index

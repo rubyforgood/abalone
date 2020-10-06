@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "When I visit the animal Show page" do
   it "I see information of a specific animal" do
-    user = create(:user, role: "admin")
+    user = create(:user, :admin)
     cohort = create(:cohort)
     animal = create(:animal, cohort: cohort)
 
