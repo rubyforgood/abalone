@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "When I visit the measurement_type index page" do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, role: "admin") }
 
   before do
     sign_in user
@@ -15,6 +15,16 @@ describe "When I visit the measurement_type index page" do
     measurement_types.each do |measurement_type|
       expect(page).to have_content(measurement_type.name)
       expect(page).to have_content(measurement_type.unit)
+    end
+  end
+
+  context "As a non-admin user" do
+    it "Then I should not have access to the measurement types index page" do
+      user.update(role: "user")
+
+      visit measurement_types_path
+
+      expect(page).to have_content 'Not authorized'
     end
   end
 end

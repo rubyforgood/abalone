@@ -8,9 +8,10 @@ describe "When I visit the locations index page" do
   end
 
   it "Then I see a list of locations" do
-    locations = create_list(:location, 3, organization: user.organization)
+    facility = create(:facility)
+    locations = create_list(:location, 3, facility: facility, organization: user.organization)
 
-    visit facility_locations_path(locations.first.facility)
+    visit facility_locations_path(facility)
 
     locations.each do |location|
       expect(page).to have_content(location.name)

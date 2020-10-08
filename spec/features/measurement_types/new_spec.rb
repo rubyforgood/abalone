@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe "When I visit the measurement_type New page" do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, role: "admin") }
 
   before do
     sign_in user
@@ -24,5 +24,15 @@ describe "When I visit the measurement_type New page" do
 
     expect(page).to have_content("Length")
     expect(page).to have_content("cm")
+  end
+
+  context "As a non-admin user" do
+    it "Then I should not have access to the measurement types action form" do
+      user.update(role: "user")
+
+      visit new_measurement_type_path
+
+      expect(page).to have_content 'Not authorized'
+    end
   end
 end

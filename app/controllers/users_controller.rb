@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :admin?, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :authorize_admin!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -54,9 +54,5 @@ class UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def admin?
-    redirect_to root_path, alert: "Not authorized" unless current_user.admin?
   end
 end
