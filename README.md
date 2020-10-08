@@ -107,7 +107,7 @@ To do so:
 * start the database with `make database_started`
 
 ## Contribute
-We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
+We would love to have you contribute! Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/master/CONTRIBUTING.md). Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
 
 ### Get Familiar with the App
 
