@@ -17,13 +17,14 @@ class ApplicationController < ActionController::Base
     redirect_to root_path unless current_user && current_organization
   end
 
+  # Save current_user to a place Blazer and models can access it.
   def set_current_user
-    User.current = current_user
+    Current.user = current_user
   end
 
   # Blazer's before_action_method call to
   # make sure a user is logged in and associated
-  # with an organization as the app does.
+  # with an organizatio as the app does.
   def blazer_setup
     require_organization
     set_current_user

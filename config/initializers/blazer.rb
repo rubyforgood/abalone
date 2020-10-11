@@ -39,7 +39,7 @@ end
 module Blazer
   class << self
     def data_sources
-      user_data_source = "org#{User.current.organization_id}" if User.current.present?
+      user_data_source = "org#{Current.user.organization_id}" if Current.user.present?
 
       ds = Hash.new { |_hash, key| raise Blazer::Error, "Unknown data source: #{key}" }
       settings['data_sources'].each do |id, s|
