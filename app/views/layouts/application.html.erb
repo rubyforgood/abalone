@@ -25,12 +25,11 @@
 
   <body>
     <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-      <div class="pl-2 flex">
+      <div class="pl-2 flex logo">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag 'abalone_logo.png' %>
           <h1 class="text-gray-900 font-bold pl-2">Abalone Analytics</h1>
         <% end %>
-
         <a role="button" data-target="nav-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -38,7 +37,7 @@
         </a>
       </div>
 
-      <div id="nav-menu" class="navbar-menu">
+      <div id="nav-menu" class="pl-2 navbar-menu">
         <div class="navbar-start">
           <% if current_user %>
             <%= link_to 'Reports', reports_path, class: 'navbar-item'%>
