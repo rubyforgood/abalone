@@ -2,7 +2,9 @@
 *= require reports_kit/application
 */
 
-@import "bootstrap";
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 @import "facilities";
 @import "file_uploads";
 @import "home";
@@ -11,7 +13,6 @@
 @import "mixins";
 @import "pages/**/*";
 @import "reports_kit";
-
 * {
   font-family: "Poppins", sans-serif;
 }
@@ -25,9 +26,10 @@
   -webkit-box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.25);
   box-shadow: -4px -1px 33px -5px rgba(0, 0, 0, 0.25);
-
   h1 {
     font-size: 20px;
+    color: #4a4a4a;
+    font-weight: 500;
   }
   @include tablet {
     .navbar-brand {
@@ -40,6 +42,14 @@
       right: 17px;
     }
   }
+  .logo {
+    min-width: 230px;
+  }
+}
+
+.navbar.is-light {
+  background-color: #f5f5f5;
+  color: #363636;
 }
 
 .button-primary {
@@ -81,7 +91,8 @@
   border-radius: 3px;
 }
 
-.input, .textarea{
+.input,
+.textarea {
   box-shadow: unset;
   border-radius: 2px;
 }
