@@ -17,7 +17,7 @@ RSpec.describe Cohort, type: :model do
   it "should have correct amount of mortality_events" do
     animal1 = create(:animal, cohort: cohort)
     animal2 = create(:animal, cohort: cohort)
-    animal3 = create(:animal, cohort: cohort)
+    create(:animal, cohort: cohort)
 
     create(:mortality_event, animal: animal1, cohort: cohort)
     create(:mortality_event, animal: animal2, cohort: cohort)
