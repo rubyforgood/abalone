@@ -18,6 +18,15 @@ describe "When I visit the user Show page" do
     visit user_path(user)
 
     expect(page).not_to have_content(user.email)
-    expect(page).not_to have_content(user.organization.name)
+    expect(page).to have_content(user.organization.name)
+  end
+
+  it "as a user who's not logged in, I see no user specific information" do
+    user = create(:user)
+
+    visit user_path(user)
+
+    expect(page).not_to have_content(user.email)
+    expect(page).not_to have_content("Your organization: #{user.organization.name}")
   end
 end
