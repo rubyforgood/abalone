@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3.3'
+gem 'rails', '~> 6.0.3.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'activerecord-postgres_enum', '~> 1.4'
@@ -35,7 +35,7 @@ gem 'newrelic_rpm'
 gem 'webpacker', '~> 5.x'
 
 # Pagination helper
-gem 'pagy', '~> 3.5'
+gem 'pagy', '~> 3.9'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,7 +44,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0', '>= 4.0.1'
   gem "factory_bot_rails"
   gem 'rubocop-rails'
-  gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
+  gem 'faker'
   gem 'shoulda-matchers'
   gem 'capybara'
   gem 'pry'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_27_001420) do
+ActiveRecord::Schema.define(version: 2020_10_20_103647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -222,6 +222,17 @@ ActiveRecord::Schema.define(version: 2020_09_27_001420) do
     t.index ["organization_id"], name: "index_measurements_on_organization_id"
     t.index ["processed_file_id"], name: "index_measurements_on_processed_file_id"
     t.index ["subject_type", "subject_id"], name: "index_measurements_on_subject_type_and_subject_id"
+  end
+
+  create_table "mortality_events", force: :cascade do |t|
+    t.datetime "mortality_date"
+    t.bigint "animal_id"
+    t.bigint "cohort_id"
+    t.integer "mortality_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["animal_id"], name: "index_mortality_events_on_animal_id"
+    t.index ["cohort_id"], name: "index_mortality_events_on_cohort_id"
   end
 
   create_table "operation_batches", force: :cascade do |t|

@@ -9,7 +9,7 @@ class Cohort < ApplicationRecord
 
   has_many :animals
   has_many :measurements, as: :subject
-  has_many :animals
+  has_many :mortality_events
 
   belongs_to :enclosure, required: false
 
@@ -24,6 +24,10 @@ class Cohort < ApplicationRecord
 
   def to_s
     name.blank? ? "Cohort #{id}" : name
+  end
+
+  def mortality_count
+    mortality_events.count
   end
 
   # def name
