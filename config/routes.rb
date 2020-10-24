@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'about', action: 'show', controller: 'home'
 
   mount ReportsKit::Engine, at: '/'
+  mount Blazer::Engine, at: "blazer"
 
   root 'home#index'
 end
