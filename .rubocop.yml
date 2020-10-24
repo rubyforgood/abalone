@@ -1842,6 +1842,7 @@ Metrics/BlockLength:
     - '**/*.gemspec'
     - 'spec/**/*'
     - 'lib/tasks/auto_annotate_models.rake'
+    - 'lib/tasks/blazer.rake'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting.'

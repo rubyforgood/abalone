@@ -54,7 +54,7 @@ namespace :blazer do
     end
   end
 
-private
+  private
 
   def saving?
     ENV['SAVE']
@@ -86,7 +86,7 @@ private
       GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
       GRANT USAGE ON SCHEMA public TO #{org_user};
       GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
-      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user}; 
+      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
       COMMIT;
     SQL
   end
@@ -134,7 +134,7 @@ private
     else
       puts "#{sql}\n"
     end
-  rescue => e
+  rescue StandardError => e
     # May only want to ignore exceptions when we drop things because
     # an error dropping something not there doesn't matter.
     puts e.message
@@ -149,6 +149,6 @@ private
   end
 
   def blazer_config
-    @blazer_config ||= YAML.load(ERB.new(File.read(Rails.root.join('config', 'blazer.yml'))).result).deep_symbolize_keys
+    @blazer_config ||= YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'blazer.yml'))).result).deep_symbolize_keys
   end
 end
