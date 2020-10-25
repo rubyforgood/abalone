@@ -66,6 +66,7 @@ organization_entities[:organizations].each do |org_ent|
   MeasurementType.find_or_create_by(name: 'weight', unit: 'g', organization: org)
   MeasurementType.find_or_create_by(name: 'gonad score', unit: 'number', organization: org)
 
+
   # Create facilities and their associated locations and enclosures
   org_ent[:facilities].each do |fac_ent|
     facility = Facility.find_or_create_by(name: fac_ent[:name], code: fac_ent[:code], organization: org)
@@ -74,6 +75,18 @@ organization_entities[:organizations].each do |org_ent|
 
     # Create animals and a cohort per facility
     cohort = Cohort.find_or_create_by(name: "#{enclosure.name} cohort", enclosure: enclosure, organization: org)
+
+    dead_animal = Animal.find_or_create_by(
+      sex: :female,
+      collection_year: Time.zone.now.year,
+      date_time_collected: Time.zone.now,
+      collection_position: 'Position',
+      cohort: cohort,
+      tag: "D-#{fac_ent[:code]}",
+      organization: org
+    )
+
+    dead_animal.mortality_event = MortalityEvent.create(cohort: cohort)
 
     male = Animal.find_or_create_by(
       sex: :male,

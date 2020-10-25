@@ -15,7 +15,7 @@ This application will enable groups to add data either through CSV upload or thr
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
 * Ruby (2.6.6)
-* Rails (6.0.3.3)
+* Rails (6.0.3.4)
 * PostgreSQL (tested on 9.x)
 * Yarn
 
@@ -72,6 +72,7 @@ We are currently experimenting with Docker for development. While we would love 
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop) is recommended for Windows and Mac computers.
 * The `make` utility can also make your development life easier. It it usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
+* If you run into issues using Docker Desktop on windows, we recommend you view (this page)[https://github.com/mdworken/MKD-Docker-Windows-Rails] for troubleshooting info.
 
 ### Starting Fresh
 
@@ -106,7 +107,7 @@ To do so:
 * start the database with `make database_started`
 
 ## Contribute
-We would love to have you contribute! Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
+We would love to have you contribute! Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/master/CONTRIBUTING.md). Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
 
 ### Get Familiar with the App
 

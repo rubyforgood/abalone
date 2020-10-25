@@ -22,9 +22,7 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :measurements, only: %i[new]
-  post '/data_import', to: 'measurements#data_import', as: 'data_import'
-
+  resources :measurements, only: %[new]
   post '/file_uploads', to: 'file_uploads#upload'
   resources :file_uploads, only: [:index, :new, :destroy]
   get '/file_uploads/csv_index', to: 'file_uploads#csv_index', as: 'csv_index'
@@ -34,12 +32,13 @@ Rails.application.routes.draw do
 
   resources :reports, only: [:index]
 
-  resources :operations
+  resources :operations, only: [:index]
 
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
 
   mount ReportsKit::Engine, at: '/'
+  mount Blazer::Engine, at: "blazer"
 
   root 'home#index'
 end
