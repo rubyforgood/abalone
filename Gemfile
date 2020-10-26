@@ -25,7 +25,6 @@ gem 'jbuilder', '~> 2.10'
 
 gem 'devise', '~> 4.7'
 
-gem 'bootstrap', '~> 4.5.2'
 gem 'jquery-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
