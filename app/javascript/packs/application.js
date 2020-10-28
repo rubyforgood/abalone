@@ -14,6 +14,14 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+//= require jquery
+//= require jquery_ujs
+
+$(function() {
+  setTimeout(function(){
+    $("[role='alert']").slideUp(500);
+  }, 1000);
+});
 
 console.log('Hello World from Webpacker')
 
