@@ -9,7 +9,7 @@ class CsvImporter
   class InvalidCategoryError < StandardError; end
 
   def self.header_conversion(header)
-    header&.strip&.downcase&.gsub(' ', '_')&.gsub(/[^a-z0-9_]/, '')&.gsub(/[_]+/, '_')&.gsub(/^[_]+/, '')
+    header&.strip&.downcase&.gsub(' ', '_')&.gsub(/[^a-z0-9_]/, '')&.gsub(/_+/, '_')&.gsub(/^_+/, '')
   end
 
   def initialize(temporary_file, category_name, processed_file_id, organization = nil)

@@ -16,7 +16,7 @@ Delayed::Worker.delay_jobs = false
 Dir[Rails.root.join("spec", "jobs", "concerns", "**", "*.rb")].sort.each { |f| require f }
 Dir[Rails.root.join("spec", "models", "concerns", "**", "*.rb")].sort.each { |f| require f }
 require 'support/factory_bot'
-require 'support/shared_contexts/rake.rb'
+require 'support/shared_contexts/rake'
 require './spec/support/file_upload_helpers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
