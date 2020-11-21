@@ -48,11 +48,6 @@
             <%= link_to 'Animals', animals_path, class: 'navbar-item'%>
             <%= link_to 'Cohorts', cohorts_path, class: 'navbar-item'%>
             <%= link_to 'Operations', operations_path, class: 'navbar-item'%>
-            <% if current_user.admin? %>
-              <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
-              <%= link_to 'Users', users_path, class: 'navbar-item'%>
-            <% end %>
-
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 Uploads
@@ -64,8 +59,18 @@
                 <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
               </div>
             </div>
+            <% if current_user.admin? %>
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link">
+                  Admin
+                </a>
+                <div class="navbar-dropdown">
+                  <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
+                  <%= link_to 'Users', users_path, class: 'navbar-item'%>
+                </div>
+              </div>
+            <% end %>
           <% end %>
-
           <div class="navbar-item has-dropdown is-hoverable">
             <a class="navbar-link">
               More
@@ -80,8 +85,8 @@
 
               <hr class="navbar-divider">
 
-              <a href="https://github.com/rubyforgood/abalone/issues/new" target="_blank" class="navbar-item">
-                Report an issue
+              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="navbar-item">
+                Github
               </a>
             </div>
           </div>
@@ -96,13 +101,6 @@
               <% else %>
                 <%= link_to "Login", new_user_session_path, class: "button is-grey-light button-outline-primary" %>
               <% end %>
-
-              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="button is-grey-light">
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-                <strong>Github</strong>
-              </a>
             </div>
           </div>
         </div>
