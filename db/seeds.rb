@@ -3,7 +3,7 @@
 #
 # This seed file is to be used for development purposes only!
 
-return unless Rails.env.development? || Rails.env.test?
+#return unless Rails.env.development? || Rails.env.test?
 
 organization_entities = {
     organizations: [
