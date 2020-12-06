@@ -149,6 +149,6 @@ namespace :blazer do
   end
 
   def blazer_config
-    @blazer_config ||= YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'blazer.yml'))).result).deep_symbolize_keys
+    @blazer_config ||= YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'blazer.yml'))).result, aliases: true).deep_symbolize_keys
   end
 end
