@@ -20,9 +20,7 @@
 $(function() {
   setTimeout(function(){
     $("[role='alert']").slideUp(500);
-  }, 1000);
+  }, 10000);
 });
-
-console.log('Hello World from Webpacker')
 
 import "controllers"
