@@ -27,6 +27,6 @@
         </div>
       <% end %>
     </div>
-    <%= link_to '<< Back', users_path, class: "button-outline-primary" %>
+    <%= link_to('<< Back', users_path, class: "button-outline-primary") if @user.admin? %>
   </div>
 </section>
