@@ -6,7 +6,9 @@ class UsersController < ApplicationController
     @users = current_organization.users
   end
 
-  def show; end
+  def show
+    redirect_to users_path unless @user
+  end
 
   def new
     @user = User.new
@@ -53,6 +55,6 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = current_organization.users.find_by(id: params[:id])
   end
 end
