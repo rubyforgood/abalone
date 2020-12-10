@@ -2,7 +2,6 @@ class CsvImporter
   attr_reader :stats, :model, :temporary_file, :processed_file_id, :error_details, :organization
 
   CATEGORIES = [
-    'Wild Collection',
     'Measurement'
   ].freeze
 
