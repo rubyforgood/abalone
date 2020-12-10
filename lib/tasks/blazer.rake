@@ -78,6 +78,8 @@ namespace :blazer do
 
   # This follows the recommended SQL from [blazer's docs](https://github.com/ankane/blazer#postgresql)
   def create_organization_user(org)
+    return if Rails.env.production?
+
     org_user = "org#{org.id}"
 
     <<~SQL
@@ -92,6 +94,8 @@ namespace :blazer do
   end
 
   def drop_organization_user(org)
+    return if Rails.env.production?
+
     org_user = "org#{org.id}"
 
     <<~SQL
