@@ -78,13 +78,10 @@ namespace :blazer do
 
   # This follows the recommended SQL from [blazer's docs](https://github.com/ankane/blazer#postgresql)
   def create_organization_user(org)
-    return if Rails.env.production?
-
     org_user = "org#{org.id}"
 
     <<~SQL
       BEGIN;
-      CREATE ROLE #{org_user} LOGIN PASSWORD '#{org_db_password(org)}';
       GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
       GRANT USAGE ON SCHEMA public TO #{org_user};
       GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
