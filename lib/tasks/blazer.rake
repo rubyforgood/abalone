@@ -82,6 +82,7 @@ namespace :blazer do
 
     <<~SQL
       BEGIN;
+      /* CREATE ROLE #{org_user} LOGIN PASSWORD '#{org_db_password(org)}'; */ /* removed to accommodate current hosting setup */
       GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
       GRANT USAGE ON SCHEMA public TO #{org_user};
       GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
@@ -91,13 +92,11 @@ namespace :blazer do
   end
 
   def drop_organization_user(org)
-    return if Rails.env.production?
-
     org_user = "org#{org.id}"
 
     <<~SQL
       DROP OWNED BY #{org_user};
-      DROP ROLE #{org_user};
+      /* DROP ROLE #{org_user}; */ /* removed to accommodate current hosting setup */
     SQL
   end
 
