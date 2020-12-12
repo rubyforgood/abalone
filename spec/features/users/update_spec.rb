@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe "When I visit the user Edit page" do
-  let(:admin) { create(:user, :admin) }
+  let(:organization) { create(:organization) }
+  let(:admin) { create(:user, :admin, organization: organization) }
 
   before do
     sign_in admin
@@ -9,7 +10,7 @@ describe "When I visit the user Edit page" do
 
   context "As an admin user" do
     it "Then I can update a user" do
-      user = create(:user)
+      user = create(:user, organization: organization)
 
       visit edit_user_path(user)
 
