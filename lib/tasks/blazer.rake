@@ -81,22 +81,28 @@ namespace :blazer do
     org_user = "org#{org.id}"
 
     # This conditional accommodates the current hosting environment which requires the role to be set up separately.
-    unless Rails.env.production?
+    if Rails.env.production?
+      <<~SQL
+        BEGIN;
+        GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
+        GRANT USAGE ON SCHEMA public TO #{org_user};
+        GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
+        ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
+        REVOKE SELECT ON users FROM #{org_user};
+        COMMIT;
+      SQL
+    else
       <<~SQL
         BEGIN;
         CREATE ROLE #{org_user} LOGIN PASSWORD '#{org_db_password(org)}';
+        GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
+        GRANT USAGE ON SCHEMA public TO #{org_user};
+        GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
+        ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
+        REVOKE SELECT ON users FROM #{org_user};
         COMMIT;
       SQL
     end
-
-    <<~SQL
-      BEGIN;
-      GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
-      GRANT USAGE ON SCHEMA public TO #{org_user};
-      GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
-      ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
-      COMMIT;
-    SQL
   end
 
   def drop_organization_user(org)
