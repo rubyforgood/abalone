@@ -65,6 +65,9 @@ To clear background jobs, run:
 ```
 rake jobs:clear
 ```
+### Direct SQL Reporting
+
+This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/master/blazer-reporting.md#dev-environment) to get started.
 
 ## Docker
 
@@ -72,7 +75,7 @@ We are currently experimenting with Docker for development. While we would love 
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop) is recommended for Windows and Mac computers.
 * The `make` utility can also make your development life easier. It it usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
-* If you run into issues using Docker Desktop on windows, we recommend you view (this page)[https://github.com/mdworken/MKD-Docker-Windows-Rails] for troubleshooting info.
+* If you run into issues using Docker Desktop on windows, we recommend you view [this page](https://github.com/mdworken/MKD-Docker-Windows-Rails) for troubleshooting info.
 
 ### Starting Fresh
 
