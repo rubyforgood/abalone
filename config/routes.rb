@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :locations
   end
   resources :cohorts
+  resources :cohort_imports, only: [:create, :new]
   resources :measurement_types, except: %i[show]
   resources :animals do
     collection do
