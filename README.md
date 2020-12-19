@@ -1,6 +1,8 @@
 # Abalone Analytics
 
-[![Build Status](https://travis-ci.org/rubyforgood/abalone.svg?branch=master)](https://travis-ci.org/rubyforgood/abalone)
+![rspec](https://github.com/rubyforgood/abalone/workflows/rspec/badge.svg)
+
+![rubocop](https://github.com/rubyforgood/abalone/workflows/rubocop/badge.svg)
 
 The Abalone project is a data tracking and analytics system aimed at storing and measuring data for population trends, mortality rates, and breeding programs. Designed as a multi-tenant application, Abalone will initially serve two stakeholders, the [Bodega Marine Laboratory](https://marinescience.ucdavis.edu/bml/about) at UC Davis and the [Puget Sound Restoration Fund](https://restorationfund.org/) in Washington State.
 
