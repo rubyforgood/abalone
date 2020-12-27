@@ -24,4 +24,10 @@ RSpec.describe Cohort, type: :model do
 
     expect(cohort.mortality_count).to eq 2
   end
+
+  describe 'FactoryBot' do
+    it 'creates a cohort' do
+      expect(create(:cohort)).to be_valid
+    end
+  end
 end
