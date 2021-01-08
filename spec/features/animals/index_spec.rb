@@ -45,4 +45,10 @@ describe "When I visit the animal Index page" do
 
     animals.each { |animal| expect(page).to have_content(animal.tag) }
   end
+
+  it "should link to csv upload" do
+    visit animals_path
+
+    expect(page).to have_content('Upload CSV')
+  end
 end
