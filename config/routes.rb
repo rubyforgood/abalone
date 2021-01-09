@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   get '/file_uploads/errors/:id', to: 'file_uploads#show_processing_csv_errors', as: 'show_processing_csv_errors'
 
-  resources :reports, only: [:index]
+  #resources :reports, only: [:index]
 
   resources :operations, only: [:index]
 
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   mount ReportsKit::Engine, at: '/'
 
   authenticate :user do
-    mount Blazer::Engine, at: "blazer"
+    mount Blazer::Engine, at: "blazer", as: 'reports'
   end
 
   root 'home#index'
