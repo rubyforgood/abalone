@@ -88,27 +88,27 @@ organization_entities[:organizations].each do |org_ent|
 
     dead_animal.mortality_event = MortalityEvent.create(cohort: cohort)
 
-    male = Animal.find_or_create_by(
+    male = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
       sex: :male,
       collection_year: Time.zone.now.year,
-      date_time_collected: Time.zone.now,
       collection_position: 'Position',
       cohort: cohort,
       tag: "M-#{fac_ent[:code]}",
       organization: org
     )
+
     male_shl = ShlNumber.find_or_create_by(code: "#{male.collection_year}-#{male.tag}")
     AnimalsShlNumber.find_or_create_by(animal: male, shl_number: male_shl)
 
-    female = Animal.find_or_create_by(
+    female = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
       sex: :female,
       collection_year: Time.zone.now.year,
-      date_time_collected: Time.zone.now,
       collection_position: 'Position',
       cohort: cohort,
       tag: "F-#{fac_ent[:code]}",
       organization: org
     )
+    
     female_shl = ShlNumber.find_or_create_by(code: "#{female.collection_year}-#{female.tag}")
     AnimalsShlNumber.find_or_create_by(animal: female, shl_number: female_shl)
 
