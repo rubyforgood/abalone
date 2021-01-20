@@ -43,7 +43,7 @@ Note: For consistency, each org credential should be named with that organizatio
 
 #### Initial Setup
 
-This process assumes initial setup, migration and seeding of a local postgres database as described in the [setup instructions](https://github.com/rubyforgood/abalone/blob/master/README.md).
+This process assumes initial setup, migration and seeding of a local postgres database as described in the [setup instructions](https://github.com/rubyforgood/abalone/blob/main/README.md).
 
 1. Add the file `config/local_env.yml` (this is covered by the application's .gitignore file)
 2. Add the blazer-related environment variables to the `config/local_env.yml` file. These will vary based on your local setup but the pattern provided below should work for most. Replace "password" with your chosen password. Note: A password must be present in the organization urls.
