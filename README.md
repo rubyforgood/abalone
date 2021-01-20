@@ -67,7 +67,7 @@ rake jobs:clear
 ```
 ### Direct SQL Reporting
 
-This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/master/blazer-reporting.md#dev-environment) to get started.
+This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/main/blazer-reporting.md#dev-environment) to get started.
 
 ## Docker
 
@@ -110,7 +110,7 @@ To do so:
 * start the database with `make database_started`
 
 ## Contribute
-We would love to have you contribute! Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/master/CONTRIBUTING.md). Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
+We would love to have you contribute! Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/main/CONTRIBUTING.md). Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
 
 ### Get Familiar with the App
 
@@ -141,7 +141,7 @@ Our stakeholder, the Bodega Marine Laboratory, has more data that they can keep 
 ### The Solution
 We are building an app which has the following capabilities:
 
-1. _Store Raw Data_: There are several different types of CSVs that the lab has been amassing (Mortality Tracking Data, Pedigree Data, Population Estimate Data and Wild Collection Data). Examples of these CSVs can be found in the [`db/sample_data_files`](https://github.com/rubyforgood/abalone/tree/master/db/sample_data_files) directory.
+1. _Store Raw Data_: There are several different types of CSVs that the lab has been amassing (Mortality Tracking Data, Pedigree Data, Population Estimate Data and Wild Collection Data). Examples of these CSVs can be found in the [`db/sample_data_files`](https://github.com/rubyforgood/abalone/tree/main/db/sample_data_files) directory.
 2. _Import CSVs_: Users are able to import single and bulk CSVs. Users should generally submit cleaned CSVs, but the app should alert users if there are parsing problems and which row(s) need to be fixed.
 3. _Display Charts and Analytics_: For MVP, we would like to display a Histogram binned in 1cm increments of different body lengths for a certain cohort or group of cohorts.
 4. _Export CSVs_: TBD.
@@ -163,6 +163,6 @@ The application is currently deployed on Heroku at https://abalone-staging.herok
 
 ...that Gary needs you.
 
-![a white abalone](https://github.com/rubyforgood/abalone/blob/master/app/assets/images/Burgess%20white%20ab%201.png)
+![a white abalone](https://github.com/rubyforgood/abalone/blob/main/app/assets/images/Burgess%20white%20ab%201.png)
 
 _Photo credit: John Burgess/The Press Democrat_
