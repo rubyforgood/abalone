@@ -3,8 +3,9 @@ class Animal < ApplicationRecord
 
   include OrganizationScope
   include CsvExportable
-  include ReportsKit::Model
+  include ReportsKit::Model # Replaced by blazer reporting - 1/24/21
 
+  # Replaced by blazer reporting - 1/24/21
   reports_kit do
     contextual_filter :for_organization, ->(relation, context_params) { relation.for_organization(context_params[:organization_id]) }
   end

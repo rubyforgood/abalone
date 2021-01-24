@@ -1,3 +1,5 @@
+// Replaced by blazer reporting - 1/24/21
+
 var Reports = (function () {
   var chart = null;
   var showChart = async function (element) {

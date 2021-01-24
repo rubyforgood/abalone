@@ -24,6 +24,7 @@ class Facility < ApplicationRecord
 
   after_commit { Rails.cache.delete('facility_codes') }
 
+  # Replaced by blazer reporting - 1/24/21
   # ReportsKit uses this for default labeling
   def to_s
     code
