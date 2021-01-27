@@ -25,7 +25,7 @@ module.exports = {
         warning: "#f2994a",
         success: "#27ae60",
         "dark-light": "#eee",
-        "caption-light": "#9191A2",
+        "caption-light": "#757586",
         "caption-dark": "#ACACC1",
       },
     },
