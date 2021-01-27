@@ -30,17 +30,17 @@ Rails.application.routes.draw do
 
   get '/file_uploads/errors/:id', to: 'file_uploads#show_processing_csv_errors', as: 'show_processing_csv_errors'
 
-  resources :reports, only: [:index]
+  # resources :reports, only: [:index] # Replaced by blazer reporting - 1/24/21
 
   resources :operations, only: [:index]
 
   get 'home', action: 'index', controller: 'home'
   get 'about', action: 'show', controller: 'home'
 
-  mount ReportsKit::Engine, at: '/'
+  # mount ReportsKit::Engine, at: '/' # Replaced by blazer reporting - 1/24/21
 
   authenticate :user do
-    mount Blazer::Engine, at: "blazer"
+    mount Blazer::Engine, at: "blazer", as: 'reports'
   end
 
   root 'home#index'

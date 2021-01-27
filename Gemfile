@@ -64,7 +64,7 @@ group :development do
 end
 
 # Report builder
-gem 'reports_kit'
+gem 'reports_kit' # Replaced by blazer reporting - 1/24/21
 gem 'blazer'
 
 # Excel and CSV support
