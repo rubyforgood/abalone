@@ -86,9 +86,16 @@ namespace :blazer do
         BEGIN;
         GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
         GRANT USAGE ON SCHEMA public TO #{org_user};
-        GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
+        GRANT SELECT ON TABLE animals TO #{org_user};
+        GRANT SELECT ON TABLE cohorts TO #{org_user};
+        GRANT SELECT ON TABLE enclosures TO #{org_user};
+        GRANT SELECT ON TABLE facilities TO #{org_user};
+        GRANT SELECT ON TABLE locations TO #{org_user};
+        GRANT SELECT ON TABLE measurement_events TO #{org_user};
+        GRANT SELECT ON TABLE measurement_types TO #{org_user};
+        GRANT SELECT ON TABLE measurements TO #{org_user};
+        GRANT SELECT ON TABLE operations TO #{org_user};
         ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
-        REVOKE SELECT ON users FROM #{org_user};
         COMMIT;
       SQL
     else
@@ -97,9 +104,16 @@ namespace :blazer do
         CREATE ROLE #{org_user} LOGIN PASSWORD '#{org_db_password(org)}';
         GRANT CONNECT ON DATABASE #{db_connection.current_database} TO #{org_user};
         GRANT USAGE ON SCHEMA public TO #{org_user};
-        GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{org_user};
+        GRANT SELECT ON TABLE animals TO #{org_user};
+        GRANT SELECT ON TABLE cohorts TO #{org_user};
+        GRANT SELECT ON TABLE enclosures TO #{org_user};
+        GRANT SELECT ON TABLE facilities TO #{org_user};
+        GRANT SELECT ON TABLE locations TO #{org_user};
+        GRANT SELECT ON TABLE measurement_events TO #{org_user};
+        GRANT SELECT ON TABLE measurement_types TO #{org_user};
+        GRANT SELECT ON TABLE measurements TO #{org_user};
+        GRANT SELECT ON TABLE operations TO #{org_user};
         ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
-        REVOKE SELECT ON users FROM #{org_user};
         COMMIT;
       SQL
     end
