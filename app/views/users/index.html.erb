@@ -31,10 +31,13 @@
             <td class="px-4 py-2"><%= user.role %></td>
             <td class="px-4 py-2"><%= user.organization.name %></td>
             <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', user %></td>
-            <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_user_path(user) %></td>
+            <td class="px-4 py-2">
+              <%= link_to image_tag("icons/edit.svg", size: 24), edit_user_path(user), title: "Edit user #{user.email}" %>
+            </td>
             <% unless user == current_user %>
               <td class="px-4 py-2">
-                <%= link_to image_tag("icons/trash.svg", size: 24), user, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%= link_to image_tag("icons/trash.svg", size: 24), user, method: :delete, data: { confirm: 'Are you sure?' },
+                title: "Delete user #{user.email}" %>
               </td>
             <% end %>
           </tr>
