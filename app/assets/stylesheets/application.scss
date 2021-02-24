@@ -96,3 +96,14 @@
   box-shadow: unset;
   border-radius: 2px;
 }
+
+// https://www.a11yproject.com/
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
