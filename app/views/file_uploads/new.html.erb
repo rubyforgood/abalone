@@ -16,7 +16,7 @@
 
       <div class="field">
         <div>
-          <%= label_tag('input_file', 'Select up to 10 files to upload', class: 'label') %>
+          <%= label_tag('input_files[]', 'Select up to 10 files to upload', class: 'label') %>
           <%= file_field_tag 'input_files[]', multiple: true, required: true %>
         </div>
       </div>
