@@ -30,7 +30,9 @@
             <td class="px-4 py-2"><%= user.email %></td>
             <td class="px-4 py-2"><%= user.role %></td>
             <td class="px-4 py-2"><%= user.organization.name %></td>
-            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', user %></td>
+            <td class="text-primary-dark px-4 py-2">
+              <%= link_to 'Show', user, title: "Show details for #{user.email}" %>
+            </td>
             <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_user_path(user) %></td>
             <% unless user == current_user %>
               <td class="px-4 py-2">

@@ -28,6 +28,7 @@ describe "When I visit the user index page" do
       expect(page).to have_content user.role
       expect(page).to have_content user.organization.name
       expect(page).to have_content 'Actions'
+      expect(page).to have_link('Show', title: "Show details for #{user.email}")
     end
   end
 
