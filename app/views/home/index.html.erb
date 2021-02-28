@@ -1,6 +1,7 @@
 <section class="hero is-large has-bg-img">
   <div class="hero-body">
     <div class="container">
+      <h1 class="sr-only">Abalone Analytics</h1>
     </div>
   </div>
 </section>
@@ -8,19 +9,20 @@
 <% if current_user %>
   <div class="column"></div>
   <section class="column">
-    <h1 class="has-text-centered title">
+    <h2 class="has-text-centered title">
       Your organization: <%= current_organization.name %>
-    </h1>
+    </h2>
   </section>
-  <section class="section has-text-centered">
+  <div class="section has-text-centered">
     <div class="container">
       <div class="columns">
         <div class="column"></div>
         <div class="column is-narrow">
           <div class="card">
             <div class="card-content">
-              <h2 class="subtitle">Total No. of Animals</h2>
-              <h1 class="title"><%= @animal_count %></h1>
+              <p class="subtitle">Total No. of Animals<br />
+                <span class="title"><%= @animal_count %></span>
+              </p>
             </div>
           </div>
         </div>
@@ -31,8 +33,9 @@
         <div class="column is-one-fifth">
           <div class="card">
             <div class="card-content">
-              <h2 class="subtitle">No. of Facilities</h2>
-              <h1 class="title"><%= @facility_count %></h1>
+              <p class="subtitle">No. of Facilities<br/>
+                <span class="title"><%= @facility_count %></span>
+              </p>
             </div>
           </div>
         </div>
@@ -40,13 +43,14 @@
         <div class="column is-one-fifth">
           <div class="card">
             <div class="card-content">
-              <h2 class="subtitle">No. of Cohorts</h2>
-              <h1 class="title"><%= @cohort_count %></h1>
+              <p class="subtitle">No. of Cohorts<br/>
+                <span class="title"><%= @cohort_count %></span>
+              </p>
             </div>
           </div>
         </div>
         <div class="column is-one-fifth"></div>
       </div>
     </div>
-  </section>
+  </div>
 <% end %>
