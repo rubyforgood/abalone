@@ -56,7 +56,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.5'
 
   gem 'annotate',                      require: false
-  gem 'capistrano',         '~> 3.15', require: false
+  gem 'capistrano',         '~> 3.16', require: false
   gem 'capistrano-bundler', '~> 2.0',  require: false
   gem 'capistrano-rvm',     '~> 0.1',  require: false
   gem 'capistrano-rails',   '~> 1.6',  require: false
