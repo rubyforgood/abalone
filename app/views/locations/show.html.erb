@@ -12,7 +12,7 @@
         </button>
       <% end %>
     </div>
-    <h1 class="text-title2">Location</h1>
+    <h1 class="text-title3 mb-4">Location</h1>
       <div class="block">
         <div class="text-sm text-caption-light font-medium uppercase">Name</div>
         <%= @location.name %>
@@ -20,7 +20,7 @@
         <%= @location.facility_name %>
       </div>
     <div class="flex justify-between items-center mb-4">
-      <h1 class="text-title3">Enclosures</h1>
+      <h2 class="text-title3 mb-4">Enclosures</h2>
       <div class="flex items-center">
           <%= link_to new_enclosure_path do %>
             <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
@@ -36,8 +36,8 @@
               CSV Upload
             </button>
           <% end %>
-        </div>
       </div>
+    </div>
       <table class="table-auto w-full border">
         <thead>
           <tr class="border">
@@ -62,5 +62,4 @@
         </tbody>
       </table>
     </div>
-  </div>
 </section>
