@@ -1,6 +1,6 @@
 <section class="section facilities__form">
   <div class="container facilities__form__container">
-    <h1 class="title">Change Password</h1>
+    <h1 class="text-title3 mb-4">Change Password</h1>
     <div class="facilities__form__container__body">
       <%= form_with(url: password_path(@user), model: @user, local: true) do |form| %>
         <% if @user.errors.any? %>
