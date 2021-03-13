@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "5.2.1",
-    "autoprefixer": "^10.2.4",
+    "autoprefixer": "^10.2.5",
     "stimulus": "^2.0.0",
     "tailwindcss": "^1.8.10"
   },
