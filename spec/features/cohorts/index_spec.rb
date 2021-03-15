@@ -36,4 +36,13 @@ describe "When I visit the cohort Index page" do
 
     cohorts.each { |cohort| expect(page).to have_content(cohort.name) }
   end
+
+  describe "importing csv" do
+    subject do
+      visit cohorts_path
+      page
+    end
+
+    it { is_expected.to have_link "Import CSV", href: new_cohort_import_path }
+  end
 end

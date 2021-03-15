@@ -10,9 +10,10 @@
             <span class="ml-2">New Cohort</span>
           </button>
         <% end %>
-        <%#= link_to csv_upload_cohorts_path, class: "button-primary" do %>
-  <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
-        <%# end %>
+        <%= link_to new_cohort_import_path, class: "bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4 hover:text-white" do %>
+          <%= image_tag  "icons/plus.png", size: 17 %>
+          <span class="ml-2">Import CSV</span>
+        <% end %>
         <%= link_to cohorts_path(format: :csv), id: "export_button" do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
             Export to CSV
