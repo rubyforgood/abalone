@@ -18,7 +18,7 @@ RSpec.describe "Cohort Import" do
       cohort.name,
       cohort.female_tag,
       cohort.male_tag,
-      cohort.enclosure.name,
+      cohort.enclosure.name
     ]
   end
 
@@ -93,11 +93,11 @@ RSpec.describe "Cohort Import" do
     end
 
     context "when all records upload successfully" do
-     it "displays success" do
-       upload_csv!
-       visit csv_index_path
+      it "displays success" do
+        upload_csv!
+        visit csv_index_path
 
-       expect(page).to have_text("0 records had errors")
+        expect(page).to have_text("0 records had errors")
       end
     end
 
