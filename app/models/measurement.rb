@@ -10,12 +10,13 @@ class Measurement < ApplicationRecord
   validates :value, presence: true
 
   HEADERS = {
-    MEASUREMENT_EVENT: "measurement_event",
-    MEASUREMENT: "measurement",
+    SUBJECT_TYPE: "subject_type",
+    SUBJECT_ID: "subject_id",
+    MEASUREMENT_TYPE: "measurement_type",
     VALUE: "value",
-    ENCLOSURE_NAME: "enclosure_name",
-    ANIMAL_PII_TAG: "animal_pii_tag",
-    COHORT_NAME: "cohort_name"
+    DATE: 'date',
+    MEASUREMENT_EVENT: "measurement_event",
+    ENCLOSURE_NAME: "enclosure_name"
   }.freeze
 
   # The below code is unstable. This is retrofitting the values from the seeded CSV
@@ -28,7 +29,7 @@ class Measurement < ApplicationRecord
       organization_id: attrs.fetch(:organization_id)
     )
 
-    measurement_type = MeasurementType.find_or_create_by!(name: "length", unit: "cm", organization_id: attrs.fetch(:organization_id))
+    measurement_type = MeasurementType.find_or_create_by!(name: attrs.fetch(:measurement_type), organization_id: attrs.fetch(:organization_id))
 
     measurement_event = MeasurementEvent.find_or_create_by!(
       name: measurement_event_name,
@@ -39,11 +40,11 @@ class Measurement < ApplicationRecord
     measurement_attrs = {}
     measurement_attrs[:measurement_event] = measurement_event
     measurement_attrs[:value] = attrs.fetch(:value)
-    measurement_attrs[:name] = attrs.fetch(:measurement)
+    measurement_attrs[:subject_type] = attrs.fetch(:subject_type)
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs[:organization_id] = attrs.fetch(:organization_id)
-    measurement_attrs[:subject] = enclosure.id
-    measurement_attrs[:measurement_type_id] = measurement_type.id
+    measurement_attrs[:subject_id] = attrs.fetch(:subject_id)
+    measurement_attrs[:measurement_type] = measurement_type
 
     # create measurement
     Measurement.create!(measurement_attrs)
