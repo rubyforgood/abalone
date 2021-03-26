@@ -11,7 +11,7 @@ describe "When I visit the animal Upload Csv page" do
     expect(page).to have_link("Click here")
     expect(page).to have_content("Click here for a sample csv file.")
 
-    attach_file('animal_csv', "#{Rails.root}/spec/fixtures/animals.csv")
+    attach_file('animal_csv', "#{Rails.root}/spec/fixtures/files/animals.csv")
 
     click_on 'Submit'
 
