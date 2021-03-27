@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 6.1', '>= 6.1.3.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'activerecord-postgres_enum', '~> 1.6'
@@ -34,13 +34,13 @@ gem 'newrelic_rpm'
 gem 'webpacker', '~> 5.x'
 
 # Pagination helper
-gem 'pagy', '~> 3.11'
+gem 'pagy', '~> 3.12'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-byebug'
-  gem 'rspec-rails', '~> 4.0'
+  gem 'rspec-rails', '~> 5.0'
   gem "factory_bot_rails"
   gem 'rubocop-rails'
   gem 'faker'
@@ -53,7 +53,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.5'
+  gem 'listen', '>= 3.0.5', '< 3.6'
 
   gem 'annotate',                      require: false
   gem 'capistrano',         '~> 3.16', require: false
