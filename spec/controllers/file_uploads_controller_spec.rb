@@ -50,7 +50,6 @@ describe FileUploadsController do
 
   describe '#index' do
     it 'should have response code 200' do
-
       get :index
       expect(response.code).to eq '200'
     end
