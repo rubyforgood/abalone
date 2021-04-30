@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.8'
 
 gem 'jquery-rails'
 
