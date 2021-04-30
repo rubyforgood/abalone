@@ -40,4 +40,15 @@ describe "When I visit the facility Index page" do
 
     facilities.each { |facility| expect(page).to have_content(facility.code) }
   end
+
+  it "should allow editing and deleting facilities" do
+    facility = create(:facility, organization: user.organization)
+
+    visit facilities_path
+
+    expect(page).to have_selector("a[href='#{edit_facility_path(facility)}']")
+    expect(page).to have_selector("a[aria-label='Edit #{facility.name}']")
+    expect(page).to have_selector("a[data-method='delete'][href='#{facility_path(facility.id)}']")
+    expect(page).to have_selector("a[aria-label='Delete #{facility.name}']")
+  end
 end
