@@ -15,6 +15,7 @@ describe "When I visit the facility Index page" do
 
     expect(page).to have_content("Name")
     expect(page).to have_content("Code")
+    expect(page).to have_content("Actions")
     expect(page).to have_link("New Facility")
     expect(page).to have_link("Show")
     expect(page).to have_link(nil, href: edit_facility_path(facility.id))
