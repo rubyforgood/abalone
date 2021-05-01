@@ -12,6 +12,11 @@ describe "When I visit the enclosure index page" do
 
     visit enclosures_path
 
+    expect(page).to have_content("Name")
+    expect(page).to have_content("Facility")
+    expect(page).to have_content("Location")
+    expect(page).to have_content("Actions")
+
     enclosures.each do |enclosure|
       expect(page).to have_content(enclosure.name)
       expect(page).to have_content(enclosure.facility_name)
