@@ -10,6 +10,7 @@ class Measurement < ApplicationRecord
   validates :value, presence: true
 
   HEADERS = {
+    DATE: "date",
     SUBJECT_TYPE: "subject_type",
     MEASUREMENT_TYPE: "measurement_type",
     VALUE: "value",
@@ -48,6 +49,7 @@ class Measurement < ApplicationRecord
 
     # create attributes for Measurement
     measurement_attrs = {}
+    measurement_attrs[:date] = attrs.fetch(:date)
     measurement_attrs[:measurement_event] = measurement_event
     measurement_attrs[:value] = attrs.fetch(:value)
     measurement_attrs[:subject_type] = attrs.fetch(:subject_type)

@@ -1,7 +1,7 @@
-    subject_type,measurement_type    ,  value, measurement_event    ,enclosure_name,cohort_name,tag
-Cohort,  count, 24,September Survey, Test Enclosure,   Test Cohort
-Enclosure,count   ,   42,September Survey,Test Enclosure,         Test Cohort
-    Animal   ,    length,      14,September Survey,Test Enclosure,Test Cohort,F-AOP
-Animal,gonad score    ,78,    September Survey,    Test Enclosure,Test Cohort ,     F-AOP
-Animal,length,16,September Survey,       Test Enclosure,Test Cohort,M-AOP
-Animal,   gonad score  ,        46,September Survey,Test Enclosure,Test Cohort,   M-AOP
+    date,subject_type,measurement_type    ,  value, measurement_event    ,enclosure_name,cohort_name,tag
+9/01/21,  Cohort,  count, 24,September Survey, Test Enclosure,   Test Cohort
+    9/01/21,Enclosure,count   ,   42,September Survey,Test Enclosure,         Test Cohort
+    9/01/21,   Animal   ,    length,      14,September Survey,Test Enclosure,Test Cohort,F-AOP
+9/01/21,Animal,gonad score    ,78,    September Survey,    Test Enclosure,Test Cohort ,     F-AOP
+9/01/21,Animal,length,16,September Survey,       Test Enclosure,Test Cohort,M-AOP
+9/01/21   ,Animal,   gonad score  ,        46,September Survey,Test Enclosure,Test Cohort,   M-AOP
