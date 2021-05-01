@@ -1,2 +1,2 @@
-measurement_event,measurement,value,enclosure_name,animal_pii_tag,cohort_name,
-Michael Drinks the Water,Flavor,Salty,Support Rack 3,123,Adams Family,
+subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag
+Cohort,count,12,Monthly Count,Test Enclosure,New Cohort
