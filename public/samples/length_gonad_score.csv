@@ -1,5 +1,5 @@
-subject_type,subject_id,measurement_type,value,date,measurement_event
-Animal,1,gonad score,3,2020-09-24,September Survey
-Animal,1,length,5.3,2020-09-24,September Survey
-Animal,1,weight,4.1,2020-09-24,September Survey
-,,,,,
+subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag
+Animal,length,14,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,F-AOP
+Animal,gonad score,78,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,F-AOP
+Animal,length,16,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,M-AOP
+Animal,gonad score,46,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,M-AOP
