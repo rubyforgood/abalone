@@ -13,12 +13,12 @@ describe "remove leading and trailing spaces from csv headers and values", type:
   let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
   let(:measurements_comparison) do
     [
-      {subject_type: "Cohort",measurement_type: "count", value: "24", measurement_event: "September Survey"},
-      {subject_type: "Enclosure",measurement_type: "count", value: "42", measurement_event: "September Survey"},
-      {subject_type: "Animal",measurement_type: "length", value: "14", measurement_event: "September Survey"},
-      {subject_type: "Animal",measurement_type: "gonad score", value: "78", measurement_event: "September Survey"},
-      {subject_type: "Animal",measurement_type: "length", value: "16", measurement_event: "September Survey"},
-      {subject_type: "Animal",measurement_type: "gonad score", value: "46", measurement_event: "September Survey"}
+      {subject_type: "Cohort", measurement_type: "count", value: "24", measurement_event: "September Survey"},
+      {subject_type: "Enclosure", measurement_type: "count", value: "42", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "length", value: "14", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "gonad score", value: "78", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "length", value: "16", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "gonad score", value: "46", measurement_event: "September Survey"}
     ]
   end
 
@@ -51,7 +51,7 @@ describe "remove leading and trailing spaces from csv headers and values", type:
           subject_type: measurement.subject_type,
           measurement_type: measurement.measurement_type.name,
           value: measurement.value,
-          measurement_event: measurement.measurement_event.name,
+          measurement_event: measurement.measurement_event.name
         }
       end
       expect(measurements).to eq(measurements_comparison)
