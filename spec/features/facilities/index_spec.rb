@@ -18,8 +18,10 @@ describe "When I visit the facility Index page" do
     expect(page).to have_content("Actions")
     expect(page).to have_link("New Facility")
     expect(page).to have_link("Show")
+    expect(page).to have_selector("a[aria-label='Show #{facility.name}']")
     expect(page).to have_link(nil, href: edit_facility_path(facility.id))
     expect(page).to have_selector("a[data-method='delete'][href='#{facility_path(facility.id)}']")
+    expect(page).to have_selector("a[aria-label='#{facility.name} location']")
 
     expect(page).to have_content(facility.name)
     expect(page).to have_content(facility.code)
