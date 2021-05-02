@@ -23,9 +23,9 @@
     <table class="table-auto w-full border">
       <thead>
         <tr class="border">
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Name</th>
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Code</th>
-          <th colspan="4"></th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Code</th>
+          <th colspan="4" class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -33,8 +33,14 @@
           <tr>
             <td class="px-4 py-2"><%= facility.name %></td>
             <td class="px-4 py-2"><%= facility.code %></td>
-            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', facility %></td>
-            <td class="text-primary-dark px-4 py-2"><%= link_to 'Locations', facility_locations_path(facility) %></td>
+            <td class="text-primary-dark px-4 py-2">
+              <%= link_to 'Show', facility,
+                'aria-label': "Show #{facility.name}" %>
+            </td>
+            <td class="text-primary-dark px-4 py-2">
+              <%= link_to 'Locations', facility_locations_path(facility),
+                'aria-label': "#{facility.name} location" %>
+            </td>
             <td class="px-4 py-2">
               <%= link_to image_tag("icons/edit.svg", size: 24), 
                 edit_facility_path(facility),
