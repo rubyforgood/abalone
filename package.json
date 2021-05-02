@@ -2,7 +2,7 @@
   "name": "abalone",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "5.2.1",
+    "@rails/webpacker": "5.3.0",
     "autoprefixer": "^10.2.5",
     "stimulus": "^2.0.0",
     "tailwindcss": "^1.8.10"
