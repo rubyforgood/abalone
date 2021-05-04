@@ -5,14 +5,14 @@
       <%= link_to 'Download a sample csv file', root_path + 'samples/cohort.csv' %>
     </div>
     <div class="facilities__form__container__body">
-      <%= form_with(url: cohort_imports_path, local: true) do |form| %>
+      <%= simple_form_for(@cohort_import_form, url: cohort_imports_path) do |f| %>
         <div class="field">
-          <%= form.file_field :cohort_csv, required: true, accept: 'text/csv' %>
+          <%= f.input :csv_file, as: :file, label: false %>
         </div>
 
         <div class="field">
           <div class="control">
-            <%= form.submit('Submit', class: 'button-primary') %>
+            <%= f.submit('Submit', class: 'button-primary') %>
           </div>
         </div>
       <% end %>

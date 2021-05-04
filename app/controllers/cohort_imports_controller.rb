@@ -1,16 +1,15 @@
 class CohortImportsController < ApplicationController
-  def new; end
+  def new
+    @cohort_import_form = CsvImportForm.new
+  end
 
   def create
-    if params[:cohort_csv].content_type == 'text/csv'
-      upload = FileUpload.create(user: current_user, organization: current_organization, status: 'Pending',
-                                 file: params[:cohort_csv])
+    @cohort_import_form = CsvImportForm.new csv_file: params.dig(:csv_import_form, :csv_file)
 
-      ImportCohortsJob.perform_later(upload)
-
+    if @cohort_import_form.save(user: current_user, organization: current_organization)
       redirect_to cohorts_path, notice: 'Processing file...'
     else
-      redirect_to csv_upload_enclosures_path, error: 'Invalid file type. Please upload a CSV.'
+      render :new
     end
   end
 end
