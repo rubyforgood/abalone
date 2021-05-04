@@ -50,7 +50,7 @@ RSpec.describe "Cohort Import" do
   describe "from CSV file" do
     subject(:upload_csv!) do
       visit new_cohort_import_path
-      attach_file("cohort_csv", cohort_csv)
+      attach_file("csv_import_form[csv_file]", cohort_csv)
       click_on "Submit"
       page
     end
