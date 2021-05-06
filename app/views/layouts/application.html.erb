@@ -30,7 +30,7 @@
       <div class="pl-2 flex logo">
         <%= link_to(root_path, class: 'navbar-item') do %>
           <%= image_tag 'abalone_logo.png', alt: "Abalone Analytics - Homepage" %>
-          <span class="logo-text pl-2">Abalone Analytics</span>
+          <span class="logo-text pl-2" tabindex=1>Abalone Analytics</span>
         <% end %>
         <a role="button" data-target="nav-menu" class="navbar-burger" aria-label="menu" aria-expanded="false">
           <span aria-hidden="true"></span>
@@ -42,50 +42,50 @@
       <div id="nav-menu" class="pl-2 navbar-menu">
         <div class="navbar-start">
           <% if current_user %>
-            <%= link_to 'Reports', reports.root_path, class: 'navbar-item'%>
-            <%= link_to 'Facilities', facilities_path, class: 'navbar-item' %>
-            <%= link_to 'Enclosures', enclosures_path, class: 'navbar-item'%>
-            <%= link_to 'Animals', animals_path, class: 'navbar-item'%>
-            <%= link_to 'Cohorts', cohorts_path, class: 'navbar-item'%>
-            <%= link_to 'Operations', operations_path, class: 'navbar-item'%>
+            <%= link_to 'Reports', reports.root_path, class: 'navbar-item', tabindex: 2 %>
+            <%= link_to 'Facilities', facilities_path, class: 'navbar-item', tabindex: 3 %>
+            <%= link_to 'Enclosures', enclosures_path, class: 'navbar-item', tabindex: 4 %>
+            <%= link_to 'Animals', animals_path, class: 'navbar-item', tabindex: 5 %>
+            <%= link_to 'Cohorts', cohorts_path, class: 'navbar-item', tabindex: 6 %>
+            <%= link_to 'Operations', operations_path, class: 'navbar-item', tabindex: 7 %>
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
+              <a class="navbar-link" tabindex=8>
                 Uploads
               </a>
               <div class="navbar-dropdown">
-                <%= link_to 'Data Import', new_measurement_path, class: 'navbar-item'%>
-                <%= link_to 'CSV Uploads', csv_index_path, class: 'navbar-item' %>
-                <%= link_to 'Files List', file_uploads_path, class: 'navbar-item'%>
-                <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item'%>
+                <%= link_to 'Data Import', new_measurement_path, class: 'navbar-item', tabindex: 9 %>
+                <%= link_to 'CSV Uploads', csv_index_path, class: 'navbar-item', tabindex: 10 %>
+                <%= link_to 'Files List', file_uploads_path, class: 'navbar-item', tabindex: 11 %>
+                <%= link_to 'Upload a file', new_file_upload_path, class: 'navbar-item', tabindex: 12 %>
               </div>
             </div>
             <% if current_user.admin? %>
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
+                <a class="navbar-link" tabindex=13>
                   Admin
                 </a>
                 <div class="navbar-dropdown">
-                  <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item'%>
-                  <%= link_to 'Users', users_path, class: 'navbar-item'%>
+                  <%= link_to 'Measurement Types', measurement_types_path, class: 'navbar-item', tabindex: 14 %>
+                  <%= link_to 'Users', users_path, class: 'navbar-item', tabindex: 15 %>
                 </div>
               </div>
             <% end %>
           <% end %>
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
+            <a class="navbar-link" tabindex=16>
               More
             </a>
 
             <div class="navbar-dropdown">
-              <%= link_to 'About', about_path, class: 'navbar-item' %>
+              <%= link_to 'About', about_path, class: 'navbar-item', tabindex: 17 %>
 
-              <a href="https://rubyforgood.org/" target="_blank" class="navbar-item">
+              <a href="https://rubyforgood.org/" target="_blank" class="navbar-item" tabindex=18>
                 Ruby for Good
               </a>
 
               <hr class="navbar-divider">
 
-              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="navbar-item">
+              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="navbar-item" tabindex=19>
                 Github
               </a>
             </div>
@@ -96,10 +96,10 @@
           <div class="navbar-item">
             <div class="buttons">
               <% if user_signed_in? %>
-                <%= link_to "Change password", edit_password_path(current_user), class: "button is-grey-light" %>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-grey-light" %>
+                <%= link_to "Change password", edit_password_path(current_user), class: "button is-grey-light", tabindex: 20 %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "button is-grey-light", tabindex: 21 %>
               <% else %>
-                <%= link_to "Login", new_user_session_path, class: "button is-grey-light button-outline-primary" %>
+                <%= link_to "Login", new_user_session_path, class: "button is-grey-light button-outline-primary", tabindex: 20 %>
               <% end %>
             </div>
           </div>
