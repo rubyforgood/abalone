@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.8'
 
 gem 'jquery-rails'
 
@@ -34,7 +34,7 @@ gem 'newrelic_rpm'
 gem 'webpacker', '~> 5.x'
 
 # Pagination helper
-gem 'pagy', '~> 3.12'
+gem 'pagy', '~> 3.13'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

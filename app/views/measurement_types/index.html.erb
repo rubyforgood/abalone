@@ -26,8 +26,16 @@
           <tr>
             <td class="px-4 py-2"><%= measurement_type.name %></td>
             <td class="px-4 py-2"><%= measurement_type.unit %></td>
-            <td class="px-4 py-2 text-primary-dark"><%= link_to image_tag("icons/edit.svg", size: 24), edit_measurement_type_path(measurement_type) %></td>
-            <td class="px-4 py-2 text-primary-dark"><%= link_to image_tag("icons/trash.svg", size: 24), measurement_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2 text-primary-dark">
+              <%= link_to image_tag("icons/edit.svg", size: 24),
+              edit_measurement_type_path(measurement_type),
+              'aria-label': "Edit #{measurement_type.name}" %>
+            </td>
+            <td class="px-4 py-2 text-primary-dark">
+              <%= link_to image_tag("icons/trash.svg", size: 24),
+              measurement_type, method: :delete, data: { confirm: 'Are you sure?' },
+              'aria-label': "Delete #{measurement_type.name}" %>
+            </td>
           </tr>
         <% end %>
       </tbody>
