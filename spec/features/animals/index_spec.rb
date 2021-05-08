@@ -21,7 +21,9 @@ describe "When I visit the animal Index page" do
     expect(page).to have_link("New Animal")
     expect(page).to have_link("Show")
     expect(page).to have_link(nil, href: edit_animal_path(animal.id))
+    expect(page).to have_selector("a[title='Edit']")
     expect(page).to have_selector("a[data-method='delete'][href='#{animal_path(animal.id)}']")
+    expect(page).to have_selector("a[title='Delete']")
 
     expect(page).to have_content(animal.collection_year)
     expect(page).to have_content(animal.tag)
