@@ -67,7 +67,7 @@ rake jobs:clear
 ```
 ### Direct SQL Reporting
 
-This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/main/blazer-reporting.md#dev-environment) to get started.
+This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/wiki/Abalone-Analytics-Blazer-Reporting#development-environment) to get started.
 
 ## Docker
 
