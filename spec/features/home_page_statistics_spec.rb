@@ -10,7 +10,7 @@ RSpec.describe 'Home Page Statistics' do
 
     it 'When I view the home page as a visitor I see no data' do
       visit root_path
-      expect(page.all('.card-content')).to be_empty
+      expect(page.all('.shadow')).to be_empty
       expect(page).to have_selector('span[tabindex=1]') # Abalone Analytics link
       expect(page).to have_selector('a[tabindex=16]')   # More dropdown
     end
@@ -22,9 +22,9 @@ RSpec.describe 'Home Page Statistics' do
       expect(page.all('h1').count).to eq(1)
       expect(page.find('h1').text).to eq('Abalone Analytics')
       expect(page.find('h2').text).to eq('Your organization: White Abalone')
-      expect(page.all('.card-content')[0].find('.title').text).to eq('1') # Total No. of Animals
-      expect(page.all('.card-content')[1].find('.title').text).to eq('1') # No. of Facilities
-      expect(page.all('.card-content')[2].find('.title').text).to eq('1') # No. of Cohorts
+      expect(page.all('.shadow')[0].find('.text-title2').text).to eq('1') # Total No. of Animals
+      expect(page.all('.shadow')[1].find('.text-title2').text).to eq('1') # No. of Facilities
+      expect(page.all('.shadow')[2].find('.text-title2').text).to eq('1') # No. of Cohorts
 
       expect(page).to have_selector('span[tabindex=1]') # Abalone Analytics link
       expect(page).to have_selector('a[tabindex=2]')    # Reports link
