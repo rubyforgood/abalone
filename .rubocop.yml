@@ -754,12 +754,6 @@ Layout/HeredocIndentation:
   Enabled: true
   VersionAdded: '0.49'
   VersionChanged: '0.77'
-  EnforcedStyle: squiggly
-  SupportedStyles:
-    - squiggly
-    - active_support
-    - powerpack
-    - unindent
 
 Layout/IndentationConsistency:
   Description: 'Keep indentation straight.'
@@ -1391,11 +1385,6 @@ Lint/EmptyWhen:
   Enabled: true
   VersionAdded: '0.45'
 
-Style/EndBlock:
-  Description: 'END blocks should not be placed inside method definitions.'
-  Enabled: true
-  VersionAdded: '0.9'
-
 Lint/EnsureReturn:
   Description: 'Do not use return in an ensure block.'
   StyleGuide: '#no-return-ensure'
@@ -1717,12 +1706,6 @@ Lint/SuppressedException:
   VersionAdded: '0.9'
   VersionChanged: '0.77'
 
-Lint/Syntax:
-  Description: 'Checks syntax error.'
-  Enabled: true
-  VersionAdded: '0.9'
-
-
 Lint/ToJSON:
   Description: 'Ensure #to_json includes an optional argument.'
   Enabled: true
@@ -1834,7 +1817,7 @@ Metrics/BlockLength:
   VersionChanged: '0.66'
   CountComments: false  # count full line comments?
   Max: 25
-  ExcludedMethods:
+  IgnoredMethods:
     # By default, exclude the `#refine` method, as it tends to have larger
     # associated blocks.
     - refine
@@ -1877,7 +1860,7 @@ Metrics/MethodLength:
   VersionChanged: '0.59.2'
   CountComments: false  # count full line comments?
   Max: 100
-  ExcludedMethods: []
+  IgnoredMethods: []
 
 Metrics/ModuleLength:
   Description: 'Avoid modules longer than 100 lines of code.'
@@ -2787,7 +2770,6 @@ Style/FrozenStringLiteralComment:
     # `never` will enforce that the frozen string literal comment does not
     # exist in a file.
     - never
-  Safe: false
 
 Style/GlobalVars:
   Description: 'Do not introduce global variables.'
@@ -2896,7 +2878,6 @@ Style/InfiniteLoop:
   Enabled: true
   VersionAdded: '0.26'
   VersionChanged: '0.61'
-  SafeAutoCorrect: true
 
 Style/InlineComment:
   Description: 'Avoid trailing inline comments.'
@@ -3768,7 +3749,6 @@ Style/SymbolLiteral:
 Style/SymbolProc:
   Description: 'Use symbols as procs instead of blocks when possible.'
   Enabled: true
-  SafeAutoCorrect: false
   VersionAdded: '0.26'
   VersionChanged: '0.64'
   # A list of method names to be ignored by the check.
