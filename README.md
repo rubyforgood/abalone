@@ -14,7 +14,7 @@ This application will enable groups to add data either through CSV upload or thr
 
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
-* Ruby (2.6.6)
+* Ruby (2.7.3)
 * Rails (6.1.3.2)
 * PostgreSQL (tested on 9.x)
 * Yarn

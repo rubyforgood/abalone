@@ -1,4 +1,4 @@
-FROM ruby:2.6.6-alpine AS builder
+FROM ruby:2.7.3-alpine AS builder
 
 ARG RAILS_ROOT=/usr/src/app/
 WORKDIR $RAILS_ROOT
@@ -18,7 +18,7 @@ RUN yarn install --check-files --frozen-lockfile &&\
 
 ### BUILD STEP DONE ###
 
-FROM ruby:2.6.6-alpine
+FROM ruby:2.7.3-alpine
 
 ARG RAILS_ROOT=/usr/src/app/
 WORKDIR $RAILS_ROOT

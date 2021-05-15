@@ -70,7 +70,7 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
-    ast (2.4.1)
+    ast (2.4.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
     blazer (2.4.2)
@@ -180,7 +180,7 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     parallel (1.20.1)
-    parser (3.0.0.0)
+    parser (3.0.1.1)
       ast (~> 2.4.1)
     pg (1.2.3)
     pry (0.13.1)
@@ -376,7 +376,7 @@ DEPENDENCIES
   webpacker (~> 5.x)
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 2.7.3p183
 
 BUNDLED WITH
-   1.17.2
+   2.1.4
