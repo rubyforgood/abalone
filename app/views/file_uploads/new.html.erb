@@ -1,33 +1,36 @@
-<section class="section">
+<section class="px-6 py-12">
   <div class="container">
     <h1 class="text-title3 mb-4">File Upload</h1>
 
-    <p class="subtitle is-size-6">Select the type of spreadsheet and select up to 10 .xlsx or .csv spreadsheets. <br /> CSV files are recommended for large spreadsheets (over 1000 rows).</p>
+    <p class="break-words leading-tight mb-6 text-base">Select the type of spreadsheet and select up to 10 .xlsx or .csv spreadsheets. <br /> CSV files are recommended for large spreadsheets (over 1000 rows).</p>
 
     <%= form_tag({action: :upload}, multipart: true, method: 'post') do %>
-      <div class="field">
-        <%= label_tag(:category, 'Category', class: 'label') %>
-        <div class="control">
-          <div class="select">
-            <%= select_tag(:category, options_for_select(@categories), required: true) %>
+      <div class="mb-3">
+        <%= label_tag(:category, 'Category', class: 'font-bold') %>
+        <div class="mt-2 relative text-left">
+          <div class="align-top h-9 inline-block max-w-full relative">
+            <%= select_tag(:category, options_for_select(@categories), required: true,
+                class: 'border border-gray-400 border-solid cursor-pointer p-2 rounded') %>
           </div>
         </div>
       </div>
 
-      <div class="field">
+      <div class="mb-3">
         <div>
-          <%= label_tag('input_files[]', 'Select up to 10 files to upload', class: 'label') %>
-          <%= file_field_tag 'input_files[]', multiple: true, required: true %>
+          <%= label_tag('input_files[]', 'Select up to 10 files to upload', class: 'font-bold') %>
+          <%= file_field_tag 'input_files[]', multiple: true, required: true, class: 'block mt-2' %>
         </div>
       </div>
 
-      <div class="field is-grouped">
-        <div class="control">
-          <%= submit_tag('Submit', class: 'button-primary') %>
+      <div class="flex justify-start mb-3">
+        <div class="flex-shrink-0 mb-0 mr-3 relative text-left">
+          <%= submit_tag('Submit',
+              class: 'bg-purple-600 border border-transparent cursor-pointer font-medium px-4 py-1 rounded-sm text-white') %>
         </div>
 
-        <div class="control">
-          <%= link_to 'Cancel', file_uploads_path, class: 'button is-light' %>
+        <div class="flex-shrink-0 mb-0 mr-3 relative text-left">
+          <%= link_to 'Cancel', file_uploads_path,
+              class: 'bg-gray-200 border border-transparent cursor-pointer inline-flex px-2 py-1 rounded-sm' %>
         </div>
       </div>
     <% end %>
