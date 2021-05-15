@@ -9,7 +9,7 @@ gem 'rails', '~> 6.1'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'activerecord-postgres_enum', '~> 1.6'
 # Use Puma as the app server
-gem 'puma', '~> 5.2'
+gem 'puma', '~> 5.3'
 gem 'sass-rails', '~> 6.0'
 gem 'uglifier',   '>= 1.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
