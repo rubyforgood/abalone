@@ -31,8 +31,8 @@
             <td class="px-4 py-2"><%= location.name %></td>
             <td class="px-4 py-2"><%= location.facility_name %></td>
             <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', facility_location_path(@facility, location) %></td>
-            <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_facility_location_path(@facility, location) %></td>
-            <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), facility_location_path(@facility, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/edit.svg"), edit_facility_location_path(@facility, location) %></td>
+            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/trash.svg"), facility_location_path(@facility, location), method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

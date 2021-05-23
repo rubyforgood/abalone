@@ -17,7 +17,7 @@
         <tr class="border">
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Name</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase">Unit</th>
-          <th colspan="3"></th>
+          <th colspan="2"></th>
         </tr>
       </thead>
 
@@ -26,13 +26,13 @@
           <tr>
             <td class="px-4 py-2"><%= measurement_type.name %></td>
             <td class="px-4 py-2"><%= measurement_type.unit %></td>
-            <td class="px-4 py-2 text-primary-dark">
-              <%= link_to image_tag("icons/edit.svg", size: 24),
+            <td class="px-4 py-2 text-primary-dark w-12">
+              <%= link_to image_tag("icons/edit.svg"),
               edit_measurement_type_path(measurement_type),
               'aria-label': "Edit #{measurement_type.name}" %>
             </td>
-            <td class="px-4 py-2 text-primary-dark">
-              <%= link_to image_tag("icons/trash.svg", size: 24),
+            <td class="px-4 py-2 text-primary-dark w-12">
+              <%= link_to image_tag("icons/trash.svg"),
               measurement_type, method: :delete, data: { confirm: 'Are you sure?' },
               'aria-label': "Delete #{measurement_type.name}" %>
             </td>
