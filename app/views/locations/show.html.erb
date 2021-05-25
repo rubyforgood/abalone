@@ -55,8 +55,8 @@
               <td class="px-4 py-2"><%= enclosure.facility_name %></td>
               <td class="px-4 py-2"><%= enclosure.location_name %></td>
               <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', enclosure %></td>
-              <td class="px-4 py-2"><%= link_to image_tag("icons/edit.svg", size: 24), edit_enclosure_path(enclosure) %></td>
-              <td class="px-4 py-2"><%= link_to image_tag("icons/trash.svg", size: 24), enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/edit.svg"), edit_enclosure_path(enclosure) %></td>
+              <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/trash.svg"), enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
             </tr>
           <% end %>
         </tbody>
