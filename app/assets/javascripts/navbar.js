@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         el.classList.toggle('is-active');
         $target.classList.toggle('is-active');
+        $target.classList.toggle('hidden');
       });
     });
   }
