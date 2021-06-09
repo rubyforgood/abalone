@@ -45,6 +45,12 @@
   .logo {
     min-width: 230px;
   }
+  .dropdown-nav-item .dropdown {
+    display: none;
+  }
+  .dropdown-nav-item:hover .dropdown {
+    display: block;
+  }
 }
 
 .navbar.is-light {

@@ -30,7 +30,16 @@ module.exports = {
         "caption-light": "#757586",
         "caption-dark": "#ACACC1",
       },
+      inset: {
+        "full": "100%",
+      },
       spacing: {
+        "full": "100%",
+        "0.5": "0.125rem",
+        "7": "1.75rem",
+        "44": "11rem",
+        "52": "13rem",
+        "60": "15rem",
         "72": "18rem",
       },
     },
