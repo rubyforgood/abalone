@@ -1,8 +1,13 @@
 require 'rails_helper'
 
 describe "When I visit the File Uploads New page" do
-  let(:user) { create(:user) }
-  let(:valid_file) { "#{Rails.root}/db/sample_data_files/measurement/basic_measurement.csv" }
+  let!(:organization) { create(:organization) }
+  let(:user) { create(:user, organization: organization) }
+  let!(:measurement_type1) { create(:measurement_type, organization: organization) }
+  let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: organization) }
+  let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: organization) }
+  let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: organization) }
+  let(:valid_file) { "#{Rails.root}/spec/fixtures/files/basic_custom_measurement_with_spaces.csv" }
 
   before do
     sign_in user
