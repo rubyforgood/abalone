@@ -3,7 +3,7 @@ module.exports = {
     boxShadow: {
       default: "0 2px 3px rgb(10 10 10 / 10%), 0 0 0 1px rgb(10 10 10 / 10%)",
       sm: "0 4px 10px rgba(60,106,139,0.15)",
-      none: "--tw-shadow: 0 0 #0000; box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);",
+      //none: "--tw-shadow: 0 0 #0000; box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);",
     },
     container: {
       center: true,
