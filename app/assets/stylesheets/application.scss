@@ -38,12 +38,37 @@
     }
     #nav-menu {
       position: absolute;
-      top: 85px;
+      top: 65px;
       right: 17px;
     }
   }
   .logo {
     min-width: 230px;
+  }
+  .dropdown-nav-item .dropdown {
+    display: none;
+  }
+  .dropdown-nav-item:hover .dropdown {
+    display: block;
+  }
+
+  @include tablet {
+    .dropdown-nav-item {
+      display: block;
+
+      a {
+        display: block;
+
+        span { //chevron down
+          float: right;
+        }
+      }
+
+      .dropdown {
+        display: block;
+        position: relative;
+      }
+    }
   }
 }
 
