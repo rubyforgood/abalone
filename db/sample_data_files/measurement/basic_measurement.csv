@@ -1,7 +1,7 @@
-measurement_event,measurement,value,tank_name,animal_pii_tag,cohort_name,
-Michael Drinks the Water,Flavor,Salty,Support Rack 3,,,
-Michael Drinks the Water,Flavor,WAY too salty,AB-17,,,
-Michael Drinks the Water,Flavor,Good,,,,
-Michael Drinks the Correct Water,Flavor,Good,The Water Bottle at My Desk,,,
-Michael Drinks the Correct Water,Flavor,Excellent,Office Water Cooler,,,
-Michael last known test,Tanning Lotion Smell,Sort of like Sardine Oil,CB Husband Tanning Salon,,,
+date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag
+9/01/21,Cohort,count,24,September Survey,Test Enclosure,Aquarium of the Pacific location enclosure cohort
+9/01/21,Enclosure,count,42,September Survey,California Science Center location enclosure,California Science Center location enclosure cohort
+9/01/21,Animal,length,14,September Survey,California Science Center location enclosure,California Science Center location enclosure cohort,F-CSC
+9/01/21,Animal,gonad score,78,September Survey,California Science Center location enclosure,California Science Center location enclosure cohort,F-CSC
+9/01/21,Animal,length,16,September Survey,California Science Center location enclosure,California Science Center location enclosure cohort,M-CSC
+9/01/21,Animal,gonad score,46,September Survey,California Science Center location enclosure,California Science Center location enclosure cohort,M-CSC

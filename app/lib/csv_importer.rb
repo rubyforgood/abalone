@@ -47,7 +47,7 @@ class CsvImporter
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
         if record.valid?
-          record.save
+          record.save!
           increment_stats(record)
         else
           error_details["row_number_#{row_number}"] = record.errors.details

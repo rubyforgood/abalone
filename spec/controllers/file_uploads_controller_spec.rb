@@ -3,7 +3,11 @@ require 'rails_helper'
 describe FileUploadsController do
   include Devise::Test::ControllerHelpers
 
-  let(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:measurement_type1) { create(:measurement_type, organization: user.organization) }
+  let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: user.organization) }
+  let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: user.organization) }
+  let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: user.organization) }
 
   before do
     sign_in user
@@ -11,7 +15,6 @@ describe FileUploadsController do
 
   describe '#upload' do
     it 'should upload multiple files successfully' do
-      skip
       post :upload, params: valid_files_params
 
       expect(assigns[:file_uploads].length).to eq 2
@@ -23,7 +26,6 @@ describe FileUploadsController do
     end
 
     it 'should reject a CSV with incorrect headers' do
-      skip
       post :upload, params: invalid_header_file_params
 
       expect(response.code).to eq '200'
@@ -32,7 +34,6 @@ describe FileUploadsController do
     end
 
     it 'should give an error message if no CSV is uploaded' do
-      skip
       post :upload, params: invalid_file_params
 
       expect(response.code).to eq '400'
@@ -41,7 +42,6 @@ describe FileUploadsController do
 
   describe '#new' do
     it 'should build the categories list' do
-      skip
       get :new
       expect(assigns[:categories].length > 2)
       expect(response.code).to eq '200'
@@ -50,7 +50,6 @@ describe FileUploadsController do
 
   describe '#index' do
     it 'should have response code 200' do
-      skip
       get :index
       expect(response.code).to eq '200'
     end
@@ -58,7 +57,6 @@ describe FileUploadsController do
 
   describe '#show' do
     it 'should have response code 200' do
-      skip
       file = create(:processed_file)
       get :show, params: { id: file.id }
       expect(response.code).to eq '200'
@@ -69,8 +67,8 @@ describe FileUploadsController do
     {
       'category': 'Measurement',
       'input_files': [
-        fixture_file_upload('basic_custom_measurement.csv', 'text/csv'),
-        fixture_file_upload('basic_custom_measurement_with_spaces.csv', 'text/csv')
+        fixture_file_upload('/basic_custom_measurement.csv', 'text/csv'),
+        fixture_file_upload('/basic_custom_measurement_with_spaces.csv', 'text/csv')
       ]
     }
   end

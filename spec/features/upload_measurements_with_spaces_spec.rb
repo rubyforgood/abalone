@@ -1,19 +1,24 @@
 require 'rails_helper'
 
 describe "remove leading and trailing spaces from csv headers and values", type: :feature do
-  let(:user) { create(:user) }
-  let(:file_with_spaces) { "#{Rails.root}/spec/fixtures/basic_custom_measurement_with_spaces.csv" }
-  let(:file_without_spaces) { "#{Rails.root}/spec/fixtures/basic_custom_measurement.csv" }
+  let(:user) { create(:user, organization: organization) }
+  let!(:organization) { create(:organization) }
+  let!(:measurement_type1) { create(:measurement_type, organization: organization) }
+  let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: organization) }
+  let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: organization) }
+  let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: organization) }
+  let(:file_with_spaces) { "#{Rails.root}/spec/fixtures/files/basic_custom_measurement_with_spaces.csv" }
+  let(:file_without_spaces) { "#{Rails.root}/spec/fixtures/files/basic_custom_measurement.csv" }
   let(:expected_success_message) { 'Successfully queued spreadsheet for import' }
   let(:temporary_file) { create(:temporary_file, contents: File.read(valid_file)) }
   let(:measurements_comparison) do
     [
-      {name: "Flavor", value: "Salty", measurement_event_name: "Michael Drinks the Water", enclosure_name: "Support Rack 3"},
-      {name: "Flavor", value: "WAY too salty", measurement_event_name: "Michael Drinks the Water", enclosure_name: "AB-17"},
-      {name: "Flavor", value: "Good", measurement_event_name: "Michael Drinks the Water", enclosure_name: nil},
-      {name: "Flavor", value: "Good", measurement_event_name: "Michael Drinks the Correct Water", enclosure_name: "The Water Bottle at My Desk"},
-      {name: "Flavor", value: "Excellent", measurement_event_name: "Michael Drinks the Correct Water", enclosure_name: "Office Water Cooler"},
-      {name: "Tanning Lotion Smell", value: "Sort of like Sardine Oil", measurement_event_name: "Michael last known test", enclosure_name: "CB Husband Tanning Salon"}
+      {subject_type: "Cohort", measurement_type: "count", value: "24", measurement_event: "September Survey"},
+      {subject_type: "Enclosure", measurement_type: "count", value: "42", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "length", value: "14", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "gonad score", value: "78", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "length", value: "16", measurement_event: "September Survey"},
+      {subject_type: "Animal", measurement_type: "gonad score", value: "46", measurement_event: "September Survey"}
     ]
   end
 
@@ -24,7 +29,6 @@ describe "remove leading and trailing spaces from csv headers and values", type:
 
   context 'when user successfully uploads a CSV file with spaces in the header and values' do
     it "strips spaces and generates no errors" do
-      skip
       expect do
         Measurement.delete_all
         upload_file("Measurement", [file_with_spaces])
@@ -44,10 +48,10 @@ describe "remove leading and trailing spaces from csv headers and values", type:
       measurements = []
       Measurement.all.each do |measurement|
         measurements << {
-          name: measurement.name,
+          subject_type: measurement.subject_type,
+          measurement_type: measurement.measurement_type.name,
           value: measurement.value,
-          measurement_event_name: measurement&.measurement_event&.name,
-          enclosure_name: measurement&.enclosure&.name
+          measurement_event: measurement.measurement_event.name
         }
       end
       expect(measurements).to eq(measurements_comparison)
