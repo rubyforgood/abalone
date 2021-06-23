@@ -53,4 +53,9 @@ describe "When I visit the animal Index page" do
 
     expect(page).to have_content('Upload CSV')
   end
+
+  it "should have Actions Heading" do
+    visit animals_path
+    expect(page).to have_content("Actions")
+  end
 end
