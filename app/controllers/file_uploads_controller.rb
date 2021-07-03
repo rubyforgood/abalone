@@ -25,7 +25,7 @@ class FileUploadsController < ApplicationController
 
   def show
     @processed_file = ProcessedFile.find(params[:id])
-    record_class = CsvImporter::CATEGORIES.find{ |v| v === @processed_file.category}.constantize
+    record_class = CsvImporter::CATEGORIES.find { |v| v == @processed_file.category }.constantize
     @headers = record_class::HEADERS.keys.map(&:downcase)
     @records = record_class.where(processed_file_id: @processed_file.id)
 
