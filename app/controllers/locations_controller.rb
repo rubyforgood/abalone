@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
-  before_action :set_location, only: [:show, :edit, :update, :destroy]
   before_action :set_facility
+  before_action :set_location, only: [:show, :edit, :update, :destroy]
 
   def index
     @locations = @facility.locations
@@ -42,7 +42,7 @@ class LocationsController < ApplicationController
   private
 
   def set_location
-    @location = Location.find(params[:id])
+    @location = @facility.locations.find(params[:id])
   end
 
   def set_facility
