@@ -62,6 +62,7 @@ group :development do
   gem 'capistrano-rvm',     '~> 0.1',  require: false
   gem 'capistrano-rails',   '~> 1.6',  require: false
   gem 'capistrano3-puma',   '~> 5.0',  require: false
+  gem "brakeman"
 end
 
 # Report builder
