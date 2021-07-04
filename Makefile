@@ -12,7 +12,7 @@ watch:
 console:
 	docker-compose run --rm console
 
-test: spec lint
+test: spec lint brakeman
 
 spec: schema_migrate
 	@echo -
@@ -25,6 +25,12 @@ lint:
 	@echo - Running Rubocop!
 	@echo -
 	docker-compose run --rm rubocop
+
+brakeman:
+	@echo -
+	@echo - Running Brakeman!
+	@echo -
+	docker-compose run --rm brakeman 
 
 database_started:
 	@echo - Starting up database.

@@ -55,6 +55,9 @@ services:
   rubocop:
     <<: *app
     command: bundle exec rubocop -a
+  brakeman:
+    <<: *app
+    command: bundle exec brakeman -Aw1 --no-pager
 
 volumes:
   dbdata:
