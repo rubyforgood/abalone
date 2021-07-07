@@ -5,6 +5,7 @@ RSpec.describe Cohort, type: :model do
     is_expected.to belong_to(:male).class_name("Animal").optional
     is_expected.to belong_to(:female).class_name("Animal").optional
     is_expected.to belong_to(:organization)
+    is_expected.to belong_to(:enclosure).required
     is_expected.to have_many(:measurements)
     is_expected.to have_many(:animals)
     is_expected.to have_many(:mortality_events)
@@ -23,5 +24,15 @@ RSpec.describe Cohort, type: :model do
     create(:mortality_event, animal: animal2, cohort: cohort)
 
     expect(cohort.mortality_count).to eq 2
+  end
+
+  describe 'validation' do
+    it 'validates presence of' do
+      is_expected.to validate_presence_of :name
+    end
+
+    it 'validates uniqueness of' do
+      is_expected.to validate_uniqueness_of(:name).scoped_to(:organization_id)
+    end
   end
 end
