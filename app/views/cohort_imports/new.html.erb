@@ -7,7 +7,7 @@
     <div class="facilities__form__container__body">
       <%= simple_form_for(@cohort_import_form, url: cohort_imports_path) do |f| %>
         <div class="field">
-          <%= f.input :csv_file, as: :file, label: false %>
+          <%= f.input :csv_file, as: :file, label: false, required: true %>
         </div>
 
         <div class="field">
