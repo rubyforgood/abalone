@@ -27,7 +27,7 @@ RSpec.describe CsvImporter do
 
         tempfile = Tempfile.new
         tempfile.write(orginal_file)
-        5.times{ tempfile.write("\n") }
+        5.times { tempfile.write("\n") }
         tempfile.rewind
 
         file = File.read(tempfile.path)

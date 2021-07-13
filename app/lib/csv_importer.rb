@@ -40,7 +40,7 @@ class CsvImporter
         headers: true,
         header_converters: ->(header) { CsvImporter.header_conversion(header).to_sym },
         converters: ->(value) { value&.strip },
-        skip_lines: /^\s*$/,
+        skip_lines: /^\s*$/
       ).each do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
