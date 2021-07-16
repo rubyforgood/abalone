@@ -30,6 +30,12 @@ rake db:create
 rake db:migrate
 rake db:seed
 ```
+**Run Test Suite**    
+```
+bundle exec rake
+```
+
+**Run Webserver for Abalone**    
 
 Webpack dependencies can be rebuilt on command with `bin/webpack`. Alternatively you can run `bin/webpack-dev-server` in another terminal window. This will effectively run `bin/webpack` for you whenever files change.
 
@@ -68,6 +74,7 @@ rake jobs:clear
 ### Direct SQL Reporting
 
 This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/wiki/Abalone-Analytics-Blazer-Reporting#development-environment) to get started.
+
 
 ## Docker
 
