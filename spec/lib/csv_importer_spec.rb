@@ -21,6 +21,23 @@ RSpec.describe CsvImporter do
       end
     end
 
+    context "when the csv file has extra empty lines" do
+      it "ignores the empty lines and imports the valid rows" do
+        orginal_file = File.read(Rails.root.join("spec/fixtures/files/basic_custom_measurement.csv"))
+
+        tempfile = Tempfile.new
+        tempfile.write(orginal_file)
+        5.times { tempfile.write("\n") }
+        tempfile.rewind
+
+        file = File.read(tempfile.path)
+
+        expect do
+          CsvImporter.new(file, category_name, processed_file.id, organization).call
+        end.to change { Measurement.count }.by 6
+      end
+    end
+
     context "when there are errors importing a row" do
       it "does not import any record" do
         file = File.read(Rails.root.join("spec", "fixtures", "files", "basic_custom_measurement_invalid.csv"))
