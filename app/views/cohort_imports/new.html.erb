@@ -1,0 +1,23 @@
+<section class="section facilities__form">
+  <div class="container facilities__form__container">
+    <h1 class="title">Upload Cohorts</h1>
+    <div class="facilities__form__container__body">
+      <%= link_to 'Download a sample csv file', root_path + 'samples/cohort.csv' %>
+    </div>
+    <div class="facilities__form__container__body">
+      <%= simple_form_for(@cohort_import_form, url: cohort_imports_path) do |f| %>
+        <div class="field">
+          <%= f.input :csv_file, as: :file, label: false, required: true, input_html: { accept: 'text/csv' } %>
+        </div>
+
+        <div class="field">
+          <div class="control">
+            <%= f.submit('Submit', class: 'button-primary') %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= link_to '<< Back', cohorts_path, class: 'button-outline-primary' %>
+  </div>
+</section>
