@@ -54,7 +54,7 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.6'
+  gem 'listen', '>= 3.0.5', '< 3.7'
 
   gem 'annotate',                      require: false
   gem 'capistrano',         '~> 3.16', require: false
