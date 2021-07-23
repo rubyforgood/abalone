@@ -9,6 +9,9 @@ class Measurement < ApplicationRecord
   validates :subject_type, presence: true, inclusion: { in: %w(Cohort Enclosure Animal) }
   validates :value, presence: true
 
+  delegate :name, to: :measurement_type, prefix: true, allow_nil: true
+  delegate :name, to: :measurement_event, prefix: true, allow_nil: true
+
   HEADERS = {
     DATE: "date",
     SUBJECT_TYPE: "subject_type",
@@ -19,6 +22,29 @@ class Measurement < ApplicationRecord
     COHORT_NAME: "cohort_name",
     TAG: 'tag'
   }.freeze
+
+  ROW_VALUES = {
+    DATE: "date",
+    SUBJECT_TYPE: "subject_type",
+    MEASUREMENT_TYPE: "measurement_type_name",
+    VALUE: "value",
+    MEASUREMENT_EVENT: "measurement_event_name",
+    ENCLOSURE_NAME: "enclosure_name",
+    COHORT_NAME: "cohort_name",
+    TAG: 'animal_tag'
+  }.freeze
+
+  def cohort_name
+    subject.is_a?(Cohort) ? subject.name : nil
+  end
+
+  def enclosure_name
+    subject.is_a?(Enclosure) ? subject.name : nil
+  end
+
+  def animal_tag
+    subject.is_a?(Animal) ? subject.tag : nil
+  end
 
   # The below code is unstable. This is retrofitting the values from the seeded CSV
   # In reality, for instance, the subject would not always be a enclosure
