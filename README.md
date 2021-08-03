@@ -6,7 +6,7 @@ The Abalone project is a data tracking and analytics system aimed at storing and
 
 The Bodega Marine Laboratory's White Abalone captive breeding program is working to prevent the extinction of the [White Abalone](https://www.fisheries.noaa.gov/species/white-abalone) (Haliotis sorenseni), an endangered marine snail. White abalone are one of seven species found in California and are culturally significant to the native people of the area. White abalone were perilously overfished throughout the 20th century, resulting in a 99 percent population decrease by the end of the 1970s. This group is working to reverse their decline and have already seen some great success, they currently have more abalone in the lab than exist in the wild!
 
-The Puget Sound Restoration Fund works to raise and outplant hatchery-reared [Pinto Abalone](https://www.fisheries.noaa.gov/species/pinto-abalone) (Haliotis kamtschatkana), the only abalone species found in the Washington waters. This species has cultural and ecological significance, grazing rock surfaces and maintaining the health of rocky reef habitat and kelp beds. The Washington Department of Fish & Wildlife (WDFW) documented a ~98% decline from 1992 to 2017, leading the pinto abalone to be listed as a State endangered species in 2019.
+The Puget Sound Restoration Fund works to raise and outplant hatchery-reared [Pinto Abalone](https://www.fisheries.noaa.gov/species/pinto-abalone) (Haliotis kamtschatkana), the only abalone species found in the Washington waters. This species has cultural and ecological significance, grazing rock surfaces and maintaining the health of rocky reef habitat and kelp beds. The Washington Department of Fish & Wildlife (WDFW) documented a ~98% decline from 1992 to 2017, leading the pinto abalone to be listed as a state endangered species in 2019.
 
 This application will enable groups to add data either through CSV upload or through the web interface. Groups can view reports and visual representations of key data. Future plans include giving groups the ability to generate custom reports on the fly.
 
@@ -19,7 +19,7 @@ Start by reading our contributing [guide](https://github.com/rubyforgood/abalone
 
 Checkout the [Issues tab](https://github.com/rubyforgood/abalone/issues). An issue can be claimed by commenting on it.  
 
-Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-started) and [Get Familiar with the App](https://github.com/rubyforgood/abalone#get-familiar-with-the-app) to learn more about the application.
+Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-started) and [Get Familiar with the App](https://github.com/rubyforgood/abalone#get-familiar-with-the-app) sections to learn more about the application.
 
 ## Getting Started
 
@@ -84,7 +84,7 @@ rake jobs:clear
 ```
 ### Direct SQL Reporting
 
-This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/wiki/Abalone-Analytics-Blazer-Reporting#development-environment) to get started.
+This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/main/blazer_reporting.md#development-environment) to get started.
 
 ### Docker
 
@@ -120,7 +120,7 @@ The web app will be available on your host at `http://localhost:3000`. The logs 
 
 **Only the Database**
 
-Some developers prefer to run the Ruby and Rails processes directly on their host computers instead of running everything in contianers.
+Some developers prefer to run the Ruby and Rails processes directly on their host computers instead of running everything in containers.
 It might still be convenient for those developers to run the database in a container and not deal with the installation of yet another server on their computer.
 To do so:
 
@@ -150,9 +150,9 @@ We want it to be easy to understand and contribute to this app, which means we l
 
 ### Current Status
 
-__Last updated August 2021__  
+__Last status update: August 2021__  
 
-This app is currently in testing with the two initial stakeholder groups. We are working with them to begin using actual data, build initial reports, fix bugs discovered during testing and refine the application. Simultaneously, we are continuing feature work to extend and improve the application. While the core functionality of the application is in place, refactors may considered as part of the stakeholder testing process.
+This app is currently in testing with the two initial stakeholder groups. We are working with them to begin using actual data, build initial reports, fix bugs discovered during testing and refine the application. Simultaneously, we are continuing feature work to extend and improve the application. While the core functionality of the application is in place, refactors may be considered as part of the stakeholder testing process.
 
 Issues specific to stakeholder testing and onboarding are part of the [Stakeholder Testing and Onboarding](https://github.com/rubyforgood/abalone/milestone/10) milestone.
 
