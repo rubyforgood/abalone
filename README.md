@@ -146,7 +146,7 @@ We want it to be easy to understand and contribute to this app, which means we l
 
 ## Get Familiar with the App
 
-[Application Overview](#)
+[Application Overview](https://github.com/rubyforgood/abalone/blob/main/application_overview.md)
 
 ### Current Status
 
@@ -154,7 +154,7 @@ __Last updated August 2021__
 
 This app is currently in testing with the two initial stakeholder groups. We are working with them to begin using actual data, build initial reports, fix bugs discovered during testing and refine the application. Simultaneously, we are continuing feature work to extend and improve the application. While the core functionality of the application is in place, refactors may considered as part of the stakeholder testing process.
 
-Issues specific to stakeholder testing can be found on the [Initial Stakeholder Testing and Onboarding](#) board.
+Issues specific to stakeholder testing and onboarding are part of the [Stakeholder Testing and Onboarding](https://github.com/rubyforgood/abalone/milestone/10) milestone.
 
 Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues) and feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue.
 
