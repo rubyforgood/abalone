@@ -6,16 +6,27 @@ The Abalone project is a data tracking and analytics system aimed at storing and
 
 The Bodega Marine Laboratory's White Abalone captive breeding program is working to prevent the extinction of the [White Abalone](https://www.fisheries.noaa.gov/species/white-abalone) (Haliotis sorenseni), an endangered marine snail. White abalone are one of seven species found in California and are culturally significant to the native people of the area. White abalone were perilously overfished throughout the 20th century, resulting in a 99 percent population decrease by the end of the 1970s. This group is working to reverse their decline and have already seen some great success, they currently have more abalone in the lab than exist in the wild!
 
-The Puget Sound Restoration Fund works to raise and outplant hatchery-reared [Pinto Abalone](https://www.fisheries.noaa.gov/species/pinto-abalone) (Haliotis kamtschatkana), the only abalone species found in the Washington waters. This species has cultural and ecological significance, grazing rock surfaces and maintaining the health of rocky reef habitat and kelp beds. The Washington Department of Fish & Wildlife (WDFW) documented a ~98% decline from 1992 to 2017, leading the pinto abalone to be listed as a State endangered species in 2019.
+The Puget Sound Restoration Fund works to raise and outplant hatchery-reared [Pinto Abalone](https://www.fisheries.noaa.gov/species/pinto-abalone) (Haliotis kamtschatkana), the only abalone species found in the Washington waters. This species has cultural and ecological significance, grazing rock surfaces and maintaining the health of rocky reef habitat and kelp beds. The Washington Department of Fish & Wildlife (WDFW) documented a ~98% decline from 1992 to 2017, leading the pinto abalone to be listed as a state endangered species in 2019.
 
 This application will enable groups to add data either through CSV upload or through the web interface. Groups can view reports and visual representations of key data. Future plans include giving groups the ability to generate custom reports on the fly.
+
+## Welcome Contributors!!
+Thank you for checking out the project. We would love to have you contribute!  
+
+We recommend that you join us in slack https://rubyforgood.herokuapp.com/ #abalone channel to ask questions quickly and hear about office hours (currently Tuesday 6-7pm Eastern), stakeholder news, and upcoming new issues.  
+
+Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/main/CONTRIBUTING.md).  
+
+Checkout the [Issues tab](https://github.com/rubyforgood/abalone/issues). An issue can be claimed by commenting on it.  
+
+Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-started) and [Get Familiar with the App](https://github.com/rubyforgood/abalone#get-familiar-with-the-app) sections to learn more about the application.
 
 ## Getting Started
 
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
 * Ruby (2.7.3)
-* Rails (6.1.3.2)
+* Rails (6.1.4)
 * PostgreSQL (tested on 9.x)
 * Yarn
 
@@ -73,10 +84,9 @@ rake jobs:clear
 ```
 ### Direct SQL Reporting
 
-This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/wiki/Abalone-Analytics-Blazer-Reporting#development-environment) to get started.
+This application uses a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access with data scoped to an organizational level. This requires some setup to use in your development environment. See the [instructions for setting this up locally](https://github.com/rubyforgood/abalone/blob/main/blazer_reporting.md#development-environment) to get started.
 
-
-## Docker
+### Docker
 
 We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward. You will need Docker and docker-compose.
 
@@ -84,7 +94,7 @@ We are currently experimenting with Docker for development. While we would love 
 * The `make` utility can also make your development life easier. It it usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
 * If you run into issues using Docker Desktop on windows, we recommend you view [this page](https://github.com/mdworken/MKD-Docker-Windows-Rails) for troubleshooting info.
 
-### Starting Fresh
+**Starting Fresh**
 
 To start the application in development mode:
 
@@ -98,7 +108,7 @@ Or, run only this:
 
 The web app will be available on your host at `http://localhost:3000`. The logs for the web app and delayed_job processes can be seen and followed with the `make watch` command.
 
-### Some Routine Tasks
+**Some Routine Tasks**
 
 * `make spec` will run the RSpec tests
 * `make lint` will run the Rubocop linting and style checks
@@ -108,23 +118,14 @@ The web app will be available on your host at `http://localhost:3000`. The logs 
 * `make database_seeds` will seed the database according to `seeds.rb`.
 * `make nuke` will stop all Abalone docker services, remove containers, and delete the development and test databases. This is also used in the `make minty_fresh` command to restart the development and test environment with a clean slate.
 
-### Only the Database
+**Only the Database**
 
-Some developers prefer to run the Ruby and Rails processes directly on their host computers instead of running everything in contianers.
+Some developers prefer to run the Ruby and Rails processes directly on their host computers instead of running everything in containers.
 It might still be convenient for those developers to run the database in a container and not deal with the installation of yet another server on their computer.
 To do so:
 
 * set an environment variable on your host: `export DATABASE_URL="postgres://dockerpg:supersecret@localhost:54321"`
 * start the database with `make database_started`
-
-## Contribute
-We would love to have you contribute! Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/main/CONTRIBUTING.md). Checkout the Issues tab and make sure you understand the acceptance criteria before starting one. Before you start, get familiar with important terms, how the app works right now, sample data and the steps to MVP below:
-
-### Get Familiar with the App
-
-This app is still in early stages of development (MVP). We have defined our [MVP and additional milestones here](https://github.com/rubyforgood/abalone/milestones)
-
-Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues), which lay out our path to MVP. Feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue.
 
 ### Development
 We have included the [Annotate gem](https://github.com/ctran/annotate_models) in this project, for better development experience. It annotates (table attributes) models, model specs, and factories.
@@ -143,24 +144,39 @@ In submitting features or bug fixes, please do not add new infrastructure compon
 ### Other Considerations
 We want it to be easy to understand and contribute to this app, which means we like comments in our code! We also want to keep the codebase beginner-friendly. Please keep this in mind when you are tempted to refactor that abstraction into an additional abstraction.
 
+## Get Familiar with the App
+
+[Application Overview](https://github.com/rubyforgood/abalone/blob/main/application_overview.md)
+
+### Current Status
+
+__Last status update: August 2021__  
+
+This app is currently in testing with the two initial stakeholder groups. We are working with them to begin using actual data, build initial reports, fix bugs discovered during testing and refine the application. Simultaneously, we are continuing feature work to extend and improve the application. While the core functionality of the application is in place, refactors may be considered as part of the stakeholder testing process.
+
+Issues specific to stakeholder testing and onboarding are part of the [Stakeholder Testing and Onboarding](https://github.com/rubyforgood/abalone/milestone/10) milestone.
+
+Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues) and feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue.
+
 ### The Problem
-Our stakeholder, the Bodega Marine Laboratory, has more data that they can keep track of! They want to have a central data repository for all of their abalone captive breeding data instead of just spreadhseets. It is hard to run reports and anlytics on the data when it's not all in one place.
+Our stakeholders, the Bodega Marine Laboratory and the Puget Sound Restoration Fund work with large amounts of data collected as part of their abalone captive breeding programs. They need a system that can act as a central data repository for all of this data and provide robust reporting capabilities to help them examine trends and combine data collected across their research efforts.
 
 ### The Solution
-We are building an app which has the following capabilities:
+We are building a multi-tenant application which has the following capabilities:
 
-1. _Store Raw Data_: There are several different types of CSVs that the lab has been amassing (Mortality Tracking Data, Pedigree Data, Population Estimate Data and Wild Collection Data). Examples of these CSVs can be found in the [`db/sample_data_files`](https://github.com/rubyforgood/abalone/tree/main/db/sample_data_files) directory.
+1. _Store Data_: There are several types of measurement data collected that should be stored in the system and retrievable by each organization.
 2. _Import CSVs_: Users are able to import single and bulk CSVs. Users should generally submit cleaned CSVs, but the app should alert users if there are parsing problems and which row(s) need to be fixed.
-3. _Display Charts and Analytics_: For MVP, we would like to display a Histogram binned in 1cm increments of different body lengths for a certain cohort or group of cohorts.
+3. _Display Charts and Analytics_: Display charts and analytics to meet the reporting needs of each organization. Allow organizations to directly query their data.
 4. _Export CSVs_: TBD.
 
-### Jargon
+### Key Definitions
 * **Tag number(s), date** = e.g. `Green_389 from 3/4/08 to 4/6/15` We sometimes tag individuals; however, not all individuals have tags. We can't tag individuals until they are older than one year old because they are too small. Generally a color, a 3-digit number and dates that tag was on. Sometimes tags fall off. It can be logistically challenging to give them the same tag, so they sometimes get assigned new tags. Also, occasionally tags have another form besides color_### (e.g., they have 2 or 4 digits and/or have no color associated with them), and sometimes they are something crazy like, "no tag" or "no tag red zip tie" for animals that lived long ago ... though I suppose we could re-code those into something more tractable.
-* **Individual ID** = `YYYY_MM_DD_color_###` The individuals' ID is ithe date it was spawned followed by its initial tag color and 3-digit number
-* **Shellfish Health Lab Case Number** = `SF##-##` Animals from each spawning date and from each wild collection have a unique case number created by California's state Shellfish Health Laboratory (SHL). Sometimes animals from a single spawning date have more than one SHL number.
+* **Shellfish Health Lab Case Number (shl number)** = `SF##-##` Animals from each spawning date and from each wild collection have a unique case number created by California's state Shellfish Health Laboratory (SHL). Sometimes animals from a single spawning date have more than one SHL number.
 * **Cohort** = `place_YYYY` This is how the lab coloquilly refers to each of their populations spawned on a certain date. It's bascially a note/nickname for each group of animals with a particular SHL #/spawning date.
-* **Institution** = e.g. `BML from 6/5/13 - 11/20/14` Animals move around among a finite number of partner institutions (it is possible for new facilities to be added, but it only happens about once every few years).
-* **Holding area** = e.g. `Juvenile Rack 1 Column A Trough 3 from 3/4/15 - 6/2/16` This is the tank space by date. This is a note. The types of input will vary significantly within a facility and over time.
+* **Enclosures** = e.g. `Juvenile Rack 1 Column A Trough 3 from 3/4/15 - 6/2/16` This is the tank space by date. This is a note. The types of input will vary significantly within a facility and over time.
+* **Locations** = `facility_name - location_name` Animals may be located in different location within a single facility
+* **Facilities** = e.g. `BML from 6/5/13 - 11/20/14` Animals move around among a finite number of partner institutions (it is possible for new facilities to be added, but it only happens about once every few years).
+* **Organizations** e.g. `Bodega Marine Laboratory` Organizations act as the tenants within the application for the purpose of walling off data 
 
 [See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
