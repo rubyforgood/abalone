@@ -11,13 +11,13 @@ The Puget Sound Restoration Fund works to raise and outplant hatchery-reared [Pi
 This application will enable groups to add data either through CSV upload or through the web interface. Groups can view reports and visual representations of key data. Future plans include giving groups the ability to generate custom reports on the fly.
 
 ## Welcome Contributors!!
-Thank you for checking out the project. We would love to have you contribute!  
+Thank you for checking out the project. We would love to have you contribute!
 
-We recommend that you join us in slack https://rubyforgood.herokuapp.com/ #abalone channel to ask questions quickly and hear about office hours (currently Tuesday 6-7pm Eastern), stakeholder news, and upcoming new issues.  
+We recommend that you join us in slack https://rubyforgood.herokuapp.com/ #abalone channel to ask questions quickly and hear about office hours (currently Tuesday 6-7pm Eastern), stakeholder news, and upcoming new issues.
 
-Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/main/CONTRIBUTING.md).  
+Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/main/CONTRIBUTING.md).
 
-Checkout the [Issues tab](https://github.com/rubyforgood/abalone/issues). An issue can be claimed by commenting on it.  
+Checkout the [Issues tab](https://github.com/rubyforgood/abalone/issues). An issue can be claimed by commenting on it.
 
 Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-started) and [Get Familiar with the App](https://github.com/rubyforgood/abalone#get-familiar-with-the-app) sections to learn more about the application.
 
@@ -25,7 +25,7 @@ Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-sta
 
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
-* Ruby (2.7.3)
+* Ruby (3.0.0)
 * Rails (6.1.4)
 * PostgreSQL (tested on 9.x)
 * Yarn
@@ -41,12 +41,12 @@ rake db:create
 rake db:migrate
 rake db:seed
 ```
-**Run Test Suite**    
+**Run Test Suite**
 ```
 bundle exec rake
 ```
 
-**Run Webserver for Abalone**    
+**Run Webserver for Abalone**
 
 Webpack dependencies can be rebuilt on command with `bin/webpack`. Alternatively you can run `bin/webpack-dev-server` in another terminal window. This will effectively run `bin/webpack` for you whenever files change.
 
@@ -99,7 +99,7 @@ We are currently experimenting with Docker for development. While we would love 
 To start the application in development mode:
 
 * `docker-compose up --detach db` to start the database
-* `docker-compose up --rm schema_migrate` to bring the database schema up-to-date
+* `docker-compose run --rm schema_migrate` to bring the database schema up-to-date
 * `docker-compose up --detach web delayed_job` to start the web and background job processes
 
 Or, run only this:
@@ -150,7 +150,7 @@ We want it to be easy to understand and contribute to this app, which means we l
 
 ### Current Status
 
-__Last status update: August 2021__  
+__Last status update: August 2021__
 
 This app is currently in testing with the two initial stakeholder groups. We are working with them to begin using actual data, build initial reports, fix bugs discovered during testing and refine the application. Simultaneously, we are continuing feature work to extend and improve the application. While the core functionality of the application is in place, refactors may be considered as part of the stakeholder testing process.
 
@@ -176,7 +176,7 @@ We are building a multi-tenant application which has the following capabilities:
 * **Enclosures** = e.g. `Juvenile Rack 1 Column A Trough 3 from 3/4/15 - 6/2/16` This is the tank space by date. This is a note. The types of input will vary significantly within a facility and over time.
 * **Locations** = `facility_name - location_name` Animals may be located in different location within a single facility
 * **Facilities** = e.g. `BML from 6/5/13 - 11/20/14` Animals move around among a finite number of partner institutions (it is possible for new facilities to be added, but it only happens about once every few years).
-* **Organizations** e.g. `Bodega Marine Laboratory` Organizations act as the tenants within the application for the purpose of walling off data 
+* **Organizations** e.g. `Bodega Marine Laboratory` Organizations act as the tenants within the application for the purpose of walling off data
 
 [See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
