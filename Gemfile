@@ -34,7 +34,7 @@ gem 'newrelic_rpm'
 gem 'webpacker', '~> 5.x'
 
 # Pagination helper
-gem 'pagy', '~> 4.10'
+gem 'pagy', '~> 4.11'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
