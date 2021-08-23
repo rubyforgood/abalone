@@ -1,7 +1,7 @@
 class ImportCohortsJob < ApplicationJob
   def perform(upload)
     @status = { created_count: 0, error_count: 0, errors: [] }
-    CSV(upload.file.download, headers: true).read.each_with_index do |cohort_row, row_num|
+    CSV.parse(upload.file.download, headers: true).each_with_index do |cohort_row, row_num|
       cohort = build_cohort(cohort_row.to_h, upload.organization)
 
       if cohort.save
