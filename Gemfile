@@ -31,7 +31,7 @@ gem 'jquery-rails'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'newrelic_rpm'
-gem 'webpacker', '~> 5.x'
+gem 'webpacker', '~> 5'
 
 # Pagination helper
 gem 'pagy', '~> 4.11'
@@ -61,7 +61,7 @@ group :development do
   gem 'capistrano-bundler', '~> 2.0',  require: false
   gem 'capistrano-rvm',     '~> 0.1',  require: false
   gem 'capistrano-rails',   '~> 1.6',  require: false
-  gem 'capistrano3-puma',   '~> 5.1',  require: false
+  gem 'capistrano3-puma',   '~> 5.2',  require: false
   gem "brakeman"
 end
 
