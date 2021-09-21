@@ -73,7 +73,7 @@ GEM
     ast (2.4.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    blazer (2.4.3)
+    blazer (2.4.6)
       activerecord (>= 5)
       chartkick (>= 3.2)
       railties (>= 5)
