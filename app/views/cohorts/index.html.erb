@@ -50,7 +50,7 @@
               <% end %>
             </td>
             <td class="px-4 py-2"><%= cohort.enclosure&.name %></td>
-            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', cohort %></td>
+            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', cohort, 'aria-label' => "Show #{cohort.name}" %></td>
             <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/edit.svg"), edit_cohort_path(cohort) %></td>
             <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/trash.svg"), cohort, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
