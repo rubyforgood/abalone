@@ -32,8 +32,8 @@
             <td class="px-4 py-2"><%= enclosure.facility_name %></td>
             <td class="px-4 py-2"><%= enclosure.location_name %></td>
             <td class="px-4 py-2 text-primary-dark"><%= link_to 'Show', enclosure, 'aria-label': "Show #{enclosure.name}" %></td>
-            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/edit.svg"), edit_enclosure_path(enclosure) %></td>
-            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/trash.svg"), enclosure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/edit.svg"), edit_enclosure_path(enclosure), 'aria-label': "Edit #{enclosure.name}" %></td>
+            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/trash.svg"), enclosure, 'aria-label': "Delete #{enclosure.name}", method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
