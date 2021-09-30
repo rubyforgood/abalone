@@ -1,5 +1,5 @@
 class ExitType < ApplicationRecord
-  belongs_to :organization
+  include OrganizationScope
 
   validates :name, presence: true
 end

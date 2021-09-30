@@ -1,31 +1,50 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Exit Types</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Disabled</th>
-      <th>Organization</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @exit_types.each do |exit_type| %>
-      <tr>
-        <td><%= exit_type.name %></td>
-        <td><%= exit_type.disabled %></td>
-        <td><%= exit_type.organization_id %></td>
-        <td><%= link_to 'Show', exit_type %></td>
-        <td><%= link_to 'Edit', edit_exit_type_path(exit_type) %></td>
-        <td><%= link_to 'Destroy', exit_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Exit Type', new_exit_type_path %>
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-title2">Exit Types</h1>
+      <div class="flex items-center">
+        <%= link_to new_facility_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2">New Exit Type</span>
+          </button>
+        <% end %>
+        <%#= link_to csv_upload_facilities_path, class: "button-primary" do %>
+  <!--        CSV Upload <%#= image_tag  "icons/plus.png", size: 17 %>-->
+        <%# end %>
+      </div>
+    </div>
+    <table class="table-auto w-full border">
+      <thead>
+        <tr class="border">
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Disabled</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" colspan="3" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @exit_types.each do |exit_type| %>
+          <tr>
+            <td><%= exit_type.name %></td>
+            <td><%= exit_type.disabled %></td>
+            <td class="text-primary-dark px-4 py-2">
+              <%= link_to 'Show', exit_type,
+                'aria-label': "Show #{exit_type.name}" %>
+            </td>
+            <td class="px-4 py-2 w-12">
+              <%= link_to image_tag("icons/edit.svg"),
+                edit_exit_type_path(exit_type),
+                'aria-label': "Edit #{exit_type.name}" %>
+            </td>
+            <td class="px-4 py-2 w-12">
+              <%= link_to image_tag("icons/trash.svg"),
+                exit_type, method: :delete, data: { confirm: 'Are you sure?' },
+                'aria-label': "Delete #{exit_type.name}" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
