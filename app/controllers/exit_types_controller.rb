@@ -1,7 +1,7 @@
 class ExitTypesController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_exit_type, only: %i[show edit update]
-  before_action :of_organization, only: %i[show edit update]
+  before_action :set_exit_type, only: %i[show edit update destroy]
+  before_action :of_organization, only: %i[show edit update destroy]
 
   def index
     @exit_types = ExitType.all.for_organization(current_organization)
@@ -30,6 +30,15 @@ class ExitTypesController < ApplicationController
       redirect_to @exit_type, notice: "Exit type was successfully updated."
     else
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @exit_type.mortality_events.empty?
+      @exit_type.destroy
+      redirect_to exit_types_url, notice: "Exit type was successfully destroyed."
+    else
+      redirect_to exit_types_path, alert: 'Some mortality events are using this exit type'
     end
   end
 
