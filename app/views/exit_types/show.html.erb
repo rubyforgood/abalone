@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @exit_type.name %>
+</p>
+
+<p>
+  <strong>Disabled:</strong>
+  <%= @exit_type.disabled %>
+</p>
+
+<p>
+  <strong>Organization:</strong>
+  <%= @exit_type.organization_id %>
+</p>
+
+<%= link_to 'Edit', edit_exit_type_path(@exit_type) %> |
+<%= link_to 'Back', exit_types_path %>
