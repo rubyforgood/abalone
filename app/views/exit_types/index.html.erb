@@ -36,11 +36,6 @@
                 edit_exit_type_path(exit_type),
                 'aria-label': "Edit #{exit_type.name}" %>
             </td>
-            <td class="px-4 py-2 w-12 align-middle">
-              <%= link_to image_tag("icons/trash.svg"),
-                exit_type, method: :delete, data: { confirm: 'Are you sure?' },
-                'aria-label': "Delete #{exit_type.name}" %>
-            </td>
           </tr>
         <% end %>
       </tbody>

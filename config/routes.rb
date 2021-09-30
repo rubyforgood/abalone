@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :exit_types
+  resources :exit_types, except: :destroy
   devise_for :users, path_prefix: 'app'
   resources :users
 

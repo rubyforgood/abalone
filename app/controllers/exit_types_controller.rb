@@ -1,8 +1,8 @@
 class ExitTypesController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_exit_type, only: %i[show edit update destroy]
-  before_action :of_organization, only: %i[show edit update destroy]
-  
+  before_action :set_exit_type, only: %i[show edit update]
+  before_action :of_organization, only: %i[show edit update]
+
   def index
     @exit_types = ExitType.all.for_organization(current_organization)
   end
@@ -33,11 +33,6 @@ class ExitTypesController < ApplicationController
     end
   end
 
-  def destroy
-    @exit_type.destroy
-    redirect_to exit_types_url, notice: "Exit type was successfully destroyed."
-  end
-
   private
 
   def set_exit_type
@@ -45,12 +40,12 @@ class ExitTypesController < ApplicationController
   end
 
   def exit_type_params
-    params.require(:exit_type).permit(:name, :disabled, :organization_id).merge(organization_id: current_organization.id)
+    params.require(:exit_type).permit(:name, :disabled).merge(organization_id: current_organization.id)
   end
 
   def of_organization
-    if @exit_type.organization_id != current_organization.id
-      redirect_to exit_types_url, notice: "You can only interact with exit types of your organization."
-    end
+    return unless @exit_type.organization_id != current_organization.id
+
+    redirect_to exit_types_url, notice: "You can only interact with exit types of your organization."
   end
 end
