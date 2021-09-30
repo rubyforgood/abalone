@@ -15,6 +15,7 @@
     <table class="table-auto w-full border">
       <thead>
         <tr class="border">
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Id</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Name</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Disabled</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" colspan="3" scope="col">Actions</th>
@@ -23,6 +24,7 @@
       <tbody>
         <% @exit_types.each do |exit_type| %>
           <tr>
+            <td class="px-4 py-2"><%= exit_type.id %></td>
             <td class="px-4 py-2"><%= exit_type.name %></td>
             <td class="px-4 py-2"><%= exit_type.disabled %></td>
             <td class="text-primary-dark px-4 py-2 w-12 align-middle">
