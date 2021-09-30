@@ -1,15 +1,32 @@
+<%= form_with(model: exit_type, local: true, html: { class: "w-full max-w-md" }) do |form| %>
+  <% if exit_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exit_type.errors.count, "error") %> prohibited this exit type from being saved:</h2>
+      <ul>
+      <% exit_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<%= simple_form_for(@exit_type) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :disabled %>
-    <%= f.association :organization %>
+  <div>
+    <div>
+      <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :name, class: 'input mb-2' %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div>
+    <%= form.check_box :disabled, class: 'form-checkbox' %>
+    <%= form.label :disabled, "Disabled", class: 'ml-2' %>
+  </div>
+
+   <div>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
+    </div>
   </div>
 <% end %>
