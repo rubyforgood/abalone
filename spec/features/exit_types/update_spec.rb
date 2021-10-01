@@ -14,14 +14,12 @@ describe "When I visit the exit type Edit page" do
 
     within('form') do
       fill_in 'exit_type_name', with: 'new name'
-      check 'exit_type_disabled'
       click_on 'Submit'
     end
 
     expect(page).to have_content 'Exit type was successfully updated.'
     within('.container') do
       expect(page).to have_content 'new name'
-      expect(page).to have_content 'true'
     end
   end
 

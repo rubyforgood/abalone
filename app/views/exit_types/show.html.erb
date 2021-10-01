@@ -21,8 +21,6 @@
       <%= @exit_type.id %>
       <div class="text-sm text-caption-light font-medium uppercase">Name</div>
       <%= @exit_type.name %>
-      <div class="text-sm text-caption-light font-medium uppercase mt-2">Disabled</div>
-      <%= @exit_type.disabled %>
     </div>
     <%= link_to '<< BACK', exit_types_path, class: "mr-3 mb-3 button-outline-primary" %>
     <%= link_to "Edit", edit_exit_type_path(@exit_type), class: "button-outline-primary mt-4" %>

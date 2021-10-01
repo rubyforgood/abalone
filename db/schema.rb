@@ -169,7 +169,6 @@ ActiveRecord::Schema.define(version: 2021_09_30_125236) do
 
   create_table "exit_types", force: :cascade do |t|
     t.string "name"
-    t.boolean "disabled"
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -186,5 +186,5 @@ organization_entities[:organizations].each do |org_ent|
   end
 
   # Create exit_types
-  %w[Incidental Outplanted Sacrificed].each { |name| ExitType.find_or_create_by(name: name, disabled: false, organization: org) }
+  %w[Incidental Outplanted Sacrificed].each { |name| ExitType.find_or_create_by(name: name, organization: org) }
 end

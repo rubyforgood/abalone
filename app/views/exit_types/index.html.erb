@@ -17,7 +17,6 @@
         <tr class="border">
         <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Id</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Name</th>
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Disabled</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" colspan="3" scope="col">Actions</th>
         </tr>
       </thead>
@@ -26,7 +25,6 @@
           <tr>
             <td class="px-4 py-2"><%= exit_type.id %></td>
             <td class="px-4 py-2"><%= exit_type.name %></td>
-            <td class="px-4 py-2"><%= exit_type.disabled %></td>
             <td class="text-primary-dark px-4 py-2 w-12 align-middle">
               <%= link_to 'Show', exit_type,
                 'aria-label': "Show #{exit_type.name}" %>
