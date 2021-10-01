@@ -38,9 +38,9 @@
             <td class="px-4 py-2"><%= animal.collection_year %></td>
             <td class="px-4 py-2"><%= animal.cohort_name %></td>
             <td class="px-4 py-2"><%= animal.shl_number_codes(", ") %></td>
-            <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', animal, 'aria-label' => "Show #{animal.tag}" %></td>
-            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/edit.svg"), edit_animal_path(animal), title: 'Edit' %></td>
-            <td class="px-4 py-2 w-12"><%= link_to image_tag("icons/trash.svg"), animal, title: 'Delete', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="text-primary-dark px-4 py-2 align-middle"><%= link_to 'Show', animal, 'aria-label' => "Show #{animal.tag}" %></td>
+            <td class="px-4 py-2 w-12 align-middle"><%= link_to image_tag("icons/edit.svg"), edit_animal_path(animal), title: 'Edit' %></td>
+            <td class="px-4 py-2 w-12 align-middle"><%= link_to image_tag("icons/trash.svg"), animal, title: 'Delete', method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>

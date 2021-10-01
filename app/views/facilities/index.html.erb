@@ -33,20 +33,20 @@
           <tr>
             <td class="px-4 py-2"><%= facility.name %></td>
             <td class="px-4 py-2"><%= facility.code %></td>
-            <td class="text-primary-dark px-4 py-2">
+            <td class="text-primary-dark px-4 py-2 align-middle">
               <%= link_to 'Show', facility,
                 'aria-label': "Show #{facility.name}" %>
             </td>
-            <td class="text-primary-dark px-4 py-2">
+            <td class="text-primary-dark px-4 py-2 align-middle">
               <%= link_to 'Locations', facility_locations_path(facility),
                 'aria-label': "#{facility.name} location" %>
             </td>
-            <td class="px-4 py-2 w-12">
+            <td class="px-4 py-2 w-12 align-middle">
               <%= link_to image_tag("icons/edit.svg"),
                 edit_facility_path(facility),
                 'aria-label': "Edit #{facility.name}" %>
             </td>
-            <td class="px-4 py-2 w-12">
+            <td class="px-4 py-2 w-12 align-middle">
               <%= link_to image_tag("icons/trash.svg"),
                 facility, method: :delete, data: { confirm: 'Are you sure?' },
                 'aria-label': "Delete #{facility.name}" %>
