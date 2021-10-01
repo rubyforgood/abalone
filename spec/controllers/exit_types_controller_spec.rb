@@ -7,7 +7,7 @@ describe ExitTypesController do
   let(:exit_type) { FactoryBot.create(:exit_type, organization_id: user.organization.id) }
   let(:exit_type_another_organization) { FactoryBot.create(:exit_type) }
   let!(:to_delete) { FactoryBot.create(:exit_type, organization_id: user.organization.id) }
-  
+
   before do
     sign_in user
   end
@@ -111,9 +111,9 @@ describe ExitTypesController do
       user.update(role: 'user')
       sign_in user
 
-      expect {
+      expect do
         delete :destroy, params: { id: to_delete.id}
-      }.to change(ExitType, :count).by(0)
+      end.to change(ExitType, :count).by(0)
     end
 
     it 'should not destroy for an exit types in another organization' do
@@ -122,9 +122,9 @@ describe ExitTypesController do
 
       to_delete = FactoryBot.create(:exit_type)
 
-      expect {
+      expect do
         delete :destroy, params: { id: to_delete.id}
-      }.to change(ExitType, :count).by(0)
+      end.to change(ExitType, :count).by(0)
     end
 
     it 'should not destroy if the exit types referenced in a mortality event' do
@@ -133,18 +133,18 @@ describe ExitTypesController do
 
       FactoryBot.create(:mortality_event, exit_type_id: to_delete.id)
 
-      expect {
+      expect do
         delete :destroy, params: { id: to_delete.id}
-      }.to change(ExitType, :count).by(0)
+      end.to change(ExitType, :count).by(0)
     end
 
     it 'should have delete the entity for admin user' do
       user.update(role: "admin")
       sign_in user
 
-      expect {
+      expect do
         delete :destroy, params: { id: to_delete.id}
-      }.to change(ExitType, :count).by(-1)
+      end.to change(ExitType, :count).by(-1)
     end
   end
 end

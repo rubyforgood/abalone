@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ExitType, type: :model do
-
   let(:exit_type) { FactoryBot.create :exit_type }
 
   include_examples 'organization presence validation' do
