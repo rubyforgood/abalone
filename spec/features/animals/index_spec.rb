@@ -14,7 +14,7 @@ describe "When I visit the animal Index page" do
 
     visit animals_path
 
-    expect(page).to have_content("Collection Year")
+    expect(page).to have_content("Entry Year")
     expect(page).to have_content("Tag")
     expect(page).to have_content("Cohort")
     expect(page).to have_content("SHL Numbers")

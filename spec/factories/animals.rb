@@ -5,6 +5,7 @@ FactoryBot.define do
     entry_point { "MyString" }
     sequence(:tag) { |n| "G#{format('%<number>03d', number: n)}" }
     sex { Animal.sexes.keys.sample }
+    collected { false }
     organization
 
     factory(:male) { sex { 'male' } }

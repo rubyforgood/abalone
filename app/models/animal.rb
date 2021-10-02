@@ -17,6 +17,7 @@ class Animal < ApplicationRecord
   has_one :mortality_event
 
   validates :tag, uniqueness: { scope: %i[cohort_id] }
+  validates :entry_point, presence: true, allow_blank: false, if: :collected
 
   delegate :name, to: :cohort, prefix: true, allow_nil: true
 
