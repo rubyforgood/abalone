@@ -78,9 +78,9 @@ organization_entities[:organizations].each do |org_ent|
 
     dead_animal = Animal.find_or_create_by(
       sex: :female,
-      collection_year: Time.zone.now.year,
-      date_time_collected: Time.zone.now,
-      collection_position: 'Position',
+      entry_year: Time.zone.now.year,
+      entry_date: Time.zone.now,
+      entry_point: 'Position',
       cohort: cohort,
       tag: "D-#{fac_ent[:code]}",
       organization: org
@@ -88,28 +88,28 @@ organization_entities[:organizations].each do |org_ent|
 
     dead_animal.mortality_event = MortalityEvent.create(cohort: cohort)
 
-    male = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
+    male = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
       sex: :male,
-      collection_year: Time.zone.now.year,
-      collection_position: 'Position',
+      entry_year: Time.zone.now.year,
+      entry_point: 'Position',
       cohort: cohort,
       tag: "M-#{fac_ent[:code]}",
       organization: org
     )
 
-    male_shl = ShlNumber.find_or_create_by(code: "#{male.collection_year}-#{male.tag}")
+    male_shl = ShlNumber.find_or_create_by(code: "#{male.entry_year}-#{male.tag}")
     AnimalsShlNumber.find_or_create_by(animal: male, shl_number: male_shl)
 
-    female = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
+    female = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
       sex: :female,
-      collection_year: Time.zone.now.year,
-      collection_position: 'Position',
+      entry_year: Time.zone.now.year,
+      entry_point: 'Position',
       cohort: cohort,
       tag: "F-#{fac_ent[:code]}",
       organization: org
     )
     
-    female_shl = ShlNumber.find_or_create_by(code: "#{female.collection_year}-#{female.tag}")
+    female_shl = ShlNumber.find_or_create_by(code: "#{female.entry_year}-#{female.tag}")
     AnimalsShlNumber.find_or_create_by(animal: female, shl_number: female_shl)
 
     cohort.update(male: male, female: female)
@@ -117,14 +117,14 @@ organization_entities[:organizations].each do |org_ent|
     8.times do |n|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
-                collection_year: Time.zone.now.year,
-                date_time_collected: Time.zone.now,
-                collection_position: 'Position',
+                entry_year: Time.zone.now.year,
+                entry_date: Time.zone.now,
+                entry_point: 'Position',
                 tag: "#{n+1}-#{fac_ent[:code]}",
                 cohort: cohort,
                 organization: org
               )
-      animal_shl = ShlNumber.find_or_create_by(code: "#{animal.collection_year}-#{animal.tag}")
+      animal_shl = ShlNumber.find_or_create_by(code: "#{animal.entry_year}-#{animal.tag}")
       AnimalsShlNumber.find_or_create_by(animal: animal, shl_number: animal_shl)
     end
 

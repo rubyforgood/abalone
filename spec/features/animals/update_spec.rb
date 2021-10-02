@@ -14,8 +14,8 @@ describe "When I visit the animal Edit page" do
     visit edit_animal_path(animal)
 
     within('form') do
-      fill_in 'animal_collection_year', with: '2020'
-      fill_in 'animal_date_time_collected', with: '1/1/2020'
+      fill_in 'animal_entry_year', with: '2020'
+      fill_in 'animal_entry_date', with: '1/1/2020'
       fill_in 'animal_tag', with: 'Y200'
       select "Male", from: 'animal_sex'
       select cohort.name, from: 'animal_cohort_id'

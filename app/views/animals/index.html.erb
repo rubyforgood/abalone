@@ -35,7 +35,7 @@
         <% @animals.each do |animal| %>
           <tr>
             <td class="px-4 py-2"><%= animal.tag %></td>
-            <td class="px-4 py-2"><%= animal.collection_year %></td>
+            <td class="px-4 py-2"><%= animal.entry_year %></td>
             <td class="px-4 py-2"><%= animal.cohort_name %></td>
             <td class="px-4 py-2"><%= animal.shl_number_codes(", ") %></td>
             <td class="text-primary-dark px-4 py-2"><%= link_to 'Show', animal, 'aria-label' => "Show #{animal.tag}" %></td>
