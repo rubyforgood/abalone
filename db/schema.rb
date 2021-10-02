@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_140853) do
+ActiveRecord::Schema.define(version: 2021_10_02_144054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,13 +52,14 @@ ActiveRecord::Schema.define(version: 2021_10_02_140853) do
   create_table "animals", force: :cascade do |t|
     t.integer "entry_year"
     t.datetime "entered_at"
-    t.string "entry_point"
+    t.string "entry_point", default: ""
     t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
     t.bigint "cohort_id"
     t.string "tag"
+    t.boolean "collected", default: true, null: false
     t.index ["cohort_id"], name: "index_animals_on_cohort_id"
     t.index ["organization_id"], name: "index_animals_on_organization_id"
     t.index ["tag", "cohort_id"], name: "index_animals_on_tag_and_cohort_id", unique: true

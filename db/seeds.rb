@@ -78,35 +78,38 @@ organization_entities[:organizations].each do |org_ent|
 
     dead_animal = Animal.find_or_create_by(
       sex: :female,
-      collection_year: Time.zone.now.year,
-      date_time_collected: Time.zone.now,
-      collection_position: 'Position',
+      entry_year: Time.zone.now.year,
+      entered_at: Time.zone.now,
+      entry_point: 'Position',
       cohort: cohort,
       tag: "D-#{fac_ent[:code]}",
-      organization: org
+      organization: org,
+      collected: true
     )
 
     dead_animal.mortality_event = MortalityEvent.create(cohort: cohort)
 
-    male = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
+    male = Animal.create_with(entered_at: Time.zone.now).find_or_create_by(
       sex: :male,
-      collection_year: Time.zone.now.year,
-      collection_position: 'Position',
+      entry_year: Time.zone.now.year,
+      entry_point: 'Position',
       cohort: cohort,
       tag: "M-#{fac_ent[:code]}",
-      organization: org
+      organization: org,
+      collected: true
     )
 
     male_shl = ShlNumber.find_or_create_by(code: "#{male.entry_year}-#{male.tag}")
     AnimalsShlNumber.find_or_create_by(animal: male, shl_number: male_shl)
 
-    female = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
+    female = Animal.create_with(entered_at: Time.zone.now).find_or_create_by(
       sex: :female,
-      collection_year: Time.zone.now.year,
-      collection_position: 'Position',
+      entry_year: Time.zone.now.year,
+      entry_point: 'Position',
       cohort: cohort,
       tag: "F-#{fac_ent[:code]}",
-      organization: org
+      organization: org,
+      collected: false
     )
     
     female_shl = ShlNumber.find_or_create_by(code: "#{female.entry_year}-#{female.tag}")
@@ -117,12 +120,13 @@ organization_entities[:organizations].each do |org_ent|
     8.times do |n|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
-                collection_year: Time.zone.now.year,
-                date_time_collected: Time.zone.now,
-                collection_position: 'Position',
+                entry_year: Time.zone.now.year,
+                entered_at: Time.zone.now,
+                entry_point: 'Position',
                 tag: "#{n+1}-#{fac_ent[:code]}",
                 cohort: cohort,
-                organization: org
+                organization: org,
+                collected: false
               )
       animal_shl = ShlNumber.find_or_create_by(code: "#{animal.entry_year}-#{animal.tag}")
       AnimalsShlNumber.find_or_create_by(animal: animal, shl_number: animal_shl)
