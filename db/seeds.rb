@@ -105,7 +105,6 @@ organization_entities[:organizations].each do |org_ent|
     female = Animal.create_with(entered_at: Time.zone.now).find_or_create_by(
       sex: :female,
       entry_year: Time.zone.now.year,
-      entry_point: 'Position',
       cohort: cohort,
       tag: "F-#{fac_ent[:code]}",
       organization: org,
@@ -122,7 +121,6 @@ organization_entities[:organizations].each do |org_ent|
                 sex: n.even? ? :female : :male,
                 entry_year: Time.zone.now.year,
                 entered_at: Time.zone.now,
-                entry_point: 'Position',
                 tag: "#{n+1}-#{fac_ent[:code]}",
                 cohort: cohort,
                 organization: org,
