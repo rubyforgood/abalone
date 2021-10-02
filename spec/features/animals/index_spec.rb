@@ -14,7 +14,7 @@ describe "When I visit the animal Index page" do
 
     visit animals_path
 
-    expect(page).to have_content("Collection Year")
+    expect(page).to have_content("Entry Year")
     expect(page).to have_content("Tag")
     expect(page).to have_content("Cohort")
     expect(page).to have_content("SHL Numbers")
@@ -25,7 +25,7 @@ describe "When I visit the animal Index page" do
     expect(page).to have_selector("a[data-method='delete'][href='#{animal_path(animal.id)}']")
     expect(page).to have_selector("a[title='Delete']")
 
-    expect(page).to have_content(animal.collection_year)
+    expect(page).to have_content(animal.entry_year)
     expect(page).to have_content(animal.tag)
     expect(page).to have_content(animal.cohort.name)
     expect(page).to have_content(animal.shl_number_codes(", "))

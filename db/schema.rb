@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_13_212906) do
+ActiveRecord::Schema.define(version: 2021_10_02_140853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,9 +50,9 @@ ActiveRecord::Schema.define(version: 2021_02_13_212906) do
   end
 
   create_table "animals", force: :cascade do |t|
-    t.integer "collection_year"
-    t.datetime "date_time_collected"
-    t.string "collection_position"
+    t.integer "entry_year"
+    t.datetime "entered_at"
+    t.string "entry_point"
     t.enum "sex", null: false, enum_name: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

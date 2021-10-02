@@ -10,9 +10,9 @@ describe "When I visit the animal Show page" do
 
     visit animal_path(animal)
 
-    expect(page).to have_content(animal.collection_year)
-    expect(page).to have_content(animal.date_time_collected)
-    expect(page).to have_content(animal.collection_position)
+    expect(page).to have_content(animal.entry_year)
+    expect(page).to have_content(animal.entered_at)
+    expect(page).to have_content(animal.entry_point)
     expect(page).to have_content(animal.tag)
     expect(page).to have_content(animal.sex.titleize)
     expect(page).to have_content(animal.cohort.name)

@@ -97,7 +97,7 @@ organization_entities[:organizations].each do |org_ent|
       organization: org
     )
 
-    male_shl = ShlNumber.find_or_create_by(code: "#{male.collection_year}-#{male.tag}")
+    male_shl = ShlNumber.find_or_create_by(code: "#{male.entry_year}-#{male.tag}")
     AnimalsShlNumber.find_or_create_by(animal: male, shl_number: male_shl)
 
     female = Animal.create_with(date_time_collected: Time.zone.now).find_or_create_by(
@@ -109,7 +109,7 @@ organization_entities[:organizations].each do |org_ent|
       organization: org
     )
     
-    female_shl = ShlNumber.find_or_create_by(code: "#{female.collection_year}-#{female.tag}")
+    female_shl = ShlNumber.find_or_create_by(code: "#{female.entry_year}-#{female.tag}")
     AnimalsShlNumber.find_or_create_by(animal: female, shl_number: female_shl)
 
     cohort.update(male: male, female: female)
@@ -124,7 +124,7 @@ organization_entities[:organizations].each do |org_ent|
                 cohort: cohort,
                 organization: org
               )
-      animal_shl = ShlNumber.find_or_create_by(code: "#{animal.collection_year}-#{animal.tag}")
+      animal_shl = ShlNumber.find_or_create_by(code: "#{animal.entry_year}-#{animal.tag}")
       AnimalsShlNumber.find_or_create_by(animal: animal, shl_number: animal_shl)
     end
 
