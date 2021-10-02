@@ -21,8 +21,12 @@
         <%= @animal.entry_year %>
         <div class="text-sm text-caption-light font-medium uppercase mt-2">Entry Date</div>
         <%= @animal.entry_date %>
-        <div class="text-sm text-caption-light font-medium uppercase mt-2">Entry Point</div>
-        <%= @animal.entry_point %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Spawned/Collected</div>
+        <%= @animal.collected ? "Collected" : "Spawned" %>
+        <% if !@animal.entry_point.empty? %>
+          <div class="text-sm text-caption-light font-medium uppercase mt-2">Entry Point</div>
+          <%= @animal.entry_point %>
+        <% end %>
         <div class="text-sm text-caption-light font-medium uppercase mt-2">Tag</div>
         <%= @animal.tag %>
         <div class="text-sm text-caption-light font-medium uppercase mt-2">Sex</div>
