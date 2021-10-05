@@ -55,6 +55,6 @@ class ExitTypesController < ApplicationController
   def of_organization
     return unless @exit_type.organization_id != current_organization.id
 
-    redirect_to exit_types_url, notice: "You can only interact with exit types of your organization."
+    redirect_to exit_types_url, alert: "You can only interact with exit types of your organization."
   end
 end
