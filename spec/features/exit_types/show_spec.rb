@@ -11,4 +11,15 @@ describe "When I visit the exit type Show page" do
 
     expect(page).to have_content(exit_type.name)
   end
+
+  it "I can't see an exit type of another organization" do
+    user = create(:user, :admin)
+    exit_type = create(:exit_type, name: "test")
+
+    sign_in user
+
+    visit exit_type_path(exit_type)
+
+    expect(page).to have_content("You can only interact with exit types of your organization.")
+  end
 end
