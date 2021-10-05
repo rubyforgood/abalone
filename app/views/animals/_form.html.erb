@@ -38,7 +38,7 @@
       <%= form.label :sex, class: 'text-sm text-caption-light font-medium uppercase' %>
     </div>
     <div>
-      <%= form.collection_select :sex, Animal.sexes.map { |sex| [sex.first, sex.first.humanize] }, :first, :second, class: 'input mb-2' %>
+      <%= form.collection_select :sex, Animal.sexes.map { |sex| [sex.first, sex.first.humanize] }, :first, :second, {}, { class: 'input mb-2' } %>
     </div>
   </div>
   <div class="mb-2">
@@ -46,7 +46,7 @@
       <%= form.label :cohort, class: 'text-sm text-caption-light font-medium uppercase' %>
     </div>
     <div>
-      <%= form.collection_select :cohort_id, Cohort.for_organization(current_organization), :id, :name, include_blank: 'Select Cohort', class: 'input mb-2' %>
+      <%= form.collection_select :cohort_id, Cohort.for_organization(current_organization), :id, :name, { include_blank: 'Select Cohort'}, { class: 'input w-full mb-2' } %>
     </div>
   </div>
   <div>
