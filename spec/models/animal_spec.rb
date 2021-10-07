@@ -23,4 +23,17 @@ RSpec.describe Animal, type: :model do
   it "should be alive" do
     expect(animal.alive?).to eq true
   end
+
+  context "entry point" do
+    before { animal.entry_point = "" }
+
+    it "can be blank for spawned animals" do
+      expect(animal).to be_valid
+    end
+
+    it "cannot be blank for collected animals" do
+      animal.collected = true
+      expect(animal).not_to be_valid
+    end
+  end
 end

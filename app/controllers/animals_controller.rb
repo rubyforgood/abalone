@@ -64,12 +64,13 @@ class AnimalsController < ApplicationController
 
   def animal_params
     params.require(:animal).permit(
-      :collection_year,
-      :date_time_collected,
-      :collection_position,
+      :entry_year,
+      :entry_date,
+      :entry_point,
       :cohort_id,
       :tag,
-      :sex
+      :sex,
+      :collected
     ).merge(organization_id: current_organization.id)
   end
 
