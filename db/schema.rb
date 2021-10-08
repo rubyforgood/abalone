@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_202547) do
+ActiveRecord::Schema.define(version: 2021_10_08_231933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,8 +239,10 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
     t.integer "mortality_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "organization_id"
     t.index ["animal_id"], name: "index_mortality_events_on_animal_id"
     t.index ["cohort_id"], name: "index_mortality_events_on_cohort_id"
+    t.index ["organization_id"], name: "index_mortality_events_on_organization_id"
   end
 
   create_table "operation_batches", force: :cascade do |t|
@@ -334,6 +336,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
+  add_foreign_key "mortality_events", "organizations"
   add_foreign_key "operations", "enclosures"
   add_foreign_key "operations", "organizations"
 end
