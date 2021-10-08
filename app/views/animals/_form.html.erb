@@ -25,6 +25,16 @@
       <%= form.text_field :entry_date, class: 'input mb-2' %>
     </div>
   </div>
+  <div data-controller='animals'>
+    <fieldset class='mb-2 animals__collected-fieldset'>
+      <legend class='text-sm text-caption-light font-medium uppercase'>Was the animal collected?</legend>
+      <%= form.collection_radio_buttons :collected, [[true, 'Yes'], [false, 'No']], :first, :last %>
+    </fieldset>
+  </div>
+  <div class='animals__entry-point'>
+    <%= form.label :entry_point, class: 'text-sm text-caption-light font-medium uppercase' %>
+    <%= form.text_field :entry_point, class: 'input mb-2' %>
+  </div>
   <div>
     <div>
       <%= form.label :tag, class: 'text-sm text-caption-light font-medium uppercase' %>
