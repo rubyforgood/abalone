@@ -67,7 +67,7 @@ end
 
 # Report builder
 gem 'reports_kit' # Replaced by blazer reporting - 1/24/21
-gem 'blazer'
+gem 'blazer', '2.4.7'
 
 # Excel and CSV support
 gem 'creek'
