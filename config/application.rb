@@ -37,5 +37,13 @@ module Abalone
 
     # background processing with delayed_job
     config.active_job.queue_adapter = :delayed_job
+
+    overrides = "#{Rails.root}/app/overrides"
+    Rails.autoloaders.main.ignore(overrides)
+    config.to_prepare do
+      Dir.glob("#{overrides}/**/*_override.rb").each do |override|
+        load override
+      end
+    end
   end
 end

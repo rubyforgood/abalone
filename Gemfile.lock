@@ -348,7 +348,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres_enum (~> 1.6)
   annotate
-  blazer
+  blazer (= 2.4.7)
   bootsnap (>= 1.1.0)
   brakeman
   byebug
