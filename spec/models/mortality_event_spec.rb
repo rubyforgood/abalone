@@ -4,6 +4,7 @@ RSpec.describe MortalityEvent, type: :model do
   it "Mortality Event has associations" do
     is_expected.to belong_to(:animal)
     is_expected.to belong_to(:cohort)
+    is_expected.to belong_to(:organization)
   end
 
   include_examples 'organization presence validation' do
