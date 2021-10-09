@@ -17,12 +17,16 @@
       <h1 class="text-title3 mb-4">Animal</h1>
     </div>
     <div class="block">
-        <div class="text-sm text-caption-light font-medium uppercase">Collection Year</div>
-        <%= @animal.collection_year %>
-        <div class="text-sm text-caption-light font-medium uppercase mt-2">Date Collected</div>
-        <%= @animal.date_time_collected %>
-        <div class="text-sm text-caption-light font-medium uppercase mt-2">Collection Position</div>
-        <%= @animal.collection_position %>
+        <div class="text-sm text-caption-light font-medium uppercase">Entry Year</div>
+        <%= @animal.entry_year %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Entry Date</div>
+        <%= @animal.entry_date %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Spawned/Collected</div>
+        <%= @animal.collected ? "Collected" : "Spawned" %>
+        <% if !@animal.entry_point.empty? %>
+          <div class="text-sm text-caption-light font-medium uppercase mt-2">Entry Point</div>
+          <%= @animal.entry_point %>
+        <% end %>
         <div class="text-sm text-caption-light font-medium uppercase mt-2">Tag</div>
         <%= @animal.tag %>
         <div class="text-sm text-caption-light font-medium uppercase mt-2">Sex</div>

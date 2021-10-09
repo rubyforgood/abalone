@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe UsersController do
-  include Devise::Test::ControllerHelpers
+describe UsersController, type: :request do
+  include Devise::Test::IntegrationHelpers
 
   let(:user) { FactoryBot.create(:user) }
 
@@ -13,13 +13,13 @@ describe UsersController do
     it 'should have response code 200 for admin user' do
       user.update(role: 'admin')
 
-      get :index
-      expect(response.code).to eq '200'
+      get users_path
+      expect(response).to have_http_status(:success)
     end
 
     it 'should have response code 302 for non-admin user' do
-      get :index
-      expect(response.code).to eq '302'
+      get users_path
+      expect(response).to have_http_status(302)
     end
   end
 
@@ -27,17 +27,17 @@ describe UsersController do
     it 'should have response code 200 for admin user' do
       user = create(:user, role: "admin")
       sign_in user
-      get :show, params: { id: user.id }
+      get user_path(user.id)
 
-      expect(response.code).to eq '200'
+      expect(response).to have_http_status(:success)
     end
 
     it 'should have response code 302 for non-admin user' do
       user = create(:user, role: "user")
       sign_in user
-      get :show, params: { id: user.id }
+      get user_path(user.id)
 
-      expect(response.code).to eq '302'
+      expect(response).to have_http_status(302)
     end
   end
 end

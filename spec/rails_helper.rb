@@ -72,10 +72,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::IntegrationHelpers, type: :request
 
   config.include FileUploadHelpers
 
   config.include_context "rake", include_shared: true
+
+  config.include Rails.application.routes.url_helpers, type: :request
 end
 
 Shoulda::Matchers.configure do |config|

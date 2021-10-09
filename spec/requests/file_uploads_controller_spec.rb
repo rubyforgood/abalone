@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe FileUploadsController do
-  include Devise::Test::ControllerHelpers
+describe FileUploadsController, type: :request do
+  include Devise::Test::IntegrationHelpers
 
   let!(:user) { FactoryBot.create(:user) }
   let!(:measurement_type1) { create(:measurement_type, organization: user.organization) }
@@ -15,10 +15,10 @@ describe FileUploadsController do
 
   describe '#upload' do
     it 'should upload multiple files successfully' do
-      post :upload, params: valid_files_params
+      post file_uploads_path, params: valid_files_params
 
       expect(assigns[:file_uploads].length).to eq 2
-      expect(response.code).to eq '200'
+      expect(response).to have_http_status(:success)
 
       assigns[:file_uploads].each do |upload|
         expect(upload.result_message).to include 'Successfully queued'
@@ -26,40 +26,39 @@ describe FileUploadsController do
     end
 
     it 'should reject a CSV with incorrect headers' do
-      post :upload, params: invalid_header_file_params
+      post file_uploads_path, params: invalid_header_file_params
 
-      expect(response.code).to eq '200'
+      expect(response).to have_http_status(:success)
       expect(assigns[:file_uploads][0].result_message)
         .to include 'Invalid category'
     end
 
     it 'should give an error message if no CSV is uploaded' do
-      post :upload, params: invalid_file_params
-
-      expect(response.code).to eq '400'
+      post file_uploads_path, params: invalid_file_params
+      expect(response).to have_http_status(:bad_request)
     end
   end
 
   describe '#new' do
     it 'should build the categories list' do
-      get :new
+      get new_file_upload_path
       expect(assigns[:categories].length > 2)
-      expect(response.code).to eq '200'
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe '#index' do
     it 'should have response code 200' do
-      get :index
-      expect(response.code).to eq '200'
+      get file_uploads_path
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe '#show' do
     it 'should have response code 200' do
       file = create(:processed_file)
-      get :show, params: { id: file.id }
-      expect(response.code).to eq '200'
+      get file_upload_path(file.id)
+      expect(response).to have_http_status(:success)
     end
   end
 
@@ -86,6 +85,6 @@ describe FileUploadsController do
     {
       'category': 'Measurement',
       'input_files': []
-    }
+    }.to_json
   end
 end
