@@ -26,13 +26,13 @@
   </head>
 
   <body>
-    <nav class="flex navbar is-light h-12" role="navigation" aria-label="main navigation">
+    <nav class="flex navbar is-light h-12" role="navigation" aria-label="main navigation"  data-controller="navbar">
       <div class="pl-2 flex logo">
         <%= link_to(root_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 items-center px-3 py-2') do %>
           <%= image_tag 'abalone_logo.png', alt: "Abalone Analytics - Homepage", class: 'h-7' %>
           <span class="logo-text pl-2" tabindex=1>Abalone Analytics</span>
         <% end %>
-        <a role="button" data-target="nav-menu" class="block p-4 relative settings lg:hidden w-12" aria-label="menu" aria-expanded="false">
+        <a id="nav-burger" role="button" data-target="nav-menu" class="block p-4 relative settings lg:hidden w-12" aria-label="menu" aria-expanded="false"  data-action="click->navbar#open">
           <i class="fas fa-bars"></i>
         </a>
       </div>
