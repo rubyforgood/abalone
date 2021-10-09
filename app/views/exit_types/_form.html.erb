@@ -1,0 +1,27 @@
+<%= form_with(model: exit_type, local: true, html: { class: "w-full max-w-md" }) do |form| %>
+  <% if exit_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(exit_type.errors.count, "error") %> prohibited this exit type from being saved:</h2>
+      <ul>
+      <% exit_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <div>
+      <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
+    </div>
+    <div>
+      <%= form.text_field :name, class: 'input mb-2' %>
+    </div>
+  </div>
+
+   <div>
+    <div>
+      <%= form.submit('Submit', class: 'bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mt-4') %>
+    </div>
+  </div>
+<% end %>

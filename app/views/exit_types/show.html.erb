@@ -1,0 +1,28 @@
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-start mb-4">
+      <%= link_to exit_types_path do %>
+        <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center">
+          <span><< Back</span>
+        </button>
+      <% end %>
+      <%= link_to edit_exit_type_path(@exit_type) do %>
+        <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <span>Edit Exit type</span>
+        </button>
+      <% end %>
+    </div>
+    <div>
+      <h1 class="text-title3 mb-4">Exit type</h1>
+    </div>
+    <div class="block">
+      <div class="text-sm text-caption-light font-medium uppercase">Id</div>
+      <%= @exit_type.id %>
+      <div class="text-sm text-caption-light font-medium uppercase">Name</div>
+      <%= @exit_type.name %>
+    </div>
+    <%= link_to '<< BACK', exit_types_path, class: "mr-3 mb-3 button-outline-primary" %>
+    <%= link_to "Edit", edit_exit_type_path(@exit_type), class: "button-outline-primary mt-4" %>
+  </div>
+</section>

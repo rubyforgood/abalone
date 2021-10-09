@@ -1,0 +1,13 @@
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <%= link_to exit_types_path do %>
+      <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center mb-4">
+        <span><< Cancel</span>
+      </button>
+    <% end %>
+    <h1 class="text-title3 mb-4">New Exit Type</h1>
+    <div>
+      <%= render 'form', exit_type: @exit_type %>
+    </div>
+  </div>
+</section>

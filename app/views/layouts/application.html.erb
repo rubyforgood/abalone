@@ -26,13 +26,13 @@
   </head>
 
   <body>
-    <nav class="flex navbar is-light h-12" role="navigation" aria-label="main navigation">
+    <nav class="flex navbar is-light h-12" role="navigation" aria-label="main navigation"  data-controller="navbar">
       <div class="pl-2 flex logo">
         <%= link_to(root_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 items-center px-3 py-2') do %>
           <%= image_tag 'abalone_logo.png', alt: "Abalone Analytics - Homepage", class: 'h-7' %>
           <span class="logo-text pl-2" tabindex=1>Abalone Analytics</span>
         <% end %>
-        <a role="button" data-target="nav-menu" class="block p-4 relative settings lg:hidden w-12" aria-label="menu" aria-expanded="false">
+        <a id="nav-burger" role="button" data-target="nav-menu" class="block p-4 relative settings lg:hidden w-12" aria-label="menu" aria-expanded="false"  data-action="click->navbar#open">
           <i class="fas fa-bars"></i>
         </a>
       </div>
@@ -67,6 +67,7 @@
                 <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-60">
                   <%= link_to 'Measurement Types', measurement_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 14 %>
                   <%= link_to 'Users', users_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 15 %>
+                  <%= link_to 'Exit types', exit_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 16 %>
                 </div>
               </div>
             <% end %>
