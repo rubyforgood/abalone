@@ -168,6 +168,14 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
     t.index ["organization_id"], name: "index_enclosures_on_organization_id"
   end
 
+  create_table "exit_types", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_exit_types_on_organization_id"
+  end
+
   create_table "facilities", force: :cascade do |t|
     t.string "name"
     t.string "code"
@@ -239,8 +247,10 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
     t.integer "mortality_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "exit_type_id"
     t.index ["animal_id"], name: "index_mortality_events_on_animal_id"
     t.index ["cohort_id"], name: "index_mortality_events_on_cohort_id"
+    t.index ["exit_type_id"], name: "index_mortality_events_on_exit_type_id"
   end
 
   create_table "operation_batches", force: :cascade do |t|
@@ -311,7 +321,8 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type", null: false
+    t.string "item_type"
+    t.string "{:null=>false}"
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
@@ -326,6 +337,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
   add_foreign_key "animals", "organizations"
   add_foreign_key "cohorts", "organizations"
   add_foreign_key "enclosures", "organizations"
+  add_foreign_key "exit_types", "organizations"
   add_foreign_key "file_uploads", "organizations"
   add_foreign_key "file_uploads", "users"
   add_foreign_key "locations", "facilities"
@@ -334,6 +346,7 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
   add_foreign_key "measurements", "measurement_events"
   add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
+  add_foreign_key "mortality_events", "exit_types"
   add_foreign_key "operations", "enclosures"
   add_foreign_key "operations", "organizations"
 end

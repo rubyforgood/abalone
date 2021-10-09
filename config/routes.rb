@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :exit_types
   devise_for :users, path_prefix: 'app'
   resources :users
 
