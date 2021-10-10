@@ -102,7 +102,7 @@ describe ExitTypesController, type: :request do
         delete exit_type_path(exit_type)
       end.to change(ExitType, :count).by(0)
     end
-    
+
     it 'should not delete a exit_type in another organization' do
       user.update(role: 'admin')
 

@@ -37,7 +37,7 @@ describe MeasurementTypesController, type: :request do
       get edit_measurement_type_path(measurement_type_from_another_orga.id)
       expect(response).to have_http_status(302)
     end
-    
+
     it 'should have response code 200 for a measurement_type in the current organization' do
       user.update(role: 'admin')
 

@@ -113,7 +113,7 @@ describe UsersController, type: :request do
         delete exit_type_path(user_to_delete)
       end.to change(ExitType, :count).by(0)
     end
-    
+
     it 'should not delete a user in another organization' do
       user.update(role: 'admin')
 

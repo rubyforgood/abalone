@@ -36,8 +36,6 @@ gem 'webpacker', '~> 5'
 # Pagination helper
 gem 'pagy', '~> 4.11'
 
-
-
 # Simple authorization solution for Rails. All permissions are stored in a single location.
 gem 'cancancan', '~> 3.3'
 
