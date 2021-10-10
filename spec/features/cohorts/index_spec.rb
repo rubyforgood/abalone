@@ -43,6 +43,6 @@ describe "When I visit the cohort Index page" do
       page
     end
 
-    it { is_expected.to have_link "Import CSV", href: new_cohort_import_path }
+    it { is_expected.to have_link "Upload CSV", href: new_cohort_import_path }
   end
 end
