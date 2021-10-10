@@ -97,9 +97,9 @@ describe ExitTypesController, type: :request do
 
   describe '#destroy' do
     it 'should have not delete if non admin user' do
-      exit_type_from_another_orga = create(:exit_type)
+      exit_type = create(:exit_type)
       expect do
-        delete exit_type_path(exit_type_from_another_orga)
+        delete exit_type_path(exit_type)
       end.to change(ExitType, :count).by(0)
     end
     
