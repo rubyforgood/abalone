@@ -8,7 +8,7 @@ describe "When I visit the animal Edit page" do
   end
 
   it "And fill out the form and click the submit button, animal should be updated" do
-    animal = create(:animal)
+    animal = create(:animal, organization: user.organization)
     cohort = create(:cohort, organization: user.organization)
 
     visit edit_animal_path(animal)
@@ -32,5 +32,13 @@ describe "When I visit the animal Edit page" do
       expect(page).to have_content cohort.name
       expect(page).to have_content 'c123, k123-32'
     end
+  end
+
+  it "I can't update an animal of another organization" do
+    animal = create(:animal)
+
+    visit edit_animal_path(animal)
+
+    expect(page).to have_content 'You can only interact with data of your organization.'
   end
 end

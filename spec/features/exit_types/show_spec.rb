@@ -20,6 +20,6 @@ describe "When I visit the exit type Show page" do
 
     visit exit_type_path(exit_type)
 
-    expect(page).to have_content("You can only interact with exit types of your organization.")
+    expect(page).to have_content("You can only interact with data of your organization.")
   end
 end

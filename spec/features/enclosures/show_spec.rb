@@ -8,11 +8,19 @@ describe "When I visit the enclosure Show page" do
   end
 
   it "Then I see information of a specific enclosure" do
-    enclosure = FactoryBot.create(:enclosure)
+    enclosure = FactoryBot.create(:enclosure, organization: user.organization)
 
     visit enclosure_path(enclosure)
 
     expect(page).to have_content(enclosure.name)
     expect(page).to have_content(enclosure.location.name)
+  end
+
+  it "I can't see an enclosure of another organization" do
+    enclosure = FactoryBot.create(:enclosure)
+
+    visit enclosure_path(enclosure)
+
+    expect(page).to have_content("You can only interact with data of your organization.")
   end
 end

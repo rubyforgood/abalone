@@ -29,4 +29,14 @@ describe "When I visit the user Show page" do
     expect(page).not_to have_content(user.email)
     expect(page).not_to have_content("Your organization: #{user.organization.name}")
   end
+
+  it "I can't see a facility of another organization" do
+    user = create(:user, :admin)
+    sign_in user
+
+    another_user = create(:user)
+    visit user_path(another_user)
+
+    expect(page).to have_content("You can only interact with data of your organization.")
+  end
 end

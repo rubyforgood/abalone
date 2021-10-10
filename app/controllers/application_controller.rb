@@ -29,4 +29,10 @@ class ApplicationController < ActionController::Base
     require_organization
     set_current_user
   end
+
+  # Error page for CanCanCan
+  rescue_from CanCan::AccessDenied do
+    flash[:alert] = 'You can only interact with data of your organization.'
+    redirect_back fallback_location: root_path, status: 302
+  end
 end

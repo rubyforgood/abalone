@@ -35,4 +35,12 @@ describe "When I visit the exit type Edit page" do
 
     expect(page).to have_content "Name can't be blank"
   end
+
+  it "I can't update an exit type of another organization" do
+    exit_type = create(:exit_type)
+
+    visit edit_exit_type_path(exit_type)
+
+    expect(page).to have_content 'You can only interact with data of your organization.'
+  end
 end
