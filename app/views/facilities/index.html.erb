@@ -1,13 +1,14 @@
-<section class="h-screen bg-background p-12">
+<section class="h-screen bg-background md:p-12 sm:w-100 p-0">
   <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-title2">Facilities</h1>
-      <div class="flex items-center">
+    <div class="flex md:flex-row flex-col md:justify-between mb-4">
+      <h1 class="text-title2 text-center">Facilities</h1>
+      <div class="flex items-center justify-center">
         <%= link_to new_facility_path do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
             <%= image_tag  "icons/plus.png", size: 17 %>
-            <span class="ml-2">New Facility</span>
+            <span class="ml-2 hidden md:block">New Facility</span>
+            <span class="ml-2 md:hidden">New</span>
           </button>
         <% end %>
         <%#= link_to csv_upload_facilities_path, class: "button-primary" do %>
@@ -15,7 +16,8 @@
         <%# end %>
         <%= link_to facilities_path(format: :csv), id: "export_button" do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
-            Export to CSV
+            <span class="ml-2 hidden md:block">Export to CSV</span>
+            <span class="ml-2 md:hidden">Export</span>
           </button>
         <% end %>
       </div>
@@ -25,31 +27,28 @@
         <tr class="border">
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Name</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Code</th>
-          <th colspan="4" class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Actions</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @facilities.each do |facility| %>
-          <tr>
-            <td class="px-4 py-2"><%= facility.name %></td>
-            <td class="px-4 py-2"><%= facility.code %></td>
-            <td class="text-primary-dark px-4 py-2 align-middle">
+          <tr class="w-11/12">
+            <td class="px-4 py-2" data-label="Name"><%= facility.name %></td>
+            <td class="px-4 py-2" data-label="Code"><%= facility.code %></td>
+            <td class="text-base px-0 py-0 align-middle flex items-center" data-label="Actions">
               <%= link_to 'Show', facility,
-                'aria-label': "Show #{facility.name}" %>
-            </td>
-            <td class="text-primary-dark px-4 py-2 align-middle">
+                'aria-label': "Show #{facility.name}", class: 'text-primary-dark'  %>
+           
               <%= link_to 'Locations', facility_locations_path(facility),
-                'aria-label': "#{facility.name} location" %>
-            </td>
-            <td class="px-4 py-2 w-12 align-middle">
+                'aria-label': "#{facility.name} location", class: 'text-primary-dark mx-2' %>
+            
               <%= link_to image_tag("icons/edit.svg"),
                 edit_facility_path(facility),
-                'aria-label': "Edit #{facility.name}" %>
-            </td>
-            <td class="px-4 py-2 w-12 align-middle">
+                'aria-label': "Edit #{facility.name}", class: 'w-8 mx-2' %>
+
               <%= link_to image_tag("icons/trash.svg"),
                 facility, method: :delete, data: { confirm: 'Are you sure?' },
-                'aria-label': "Delete #{facility.name}" %>
+                'aria-label': "Delete #{facility.name}", class: 'w-8 mx-2' %>
             </td>
           </tr>
         <% end %>
