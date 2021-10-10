@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_02_202547) do
+ActiveRecord::Schema.define(version: 2021_10_10_204649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -291,6 +291,8 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "temporary_file_id"
+    t.bigint "organization_id"
+    t.index ["organization_id"], name: "index_processed_files_on_organization_id"
   end
 
   create_table "shl_numbers", force: :cascade do |t|
@@ -349,4 +351,5 @@ ActiveRecord::Schema.define(version: 2021_10_02_202547) do
   add_foreign_key "mortality_events", "exit_types"
   add_foreign_key "operations", "enclosures"
   add_foreign_key "operations", "organizations"
+  add_foreign_key "processed_files", "organizations"
 end

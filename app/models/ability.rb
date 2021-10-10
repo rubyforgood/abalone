@@ -25,6 +25,10 @@ class Ability
       item.organization_id == user.organization_id
     end
 
+    can :same_organization, ProcessedFile do |item|
+      item.organization_id == user.organization_id
+    end
+
     can :same_organization, MeasurementType do |item|
       item.organization_id == user.organization_id
     end

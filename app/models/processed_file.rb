@@ -22,4 +22,5 @@ class ProcessedFile < ApplicationRecord
              optional: true,
              inverse_of: :processed_file,
              dependent: :destroy
+  belongs_to :organization
 end

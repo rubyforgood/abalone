@@ -8,7 +8,7 @@ RSpec.describe CsvImporter do
   let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: organization) }
 
   describe "#process" do
-    let(:processed_file) { create(:processed_file) }
+    let(:processed_file) { create(:processed_file, organization: organization) }
     let(:category_name) { "Measurement" }
 
     context "when csv file is perfect" do
@@ -61,7 +61,7 @@ RSpec.describe CsvImporter do
   end
 
   describe "#process" do
-    let(:processed_file) { create(:processed_file) }
+    let(:processed_file) { create(:processed_file, organization: organization) }
     let(:category_name) { "Measurement" }
     let!(:enclosure) { create(:enclosure, name: "Test Enclosure") }
 
