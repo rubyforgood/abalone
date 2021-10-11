@@ -65,7 +65,8 @@ organization_entities[:organizations].each do |org_ent|
   MeasurementType.find_or_create_by(name: 'count', unit: 'number', organization: org)
   MeasurementType.find_or_create_by(name: 'weight', unit: 'g', organization: org)
   MeasurementType.find_or_create_by(name: 'gonad score', unit: 'number', organization: org)
-
+  MeasurementType.find_or_create_by(name: 'animal mortality event', unit: 'n/a', organization: org)
+  MeasurementType.find_or_create_by(name: 'cohort mortality event', unit: 'number', organization: org)
 
   # Create facilities and their associated locations and enclosures
   org_ent[:facilities].each do |fac_ent|
