@@ -87,7 +87,7 @@ organization_entities[:organizations].each do |org_ent|
       organization: org
     )
 
-    dead_animal.mortality_event = MortalityEvent.create(cohort: cohort)
+    dead_animal.mortality_event = MortalityEvent.create(cohort: cohort, organization: org)
 
     male = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
       sex: :male,
