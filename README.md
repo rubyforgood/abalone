@@ -177,6 +177,7 @@ We are building a multi-tenant application which has the following capabilities:
 * **Locations** = `facility_name - location_name` Animals may be located in different location within a single facility
 * **Facilities** = e.g. `BML from 6/5/13 - 11/20/14` Animals move around among a finite number of partner institutions (it is possible for new facilities to be added, but it only happens about once every few years).
 * **Organizations** e.g. `Bodega Marine Laboratory` Organizations act as the tenants within the application for the purpose of walling off data
+* **MortalityEvents** this is a way to track mortality the mortality event of either a specific animal or a cohort. If the mortality event is related to a specific animal, the mortality_count is expected to be nil; if the mortality event is related to a cohort, the mortality_count is expected to be present, but the animal id is expected to be nil.
 
 [See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
