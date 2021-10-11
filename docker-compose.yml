@@ -17,7 +17,6 @@ services:
     build: .
     image: abalone
     environment:
-      RAILS_ENV: development
       ABALONE_DATABASE_HOSTNAME: db
       DATABASE_URL: postgres://dockerpg:supersecret@db
     volumes:
