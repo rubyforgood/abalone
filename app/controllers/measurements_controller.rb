@@ -3,7 +3,9 @@ class MeasurementsController < ApplicationController
     @measurements = Measurement.all
   end
 
-  def show; end
+  def show
+    @measurement = Measurement.find(params[:id])
+  end
 
   def new; end
 end
