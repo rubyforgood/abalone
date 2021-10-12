@@ -10,9 +10,9 @@
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Value</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Subject Type</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Date</th>
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Animal Tag</th>
+          <%# <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Animal Tag</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Enclosure Name</th>
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Cohort Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Cohort Name</th> %>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Measurment Type</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Measurment Event</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" colspan="3" scope="col">Actions</th>
@@ -24,29 +24,31 @@
             <td class="px-4 py-2"><%= measurement.value %></td>
             <td class="px-4 py-2"><%= measurement.subject_type %></td>
             <td class="px-4 py-2"><%= measurement.date %></td>
-            <td class="px-4 py-2">
-              <% if measurement.animal_tag %>
-                <%= measurement.animal_tag %>
-              <% else %>
-                N/A
-              <% end %>
-            </td>
-            <td class="px-4 py-2">
-              <% if measurement.enclosure_name %>
-                <%= measurement.enclosure_name %>
-              <% else %>
-                N/A
-              <% end %>
-            </td>
-            <td class="px-4 py-2">
-              <% if measurement.cohort_name %>
-                <%= measurement.cohort_name %>
-              <% else %>
-                N/A
-              <% end %>
-            </td>
+            <%# <td class="px-4 py-2"> %>
+              <%# if measurement.animal_tag %>
+                <%#= measurement.animal_tag %>
+              <%# else %>
+                <%# N/A %>
+              <%# end %>
+            <%# </td> %>
+            <%# <td class="px-4 py-2"> %>
+              <%# if measurement.enclosure_name %>
+                <%#= measurement.enclosure_name %>
+              <%# else %>
+                <%# N/A %>
+              <%# end %>
+            <%# </td> %>
+            <%# <td class="px-4 py-2"> %>
+              <%# if measurement.cohort_name %>
+                <%#= measurement.cohort_name %>
+              <%# else %>
+                <%# N/A %>
+              <%# end %>
+            <%# </td> %>
             <td class="px-4 py-2"><%= measurement&.measurement_type.name %></td>
             <td class="px-4 py-2"><%= measurement&.measurement_event.name %></td>
+            <td class="text-primary-dark px-4 py-2 align-middle"><%= link_to 'Show', measurement, 'aria-label' => "Show" %></td>
+            <td class="px-4 py-2 w-12 align-middle"><%= link_to image_tag("icons/edit.svg"), edit_measurement_path(measurement), 'aria-label' => "Edit" %></td>
           </tr>
         <% end %>
       </tbody>
