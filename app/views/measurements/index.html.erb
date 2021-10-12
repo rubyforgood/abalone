@@ -1,1 +1,55 @@
-<div>"Hello World"</div>
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-title2">Measurements</h1>
+    </div>
+    <table class="table-auto w-full border">
+      <thead>
+        <tr class="border">
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Value</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Subject Type</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Date</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Animal Tag</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Enclosure Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Cohort Name</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Measurment Type</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Measurment Event</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" colspan="3" scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @measurements.each do |measurement| %>
+          <tr>
+            <td class="px-4 py-2"><%= measurement.value %></td>
+            <td class="px-4 py-2"><%= measurement.subject_type %></td>
+            <td class="px-4 py-2"><%= measurement.date %></td>
+            <td class="px-4 py-2">
+              <% if measurement.animal_tag %>
+                <%= measurement.animal_tag %>
+              <% else %>
+                N/A
+              <% end %>
+            </td>
+            <td class="px-4 py-2">
+              <% if measurement.enclosure_name %>
+                <%= measurement.enclosure_name %>
+              <% else %>
+                N/A
+              <% end %>
+            </td>
+            <td class="px-4 py-2">
+              <% if measurement.cohort_name %>
+                <%= measurement.cohort_name %>
+              <% else %>
+                N/A
+              <% end %>
+            </td>
+            <td class="px-4 py-2"><%= measurement&.measurement_type.name %></td>
+            <td class="px-4 py-2"><%= measurement&.measurement_event.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>

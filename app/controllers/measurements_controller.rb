@@ -1,4 +1,6 @@
 class MeasurementsController < ApplicationController
-  def index; end
+  def index
+    @measurements = Measurement.all
+  end
   def new; end
 end
