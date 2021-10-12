@@ -1,9 +1,17 @@
 class CsvImporter
-  attr_reader :stats, :model, :temporary_file, :processed_file_id, :error_details, :organization
+  attr_reader :stats, :category_name, :temporary_file, :processed_file_id, :error_details, :organization
 
-  CATEGORIES = [
-    'Measurement'
-  ].freeze
+  CATEGORIES_MAPPED_TO_MODELS = {
+    'measurement' => {
+      'length' => Measurement,
+      'count' => Measurement,
+      'weight' => Measurement,
+      'gonad score' => Measurement,
+      'animal mortality event' => MortalityEvent,
+      'cohort mortality event' => MortalityEvent,
+    }
+  }.freeze
+  CATEGORIES = CATEGORIES_MAPPED_TO_MODELS.keys.map(&:titleize).freeze
 
   class InvalidCategoryError < StandardError; end
 
@@ -14,7 +22,7 @@ class CsvImporter
   def initialize(temporary_file, category_name, processed_file_id, organization = nil)
     @temporary_file = temporary_file
     @processed_file_id = processed_file_id
-    @model = model_from_category(category_name)
+    @category_name = category_name
     @stats = Hash.new(0)
     @organization = organization
     @error_details = {}
@@ -34,7 +42,7 @@ class CsvImporter
   def process
     row_number = 2 # assuming 1 is headers
 
-    model.transaction do
+    ActiveRecord::Base.transaction do
       CSV.parse(
         temporary_file,
         headers: true,
@@ -44,6 +52,8 @@ class CsvImporter
       ).each do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
+        model = model_from(category_name, csv_row[:measurement_type])
+
         record = model.create_from_csv_data(create_attributes(csv_row.to_h))
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
@@ -64,10 +74,11 @@ class CsvImporter
     end
   end
 
-  def model_from_category(category_name)
-    raise InvalidCategoryError unless CATEGORIES.include?(category_name)
+  def model_from(category_name, type)
+    category = CATEGORIES_MAPPED_TO_MODELS.dig(category_name.downcase, type.downcase)
 
-    @model_from_category ||= category_name.delete(' ').constantize
+    raise InvalidCategoryError if category.nil?
+    category
   end
 
   def increment_stats(model)
