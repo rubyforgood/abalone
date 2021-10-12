@@ -1,4 +1,5 @@
-entry_year,entry_date,entry_point,sex,organization_id,cohort_id,tag,collected
-2020,2020-09-22T08:16:24-04:00,Collection Area 7,female,1,1,Green_389 from 3/4/08 to 4/6/15,true
-2020,2020-09-22T10:13:01-08:00,,female,1,2,Aqua_562 from 5/20/10 to 3/6/18,false
-2021,2021-10-11T12:20:11-03:00,Collection Area 2,male,2,2,Blue_123 from 10/11/13 to 4/6/21,true
+entry_year,entry_date,entry_point,tag,sex,collected
+2020,2020-09-22T08:16:24-04:00,Collection Area 7,Green_389,female,true
+2020,2020-09-22T10:13:01-08:00,,Red_562,female,false
+2021,2021-10-11T12:20:11-03:00,Collection Area 2,Blue_123,male,true
+,,,,,
