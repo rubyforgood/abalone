@@ -88,4 +88,5 @@ This process assumes initial setup, migration and seeding of a local postgres da
 - measurement events
 - measurement types
 - measurements
+- mortality events
 - operations
