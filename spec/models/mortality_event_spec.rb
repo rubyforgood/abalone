@@ -85,6 +85,10 @@ RSpec.describe MortalityEvent, type: :model do
       it 'has the correct exit type' do
         expect(subject.exit_type).to eq(exit_type)
       end
+
+      it 'is not a mortality event for an animal' do
+        expect(subject.animal).to eq(nil)
+      end
     end
   end
 end
