@@ -53,11 +53,4 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   Reports.showChart(document.querySelectorAll('.tabs .is-active')[0]);
-
-  // TODO: Add this back in later, after backend code is cleaned up
-  // Initialize all input of type date
-  // var calendars = bulmaCalendar.attach('.bulma-calendar[type="date"]', {
-  //   displayMode: 'dialog',
-  //   isRange: false,
-  // });
 });
