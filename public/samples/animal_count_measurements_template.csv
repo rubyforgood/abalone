@@ -1,3 +1,5 @@
-date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag
-9/01/21,Cohort,count,24,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort
-9/01/21,Enclosure,count,42,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort
+date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag,reason
+9/01/21,Cohort,count,24,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,,
+9/01/21,Enclosure,count,42,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,,
+9/01/21,Animal,animal mortality event,,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,Green_289,sacrifice
+9/01/21,Cohort,animal mortality event,5,September Survey,Aquarium of the Pacific location enclosure,Aquarium of the Pacific location enclosure cohort,,natural causes
