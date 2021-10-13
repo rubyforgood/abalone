@@ -200,7 +200,7 @@ organization_entities[:organizations].each do |org_ent|
     event = MeasurementEvent.last
 
     2.times do
-      Measurement.create(value: rand(1..30), measurement_type: measurement_type, organization_id: organization.id, subject: animal, measurement_event: event)
+      Measurement.create(value: rand(1..30), measurement_type: measurement_type, measurement_event: event, organization_id: organization.id, subject: animal, date: 1.day.ago)
     end
   end
 end
