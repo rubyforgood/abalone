@@ -7,7 +7,9 @@ class MeasurementsController < ApplicationController
     @measurement = Measurement.find(params[:id])
   end
 
-  def edit; end
+  def edit
+    @measurement = Measurement.find(params[:id])
+  end
 
   def update; end
 
