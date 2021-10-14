@@ -1,2 +1,2 @@
-date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag
-9/01/21,Cohort,count,12,Monthly Count,Test Enclosure,New Cohort
+date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag,reason
+9/01/21,Cohort,count,12,Monthly Count,Test Enclosure,New Cohort,

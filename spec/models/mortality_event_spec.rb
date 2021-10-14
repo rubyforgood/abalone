@@ -18,19 +18,25 @@ RSpec.describe MortalityEvent, type: :model do
     let(:organization) { create(:organization) }
     let(:exit_type) { create(:exit_type, organization: organization) }
     let(:mortality_date) { "2021/10/11" }
+    let(:processed_file) { create(:processed_file) }
 
     subject { described_class.create_from_csv_data(attrs) }
 
     context "for a Mortality Event for an Animal" do
       let(:attrs) do
         {
-          mortality_date: mortality_date,
+          processed_file_id: processed_file.id,
+          date: mortality_date,
           tag: animal.tag,
           cohort_name: cohort.name,
           organization_id: organization.id,
           measurement_type: "animal mortality event",
           reason: exit_type.name
         }
+      end
+
+      it 'has an associated processed file' do
+        expect(subject.processed_file).to eq(processed_file)
       end
 
       it 'has the correct mortality_date' do
@@ -57,13 +63,18 @@ RSpec.describe MortalityEvent, type: :model do
     context "creates a Mortality Event for a Cohort" do
       let(:attrs) do
         {
-          mortality_date: mortality_date,
+          processed_file_id: processed_file.id,
+          date: mortality_date,
           cohort_name: cohort.name,
           organization_id: organization.id,
           measurement_type: "cohort mortality event",
           value: "3",
           reason: exit_type.name
         }
+      end
+
+      it 'has an associated processed file' do
+        expect(subject.processed_file).to eq(processed_file)
       end
 
       it 'has the correct mortality_date' do
@@ -91,4 +102,16 @@ RSpec.describe MortalityEvent, type: :model do
       end
     end
   end
+
+  # describe "#display_data" do
+  #   let(:mortality_event) { create(:mortality_event, mortality_date: "2021-10-14", mortality_type: "Animal", mortality_type: "mortality event", mortality_count:, nil, cohort.enclosure.name, cohort.name, animal&.tag, exit_type&.name) }
+
+  #   it 'returns the correct data for the show view' do
+  #     expect(mortality_event.display_data).to eq(
+  #       [
+  #         mortality_event.mortality_date, mortality_event.mortality_type, "mortality event", mortality_event.mortality_count, nil, mortality_event.cohort.enclosure.name, mortality_event.cohort.name, mortality_event.animal&.tag, mortality_event.exit_type&.name
+  #       ]
+  #     )
+  #   end
+  # end
 end

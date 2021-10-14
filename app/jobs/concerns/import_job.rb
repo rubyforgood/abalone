@@ -34,7 +34,7 @@ module ImportJob
     raise "No input file specified" unless temporary_file
 
     headers = CSV.parse(temporary_file.contents, headers: true, header_converters: ->(header) { CsvImporter.header_conversion(header) }).headers.compact
-    valid_headers = category_model::HEADERS.values.map { |header| CsvImporter.header_conversion(header) }
+    valid_headers = category_model::HEADERS.map { |header| CsvImporter.header_conversion(header) }
 
     log("Headers in file: #{headers}", :debug)
     log("Valid headers for model: #{valid_headers}", :debug)

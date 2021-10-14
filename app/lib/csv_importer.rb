@@ -8,7 +8,7 @@ class CsvImporter
       'weight' => Measurement,
       'gonad score' => Measurement,
       'animal mortality event' => MortalityEvent,
-      'cohort mortality event' => MortalityEvent,
+      'cohort mortality event' => MortalityEvent
     }
   }.freeze
   CATEGORIES = CATEGORIES_MAPPED_TO_MODELS.keys.map(&:titleize).freeze
@@ -78,6 +78,7 @@ class CsvImporter
     category = CATEGORIES_MAPPED_TO_MODELS.dig(category_name.downcase, type.downcase)
 
     raise InvalidCategoryError if category.nil?
+
     category
   end
 

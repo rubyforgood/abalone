@@ -26,7 +26,7 @@ describe "When I visit the File Uploads show page", type: :feature do
     expect(page).to have_content("Processed File")
 
     within(".table thead") do
-      Measurement::HEADERS.keys.map(&:downcase).each do |header|
+      Measurement::HEADERS.each do |header|
         expect(page).to have_content(header)
       end
     end

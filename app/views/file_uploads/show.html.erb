@@ -28,8 +28,8 @@
         <tbody>
         <%- @records.each do |record| %>
           <tr>
-            <%- @row_values.each do |attr|%>
-              <td><%= record.send(attr) %></td>
+            <%- record.display_data.each do |data_point|%>
+              <td><%= data_point %></td>
             <%- end %>
           </tr>
         <% end %>
