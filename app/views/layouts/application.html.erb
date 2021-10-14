@@ -46,49 +46,49 @@
             <%= link_to 'Animals', animals_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 5 %>
             <%= link_to 'Cohorts', cohorts_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 6 %>
             <%= link_to 'Operations', operations_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 7 %>
-            <%= link_to 'Measurements', measurements_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 6 %>
+            <%= link_to 'Measurements', measurements_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 8 %>
             <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
-              <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=8>
+              <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex: 9>
                 Uploads
                 <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
               </a>
               <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-44">
-                <%= link_to 'Data Import', new_measurement_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 9 %>
-                <%= link_to 'CSV Uploads', csv_index_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 10 %>
-                <%= link_to 'Files List', file_uploads_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 11 %>
-                <%= link_to 'Upload a file', new_file_upload_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 12 %>
+                <%= link_to 'Data Import', new_measurement_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 10 %>
+                <%= link_to 'CSV Uploads', csv_index_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 11 %>
+                <%= link_to 'Files List', file_uploads_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 12 %>
+                <%= link_to 'Upload a file', new_file_upload_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 13 %>
               </div>
             </div>
             <% if current_user.admin? %>
               <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
-                <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=13>
+                <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex: 14>
                   Admin
                   <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
                 </a>
                 <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-60">
-                  <%= link_to 'Measurement Types', measurement_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 14 %>
-                  <%= link_to 'Users', users_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 15 %>
-                  <%= link_to 'Exit types', exit_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 16 %>
+                  <%= link_to 'Measurement Types', measurement_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 15 %>
+                  <%= link_to 'Users', users_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 16 %>
+                  <%= link_to 'Exit types', exit_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 17 %>
                 </div>
               </div>
             <% end %>
           <% end %>
           <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
-            <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=16>
+            <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex: 18>
               More
               <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
             </a>
 
             <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-52">
-              <%= link_to 'About', about_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 17 %>
+              <%= link_to 'About', about_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 19 %>
 
-              <a href="https://rubyforgood.org/" target="_blank" class="cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2" tabindex=18>
+              <a href="https://rubyforgood.org/" target="_blank" class="cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2" tabindex: 20>
                 Ruby for Good
               </a>
 
               <hr class="lg:h-0.5"/>
 
-              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2" tabindex=19>
+              <a href="https://github.com/rubyforgood/abalone" target="_blank" class="cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2" tabindex: 21>
                 Github
               </a>
             </div>
@@ -100,9 +100,9 @@
             <div class="flex flex-wrap items-center justify-start">
               <% if user_signed_in? %>
                 <%= link_to "Change password", edit_password_path(current_user), class: "bg-white border-2 border-gray-300 cursor-pointer hover:border-gray-400 justify-center mr-2 p-2 rounded-md text-black text-center", tabindex: 20 %>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "bg-white border-2 border-gray-300 cursor-pointer hover:border-gray-400 justify-center mr-2 p-2 rounded-md text-black text-center", tabindex: 21 %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "bg-white border-2 border-gray-300 cursor-pointer hover:border-gray-400 justify-center mr-2 p-2 rounded-md text-black text-center", tabindex: 22 %>
               <% else %>
-                <%= link_to "Login", new_user_session_path, class: "bg-white border-2 border-current cursor-pointer font-semibold hover:bg-primary-dark hover:text-white justify-center px-4 py-2 rounded-md text-primary-dark text-center", tabindex: 20 %>
+                <%= link_to "Login", new_user_session_path, class: "bg-white border-2 border-current cursor-pointer font-semibold hover:bg-primary-dark hover:text-white justify-center px-4 py-2 rounded-md text-primary-dark text-center", tabindex: 23 %>
               <% end %>
             </div>
           </div>
