@@ -75,7 +75,7 @@ organization_entities[:organizations].each do |org_ent|
 
     # Create animals and a cohort per facility
     cohort = Cohort.find_or_create_by(name: "#{enclosure.name} cohort", enclosure: enclosure, organization: org)
-
+    
     dead_animal = Animal.find_or_create_by(
       sex: :female,
       entry_year: Time.zone.now.year,
@@ -87,7 +87,11 @@ organization_entities[:organizations].each do |org_ent|
       organization: org
     )
 
-    dead_animal.mortality_event = MortalityEvent.create(cohort: cohort, organization: org)
+    dead_animal.mortality_event = MortalityEvent.create(
+      cohort: cohort,
+      organization: org,
+      mortality_date: rand(Time.zone.now..Time.zone.now.end_of_year)
+    )
 
     male = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
       sex: :male,
