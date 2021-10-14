@@ -75,7 +75,7 @@ organization_entities[:organizations].each do |org_ent|
 
     # Create animals and a cohort per facility
     cohort = Cohort.find_or_create_by(name: "#{enclosure.name} cohort", enclosure: enclosure, organization: org)
-    
+
     dead_animal = Animal.find_or_create_by(
       sex: :female,
       entry_year: Time.zone.now.year,
