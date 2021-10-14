@@ -195,4 +195,16 @@ organization_entities[:organizations].each do |org_ent|
 
   # Create exit_types
   %w[Incidental Outplanted Sacrificed].each { |name| ExitType.find_or_create_by(name: name, organization: org) }
+
+  # create a variety of length measurements for testing reports
+
+  Animal.where.missing(:mortality_event).each do |animal|
+    organization = animal.organization
+    measurement_type = MeasurementType.find_by(name: "length", organization_id: organization.id)
+    event = MeasurementEvent.last
+
+    2.times do
+      Measurement.create(value: rand(1..30), measurement_type: measurement_type, measurement_event: event, organization_id: organization.id, subject: animal, date: 1.day.ago)
+    end
+  end
 end
