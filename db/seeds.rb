@@ -120,12 +120,11 @@ organization_entities[:organizations].each do |org_ent|
     AnimalsShlNumber.find_or_create_by(animal: female, shl_number: female_shl)
 
     cohort.update(male: male, female: female)
-
     100.times do |n|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
                 entry_year: Time.zone.now.year,
-                entry_date: Time.zone.now.beginning_of_year,
+                entry_date: Date.parse("2020/#{rand(1..12)}/#{rand(1..28)}"),
                 entry_point: '',
                 collected: false,
                 tag: "#{n+1}-#{fac_ent[:code]}",
