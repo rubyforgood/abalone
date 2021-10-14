@@ -12,7 +12,7 @@ describe 'Home Page Statistics', type: :system do
       visit root_path
       expect(page).to_not have_selector('.container .shadow')
       expect(page).to have_selector('span[tabindex=1]') # Abalone Analytics link
-      expect(page).to have_selector('a[tabindex=16]')   # More dropdown
+      expect(page).to have_selector('a[tabindex=18]')   # More dropdown
     end
 
     it 'When I login and view the home page I see my company data' do
@@ -34,9 +34,9 @@ describe 'Home Page Statistics', type: :system do
       expect(page).to have_selector('a[tabindex=6]')    # Cohorts link
       expect(page).to have_selector('a[tabindex=7]')    # Operations link
       expect(page).to have_selector('a[tabindex=8]')    # Uploads dropdown
-      expect(page).to have_selector('a[tabindex=16]')   # More dropdown
+      expect(page).to have_selector('a[tabindex=18]')   # More dropdown
 
-      expect(page).to_not have_selector('a[tabindex=13]') # Admin dropdown
+      expect(page).to_not have_selector('a[tabindex=14]') # Admin dropdown
     end
 
     context "as an admin" do

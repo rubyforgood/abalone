@@ -24,10 +24,10 @@
             <td class="px-4 py-2"><%= measurement&.measurement_type.name %></td>
             <td class="px-4 py-2"><%= measurement&.measurement_event.name %></td>
             <td class="text-primary-dark px-4 py-2 align-middle">
-              <%= link_to 'Show', measurement, 'aria-label' => "Show" %>
+              <%= link_to 'Show', measurement, aria: { label: 'Show' } %>
             </td>
             <td class="px-4 py-2 w-12 align-middle">
-              <%= link_to image_tag("icons/edit.svg"), edit_measurement_path(measurement), 'aria-label' => "Edit" %>
+              <%= link_to image_tag("icons/edit.svg"), edit_measurement_path(measurement), aria: { label: 'Edit' } %>
             </td>
           </tr>
         <% end %>

@@ -20,6 +20,26 @@ class MeasurementsController < ApplicationController
 
   def new; end
 
+  helper_method def subject_name_label
+    if @measurement.subject_type == "Animal"
+      "Animal Tag"
+    elsif @measurement.subject_type == "Cohort"
+      "Cohort Name"
+    else
+      "Enclosure Name"
+    end
+  end
+
+  helper_method def subject_name_value
+    if @measurement.subject_type == "Animal"
+      @measurement.animal_tag
+    elsif @measurement.subject_type == "Cohort"
+      @measurement.cohort_name
+    else
+      @measurement.enclosure_name
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

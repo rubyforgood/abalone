@@ -23,21 +23,9 @@
       <div class="text-sm text-caption-light font-medium uppercase mt-2">Measurement Event</div>
       <%= @measurement.measurement_event&.name %>
       <div class="text-sm text-caption-light font-medium uppercase mt-2">
-        <% if @measurement.subject_type == "Animal" %>
-          Animal Tag
-        <% elsif @measurement.subject_type == "Cohort" %>
-          Cohort Name
-        <% else %>
-          Enclosure Name
-        <% end %>
+        <%= subject_name_label %>
       </div>
-        <% if @measurement.subject_type == "Animal" %>
-          <%= @measurement.animal_tag %>
-        <% elsif @measurement.subject_type == "Cohort" %>
-          <%= @measurement.cohort_name %>
-        <% else %>
-          <%= @measurement.enclosure_name %>
-        <% end %>
+        <%= subject_name_value %>
     </div>
     <%= link_to '<< BACK', measurements_path, class: "mr-3 mb-3 button-outline-primary" %>
   </div>
