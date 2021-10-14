@@ -20,7 +20,8 @@ class Measurement < ApplicationRecord
     MEASUREMENT_EVENT: "measurement_event",
     ENCLOSURE_NAME: "enclosure_name",
     COHORT_NAME: "cohort_name",
-    TAG: 'tag'
+    TAG: 'tag',
+    REASON: 'reason'
   }.freeze
 
   ROW_VALUES = {
@@ -31,7 +32,8 @@ class Measurement < ApplicationRecord
     MEASUREMENT_EVENT: "measurement_event_name",
     ENCLOSURE_NAME: "enclosure_name",
     COHORT_NAME: "cohort_name",
-    TAG: 'animal_tag'
+    TAG: 'animal_tag',
+    REASON: 'reason'
   }.freeze
 
   def cohort_name
