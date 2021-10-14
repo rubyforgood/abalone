@@ -90,7 +90,7 @@ organization_entities[:organizations].each do |org_ent|
     dead_animal.mortality_event = MortalityEvent.create(
       cohort: cohort,
       organization: org,
-      mortality_date: Date.parse("#{Time.zone.now.year}/#{rand(1..12)}/1")
+      mortality_date: Date.parse("2020/#{rand(1..12)}/#{rand(1..28)}")
     )
 
     male = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
@@ -120,6 +120,7 @@ organization_entities[:organizations].each do |org_ent|
     AnimalsShlNumber.find_or_create_by(animal: female, shl_number: female_shl)
 
     cohort.update(male: male, female: female)
+
     100.times do |n|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
