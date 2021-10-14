@@ -21,23 +21,23 @@ class MeasurementsController < ApplicationController
   def new; end
 
   helper_method def subject_name_label
-    if @measurement.subject_type == "Animal"
-      "Animal Tag"
-    elsif @measurement.subject_type == "Cohort"
-      "Cohort Name"
-    else
-      "Enclosure Name"
-    end
+    subject_label = {
+      "Animal" => "Animal Tag",
+      "Cohort" => "Cohort Name",
+      "Enclosure" => "Enclosure Name"
+    }
+
+    subject_label[@measurement.subject_type]
   end
 
   helper_method def subject_name_value
-    if @measurement.subject_type == "Animal"
-      @measurement.animal_tag
-    elsif @measurement.subject_type == "Cohort"
-      @measurement.cohort_name
-    else
-      @measurement.enclosure_name
-    end
+    subject_value = {
+      "Animal" => @measurement.animal_tag,
+      "Cohort" => @measurement.cohort_name,
+      "Enclosure" => @measurement.enclosure_name
+    }
+
+    subject_value[@measurement.subject_type]
   end
 
   private
