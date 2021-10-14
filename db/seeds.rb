@@ -117,7 +117,7 @@ organization_entities[:organizations].each do |org_ent|
 
     cohort.update(male: male, female: female)
 
-    8.times do |n|
+    10_000.times do |n|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
                 entry_year: Time.zone.now.year,
@@ -192,3 +192,5 @@ organization_entities[:organizations].each do |org_ent|
   # Create exit_types
   %w[Incidental Outplanted Sacrificed].each { |name| ExitType.find_or_create_by(name: name, organization: org) }
 end
+
+
