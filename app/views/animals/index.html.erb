@@ -11,10 +11,12 @@
             <span class="ml-2 md:hidden">New</span>
           </button>
         <% end %>
-        <%= link_to csv_upload_animals_path, class: "bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4 hover:text-white" do %>
-          <%= image_tag  "icons/plus.png", size: 17 %>
-          <span class="ml-2 hidden md:block">Upload CSV</span>
-          <span class="ml-2 md:hidden">Upload</span>
+        <%= link_to csv_upload_animals_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2 hidden md:block">Upload CSV</span>
+            <span class="ml-2 md:hidden">Upload</span>
+          </button>  
         <% end %>
         <%= link_to animals_path(format: :csv), id: "export_button" do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
