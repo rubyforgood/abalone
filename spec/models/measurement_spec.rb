@@ -33,7 +33,7 @@ RSpec.describe Measurement, type: :model do
     let(:animal) { build :animal, tag: "BB8-L8" }
     let(:measurement_type) { build :measurement_type, name: "gonad score" }
     let(:measurement_event) { build :measurement_event, name: "Gonad Survey" }
-    let(:measurement) do 
+    let(:measurement) do
       build :measurement, subject: animal, measurement_type: measurement_type, measurement_event: measurement_event, value: "12", date: "2021-10-11 00:00:00.000000000 +0000"
     end
 

@@ -36,7 +36,7 @@ class Measurement < ApplicationRecord
     subject.is_a?(Animal) ? subject.tag : nil
   end
 
-  # We want mortality events to be created as part of measurement file uploads, which means that if a measurement 
+  # We want mortality events to be created as part of measurement file uploads, which means that if a measurement
   # file is uploaded and it has mortality events, we want to show that data as well
   def self.data_for_file(processed_file_id)
     where(processed_file_id: processed_file_id) + MortalityEvent.where(processed_file_id: processed_file_id)

@@ -108,9 +108,9 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
     subject { mortality_event.display_data }
 
     context "for an Animal" do
-      let(:enclosure) { build(:enclosure, name: "Tank 2")}
+      let(:enclosure) { build(:enclosure, name: "Tank 2") }
       let(:cohort) { build(:cohort, name: "Aquarium of the Pacific location enclosure cohort", enclosure: enclosure) }
-      let(:animal) { build(:animal, tag: "R2D2-PO", cohort: cohort)}
+      let(:animal) { build(:animal, tag: "R2D2-PO", cohort: cohort) }
       let(:exit_type) { build(:exit_type, name: "sacrifical clam") }
       let(:mortality_event) { build(:mortality_event, mortality_date: "2021-10-11 00:00:00.000000000 +0000", animal: animal, cohort: cohort, exit_type: exit_type) }
 
@@ -124,7 +124,7 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
     end
 
     context "for a Cohort" do
-      let(:enclosure) { build(:enclosure, name: "Tank 2")}
+      let(:enclosure) { build(:enclosure, name: "Tank 2") }
       let(:cohort) { build(:cohort, name: "Aquarium of the Pacific location enclosure cohort", enclosure: enclosure) }
       let(:exit_type) { build(:exit_type, name: "sacrifical clam") }
       let(:mortality_event) { build(:mortality_event, :for_cohort, mortality_date: "2021-10-11 00:00:00.000000000 +0000", mortality_count: 12, cohort: cohort, exit_type: exit_type) }

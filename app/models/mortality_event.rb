@@ -34,12 +34,6 @@ class MortalityEvent < ApplicationRecord
     end
   end
 
-  private
-
-  def mortality_type
-    !animal && mortality_count ? "Cohort" : "Animal"
-  end
-
   def self.attrs_for_animal(attrs)
     measurement_attrs = {}
     measurement_attrs[:mortality_date] = attrs.fetch(:date)
@@ -60,5 +54,13 @@ class MortalityEvent < ApplicationRecord
     measurement_attrs[:exit_type] = ExitType.find_or_create_by!(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs
+  end
+
+  private
+
+  private_class_method :attrs_for_animal, :attrs_for_cohort
+
+  def mortality_type
+    !animal && mortality_count ? "Cohort" : "Animal"
   end
 end
