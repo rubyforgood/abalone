@@ -22,7 +22,7 @@ describe "When I visit the File Uploads show page", type: :feature do
   it "shows all the values that have been imported" do
     expect do
       CsvImporter.new(file, category_name, processed_file.id, organization).call
-    end.to change { Measurement.count }
+    end.to change { Measurement.count + MortalityEvent.count }
 
     visit show_processed_file_path(processed_file.id)
     expect(page).to have_content("Processed File")
@@ -51,6 +51,20 @@ describe "When I visit the File Uploads show page", type: :feature do
         else
           expect(measurement.animal_tag).not_to be_nil
           expect(page).to have_content(measurement.animal_tag)
+        end
+      end
+
+      MortalityEvent.find_each do |event|
+        expect(page).to have_content(event.mortality_date)
+        expect(page).to have_content("mortality event")
+
+        case event.send(:mortality_type)
+        when "Animal"
+          expect(page).to have_content("Animal")
+          expect(page).to have_content(event.animal&.tag)
+        else
+          expect(page).to have_content("Cohort")
+          expect(page).to have_content(event.cohort&.name)
         end
       end
     end
