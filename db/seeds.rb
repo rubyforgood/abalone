@@ -125,7 +125,7 @@ organization_entities[:organizations].each do |org_ent|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
                 entry_year: Time.zone.now.year,
-                entry_date: Date.parse("2020/1/#{rand(1..28)}"),
+                entry_date: rand(Time.zone.now - 1.year..Time.zone.now - 6.months),
                 entry_point: '',
                 collected: false,
                 tag: "#{n+1}-#{fac_ent[:code]}",
