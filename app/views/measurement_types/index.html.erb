@@ -1,12 +1,13 @@
-<section class="h-screen bg-background p-12">
+<section class="h-screen bg-background md:p-12 sm:w-100 p-0">
   <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-title2">Measurement Types</h1>
-      <div class="flex items-center">
+    <div class="flex md:flex-row flex-col md:justify-between mb-4">
+      <h1 class="text-title2 text-center">Measurement Types</h1>
+      <div class="flex items-center justify-center">
         <%= link_to new_measurement_type_path do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
             <%= image_tag  "icons/plus.png", size: 17 %>
-            <span class="ml-2">New Measurement Type</span>
+            <span class="ml-2 hidden md:block">New Measurement Type</span>
+            <span class="ml-2 md:hidden">New</span>
           </button>
         <% end %>
       </div>
@@ -17,24 +18,22 @@
         <tr class="border">
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Name</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Unit</th>
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" colspan="2" scope="colgroup">Action</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="colgroup">Action</th>
         </tr>
       </thead>
 
       <tbody>
         <% @measurement_types.each do |measurement_type| %>
           <tr>
-            <td class="px-4 py-2"><%= measurement_type.name %></td>
-            <td class="px-4 py-2"><%= measurement_type.unit %></td>
-            <td class="px-4 py-2 text-primary-dark w-12">
+            <td class="px-4 py-2" data-label="Name"><%= measurement_type.name %></td>
+            <td class="px-4 py-2" data-label="Unit"><%= measurement_type.unit %></td>
+            <td class="text-base px-4 py-2 align-middle flex items-center" data-label="Actions">
               <%= link_to image_tag("icons/edit.svg"),
               edit_measurement_type_path(measurement_type),
-              'aria-label': "Edit #{measurement_type.name}" %>
-            </td>
-            <td class="px-4 py-2 text-primary-dark w-12">
+              'aria-label': "Edit #{measurement_type.name}", class: 'w-5 mx-2' %>
               <%= link_to image_tag("icons/trash.svg"),
               measurement_type, method: :delete, data: { confirm: 'Are you sure?' },
-              'aria-label': "Delete #{measurement_type.name}" %>
+              'aria-label': "Delete #{measurement_type.name}", class: 'w-5 mx-2' %>
             </td>
           </tr>
         <% end %>
