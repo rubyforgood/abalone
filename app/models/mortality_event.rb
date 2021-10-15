@@ -20,7 +20,7 @@ class MortalityEvent < ApplicationRecord
 
   def display_data
     [
-      mortality_date, mortality_type, "mortality event", mortality_count, nil, cohort.enclosure.name, cohort.name, animal&.tag, exit_type&.name
+      mortality_date, mortality_type, "mortality event", mortality_count, nil, cohort.enclosure&.name, cohort.name, animal&.tag, exit_type&.name
     ]
   end
 
