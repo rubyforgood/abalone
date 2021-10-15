@@ -42,41 +42,41 @@
           <% if current_user %>
             <%= link_to 'Reports', reports.root_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 2 %>
             <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
-              <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=8>
+              <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=3>
                 Statistics
                 <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
               </a>
               <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-44">
-                <%= link_to 'Facilities', facilities_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 3 %>
-                <%= link_to 'Enclosures', enclosures_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 4 %>
-                <%= link_to 'Animals', animals_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 5 %>
-                <%= link_to 'Cohorts', cohorts_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 6 %>
+                <%= link_to 'Facilities', facilities_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 4 %>
+                <%= link_to 'Enclosures', enclosures_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 5 %>
+                <%= link_to 'Animals', animals_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 6 %>
+                <%= link_to 'Cohorts', cohorts_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 7 %>
               </div>
             </div>
-            <%= link_to 'Operations', operations_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 7 %>
-            <%#= link_to 'Measurements', measurements_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 8 %>
+            <%= link_to 'Operations', operations_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relative', tabindex: 8 %>
+            <%#= link_to 'Measurements', measurements_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-3 py-2 relativem', tabindex: 9 %>
             <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
               <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=8>
                 Uploads
                 <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
               </a>
               <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-44">
-                <%= link_to 'Data Import', new_measurement_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 9 %>
-                <%= link_to 'CSV Uploads', csv_index_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 10 %>
-                <%= link_to 'Files List', file_uploads_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 11 %>
-                <%= link_to 'Upload a file', new_file_upload_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 12 %>
+                <%= link_to 'Data Import', new_measurement_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 10 %>
+                <%= link_to 'CSV Uploads', csv_index_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 11 %>
+                <%= link_to 'Files List', file_uploads_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 12 %>
+                <%= link_to 'Upload a file', new_file_upload_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 13 %>
               </div>
             </div>
             <% if current_user.admin? %>
               <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
-                <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=13>
+                <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=14>
                   Admin
                   <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
                 </a>
                 <div class="absolute bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-60">
-                  <%= link_to 'Measurement Types', measurement_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 14 %>
-                  <%= link_to 'Users', users_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 15 %>
-                  <%= link_to 'Exit types', exit_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 16 %>
+                  <%= link_to 'Measurement Types', measurement_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 15 %>
+                  <%= link_to 'Users', users_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 16 %>
+                  <%= link_to 'Exit types', exit_types_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 17 %>
                 </div>
               </div>
             <% end %>
@@ -87,16 +87,16 @@
         <div class="flex items-stretch justify-end ml-auto">
           <div class="cursor-pointer flex flex-grow-0 flex-shrink-0 items-center px-3 py-2 relative">
              <div class="cursor-pointer dropdown-nav-item flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center relative">
-                <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=13>
+                <a class="flex items-center hover:bg-gray-300 px-3 py-2 lg:py-0 relative" tabindex=18>
                   Users
                   <span class="lg:p-2"><i class="fas fa-chevron-down"></i></span>
                 </a>
                 <div class="user-dropdown bg-white block lg:border-t-2 border-gray-50 dropdown py-2 rounded shadow-md text-sm top-full w-60">
                   <% if user_signed_in? %>
-                    <%= link_to "Change password", edit_password_path(current_user), class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 20 %>
-                    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 21 %>
+                    <%= link_to "Change password", edit_password_path(current_user), class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 19 %>
+                    <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 20 %>
                   <% else %>
-                    <%= link_to "Login", new_user_session_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 20 %>
+                    <%= link_to "Login", new_user_session_path, class: 'cursor-pointer flex flex-grow-0 flex-shrink-0 hover:bg-gray-300 items-center px-6 lg:pl-4 lg:pr-12 py-2', tabindex: 21 %>
                   <% end %>
                 </div>
               </div>  

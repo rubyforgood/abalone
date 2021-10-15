@@ -28,15 +28,15 @@ RSpec.describe 'Home Page Statistics' do
 
       expect(page).to have_selector('span[tabindex=1]') # Abalone Analytics link
       expect(page).to have_selector('a[tabindex=2]')    # Reports link
-      expect(page).to have_selector('a[tabindex=3]')    # Facilities link
-      expect(page).to have_selector('a[tabindex=4]')    # Enclosures link
-      expect(page).to have_selector('a[tabindex=5]')    # Animals link
-      expect(page).to have_selector('a[tabindex=6]')    # Cohorts link
-      expect(page).to have_selector('a[tabindex=7]')    # Operations link
+      expect(page).to have_selector('a[tabindex=3]')    # Statistics Dropwdown
+      expect(page).to have_selector('a[tabindex=4]')    # Facilities link
+      expect(page).to have_selector('a[tabindex=5]')    # Enclosures link
+      expect(page).to have_selector('a[tabindex=6]')    # Animals link
+      expect(page).to have_selector('a[tabindex=7]')    # Cohorts link
       expect(page).to have_selector('a[tabindex=8]')    # Uploads dropdown
-      expect(page).to have_selector('a[tabindex=16]')   # More dropdown
+      expect(page).to have_selector('a[tabindex=18]')   # Users dropdown
 
-      expect(page).to_not have_selector('a[tabindex=13]') # Admin dropdown
+      expect(page).to_not have_selector('a[tabindex=14]') # Admin dropdown
     end
 
     context "as an admin" do
@@ -46,7 +46,7 @@ RSpec.describe 'Home Page Statistics' do
         sign_in admin
         visit root_path
 
-        expect(page).to have_selector('a[tabindex=13]') # Admin dropdown
+        expect(page).to have_selector('a[tabindex=14]') # Admin dropdown
       end
     end
   end
