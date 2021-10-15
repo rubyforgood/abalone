@@ -1,18 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe MortalityEvent, type: :model do
+RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
   it "Mortality Event has associations" do
     is_expected.to belong_to(:animal).optional
     is_expected.to belong_to(:cohort)
     is_expected.to belong_to(:organization)
     is_expected.to belong_to(:exit_type).optional
+    is_expected.to belong_to(:processed_file).optional
   end
 
   include_examples 'organization presence validation' do
     let(:model) { described_class.new animal: build(:animal), cohort: build(:cohort), organization: organization }
   end
 
-  describe "#create_from_csv_data", :aggregate_failures do
+  describe "#create_from_csv_data" do
     let(:cohort) { create(:cohort, name: "Aquarium of the Pacific location enclosure cohort", organization: organization) }
     let(:animal) { create(:animal, tag: "F-AOP", organization: organization) }
     let(:organization) { create(:organization) }
@@ -103,15 +104,38 @@ RSpec.describe MortalityEvent, type: :model do
     end
   end
 
-  # describe "#display_data" do
-  #   let(:mortality_event) { create(:mortality_event, mortality_date: "2021-10-14", mortality_type: "Animal", mortality_type: "mortality event", mortality_count:, nil, cohort.enclosure.name, cohort.name, animal&.tag, exit_type&.name) }
+  describe "#display_data" do
+    subject { mortality_event.display_data }
 
-  #   it 'returns the correct data for the show view' do
-  #     expect(mortality_event.display_data).to eq(
-  #       [
-  #         mortality_event.mortality_date, mortality_event.mortality_type, "mortality event", mortality_event.mortality_count, nil, mortality_event.cohort.enclosure.name, mortality_event.cohort.name, mortality_event.animal&.tag, mortality_event.exit_type&.name
-  #       ]
-  #     )
-  #   end
-  # end
+    context "for an Animal" do
+      let(:enclosure) { build(:enclosure, name: "Tank 2")}
+      let(:cohort) { build(:cohort, name: "Aquarium of the Pacific location enclosure cohort", enclosure: enclosure) }
+      let(:animal) { build(:animal, tag: "R2D2-PO", cohort: cohort)}
+      let(:exit_type) { build(:exit_type, name: "sacrifical clam") }
+      let(:mortality_event) { build(:mortality_event, mortality_date: "2021-10-11 00:00:00.000000000 +0000", animal: animal, cohort: cohort, exit_type: exit_type) }
+
+      it 'returns the correct data for displaying an animal mortality event' do
+        expect(subject).to eq(
+          [
+            "2021-10-11 00:00:00.000000000 +0000", "Animal", "mortality event", nil, nil, "Tank 2", "Aquarium of the Pacific location enclosure cohort", "R2D2-PO", "sacrifical clam"
+          ]
+        )
+      end
+    end
+
+    context "for a Cohort" do
+      let(:enclosure) { build(:enclosure, name: "Tank 2")}
+      let(:cohort) { build(:cohort, name: "Aquarium of the Pacific location enclosure cohort", enclosure: enclosure) }
+      let(:exit_type) { build(:exit_type, name: "sacrifical clam") }
+      let(:mortality_event) { build(:mortality_event, :for_cohort, mortality_date: "2021-10-11 00:00:00.000000000 +0000", mortality_count: 12, cohort: cohort, exit_type: exit_type) }
+
+      it 'returns the correct data for displaying a cohort mortality event' do
+        expect(subject).to eq(
+          [
+            "2021-10-11 00:00:00.000000000 +0000", "Cohort", "mortality event", 12, nil, "Tank 2", "Aquarium of the Pacific location enclosure cohort", nil, "sacrifical clam"
+          ]
+        )
+      end
+    end
+  end
 end
