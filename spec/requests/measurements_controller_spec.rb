@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe MeasurementsController, type: :controller do
-  include Devise::Test::ControllerHelpers
+describe MeasurementsController, type: :request do
+  include Devise::Test::IntegrationHelpers
 
   let(:user) { FactoryBot.create(:user) }
 
@@ -10,48 +10,55 @@ describe MeasurementsController, type: :controller do
   end
 
   describe "GET index", :aggregate_failures do
-    it "assigns @measurements" do
-      measurement = FactoryBot.create(:measurement)
-      get :index
-      expect(assigns(:measurements)).to eq([measurement])
+    it 'should have response code 200 for admin user' do
+      user.update(role: 'admin')
+
+      get measurements_path
+      expect(response).to have_http_status(:success)
     end
 
-    it "renders the index template" do
-      get :index
-      expect(response).to render_template("index")
+    it 'should have response code 200 for non-admin user' do
+      get measurements_path
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #show" do
-    it "succeed" do
+    it 'should have response code 200 for admin user' do
       measurement_id = FactoryBot.create(:measurement).id
+      user = create(:user, role: "admin")
+      sign_in user
+      get measurement_path(measurement_id)
 
-      get :show, params: { id: measurement_id }
+      expect(response).to have_http_status(:success)
+    end
 
-      expect(response).to be_successful
-      expect(response).to render_template(:show)
+    it 'should have response code 200 for admin user' do
+      measurement_id = FactoryBot.create(:measurement).id
+      sign_in user
+      get measurement_path(measurement_id)
+
+      expect(response).to have_http_status(:success)
     end
   end
 
   describe '#edit', :aggregate_failures do
     it 'should have response code 200 for admin user' do
-      measurement = FactoryBot.create(:measurement)
-      user.update(role: 'admin')
+      measurement_id = FactoryBot.create(:measurement).id
+      user = create(:user, role: "admin")
       sign_in user
+      get edit_measurement_path(measurement_id)
 
-      get :edit, params: { id: measurement.id }
-
-      expect(response.code).to eq '200'
+      expect(response).to have_http_status(:success)
     end
 
     it 'should have response code 302 for non-admin user' do
-      measurement = FactoryBot.create(:measurement)
-      user.update(role: 'user')
+      measurement_id = FactoryBot.create(:measurement).id
+      user = create(:user, role: "user")
       sign_in user
+      get edit_measurement_path(measurement_id)
 
-      get :edit, params: { id: measurement.id}
-
-      expect(response.code).to eq '302'
+      expect(response).to have_http_status(302)
     end
   end
 end
