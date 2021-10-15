@@ -35,7 +35,7 @@ describe 'Home Page Statistics', type: :system do
       expect(page).to have_selector('a[tabindex=8]')    # Uploads dropdown
       expect(page).to have_selector('a[tabindex=18]')   # User dropdown
 
-      expect(page).to_not have_selector('a[tabindex=14]') # Admin dropdown
+      expect(page).to_not have_selector('a[tabindex=15]') # Admin dropdown
     end
 
     context "as an admin" do
@@ -45,7 +45,7 @@ describe 'Home Page Statistics', type: :system do
         sign_in admin
         visit root_path
 
-        expect(page).to have_selector('a[tabindex=14]') # Admin dropdown
+        expect(page).to have_selector('a[tabindex=15]') # Admin dropdown
       end
     end
   end
