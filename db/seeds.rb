@@ -6,41 +6,41 @@
 #return unless Rails.env.development? || Rails.env.test?
 
 organization_entities = {
-    organizations: [
-        {
-            name: 'White Abalone',
-            facilities: [
-                { name: 'Aquarium of the Pacific', code: 'AOP' },
-                { name: 'Cabrillo Marine Aquarium', code: 'CMA' },
-                { name: 'California Science Center', code: 'CSC' },
-                { name: 'CICESE', code: 'CICESE' },
-                { name: 'Moss Landing Marine Laboratories', code: 'MLML' },
-                { name: 'NOAA Southwest Fisheries Science Center', code: 'SWFSC' },
-                { name: 'Santa Barbara Museum of Natural History Sea Center', code: 'SBMNH SC' },
-                { name: 'The Abalone Farm', code: 'TAF' },
-                { name: 'The Bay Foundation', code: 'TBF' },
-                { name: 'The Cultured Abalone Farm', code: 'TCAF' },
-                { name: 'UC Davis Bodega Marine Laboratory', code: 'BML' },
-                { name: 'UC Santa Barbara', code: 'UCSB' },
-            ]
-        },
-        {
-            name: 'Pinto Abalone',
-            facilities: [
-                { name: 'Chew Center of Shellfish Research and Restoration', code: 'CCSRR' },
-                { name: 'NOAA Manchester Research Station', code: 'NMARS' },
-                { name: 'NOAA Mukilteo Research Station', code: 'NMURS' },
-                { name: 'Port Madison Community Shellfish Farm', code: 'PMCSF' },
-                { name: 'Puget Sound Restoration Fund', code: 'PSRF' },
-                { name: 'Washington Department of Fish & Wildlife', code: 'WDFW' }
-            ]
+  organizations: [
+      {
+          name: 'White Abalone',
+          facilities: [
+              { name: 'Aquarium of the Pacific', code: 'AOP' },
+              { name: 'Cabrillo Marine Aquarium', code: 'CMA' },
+              { name: 'California Science Center', code: 'CSC' },
+              { name: 'CICESE', code: 'CICESE' },
+              { name: 'Moss Landing Marine Laboratories', code: 'MLML' },
+              { name: 'NOAA Southwest Fisheries Science Center', code: 'SWFSC' },
+              { name: 'Santa Barbara Museum of Natural History Sea Center', code: 'SBMNH SC' },
+              { name: 'The Abalone Farm', code: 'TAF' },
+              { name: 'The Bay Foundation', code: 'TBF' },
+              { name: 'The Cultured Abalone Farm', code: 'TCAF' },
+              { name: 'UC Davis Bodega Marine Laboratory', code: 'BML' },
+              { name: 'UC Santa Barbara', code: 'UCSB' },
+          ]
+      },
+      {
+          name: 'Pinto Abalone',
+          facilities: [
+              { name: 'Chew Center of Shellfish Research and Restoration', code: 'CCSRR' },
+              { name: 'NOAA Manchester Research Station', code: 'NMARS' },
+              { name: 'NOAA Mukilteo Research Station', code: 'NMURS' },
+              { name: 'Port Madison Community Shellfish Farm', code: 'PMCSF' },
+              { name: 'Puget Sound Restoration Fund', code: 'PSRF' },
+              { name: 'Washington Department of Fish & Wildlife', code: 'WDFW' }
+          ]
 
-        }
-    ]
+      }
+  ]
 }
 
 organization_entities[:organizations].each do |org_ent|
-  # Create organization
+# Create organization
   org = Organization.find_or_create_by(name: org_ent[:name])
 
   # Create users
@@ -79,7 +79,7 @@ organization_entities[:organizations].each do |org_ent|
     dead_animal = Animal.find_or_create_by(
       sex: :female,
       entry_year: Time.zone.now.year,
-      entry_date: Time.zone.now,
+      entry_date: Time.zone.now - 1.year,
       entry_point: 'Position',
       collected: true,
       cohort: cohort,
@@ -87,9 +87,13 @@ organization_entities[:organizations].each do |org_ent|
       organization: org
     )
 
-    dead_animal.mortality_event = MortalityEvent.create(cohort: cohort, organization: org)
+    dead_animal.mortality_event = MortalityEvent.create(
+      cohort: cohort,
+      organization: org,
+      mortality_date: Date.parse("2021/#{rand(1..5)}/#{rand(1..28)}")
+    )
 
-    male = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
+    male = Animal.create_with(entry_date: Time.zone.now - 1.year).find_or_create_by(
       sex: :male,
       entry_year: Time.zone.now.year,
       entry_point: '',
@@ -102,7 +106,7 @@ organization_entities[:organizations].each do |org_ent|
     male_shl = ShlNumber.find_or_create_by(code: "#{male.entry_year}-#{male.tag}")
     AnimalsShlNumber.find_or_create_by(animal: male, shl_number: male_shl)
 
-    female = Animal.create_with(entry_date: Time.zone.now).find_or_create_by(
+    female = Animal.create_with(entry_date: Time.zone.now - 1.year).find_or_create_by(
       sex: :female,
       entry_year: Time.zone.now.year,
       entry_point: 'Position',
@@ -111,7 +115,7 @@ organization_entities[:organizations].each do |org_ent|
       tag: "F-#{fac_ent[:code]}",
       organization: org
     )
-    
+
     female_shl = ShlNumber.find_or_create_by(code: "#{female.entry_year}-#{female.tag}")
     AnimalsShlNumber.find_or_create_by(animal: female, shl_number: female_shl)
 
@@ -121,7 +125,7 @@ organization_entities[:organizations].each do |org_ent|
       animal = Animal.find_or_create_by(
                 sex: n.even? ? :female : :male,
                 entry_year: Time.zone.now.year,
-                entry_date: Time.zone.now,
+                entry_date: rand(Time.zone.now - 1.year..Time.zone.now - 6.months),
                 entry_point: '',
                 collected: false,
                 tag: "#{n+1}-#{fac_ent[:code]}",
