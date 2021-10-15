@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MeasurementsController, type: :controller do
+describe MeasurementsController, type: :controller do
   include Devise::Test::ControllerHelpers
 
   let(:user) { FactoryBot.create(:user) }
