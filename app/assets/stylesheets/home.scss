@@ -1,5 +1,71 @@
-.has-bg-img {
-  background-image: url("/images/abalone-hero.png"), linear-gradient(45deg, rgba(61, 24, 144, 0.8) 0%, rgba(105, 120, 228, 0.8) 100%);
+@import "variables";
+@import "mixins";
+@import "utils";
+
+
+.hero {
+  background-image: url("/assets/gary_web.png"), linear-gradient(45deg, rgba(61, 24, 144, 0.8) 0%, rgba(105, 120, 228, 0.8) 100%);
   background-repeat: no-repeat;
-  background-position: center center;
+  background-position: right;
+  color: $color-light;
+  @media (max-width: $tablet) {
+    background-image: linear-gradient(45deg, rgba(61, 24, 144, 0.8) 0%, rgba(105, 120, 228, 0.8) 100%);
+  }
+  @media (max-width: $desktop-max) {
+    background-color: linear-gradient(45deg, rgba(61, 24, 144, 0.8) 0%, rgba(105, 120, 228, 0.8) 100%);
+  }
+  &-container {
+    display: flex;
+    padding: 30px;
+  }
+  &-title{
+    font-size: 60px;
+  }
+  &-subtitle {
+    font-size: 28px;
+  }
+  &-left{
+    display: flex;
+    flex-basis: 600px;
+    flex-direction: column;
+  }
+}
+
+.dashboard-cards {
+  background-color: $color-green-bg;
+  padding: 30px;
+  margin:30px;
+  color: $color-light;
+  flex-grow: 1;
+  border-radius: 10px;
+  text-align: center;
+  min-height: 238px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.white-btn {
+  background-color: $color-light;
+  color: $color-green-bg !important;
+  border-radius: 6px;
+  padding: 8px 16px;
+  &:hover {
+    color: $color-green-bg !important;
+    opacity: 0.9;
+  }
+}
+
+.bottom_content {
+  background-color: $color-grey-bg;
+  padding: 60px 0px;
+  &_container {
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-basis: 593px;
+    margin-bottom: 40px;
+  }
+
 }
