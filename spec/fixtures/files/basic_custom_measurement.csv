@@ -5,3 +5,5 @@ date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort
 9/01/21,Animal,gonad score,78,September Survey,Test Enclosure,Test Cohort,F-AOP,
 9/01/21,Animal,length,16,September Survey,Test Enclosure,Test Cohort,M-AOP,
 9/01/21,Animal,gonad score,46,September Survey,Test Enclosure,Test Cohort,M-AOP,
+10/01/21,Animal,animal mortality event,,October Survey, Test Enclosure, Test Cohort, M-AOP,sacrifice
+10/01/21,Cohort,cohort mortality event,2,October Survey, Test Enclosure, Test Cohort, M-AOP,sacrifice
