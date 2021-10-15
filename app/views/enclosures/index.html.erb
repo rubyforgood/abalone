@@ -4,19 +4,25 @@
     <div class="flex md:flex-row flex-col md:justify-between mb-4">
       <h1 class="text-title2 text-center">Enclosures</h1>
       <div class="flex items-center justify-center">
-        <%= link_to new_enclosure_path, class: "inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
-          <%= image_tag  "icons/plus.png", size: 17 %>
-          <span class="ml-2 hidden md:block">New Enclosure</span>
-          <span class="ml-2 md:hidden">New</span>
+        <%= link_to new_enclosure_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2 hidden md:block">New Enclosure</span>
+            <span class="ml-2 md:hidden">New</span>
+          </button>  
         <% end %>
-        <%= link_to csv_upload_enclosures_path, class: "inline-flex items-center px-4 py-2 mr-4 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
-          <%= image_tag  "icons/plus.png", size: 17 %>
-          <span class="ml-2 hidden md:block">Upload CSV</span>
-          <span class="ml-2 md:hidden">Upload</span>
+        <%= link_to csv_upload_enclosures_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2 hidden md:block">Upload CSV</span>
+            <span class="ml-2 md:hidden">Upload</span>
+          </button>   
         <% end %>
-        <%= link_to enclosures_path(format: :csv), id: "export_button", class: "inline-flex items-center px-4 py-2 font-bold text-white rounded bg-primary-dark hover:bg-primary" do %>
-          <span class="ml-2 hidden md:block">Export to CSV</span>
-          <span class="ml-2 md:hidden">Export</span>
+        <%= link_to enclosures_path(format: :csv), id: "export_button" do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <span class="ml-2 hidden md:block">Export to CSV</span>
+            <span class="ml-2 md:hidden">Export</span>
+          </button>   
         <% end %>
       </div>
     </div>
