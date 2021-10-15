@@ -33,7 +33,7 @@ describe 'Home Page Statistics', type: :system do
       expect(page).to have_selector('a[tabindex=6]')    # Animals link
       expect(page).to have_selector('a[tabindex=7]')    # Cohorts link
       expect(page).to have_selector('a[tabindex=8]')    # Uploads dropdown
-      expect(page).to have_selector('a[tabindex=18]')   # Users dropdown
+      expect(page).to have_selector('a[tabindex=18]')   # User dropdown
 
       expect(page).to_not have_selector('a[tabindex=14]') # Admin dropdown
     end

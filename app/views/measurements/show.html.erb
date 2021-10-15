@@ -1,0 +1,32 @@
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-start mb-4">
+      <%= link_to measurements_path do %>
+        <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center">
+          <span><< Back</span>
+        </button>
+      <% end %>
+    </div>
+    <div>
+      <h1 class="text-title3 mb-4">Measurement</h1>
+    </div>
+    <div class="block">
+      <div class="text-sm text-caption-light font-medium uppercase">Value</div>
+      <%= @measurement.value %>
+      <div class="text-sm text-caption-light font-medium uppercase mt-2">Subject Type</div>
+      <%= @measurement.subject_type %>
+      <div class="text-sm text-caption-light font-medium uppercase mt-2">Date</div>
+      <%= @measurement.date %>
+      <div class="text-sm text-caption-light font-medium uppercase mt-2">Measurement Type</div>
+      <%= @measurement.measurement_type&.name %>
+      <div class="text-sm text-caption-light font-medium uppercase mt-2">Measurement Event</div>
+      <%= @measurement.measurement_event&.name %>
+      <div class="text-sm text-caption-light font-medium uppercase mt-2">
+        <%= subject_name_label %>
+      </div>
+        <%= subject_name_value %>
+    </div>
+    <%= link_to '<< BACK', measurements_path, class: "mr-3 mb-3 button-outline-primary" %>
+  </div>
+</section>
