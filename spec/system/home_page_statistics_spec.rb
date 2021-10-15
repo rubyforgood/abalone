@@ -21,9 +21,9 @@ describe 'Home Page Statistics', type: :system do
       expect(page.all('h1').count).to eq(1)
       expect(page.find('h1').text).to eq('Abalone Analytics')
       expect(page.find('h2').text).to eq('Your organization: White Abalone')
-      expect(page.all('.container .shadow')[0].find('.text-title4').text).to eq('1') # Total No. of Animals
-      expect(page.all('.container .shadow')[1].find('.text-title4').text).to eq('1') # Number of Facilities
-      expect(page.all('.container .shadow')[2].find('.text-title4').text).to eq('1') # Number of Cohorts
+      expect(page.all('.container .dashboard-cards')[0].find('.text-title4').text).to eq('1') # Total No. of Animals
+      expect(page.all('.container .dashboard-cards')[1].find('.text-title4').text).to eq('1') # Number of Facilities
+      expect(page.all('.container .dashboard-cards')[2].find('.text-title4').text).to eq('1') # Number of Cohorts
 
       expect(page).to have_selector('span[tabindex=1]') # Abalone Analytics link
       expect(page).to have_selector('a[tabindex=2]')    # Reports link
