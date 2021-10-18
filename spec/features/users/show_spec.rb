@@ -37,6 +37,6 @@ describe "When I visit the user Show page" do
     another_user = create(:user)
     visit user_path(another_user)
 
-    expect(page).to have_content("You can only interact with data of your organization.")
+    expect(page).to have_content("You are not authorized to access this resource.")
   end
 end

@@ -1,7 +1,7 @@
 class MeasurementTypesController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_measurement_type, only: [:edit, :update, :destroy]
-  before_action :of_organization, only: %i[show edit update destroy]
+  before_action :set_measurement_type, only: %i[edit update destroy]
+  load_and_authorize_resource
 
   def index
     @measurement_types = MeasurementType.for_organization(current_organization)
@@ -46,9 +46,5 @@ class MeasurementTypesController < ApplicationController
       :name,
       :unit
     ).merge(organization_id: current_organization.id)
-  end
-
-  def of_organization
-    authorize! :same_organization, @measurement_type
   end
 end

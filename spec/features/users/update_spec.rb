@@ -30,6 +30,6 @@ describe "When I visit the user Edit page" do
 
     visit edit_user_path(user)
 
-    expect(page).to have_content 'You can only interact with data of your organization.'
+    expect(page).to have_content 'You are not authorized to access this resource.'
   end
 end

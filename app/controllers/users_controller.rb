@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :of_organization, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   def index
     @users = current_organization.users
@@ -57,9 +57,5 @@ class UsersController < ApplicationController
 
   def set_user
     @user = current_organization.users.find_by(id: params[:id])
-  end
-
-  def of_organization
-    authorize! :same_organization, @user
   end
 end

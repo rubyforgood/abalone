@@ -5,36 +5,18 @@ class Ability
   def initialize(user)
     return unless user.present?
 
-    can :same_organization, Animal do |item|
-      item.organization_id == user.organization_id
-    end
+    can %i[show destroy], ProcessedFile, organization_id: user.organization_id
 
-    can :same_organization, Cohort do |item|
-      item.organization_id == user.organization_id
-    end
-
-    can :same_organization, Enclosure do |item|
-      item.organization_id == user.organization_id
-    end
-
-    can :same_organization, ExitType do |item|
-      item.organization_id == user.organization_id
-    end
-
-    can :same_organization, Facility do |item|
-      item.organization_id == user.organization_id
-    end
-
-    can :same_organization, ProcessedFile do |item|
-      item.organization_id == user.organization_id
-    end
-
-    can :same_organization, MeasurementType do |item|
-      item.organization_id == user.organization_id
-    end
-
-    can :same_organization, User do |item|
-      item.organization_id == user.organization_id
+    [
+      Animal,
+      Cohort,
+      Enclosure,
+      ExitType,
+      Facility,
+      MeasurementType,
+      User
+    ].each do |model|
+      can :manage, model, organization_id: user.organization_id
     end
   end
 end

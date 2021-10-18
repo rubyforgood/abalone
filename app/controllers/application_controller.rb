@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   # Error page for CanCanCan
   rescue_from CanCan::AccessDenied do
-    flash[:alert] = 'You can only interact with data of your organization.'
+    flash[:alert] = 'You are not authorized to access this resource.'
     redirect_back fallback_location: root_path, status: 302
   end
 end

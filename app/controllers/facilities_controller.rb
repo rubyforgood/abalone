@@ -1,6 +1,6 @@
 class FacilitiesController < ApplicationController
-  before_action :set_facility, only: [:edit, :update, :destroy]
-  before_action :of_organization, only: %i[edit update destroy]
+  before_action :set_facility, only: %i[edit update destroy]
+  load_and_authorize_resource
 
   # GET /facilities
   # GET /facilities.csv
@@ -80,9 +80,5 @@ class FacilitiesController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def facility_params
     params.require(:facility).permit(:name, :code)
-  end
-
-  def of_organization
-    authorize! :same_organization, @facility
   end
 end

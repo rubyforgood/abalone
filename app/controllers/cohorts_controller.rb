@@ -1,6 +1,6 @@
 class CohortsController < ApplicationController
   before_action :set_cohort, only: %i[show edit update destroy]
-  before_action :of_organization, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   def index
     @cohorts = Cohort.for_organization(current_organization)
@@ -58,9 +58,5 @@ class CohortsController < ApplicationController
       :female_id,
       :enclosure_id
     ).merge(organization_id: current_organization.id)
-  end
-
-  def of_organization
-    authorize! :same_organization, @cohort
   end
 end

@@ -12,7 +12,7 @@ describe "upload Measurement category", type: :feature do
       FactoryBot.create(:processed_file, status: "Failed")
       visit file_uploads_path
       click_on 'Remove upload'
-      expect(page).to have_content('You can only interact with data of your organization.')
+      expect(page).to have_content('You are not authorized to access this resource.')
     end
 
     it "user can removes the failed upload if it belong to the current organization" do

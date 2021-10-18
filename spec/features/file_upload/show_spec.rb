@@ -21,7 +21,7 @@ describe "When I visit the File Uploads show page", type: :feature do
     processed_file = create(:processed_file)
 
     visit show_processed_file_path(processed_file.id)
-    expect(page).to have_content("You can only interact with data of your organization")
+    expect(page).to have_content("You are not authorized to access this resource.")
   end
 
   it "shows all the values that have been imported" do

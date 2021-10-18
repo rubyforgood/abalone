@@ -23,6 +23,6 @@ describe "When I visit the facility Show page" do
 
     visit facility_path(facility)
 
-    expect(page).to have_content("You can only interact with data of your organization.")
+    expect(page).to have_content("You are not authorized to access this resource.")
   end
 end

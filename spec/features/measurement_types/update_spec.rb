@@ -39,6 +39,6 @@ describe "When I visit the measurement_type Edit page" do
     measurement_type = create(:measurement_type)
     visit edit_measurement_type_path(measurement_type)
 
-    expect(page).to have_content 'You can only interact with data of your organization.'
+    expect(page).to have_content 'You are not authorized to access this resource.'
   end
 end

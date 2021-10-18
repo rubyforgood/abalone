@@ -26,6 +26,6 @@ describe "When I visit the cohort Edit page" do
 
     visit edit_cohort_path(cohort)
 
-    expect(page).to have_content 'You can only interact with data of your organization.'
+    expect(page).to have_content 'You are not authorized to access this resource.'
   end
 end

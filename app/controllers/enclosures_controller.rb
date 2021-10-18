@@ -1,7 +1,7 @@
 class EnclosuresController < ApplicationController
-  before_action :set_enclosure, only: [:show, :edit, :update, :destroy]
-  before_action :set_locations, only: [:new, :edit]
-  before_action :of_organization, only: %i[show edit update destroy]
+  before_action :set_enclosure, only: %i[show edit update destroy]
+  before_action :set_locations, only: %i[new edit]
+  load_and_authorize_resource
 
   def index
     @enclosures = Enclosure.for_organization(current_organization).includes(location: :facility)
@@ -72,9 +72,5 @@ class EnclosuresController < ApplicationController
     @locations = Location.for_organization(current_user.organization).sort_by do |location|
       location.name_with_facility.downcase
     end
-  end
-
-  def of_organization
-    authorize! :same_organization, @enclosure
   end
 end

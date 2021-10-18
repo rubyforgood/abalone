@@ -30,6 +30,6 @@ describe "When I visit the facility Edit page" do
 
     visit edit_facility_path(facility)
 
-    expect(page).to have_content 'You can only interact with data of your organization.'
+    expect(page).to have_content 'You are not authorized to access this resource.'
   end
 end
