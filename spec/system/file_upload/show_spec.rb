@@ -10,6 +10,7 @@ describe "When I visit the File Uploads show page", type: :system do
   let!(:measurement_type4) { create(:measurement_type, name: 'animal mortality event', unit: 'n/a', organization: organization) }
   let!(:measurement_type5) { create(:measurement_type, name: 'cohort mortality event', unit: 'number', organization: organization) }
   let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: organization) }
+  let!(:exit_type) { create(:exit_type, organization: organization) }
 
   let(:file) { File.read(Rails.root.join("spec/fixtures/files/basic_custom_measurement.csv")) }
   let(:processed_file) { create(:processed_file) }

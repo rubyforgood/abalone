@@ -6,18 +6,27 @@ RSpec.describe CsvImporter do
   let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: organization) }
   let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: organization) }
   let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: organization) }
+  let!(:exit_type) { create(:exit_type, organization: organization) }
 
   describe "#process" do
     let(:processed_file) { create(:processed_file) }
     let(:category_name) { "Measurement" }
 
     context "when csv file is perfect" do
-      it "imports all the records" do
+      it "imports all the Measurement records" do
         file = File.read(Rails.root.join("spec/fixtures/files/basic_custom_measurement.csv"))
 
         expect do
           CsvImporter.new(file, category_name, processed_file.id, organization).call
         end.to change { Measurement.count }.by 6
+      end
+
+      it "imports all the Mortality Event records" do
+        file = File.read(Rails.root.join("spec/fixtures/files/basic_custom_measurement.csv"))
+
+        expect do
+          CsvImporter.new(file, category_name, processed_file.id, organization).call
+        end.to change { MortalityEvent.count }.by 2
       end
     end
 

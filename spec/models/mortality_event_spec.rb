@@ -116,7 +116,7 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
       end
 
       it 'fails without an exit_type' do
-        expect{ subject }.to raise_error(KeyError)
+        expect { subject }.to raise_error(KeyError)
       end
     end
   end
