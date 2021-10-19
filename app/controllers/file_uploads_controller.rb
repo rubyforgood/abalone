@@ -14,7 +14,8 @@ class FileUploadsController < ApplicationController
   end.freeze
 
   def index
-    @pagy, @processed_files = pagy(ProcessedFile.all.order(updated_at: :desc))
+    @pagy, @processed_files = pagy(ProcessedFile.for_organization(current_organization).order(updated_at: :desc))
+    @processed_files.each { |processed_file| authorize! :index, processed_file }
   end
 
   def csv_index

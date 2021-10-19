@@ -5,7 +5,7 @@ class Ability
   def initialize(user)
     return unless user.present?
 
-    can %i[show destroy], ProcessedFile, organization_id: user.organization_id
+    can %i[show destroy index], ProcessedFile, organization_id: user.organization_id
 
     [
       Animal,

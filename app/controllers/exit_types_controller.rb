@@ -1,6 +1,5 @@
 class ExitTypesController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_exit_type, only: %i[show edit update destroy]
   load_and_authorize_resource
 
   def index
@@ -43,10 +42,6 @@ class ExitTypesController < ApplicationController
   end
 
   private
-
-  def set_exit_type
-    @exit_type = ExitType.find(params[:id])
-  end
 
   def exit_type_params
     params.require(:exit_type).permit(:name, :disabled).merge(organization_id: current_organization.id)

@@ -1,5 +1,4 @@
 class AnimalsController < ApplicationController
-  before_action :set_animal, only: %i[show edit update destroy]
   load_and_authorize_resource
 
   def index
@@ -58,10 +57,6 @@ class AnimalsController < ApplicationController
   end
 
   private
-
-  def set_animal
-    @animal = Animal.find(params[:id])
-  end
 
   def animal_params
     params.require(:animal).permit(
