@@ -94,6 +94,7 @@ namespace :blazer do
         GRANT SELECT ON TABLE measurement_events TO #{org_user};
         GRANT SELECT ON TABLE measurement_types TO #{org_user};
         GRANT SELECT ON TABLE measurements TO #{org_user};
+        GRANT SELECT ON TABLE mortality_events TO #{org_user};
         GRANT SELECT ON TABLE operations TO #{org_user};
         ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
         COMMIT;
@@ -112,6 +113,7 @@ namespace :blazer do
         GRANT SELECT ON TABLE measurement_events TO #{org_user};
         GRANT SELECT ON TABLE measurement_types TO #{org_user};
         GRANT SELECT ON TABLE measurements TO #{org_user};
+        GRANT SELECT ON TABLE mortality_events TO #{org_user};
         GRANT SELECT ON TABLE operations TO #{org_user};
         ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{org_user};
         COMMIT;

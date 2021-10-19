@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_10_204649) do
+
+ActiveRecord::Schema.define(version: 2021_10_11_181422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -248,9 +249,11 @@ ActiveRecord::Schema.define(version: 2021_10_10_204649) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "exit_type_id"
+    t.bigint "organization_id"
     t.index ["animal_id"], name: "index_mortality_events_on_animal_id"
     t.index ["cohort_id"], name: "index_mortality_events_on_cohort_id"
     t.index ["exit_type_id"], name: "index_mortality_events_on_exit_type_id"
+    t.index ["organization_id"], name: "index_mortality_events_on_organization_id"
   end
 
   create_table "operation_batches", force: :cascade do |t|
@@ -323,8 +326,7 @@ ActiveRecord::Schema.define(version: 2021_10_10_204649) do
   end
 
   create_table "versions", force: :cascade do |t|
-    t.string "item_type"
-    t.string "{:null=>false}"
+    t.string "item_type", null: false
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
@@ -349,6 +351,7 @@ ActiveRecord::Schema.define(version: 2021_10_10_204649) do
   add_foreign_key "measurements", "organizations"
   add_foreign_key "measurements", "processed_files"
   add_foreign_key "mortality_events", "exit_types"
+  add_foreign_key "mortality_events", "organizations"
   add_foreign_key "operations", "enclosures"
   add_foreign_key "operations", "organizations"
   add_foreign_key "processed_files", "organizations"

@@ -193,7 +193,7 @@ GEM
       byebug (~> 11.0)
       pry (~> 0.13.0)
     public_suffix (4.0.6)
-    puma (5.5.0)
+    puma (5.5.2)
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
@@ -274,7 +274,7 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.12.0)
       parser (>= 3.0.1.1)
-    rubocop-rails (2.12.3)
+    rubocop-rails (2.12.4)
       activesupport (>= 4.2.0)
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -349,7 +349,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres_enum (~> 1.6)
   annotate
-  blazer
+  blazer (= 2.4.7)
   bootsnap (>= 1.1.0)
   brakeman
   byebug

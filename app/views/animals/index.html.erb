@@ -1,22 +1,27 @@
-<section class="h-screen bg-background p-12">
+<section class="h-screen bg-background md:p-12 sm:w-100 p-0">
   <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
     <p id="notice"><%= notice %></p>
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-title2">Animals</h1>
-      <div class="flex items-center">
+    <div class="flex md:flex-row flex-col md:justify-between mb-4">
+      <h1 class="text-title2 text-center">Animals</h1>
+      <div class="flex items-center justify-center">
         <%= link_to new_animal_path do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
             <%= image_tag  "icons/plus.png", size: 17 %>
-            <span class="ml-2">New Animal</span>
+            <span class="ml-2 hidden md:block">New Animal</span>
+            <span class="ml-2 md:hidden">New</span>
           </button>
         <% end %>
-        <%= link_to csv_upload_animals_path, class: "bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4 hover:text-white" do %>
-          <%= image_tag  "icons/plus.png", size: 17 %>
-          <span class="ml-2">Upload CSV</span>
+        <%= link_to csv_upload_animals_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2 hidden md:block">Upload CSV</span>
+            <span class="ml-2 md:hidden">Upload</span>
+          </button>  
         <% end %>
         <%= link_to animals_path(format: :csv), id: "export_button" do %>
           <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
-            Export to CSV
+            <span class="ml-2 hidden md:block">Export to CSV</span>
+            <span class="ml-2 md:hidden">Export</span>
           </button>
         <% end %>
       </div>
@@ -28,19 +33,23 @@
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Entry Year</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Cohort</th>
           <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">SHL Numbers</th>
-          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="colgroup" colspan="3">Actions</th>
+          <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
         <% @animals.each do |animal| %>
           <tr>
-            <td class="px-4 py-2"><%= animal.tag %></td>
-            <td class="px-4 py-2"><%= animal.entry_year %></td>
-            <td class="px-4 py-2"><%= animal.cohort_name %></td>
-            <td class="px-4 py-2"><%= animal.shl_number_codes(", ") %></td>
-            <td class="text-primary-dark px-4 py-2 align-middle"><%= link_to 'Show', animal, 'aria-label' => "Show #{animal.tag}" %></td>
-            <td class="px-4 py-2 w-12 align-middle"><%= link_to image_tag("icons/edit.svg"), edit_animal_path(animal), title: 'Edit' %></td>
-            <td class="px-4 py-2 w-12 align-middle"><%= link_to image_tag("icons/trash.svg"), animal, title: 'Delete', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td class="px-4 py-2" data-label="Tag"><p><%= animal.tag %></p></td>
+            <td class="px-4 py-2" data-label="Entry Year"><%= animal.entry_year %></td>
+            <td class="px-4 py-2" data-label="Cohort"><%= animal.cohort_name %></td>
+            <td class="px-4 py-2" data-label="SHL Numbers">
+              <% if animal.shl_number_codes(", ").blank? %>
+                No SHL numbers present
+              <% else %> 
+                <%= animal.shl_number_codes(", ") %>
+              <% end %>
+            </td>
+            <td class="text-base px-4 py-2 align-middle flex items-center" data-label="Actions"><%= link_to 'Show', animal, 'aria-label' => "Show #{animal.tag}", class: 'text-primary-dark' %> <%= link_to image_tag("icons/edit.svg"), edit_animal_path(animal), title: 'Edit', class: 'w-5 mx-2' %> <%= link_to image_tag("icons/trash.svg"), animal, title: 'Delete', method: :delete, data: { confirm: 'Are you sure?' }, class: 'w-5 mx-2' %></td>
           </tr>
         <% end %>
       </tbody>

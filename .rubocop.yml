@@ -66,6 +66,7 @@ AllCops:
     - 'db/**/*'
     - 'bin/**/*'
     - 'config/routes.rb'
+    - 'app/overrides/controllers/blazer/queries_controller_override.rb'
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
   # Cop names are displayed in offense messages by default. Change behavior
