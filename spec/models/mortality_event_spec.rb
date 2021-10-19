@@ -102,6 +102,23 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
         expect(subject.animal).to eq(nil)
       end
     end
+
+    context "when no exit_type is present" do
+      let(:attrs) do
+        {
+          processed_file_id: processed_file.id,
+          date: mortality_date,
+          cohort_name: cohort.name,
+          organization_id: organization.id,
+          measurement_type: "cohort mortality event",
+          value: "3"
+        }
+      end
+
+      it 'fails without an exit_type' do
+        expect{ subject }.to raise_error(KeyError)
+      end
+    end
   end
 
   describe "#display_data" do
