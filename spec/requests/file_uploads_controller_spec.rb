@@ -56,9 +56,31 @@ describe FileUploadsController, type: :request do
 
   describe '#show' do
     it 'should have response code 200' do
-      file = create(:processed_file)
-      get file_upload_path(file.id)
+      processed_file = create(:processed_file, organization_id: user.organization.id)
+      get file_upload_path(processed_file.id)
       expect(response).to have_http_status(:success)
+    end
+
+    it 'should have response code 302 for a processed file of another organization' do
+      processed_file_from_another_orga = create(:processed_file)
+      get file_upload_path(processed_file_from_another_orga.id)
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  describe '#destroy' do
+    it 'should not delete a processed file of another organization' do
+      processed_file_from_another_orga = create(:processed_file)
+      expect do
+        delete file_upload_path(processed_file_from_another_orga)
+      end.to change(ProcessedFile, :count).by(0)
+    end
+
+    it 'should have delete the entity' do
+      processed_file = create(:processed_file, organization: user.organization)
+      expect do
+        delete file_upload_path(processed_file)
+      end.to change(ProcessedFile, :count).by(-1)
     end
   end
 

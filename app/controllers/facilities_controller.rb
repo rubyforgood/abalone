@@ -1,5 +1,5 @@
 class FacilitiesController < ApplicationController
-  before_action :set_facility, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /facilities
   # GET /facilities.csv
@@ -16,6 +16,7 @@ class FacilitiesController < ApplicationController
   # GET /facilities/1.json
   def show
     @facility = Facility.includes(:locations).find(params[:id])
+    authorize! :same_organization, @facility
   end
 
   # GET /facilities/new
@@ -69,11 +70,6 @@ class FacilitiesController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_facility
-    @facility = Facility.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def facility_params

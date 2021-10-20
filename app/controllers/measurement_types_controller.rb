@@ -1,6 +1,6 @@
 class MeasurementTypesController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_measurement_type, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @measurement_types = MeasurementType.for_organization(current_organization)
@@ -35,10 +35,6 @@ class MeasurementTypesController < ApplicationController
   def edit; end
 
   private
-
-  def set_measurement_type
-    @measurement_type = MeasurementType.find(params[:id])
-  end
 
   def measurement_type_params
     params.require(:measurement_type).permit(

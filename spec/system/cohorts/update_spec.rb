@@ -8,7 +8,7 @@ describe "When I visit the cohort Edit page", type: :system do
   end
 
   it "And fill out the form and click the submit button, cohort should be updated" do
-    cohort = create(:cohort)
+    cohort = create(:cohort, organization: user.organization)
 
     visit edit_cohort_path(cohort)
 
@@ -19,5 +19,13 @@ describe "When I visit the cohort Edit page", type: :system do
 
     expect(page).to have_content 'Cohort was successfully updated.'
     expect(page).to have_content "Gary's new cohort"
+  end
+
+  it "I can't update a cohort of another organization" do
+    cohort = create(:cohort)
+
+    visit edit_cohort_path(cohort)
+
+    expect(page).to have_content 'You are not authorized to access this resource.'
   end
 end

@@ -7,4 +7,5 @@ class Organization < ApplicationRecord
   has_many :operations
   has_many :facilities
   has_many :animals
+  has_many :processed_files
 end

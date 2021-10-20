@@ -24,4 +24,12 @@ describe "When I visit the user Edit page", type: :system do
       expect(page).to have_content('another@email.com')
     end
   end
+
+  it "I can't update a measurement type of another organization" do
+    user = create(:user)
+
+    visit edit_user_path(user)
+
+    expect(page).to have_content 'You are not authorized to access this resource.'
+  end
 end

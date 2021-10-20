@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize_admin!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @users = current_organization.users
@@ -52,9 +52,5 @@ class UsersController < ApplicationController
       :password,
       :role
     ).merge(organization_id: current_organization.id)
-  end
-
-  def set_user
-    @user = current_organization.users.find_by(id: params[:id])
   end
 end

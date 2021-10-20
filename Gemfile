@@ -36,6 +36,9 @@ gem 'webpacker', '~> 5'
 # Pagination helper
 gem 'pagy', '~> 4.11'
 
+# Simple authorization solution for Rails. All permissions are stored in a single location.
+gem 'cancancan', '~> 3.3'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

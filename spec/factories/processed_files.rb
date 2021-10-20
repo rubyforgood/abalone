@@ -23,5 +23,6 @@ FactoryBot.define do
     job_stats { "" }
     job_errors {}
     temporary_file
+    organization
   end
 end
