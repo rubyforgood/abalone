@@ -12,27 +12,17 @@ class Measurement < ApplicationRecord
   delegate :name, to: :measurement_type, prefix: true, allow_nil: true
   delegate :name, to: :measurement_event, prefix: true, allow_nil: true
 
-  HEADERS = {
-    DATE: "date",
-    SUBJECT_TYPE: "subject_type",
-    MEASUREMENT_TYPE: "measurement_type",
-    VALUE: "value",
-    MEASUREMENT_EVENT: "measurement_event",
-    ENCLOSURE_NAME: "enclosure_name",
-    COHORT_NAME: "cohort_name",
-    TAG: 'tag'
-  }.freeze
-
-  ROW_VALUES = {
-    DATE: "date",
-    SUBJECT_TYPE: "subject_type",
-    MEASUREMENT_TYPE: "measurement_type_name",
-    VALUE: "value",
-    MEASUREMENT_EVENT: "measurement_event_name",
-    ENCLOSURE_NAME: "enclosure_name",
-    COHORT_NAME: "cohort_name",
-    TAG: 'animal_tag'
-  }.freeze
+  HEADERS = [
+    "Date",
+    "Subject Type",
+    "Measurement Type",
+    "Value",
+    "Measurement Event",
+    "Enclosure Name",
+    "Cohort Name",
+    "Tag",
+    "Reason"
+  ].freeze
 
   def cohort_name
     subject.is_a?(Cohort) ? subject.name : nil
@@ -44,6 +34,18 @@ class Measurement < ApplicationRecord
 
   def animal_tag
     subject.is_a?(Animal) ? subject.tag : nil
+  end
+
+  # We want mortality events to be created as part of measurement file uploads, which means that if a measurement
+  # file is uploaded and it has mortality events, we want to show that data as well
+  def self.data_for_file(processed_file_id)
+    where(processed_file_id: processed_file_id) + MortalityEvent.where(processed_file_id: processed_file_id)
+  end
+
+  def display_data
+    [
+      date, subject_type, measurement_type_name, value, measurement_event_name, enclosure_name, cohort_name, animal_tag, nil
+    ]
   end
 
   # The below code is unstable. This is retrofitting the values from the seeded CSV

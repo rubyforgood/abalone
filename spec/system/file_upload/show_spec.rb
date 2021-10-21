@@ -7,7 +7,10 @@ describe "When I visit the File Uploads show page", type: :system do
   let!(:measurement_type1) { create(:measurement_type, organization: user.organization) }
   let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: user.organization) }
   let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: user.organization) }
+  let!(:measurement_type4) { create(:measurement_type, name: 'animal mortality event', unit: 'n/a', organization: user.organization) }
+  let!(:measurement_type5) { create(:measurement_type, name: 'cohort mortality event', unit: 'number', organization: user.organization) }
   let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: user.organization) }
+  let!(:exit_type) { create(:exit_type, organization: user.organization) }
 
   let(:file) { File.read(Rails.root.join("spec/fixtures/files/basic_custom_measurement.csv")) }
   let(:processed_file) { create(:processed_file, organization: user.organization) }
@@ -27,13 +30,13 @@ describe "When I visit the File Uploads show page", type: :system do
   it "shows all the values that have been imported" do
     expect do
       CsvImporter.new(file, category_name, processed_file.id, user.organization).call
-    end.to change { Measurement.count }
+    end.to change { Measurement.count + MortalityEvent.count }
 
     visit show_processed_file_path(processed_file.id)
     expect(page).to have_content("Processed File")
 
     within(".table thead") do
-      Measurement::HEADERS.keys.map(&:downcase).each do |header|
+      Measurement::HEADERS.each do |header|
         expect(page).to have_content(header)
       end
     end
@@ -56,6 +59,20 @@ describe "When I visit the File Uploads show page", type: :system do
         else
           expect(measurement.animal_tag).not_to be_nil
           expect(page).to have_content(measurement.animal_tag)
+        end
+      end
+
+      MortalityEvent.find_each do |event|
+        expect(page).to have_content(event.mortality_date)
+        expect(page).to have_content("mortality event")
+
+        case event.send(:mortality_type)
+        when "Animal"
+          expect(page).to have_content("Animal")
+          expect(page).to have_content(event.animal&.tag)
+        else
+          expect(page).to have_content("Cohort")
+          expect(page).to have_content(event.cohort&.name)
         end
       end
     end

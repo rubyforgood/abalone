@@ -29,10 +29,8 @@ class FileUploadsController < ApplicationController
   def show
     authorize! :show, @processed_file
     record_class = CsvImporter::CATEGORIES.find { |v| v == @processed_file.category }.constantize
-    @headers = record_class::HEADERS.keys.map(&:downcase)
-    @row_values = record_class::ROW_VALUES.values.map(&:downcase)
-    @records = record_class.where(processed_file_id: @processed_file.id)
-
+    @headers = record_class::HEADERS
+    @records = record_class.data_for_file(@processed_file.id)
     respond_to do |format|
       format.html
       format.csv { send_data @processed_file.temporary_file.contents, filename: @processed_file.filename }

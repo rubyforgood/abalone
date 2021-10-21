@@ -3,5 +3,9 @@ FactoryBot.define do
     cohort
     animal
     organization
+
+    trait :for_cohort do
+      animal { nil }
+    end
   end
 end
