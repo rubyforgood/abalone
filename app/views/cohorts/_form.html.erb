@@ -1,4 +1,4 @@
-<%= form_with(model: cohort, local: true, html: { class: "w-full max-w-md" }) do |form| %>
+<%= form_with(model: cohort, local: true, html: { class: "w-full" }) do |form| %>
   <% if cohort.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(animal.errors.count, "error") %> prohibited this cohort from being saved:</h2>
@@ -14,7 +14,7 @@
       <%= form.label :name, class: 'text-sm text-caption-light font-medium uppercase' %>
     </div>
     <div>
-      <%= form.text_field :name, class: 'input mb-2' %>
+      <%= form.text_field :name, class: 'input w-full mb-2' %>
     </div>
   </div>
   <div class="mb-2">
@@ -38,7 +38,7 @@
       <%= form.label :enclosure, class: 'text-sm text-caption-light font-medium uppercase' %>
     </div>
     <div>
-      <%= form.collection_select :enclosure_id, Enclosure.for_organization(current_organization), :id, :name, include_blank: 'Select Enclosure', class: 'input mb-2' %>
+      <%= form.collection_select :enclosure_id, Enclosure.for_organization(current_organization), :id, :name, {include_blank: 'Select Enclosure'}, {class: 'input w-full mb-2'} %>
     </div>
   </div>
   <div>
