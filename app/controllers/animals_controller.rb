@@ -1,5 +1,5 @@
 class AnimalsController < ApplicationController
-  before_action :set_animal, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @animals = Animal.for_organization(current_organization).includes(animals_shl_numbers: :shl_number)
@@ -57,10 +57,6 @@ class AnimalsController < ApplicationController
   end
 
   private
-
-  def set_animal
-    @animal = Animal.find(params[:id])
-  end
 
   def animal_params
     params.require(:animal).permit(

@@ -7,12 +7,15 @@ class FileUploadsController < ApplicationController
   #
   # Ex: Selecting "Measurement" in the form will post "Measurement"
   # and process the data with a MeasurementJob.
+  before_action :set_processed_file, only: %i[show destroy]
+
   FILE_UPLOAD_CATEGORIES = CsvImporter::CATEGORIES.map do |category|
     [category, category.delete(' ')]
   end.freeze
 
   def index
-    @pagy, @processed_files = pagy(ProcessedFile.all.order(updated_at: :desc))
+    @pagy, @processed_files = pagy(ProcessedFile.for_organization(current_organization).order(updated_at: :desc))
+    @processed_files.each { |processed_file| authorize! :index, processed_file }
   end
 
   def csv_index
@@ -24,7 +27,7 @@ class FileUploadsController < ApplicationController
   end
 
   def show
-    @processed_file = ProcessedFile.find(params[:id])
+    authorize! :show, @processed_file
     record_class = CsvImporter::CATEGORIES.find { |v| v == @processed_file.category }.constantize
     @headers = record_class::HEADERS
     @records = record_class.data_for_file(@processed_file.id)
@@ -49,8 +52,8 @@ class FileUploadsController < ApplicationController
   end
 
   def destroy
-    processed_file = ProcessedFile.find(params[:id])
-    if processed_file.destroy
+    authorize! :destroy, @processed_file
+    if @processed_file.destroy
       redirect_to file_uploads_path, notice: 'File successfully deleted'
     else
       redirect_to file_uploads_path, alert: 'There was an issue deleting this file upload'
@@ -58,6 +61,10 @@ class FileUploadsController < ApplicationController
   end
 
   private
+
+  def set_processed_file
+    @processed_file = ProcessedFile.find(params[:id])
+  end
 
   def input_files
     params[:input_files]

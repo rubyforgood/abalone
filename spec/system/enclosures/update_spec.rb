@@ -9,7 +9,7 @@ describe "When I visit the enclosure Edit page", type: :system do
   end
 
   it "And fill out the form and click the submit button, enclosure should be updated" do
-    enclosure = create(:enclosure)
+    enclosure = create(:enclosure, organization: user.organization)
 
     visit edit_enclosure_path(enclosure)
 
@@ -22,5 +22,13 @@ describe "When I visit the enclosure Edit page", type: :system do
     expect(page).to have_content 'Enclosure was successfully updated.'
     expect(page).to have_content(location.name)
     expect(page).to have_content "Gary's old enclosure"
+  end
+
+  it "I can't update an enclosure of another organization" do
+    enclosure = create(:enclosure)
+
+    visit edit_enclosure_path(enclosure)
+
+    expect(page).to have_content 'You are not authorized to access this resource.'
   end
 end

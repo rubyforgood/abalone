@@ -12,7 +12,7 @@ module ImportJob
     temporary_file = args[0]
     @filename = args[1]
     @organization = args[2]
-    initialize_processed_file(temporary_file, filename)
+    initialize_processed_file(temporary_file, filename, @organization)
     if already_processed?
       fail_processed_file("Already processed a file on #{already_processed_file.first.created_at.strftime('%m/%d/%Y')} with the same name: #{filename}. Data not imported!")
     elsif validate_headers(temporary_file)
@@ -75,10 +75,11 @@ module ImportJob
                                              .where(filename: filename)
   end
 
-  def initialize_processed_file(temporary_file, filename)
+  def initialize_processed_file(temporary_file, filename, organization)
     @processed_file = ProcessedFile.create(temporary_file_id: temporary_file.id,
                                            filename: filename,
                                            category: category,
+                                           organization: organization,
                                            status: 'Running')
   end
 

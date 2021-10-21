@@ -1,6 +1,6 @@
 class EnclosuresController < ApplicationController
-  before_action :set_enclosure, only: [:show, :edit, :update, :destroy]
-  before_action :set_locations, only: [:new, :edit]
+  before_action :set_locations, only: %i[new edit]
+  load_and_authorize_resource
 
   def index
     @enclosures = Enclosure.for_organization(current_organization).includes(location: :facility)
@@ -58,10 +58,6 @@ class EnclosuresController < ApplicationController
   end
 
   private
-
-  def set_enclosure
-    @enclosure = Enclosure.find(params[:id])
-  end
 
   def enclosure_params
     params.require(:enclosure).permit(:location_id, :name).merge(organization_id: current_organization.id)

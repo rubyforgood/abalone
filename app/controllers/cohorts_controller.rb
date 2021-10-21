@@ -1,5 +1,5 @@
 class CohortsController < ApplicationController
-  before_action :set_cohort, only: %i[show edit update destroy]
+  load_and_authorize_resource
 
   def index
     @cohorts = Cohort.for_organization(current_organization)
@@ -43,11 +43,6 @@ class CohortsController < ApplicationController
   end
 
   private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_cohort
-    @cohort = Cohort.find(params[:id])
-  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cohort_params

@@ -6,7 +6,7 @@ describe "download CSV file from upload files", type: :system do
   let(:user) { create(:user) }
 
   it "When I click on previous file name I download csv file" do
-    file = FactoryBot.create(:processed_file)
+    file = FactoryBot.create(:processed_file, organization: user.organization)
     sign_in user
     visit file_uploads_path
     click_on(file.filename)

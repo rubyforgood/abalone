@@ -4,25 +4,32 @@ describe "When I visit the File Uploads show page", type: :system do
   let(:user) { create(:user) }
   let(:organization) { create(:organization) }
 
-  let!(:measurement_type1) { create(:measurement_type, organization: organization) }
-  let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: organization) }
-  let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: organization) }
-  let!(:measurement_type4) { create(:measurement_type, name: 'animal mortality event', unit: 'n/a', organization: organization) }
-  let!(:measurement_type5) { create(:measurement_type, name: 'cohort mortality event', unit: 'number', organization: organization) }
-  let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: organization) }
-  let!(:exit_type) { create(:exit_type, organization: organization) }
+  let!(:measurement_type1) { create(:measurement_type, organization: user.organization) }
+  let!(:measurement_type2) { create(:measurement_type, name: 'count', unit: 'number', organization: user.organization) }
+  let!(:measurement_type3) { create(:measurement_type, name: 'gonad score', unit: 'number', organization: user.organization) }
+  let!(:measurement_type4) { create(:measurement_type, name: 'animal mortality event', unit: 'n/a', organization: user.organization) }
+  let!(:measurement_type5) { create(:measurement_type, name: 'cohort mortality event', unit: 'number', organization: user.organization) }
+  let!(:cohort) { create(:cohort, name: 'Test Cohort', organization: user.organization) }
+  let!(:exit_type) { create(:exit_type, organization: user.organization) }
 
   let(:file) { File.read(Rails.root.join("spec/fixtures/files/basic_custom_measurement.csv")) }
-  let(:processed_file) { create(:processed_file) }
+  let(:processed_file) { create(:processed_file, organization: user.organization) }
   let(:category_name) { "Measurement" }
 
   before do
     sign_in user
   end
 
+  it "I can't see the content of an import of another organization" do
+    processed_file = create(:processed_file)
+
+    visit show_processed_file_path(processed_file.id)
+    expect(page).to have_content("You are not authorized to access this resource.")
+  end
+
   it "shows all the values that have been imported" do
     expect do
-      CsvImporter.new(file, category_name, processed_file.id, organization).call
+      CsvImporter.new(file, category_name, processed_file.id, user.organization).call
     end.to change { Measurement.count + MortalityEvent.count }
 
     visit show_processed_file_path(processed_file.id)
