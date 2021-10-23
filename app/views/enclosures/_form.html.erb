@@ -16,7 +16,7 @@
       <%= form.label :location_id, class: 'text-sm text-caption-light font-medium uppercase' %>
     </div>
     <div>
-      <%= form.collection_select :location_id, @locations, :id, :name_with_facility, {}, { class: 'input w-full mb-2' }  %>
+      <%= form.collection_select :location_id, @locations, :id, :name_with_facility, { include_blank: 'Select Location' }, { class: 'input w-full mb-2' }  %>
     </div>
   </div>
 
