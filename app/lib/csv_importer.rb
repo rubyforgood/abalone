@@ -42,7 +42,7 @@ class CsvImporter
 
   def process
     row_number = 2 # assuming 1 is headers
-    
+
     ActiveRecord::Base.transaction do
       CSV.parse(
         temporary_file,
@@ -65,7 +65,7 @@ class CsvImporter
           error_details["row_number_#{row_number}"] = record.errors.details
           error_messages["Row #{row_number}"] = record.errors.full_messages
         end
- 
+
         row_number += 1
       end
 
