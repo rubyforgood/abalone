@@ -9,3 +9,18 @@
 .column.is-thinner{
   padding: .15rem .75rem;
 }
+
+.has-text-success{
+  color: hsl(141, 53%, 53%);
+}
+
+.has-text-danger{
+  color: hsl(348, 100%, 61%);
+}
+
+.trash-ico{
+  img {
+    width: 1.125rem;
+    margin: 0 auto;
+  }
+}

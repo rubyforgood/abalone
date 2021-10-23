@@ -53,14 +53,14 @@ class Measurement < ApplicationRecord
   def self.create_from_csv_data(attrs)
     # remove relational (non-attribute) data from hash to be handled separately
     measurement_event_name = attrs.fetch(:measurement_event)
-    enclosure = Enclosure.find_or_create_by!(
+    enclosure = Enclosure.find_or_create_by(
       name: attrs.fetch(:enclosure_name),
       organization_id: attrs.fetch(:organization_id)
     )
 
-    measurement_type = MeasurementType.find_by!(name: attrs.fetch(:measurement_type), organization_id: attrs.fetch(:organization_id))
+    measurement_type = MeasurementType.find_by(name: attrs.fetch(:measurement_type), organization_id: attrs.fetch(:organization_id))
 
-    measurement_event = MeasurementEvent.find_or_create_by!(
+    measurement_event = MeasurementEvent.find_or_create_by(
       name: measurement_event_name,
       organization_id: attrs.fetch(:organization_id)
     )
@@ -68,9 +68,9 @@ class Measurement < ApplicationRecord
     type = attrs.fetch(:subject_type)
     case type.downcase
     when 'animal'
-      subject = Animal.find_or_create_by!(tag: attrs.fetch(:tag), organization_id: attrs.fetch(:organization_id))
+      subject = Animal.find_or_create_by(tag: attrs.fetch(:tag), organization_id: attrs.fetch(:organization_id))
     when 'cohort'
-      subject = Cohort.find_by!(name: attrs.fetch(:cohort_name), organization_id: attrs.fetch(:organization_id))
+      subject = Cohort.find_by(name: attrs.fetch(:cohort_name), organization_id: attrs.fetch(:organization_id))
     when 'enclosure'
       subject = enclosure
     end

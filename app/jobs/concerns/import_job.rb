@@ -3,7 +3,7 @@ module ImportJob
 
   included do |base|
     attr_accessor :processed_file, :stats
-    attr_reader :job_stats, :error_details, :filename
+    attr_reader :job_stats, :error_details, :filename, :error_messages
 
     base.extend ImportJobClassMethods
   end
@@ -49,6 +49,7 @@ module ImportJob
 
     if csv_importer.errored?
       @error_details = csv_importer.error_details
+      @error_messages = csv_importer.error_messages
       log(error_details, :info)
       return false
     end
@@ -90,8 +91,15 @@ module ImportJob
 
   def fail_processed_file(error)
     @processed_file.status = 'Failed'
-    @processed_file.job_stats = error_details || {}
-    @processed_file.job_errors = error
+    @processed_file.job_stats = error_details
+    @processed_file.job_errors = error_messages.empty? ? error : format_errors(error)
+  end
+
+  def format_errors(error)
+    total_lines = error_messages.keys.length
+    total_errors = error_messages.values.map(&:length).reduce(:+)
+    messages = error_messages.map { |row, row_errors| "#{row} : #{row_errors.join(', ')}" }
+    "#{error} #{total_errors} error(s) found on #{total_lines} row(s). #{messages.join('. ')}."
   end
 
   def logger

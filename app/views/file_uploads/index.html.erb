@@ -1,61 +1,55 @@
-<section class="section">
-  <div class="container is-fluid">
-    <h1 class="text-title3 mb-4">Uploaded Files - <%= link_to "<button class='button is-link'>Upload New File</button>".html_safe, new_file_upload_path %></h1>
-    <br /><br />
-    <%- @processed_files.each do |pf| %>
-      <div class="columns">
-        <div class="column is-thinner is-1">File name:</div>
-        <div class="column is-thinner is-11">
-          <%- if pf.job_stats["rows_not_imported"].to_i > 0 %>
-            <%= link_to pf.filename, show_processing_csv_errors_path(pf.id) %>
-          <% else %>
-            <%= link_to pf.filename, show_processed_file_path(pf.id, format: :csv) %>
-          <%- end %>
-        </div>
+<section class="h-screen bg-background p-12">
+  <div class="container mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-center mb-4"><h1 class="text-title2 text-center">Uploaded Files</h1>
+      <div class="flex items-center justify-center">
+        <%= link_to new_file_upload_path do %>
+          <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center mr-4">
+            <%= image_tag  "icons/plus.png", size: 17 %>
+            <span class="ml-2 hidden md:block">Upload new file</span>
+            <span class="ml-2 md:hidden">New</span>
+          </button>
+        <% end %>
       </div>
-      <div class="columns">
-        <div class="column is-thinner is-1">Created at:</div>
-        <div class="column is-thinner is-11"><%= pf.created_at %></div>
-      </div>
-      <div class="columns">
-        <div class="column is-thinner is-1">Updated at:</div>
-        <div class="column is-thinner is-11"><%= pf.updated_at %></div>
-      </div>
-      <div class="columns">
-        <div class="column is-thinner is-1">Category at:</div>
-        <div class="column is-thinner is-11"><%= pf.category %></div>
-      </div>
-      <div class="columns">
-        <div class="column is-thinner is-1">Status at:</div>
-        <div class="column is-thinner is-11">
-          <%- if pf.status == 'Processed' %>
-            <span class="icon has-text-success">
-              <i class="fas fa-check-square"></i>
-            </span>
-            <%= pf.status %>
-          <%- else %>
-            <span class="icon has-text-danger">
-              <i class="fas fa-ban"></i>
-            </span>
-            <%= pf.status %>
-          <%- end %>
-        </div>
-      </div>
-      <div class="columns">
-        <div class="column is-thinner is-1">Errors at:</div>
-        <div class="column is-thinner is-11"><%= pf.job_errors %></div>
-      </div>
-      <div class="columns">
-        <div class="column is-thinner is-1">Statistics at:</div>
-        <div class="column is-thinner is-11"><%= pf.job_stats %></div>
-      </div>
-      <%- if pf.status == 'Processed' %>
-        <%= link_to "<button class='button is-link'>Show records loaded by this file</button>".html_safe, show_processed_file_path(pf.id) %>
-      <%- else %>
-        <%= button_to "Remove upload", file_upload_path(pf), method: :delete, class: "button button-danger" %>
-      <%- end %>
-      <hr />
-    <% end %>
-    <%== pagy_nav(@pagy) %>
+    </div>
+
+    <table class="table-auto w-full border" style="width: 100%">
+      <thead>
+      <tr class="border">
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">File</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Category</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Created</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Status</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Error</th>
+        <th class="text-sm text-caption-light font-medium px-4 py-2 uppercase" scope="col">Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+        <%- @processed_files.each do |pf| %>
+          <tr>
+            <td class="px-4 py-2 text-primary-dark text-center"> <%- if pf.job_stats["rows_not_imported"].to_i > 0 %>
+              <%= link_to pf.filename, show_processing_csv_errors_path(pf.id) %>
+              <% else %>
+                <%= link_to pf.filename, show_processed_file_path(pf.id, format: :csv) %>
+              <%- end %>
+            </td>
+            <td class="px-4 py-2"><%= pf.category %></td>
+            <td class="px-4 py-2"><%= pf.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+            <td class="px-4 py-2 text-center"><div class="<%= file_upload_status_style(pf.status) %>"></div></td>
+            <td class="px-4 py-2"><%= pf.job_errors %></td>
+            <td class="px-4 py-2 text-center">
+              <% if pf.status == 'Processed' %>
+                <%= link_to 'Show', show_processed_file_path(pf.id) %>
+              <% else %>
+                <%= link_to image_tag("icons/trash.svg"), file_upload_path(pf), title: 'Delete', method: :delete, class: 'trash-ico' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <%== pagy_nav(@pagy) %>
   </div>
 </section>
