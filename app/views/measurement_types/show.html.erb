@@ -1,0 +1,26 @@
+<section class="h-screen bg-background p-12">
+  <div class="container lg:max-w-xl mx-auto bg-white py-6 px-8 rounded-md shadow-sm">
+    <p id="notice"><%= notice %></p>
+    <div class="flex justify-between items-start mb-4">
+      <%= link_to measurement_types_path do %>
+        <button class="text-primary-dark hover:text-primary font-bold py-2 rounded inline-flex items-center">
+          <span><< Back</span>
+        </button>
+      <% end %>
+      <%= link_to edit_measurement_type_path(@measurement_type) do %>
+        <button class="bg-primary-dark hover:bg-primary text-white font-bold py-2 px-4 rounded inline-flex items-center">
+          <span>Edit Measurement Type</span>
+        </button>
+      <% end %>
+    </div>
+    <div>
+      <h1 class="text-title3 mb-4">Measurement Type</h1>
+    </div>
+    <div class="block">
+        <div class="text-sm text-caption-light font-medium uppercase">Name</div>
+        <%= @measurement_type.name %>
+        <div class="text-sm text-caption-light font-medium uppercase mt-2">Unit</div>
+        <%= @measurement_type.unit %>
+    </div>
+  </div>
+</section>

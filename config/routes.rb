@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   resources :cohorts
   resources :cohort_imports, only: [:create, :new]
-  resources :measurement_types, except: %i[show]
+  resources :measurement_types
   resources :animals do
     collection do
       get '/csv_upload', action: 'csv_upload'
