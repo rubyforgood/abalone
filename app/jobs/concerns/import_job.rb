@@ -91,11 +91,13 @@ module ImportJob
 
   def fail_processed_file(error)
     @processed_file.status = 'Failed'
-    @processed_file.job_stats = error_details
-    @processed_file.job_errors = error_messages.empty? ? error : format_errors(error)
+    @processed_file.job_stats = error_details || {}
+    @processed_file.job_errors = format_errors(error)
   end
 
   def format_errors(error)
+    return error if error_messages.nil? || error_messages.empty?
+
     total_lines = error_messages.keys.length
     total_errors = error_messages.values.map(&:length).reduce(:+)
     messages = error_messages.map { |row, row_errors| "#{row} : #{row_errors.join(', ')}" }
