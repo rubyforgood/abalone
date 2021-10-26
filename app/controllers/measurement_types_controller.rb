@@ -6,6 +6,8 @@ class MeasurementTypesController < ApplicationController
     @measurement_types = MeasurementType.for_organization(current_organization)
   end
 
+  def show; end
+
   def new
     @measurement_type = MeasurementType.new
   end

@@ -28,6 +28,8 @@
             <td class="px-4 py-2" data-label="Name"><%= measurement_type.name %></td>
             <td class="px-4 py-2" data-label="Unit"><%= measurement_type.unit %></td>
             <td class="text-base px-4 py-2 align-middle flex items-center" data-label="Actions">
+              <%= link_to 'Show', measurement_type,
+                'aria-label': "Show #{measurement_type.name}", class: 'text-primary-dark'  %>
               <%= link_to image_tag("icons/edit.svg"),
               edit_measurement_type_path(measurement_type),
               'aria-label': "Edit #{measurement_type.name}", class: 'w-5 mx-2' %>
