@@ -37,10 +37,10 @@ class MortalityEvent < ApplicationRecord
   def self.attrs_for_animal(attrs)
     measurement_attrs = {}
     measurement_attrs[:mortality_date] = attrs.fetch(:date)
-    measurement_attrs[:animal] = Animal.find_or_create_by!(tag: attrs.fetch(:tag), organization_id: attrs.fetch(:organization_id))
-    measurement_attrs[:cohort] = Cohort.find_by!(name: attrs.fetch(:cohort_name), organization_id: attrs.fetch(:organization_id))
+    measurement_attrs[:animal] = Animal.find_or_create_by(tag: attrs.fetch(:tag), organization_id: attrs.fetch(:organization_id))
+    measurement_attrs[:cohort] = Cohort.find_by(name: attrs.fetch(:cohort_name), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:organization_id] = attrs.fetch(:organization_id)
-    measurement_attrs[:exit_type] = ExitType.find_by!(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
+    measurement_attrs[:exit_type] = ExitType.find_by(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs
   end
@@ -48,10 +48,10 @@ class MortalityEvent < ApplicationRecord
   def self.attrs_for_cohort(attrs)
     measurement_attrs = {}
     measurement_attrs[:mortality_date] = attrs.fetch(:date)
-    measurement_attrs[:cohort] = Cohort.find_by!(name: attrs.fetch(:cohort_name), organization_id: attrs.fetch(:organization_id))
+    measurement_attrs[:cohort] = Cohort.find_by(name: attrs.fetch(:cohort_name), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:mortality_count] = attrs.fetch(:value)
     measurement_attrs[:organization_id] = attrs.fetch(:organization_id)
-    measurement_attrs[:exit_type] = ExitType.find_by!(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
+    measurement_attrs[:exit_type] = ExitType.find_by(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs
   end

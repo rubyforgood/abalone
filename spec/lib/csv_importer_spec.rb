@@ -66,6 +66,21 @@ RSpec.describe CsvImporter do
         expect(importer.errored?).to eq(true)
         expect(importer.error_details.empty?).to eq(false)
       end
+
+      it "provides error messages" do
+        file = File.read(Rails.root.join("spec", "fixtures", "files", "basic_custom_measurement_invalid.csv"))
+        importer = CsvImporter.new(file, category_name, processed_file.id, organization)
+
+        expect do
+          importer.call
+        end.not_to change { Measurement.count }
+        expect(importer.errored?).to eq(true)
+        expect(importer.error_messages.empty?).to eq(false)
+        expect(importer.error_messages.keys.length).to eq(1)
+        expect(importer.error_messages.values.length).to eq(1)
+        expect(importer.error_messages.keys.first).to eq('Row 2')
+        expect(importer.error_messages['Row 2']).to contain_exactly("Value can't be blank")
+      end
     end
   end
 

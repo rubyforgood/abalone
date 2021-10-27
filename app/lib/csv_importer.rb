@@ -1,5 +1,5 @@
 class CsvImporter
-  attr_reader :stats, :category_name, :temporary_file, :processed_file_id, :error_details, :organization
+  attr_reader :stats, :category_name, :temporary_file, :processed_file_id, :error_details, :error_messages, :organization
 
   CATEGORIES_MAPPED_TO_MODELS = {
     'measurement' => {
@@ -26,6 +26,7 @@ class CsvImporter
     @stats = Hash.new(0)
     @organization = organization
     @error_details = {}
+    @error_messages = {}
     @stats[:shl_case_numbers] = Hash.new(0)
   end
 
@@ -62,6 +63,7 @@ class CsvImporter
           increment_stats(record)
         else
           error_details["row_number_#{row_number}"] = record.errors.details
+          error_messages["Row #{row_number}"] = record.errors.full_messages
         end
 
         row_number += 1
