@@ -149,7 +149,7 @@ GEM
       activesupport (>= 5.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
-    iostreams (1.10.2)
+    iostreams (1.10.3)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jquery-rails (4.4.0)
