@@ -81,6 +81,18 @@ This process assumes initial setup, migration and seeding of a local postgres da
 5. Run the Blazer add rake task: `SAVE=1 bundle exec rake blazer:add_database_security`
 6. Log in as a user for the new organization and confirm reporting is now functioning and scoped.
 
+### Refreshing the staging database
+
+- Run manual backup of the database
+- Confirm that we have a backup of each SQL query. (these will need to be re-entered)
+- Reset the database through the Heroku interface
+- `heroku run rails db:migrate --app abalone-staging`
+- `heroku run rails db:seed --app abalone-staging`
+- `heroku run SAVE=1 bundle exec rake blazer:drop_database_security --app abalone-staging`
+- `heroku run SAVE=1 bundle exec rake blazer:add_database_security --app abalone-staging`
+- Restart the worker dyno
+- Re-add any SQL queries into the Blazer interface
+
 ### Tables available for reporting
 - animals
 - cohorts
