@@ -11,11 +11,17 @@ RSpec.describe Cohort, type: :model do
   end
 
   describe 'Cohort validations' do
-    it { should validate_uniqueness_of(:name).scoped_to(:organization) }
     it { should validate_presence_of(:name) }
+    it 'validates name uniquness scoped to organization' do
+      cohort_1 = create(:cohort, organization: create(:organization))
+      cohort_2 = build(:cohort, name: cohort_1.name, organization: cohort_1.organization)
+      expect(cohort_2.valid?).to eq(false)
+    end
   end
 
-  include_examples 'organization presence validation'
+  include_examples 'organization presence validation' do
+    let(:model) { described_class.new name: 'Test Name', organization: organization }
+  end
 
   let!(:cohort) { create(:cohort) }
 
