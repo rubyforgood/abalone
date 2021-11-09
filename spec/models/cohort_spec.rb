@@ -10,6 +10,11 @@ RSpec.describe Cohort, type: :model do
     is_expected.to have_many(:mortality_events)
   end
 
+  describe 'Cohort validations' do
+    it { should validate_uniqueness_of(:name).scoped_to(:organization) }
+    it { should validate_presence_of(:name) }
+  end
+
   include_examples 'organization presence validation'
 
   let!(:cohort) { create(:cohort) }
