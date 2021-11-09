@@ -13,7 +13,7 @@ class Cohort < ApplicationRecord
 
   belongs_to :enclosure, required: false
 
-  validates :name, presence: true, uniqueness: { scope: :organization }
+  validates :name, presence: true, uniqueness: { scope: :organization_id }
 
   delegate :name, to: :enclosure, prefix: true, allow_nil: true
 
@@ -31,8 +31,4 @@ class Cohort < ApplicationRecord
   def mortality_count
     mortality_events.count
   end
-
-  # def name
-  # "Male: #{male.id} / Female: #{female.id}"
-  # end
 end

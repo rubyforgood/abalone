@@ -10,7 +10,13 @@ RSpec.describe Operation, type: :model do
   it { is_expected.to belong_to(:organization) }
   it { is_expected.to belong_to(:cohort).required(false) }
 
-  describe "validations" do
+  describe "Validations >" do
+    it "has a valid factory" do
+      expect(build(:operation)).to be_valid
+    end
+
+    it_behaves_like OrganizationScope
+
     context 'When the action is :add_cohort' do
       let(:action) { :add_cohort }
       it { is_expected.to validate_presence_of(:cohort) }
@@ -64,9 +70,5 @@ RSpec.describe Operation, type: :model do
       let(:action) { :eat_cohort }
       it { is_expected.to raise_error(Operation::InvalidActionError) }
     end
-  end
-
-  include_examples 'organization presence validation' do
-    let(:model) { described_class.new enclosure: create(:enclosure), organization: organization }
   end
 end

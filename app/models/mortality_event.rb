@@ -18,12 +18,6 @@ class MortalityEvent < ApplicationRecord
     "Reason"
   ].freeze
 
-  def display_data
-    [
-      mortality_date, mortality_type, "mortality event", mortality_count, nil, cohort.enclosure&.name, cohort.name, animal&.tag, exit_type&.name
-    ]
-  end
-
   def self.create_from_csv_data(attrs)
     if attrs[:measurement_type] == "animal mortality event"
       animal_attrs = attrs_for_animal(attrs)
@@ -54,6 +48,20 @@ class MortalityEvent < ApplicationRecord
     measurement_attrs[:exit_type] = ExitType.find_by(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs
+  end
+
+  def display_data
+    [
+      mortality_date,
+      mortality_type,
+      "mortality event",
+      mortality_count,
+      nil,
+      cohort.enclosure&.name,
+      cohort.name,
+      animal&.tag,
+      exit_type&.name
+    ]
   end
 
   private

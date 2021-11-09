@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Cohort, type: :model do
-  it "Cohort has associations" do
+  subject(:cohort) { build_stubbed(:cohort) }
+
+  it "has associations" do
     is_expected.to belong_to(:male).class_name("Animal").optional
     is_expected.to belong_to(:female).class_name("Animal").optional
     is_expected.to belong_to(:organization)
@@ -10,40 +12,39 @@ RSpec.describe Cohort, type: :model do
     is_expected.to have_many(:mortality_events)
   end
 
-  describe 'Cohort validations' do
-    it { should validate_presence_of(:name) }
-    it 'validates name uniquness scoped to organization' do
-      cohort_org1 = build(:cohort, organization: create(:organization))
-      expect(cohort_org1.valid?).to eq(true)
-      create(:cohort, name: cohort_org1.name, organization: cohort_org1.organization)
-      # Name cannot be reused within an originization
-      expect(cohort_org1.valid?).to eq(false)
-      # Name is only unique per oginization
-      cohort_org2 = build(:cohort, name: cohort_org1.name, organization: create(:organization))
-      expect(cohort_org2.valid?).to eq(true)
+  describe "Validations >" do
+    subject(:cohort) { build(:cohort) }
+
+    it "has a valid factory" do
+      expect(cohort).to be_valid
+    end
+
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_uniqueness_of(:name).scoped_to(:organization_id) }
+
+    it_behaves_like OrganizationScope
+  end
+
+  describe "#to_s" do
+    it "returns the name assigned to the cohort" do
+      expect(cohort.to_s).to eq(cohort.name)
+    end
+
+    context "without a name" do
+      before { cohort.name = nil }
+
+      it "returns a string with the Cohort ID" do
+        expect(cohort.to_s).to eq("Cohort #{cohort.id}")
+      end
     end
   end
 
-  include_examples 'organization presence validation' do
-    let(:model) { described_class.new name: 'Test Name', organization: organization }
-  end
+  describe "#mortality_count" do
+    it "returns count of mortality_events" do
+      create_list(:mortality_event, 4, cohort: cohort)
+      create_list(:mortality_event, 3, cohort: cohort)
 
-  let!(:cohort) { create(:cohort) }
-
-  it "should have correct amount of mortality_events" do
-    animal1 = create(:animal, cohort: cohort)
-    animal2 = create(:animal, cohort: cohort)
-    create(:animal, cohort: cohort)
-
-    create(:mortality_event, animal: animal1, cohort: cohort)
-    create(:mortality_event, animal: animal2, cohort: cohort)
-
-    expect(cohort.mortality_count).to eq 2
-  end
-
-  describe 'FactoryBot' do
-    it 'creates a cohort' do
-      expect(create(:cohort)).to be_valid
+      expect(cohort.mortality_count).to eq(7)
     end
   end
 end

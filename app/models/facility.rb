@@ -24,19 +24,17 @@ class Facility < ApplicationRecord
 
   after_commit { Rails.cache.delete('facility_codes') }
 
-  # Replaced by blazer reporting - 1/24/21
-  # ReportsKit uses this for default labeling
-  def to_s
-    code
-  end
-
   def self.valid_codes
-    Rails.cache.fetch('facility_codes') do
-      Facility.all.map { |facility| facility.code.upcase }
-    end
+    Rails.cache.fetch('facility_codes') { pluck(:code).map(&:upcase) }
   end
 
   def self.valid_code?(code)
     valid_codes.include?(code.upcase)
+  end
+
+  # Replaced by blazer reporting - 1/24/21
+  # ReportsKit uses this for default labeling
+  def to_s
+    code
   end
 end

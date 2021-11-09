@@ -18,5 +18,22 @@
 require 'rails_helper'
 
 RSpec.describe ProcessedFile, type: :model do
-  it { should belong_to(:temporary_file).dependent(:destroy).optional }
+  subject(:processed_file) { build_stubbed(:processed_file) }
+
+  it "has associations" do
+    is_expected.to belong_to(:temporary_file).dependent(:destroy).optional
+    is_expected.to belong_to(:organization)
+  end
+
+  describe "Validations >" do
+    subject(:processed_file) { build(:processed_file) }
+
+    it "has a valid factory" do
+      expect(processed_file).to be_valid
+    end
+
+    it_behaves_like OrganizationScope
+
+    it { is_expected.to validate_exclusion_of(:job_stats).in_array([nil, ""]) }
+  end
 end

@@ -18,6 +18,7 @@ class Animal < ApplicationRecord
 
   validates :tag, uniqueness: { scope: %i[cohort_id] }
   validates :entry_point, presence: true, allow_blank: false, if: :collected
+  validates :sex, presence: true
 
   delegate :name, to: :cohort, prefix: true, allow_nil: true
 
@@ -29,10 +30,6 @@ class Animal < ApplicationRecord
     female: 'female'
   }
 
-  def set_default_sex
-    self.sex ||= :unknown
-  end
-
   def shl_number_codes(join = ",")
     shl_numbers.pluck(:code).join(join)
   end
@@ -43,5 +40,11 @@ class Animal < ApplicationRecord
 
   def dead?
     mortality_event.present?
+  end
+
+  private
+
+  def set_default_sex
+    self.sex ||= :unknown
   end
 end
