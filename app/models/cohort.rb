@@ -13,6 +13,8 @@ class Cohort < ApplicationRecord
 
   belongs_to :enclosure, required: false
 
+  validates :name, presence: true, uniqueness: { scope: :organization }
+
   delegate :name, to: :enclosure, prefix: true, allow_nil: true
 
   def self.exportable_columns
