@@ -13,14 +13,14 @@ RSpec.describe Cohort, type: :model do
   describe 'Cohort validations' do
     it { should validate_presence_of(:name) }
     it 'validates name uniquness scoped to organization' do
-      cohort_org_1 = build(:cohort, organization: create(:organization))
-      expect(cohort_org_1.valid?).to eq(true)
-      create(:cohort, name: cohort_org_1.name, organization: cohort_org_1.organization)
+      cohort_org1 = build(:cohort, organization: create(:organization))
+      expect(cohort_org1.valid?).to eq(true)
+      create(:cohort, name: cohort_org1.name, organization: cohort_org1.organization)
       # Name cannot be reused within an originization
-      expect(cohort_org_1.valid?).to eq(false)
+      expect(cohort_org1.valid?).to eq(false)
       # Name is only unique per oginization
-      cohort_org_2 = build(:cohort, name: cohort_org_1.name, organization: create(:organization))
-      expect(cohort_org_2.valid?).to eq(true)
+      cohort_org2 = build(:cohort, name: cohort_org1.name, organization: create(:organization))
+      expect(cohort_org2.valid?).to eq(true)
     end
   end
 
