@@ -10,7 +10,23 @@ RSpec.describe Cohort, type: :model do
     is_expected.to have_many(:mortality_events)
   end
 
-  include_examples 'organization presence validation'
+  describe 'Cohort validations' do
+    it { should validate_presence_of(:name) }
+    it 'validates name uniquness scoped to organization' do
+      cohort_org1 = build(:cohort, organization: create(:organization))
+      expect(cohort_org1.valid?).to eq(true)
+      create(:cohort, name: cohort_org1.name, organization: cohort_org1.organization)
+      # Name cannot be reused within an originization
+      expect(cohort_org1.valid?).to eq(false)
+      # Name is only unique per oginization
+      cohort_org2 = build(:cohort, name: cohort_org1.name, organization: create(:organization))
+      expect(cohort_org2.valid?).to eq(true)
+    end
+  end
+
+  include_examples 'organization presence validation' do
+    let(:model) { described_class.new name: 'Test Name', organization: organization }
+  end
 
   let!(:cohort) { create(:cohort) }
 
