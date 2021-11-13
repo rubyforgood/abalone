@@ -9,10 +9,11 @@
              ['I want to measure length and gonad score', :length_gonad_score_template]
         ])) %>
       </div>
-
+      <div id="generation" class = "mt-4">
       <%= link_to 'Generate Template', '#', class: 'button-primary', id: 'data-import-template-download' %>
+      </div>
     </div>
   </div>
 </section>
 
-<%= javascript_pack_tag 'measurements', 'data-turbolinks-track': 'reload' %> %>
+<%= javascript_pack_tag 'measurements', 'data-turbolinks-track': 'reload' %>
