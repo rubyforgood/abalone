@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe ExitType, type: :model do
-  let(:exit_type) { FactoryBot.create :exit_type }
+  subject(:exit_type) { build_stubbed(:exit_type) }
 
-  include_examples 'organization presence validation' do
-    let(:model) { described_class.new name: 'Name of exit type', organization: organization }
-  end
+  describe "Validations >" do
+    subject(:exit_type) { build(:exit_type) }
 
-  it "must have a name" do
-    exit_type.name = "test"
-    expect(exit_type).to be_valid
+    it "has a valid factory" do
+      expect(exit_type).to be_valid
+    end
 
-    exit_type.name = ""
-    expect(exit_type).not_to be_valid
+    it_behaves_like OrganizationScope
+
+    it { is_expected.to validate_presence_of(:name) }
   end
 end

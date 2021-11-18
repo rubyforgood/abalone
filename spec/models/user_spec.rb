@@ -3,15 +3,22 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let!(:user) { create(:user) }
 
-  it { should validate_presence_of :email }
-  it { should validate_presence_of :password }
+  describe "Validations >" do
+    subject(:user) { build(:user) }
 
-  it "should set a default role of 'user' when created" do
-    expect(user.role).to eq 'user'
-    expect(user.role).to_not eq 'admin'
+    it "has a valid factory" do
+      expect(user).to be_valid
+    end
+
+    it_behaves_like OrganizationScope
+
+    it { is_expected.to validate_presence_of(:email) }
+    it { is_expected.to validate_presence_of(:password) }
   end
 
-  include_examples 'organization presence validation' do
-    let(:model) { described_class.new email: 'test@gmail.com', password: 'secret-token', organization: organization }
+  describe "Callbacks >" do
+    it "initializes with a default role of 'user'" do
+      expect(User.new.role).to eq("user")
+    end
   end
 end

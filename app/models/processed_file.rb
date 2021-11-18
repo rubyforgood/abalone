@@ -25,4 +25,14 @@ class ProcessedFile < ApplicationRecord
              inverse_of: :processed_file,
              dependent: :destroy
   belongs_to :organization
+
+  validates :job_stats, exclusion: { in: [nil, ""] }
+
+  after_initialize :set_default_job_stats, if: :new_record?
+
+  private
+
+  def set_default_job_stats
+    self.job_stats = {}
+  end
 end

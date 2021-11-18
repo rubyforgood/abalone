@@ -20,7 +20,7 @@ FactoryBot.define do
     filename { "Measurement_12172018(original).csv" }
     category { "Measurement" }
     status { "Processed" }
-    job_stats { "" }
+    job_stats { "{}" }
     job_errors {}
     temporary_file
     organization

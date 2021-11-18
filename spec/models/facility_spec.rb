@@ -11,36 +11,61 @@
 #
 # rubocop:enable Layout/LineLength, Lint/RedundantCopDisableDirective
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Facility, type: :model do
-  let(:facility) { FactoryBot.create :facility }
+  subject(:facility) { build_stubbed(:facility) }
 
-  it "Facility has associations" do
+  it "has associations" do
     is_expected.to have_many(:locations)
     is_expected.to belong_to(:organization)
   end
 
-  describe 'structure' do
+  describe "structure" do
     it { is_expected.to have_db_column :name }
     it { is_expected.to have_db_column :code }
     it { is_expected.to have_db_column :organization_id }
 
-    describe 'it only has 6 columns' do
-      it { expect(described_class.columns.count).to eq 6 }
+    it "only has 6 columns" do
+      expect(described_class.columns.count).to eq(6)
     end
   end
 
-  describe 'validation' do
-    it 'validates presence of' do
-      is_expected.to validate_presence_of :name
-      is_expected.to validate_presence_of :code
-    end
+  describe "Validations >" do
+    subject(:facility) { build(:facility) }
 
-    it 'validate uniqueness of' do
-      is_expected.to validate_uniqueness_of(:code).scoped_to(:organization_id)
+    it_behaves_like OrganizationScope
+
+    it { is_expected.to validate_presence_of(:name) }
+    it { is_expected.to validate_presence_of(:code) }
+    it { is_expected.to validate_uniqueness_of(:code).scoped_to(:organization_id) }
+  end
+
+  describe "#to_s" do
+    it "returns the facility code" do
+      expect(facility.to_s).to eq(facility.code)
     end
   end
 
-  it_behaves_like OrganizationScope
+  describe ".valid_codes" do
+    before do
+      %w[first_code second_code third_code].each { |code| create(:facility, code: code) }
+    end
+
+    it "returns upcased facility codes in upcase format" do
+      expect(described_class.valid_codes).to match(%w[FIRST_CODE SECOND_CODE THIRD_CODE])
+    end
+  end
+
+  describe ".valid_code?" do
+    before { create(:facility, code: "my_code") }
+
+    it "returns true if code exists for a facility" do
+      expect(described_class.valid_code?("MY_CODE")).to eq(true)
+    end
+
+    it "returns false if code does not exist for a facility" do
+      expect(described_class.valid_code?("NO_CODE")).to eq(false)
+    end
+  end
 end

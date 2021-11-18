@@ -24,28 +24,10 @@ class Measurement < ApplicationRecord
     "Reason"
   ].freeze
 
-  def cohort_name
-    subject.is_a?(Cohort) ? subject.name : nil
-  end
-
-  def enclosure_name
-    subject.is_a?(Enclosure) ? subject.name : nil
-  end
-
-  def animal_tag
-    subject.is_a?(Animal) ? subject.tag : nil
-  end
-
   # We want mortality events to be created as part of measurement file uploads, which means that if a measurement
   # file is uploaded and it has mortality events, we want to show that data as well
   def self.data_for_file(processed_file_id)
     where(processed_file_id: processed_file_id) + MortalityEvent.where(processed_file_id: processed_file_id)
-  end
-
-  def display_data
-    [
-      date, subject_type, measurement_type_name, value, measurement_event_name, enclosure_name, cohort_name, animal_tag, nil
-    ]
   end
 
   # The below code is unstable. This is retrofitting the values from the seeded CSV
@@ -95,5 +77,31 @@ class Measurement < ApplicationRecord
     # name = attrs.fetch(:name)
     # model = klass.find_or_create_by!(name: name) # this will always be set to enclosure
     # model.measurements << measurement
+  end
+
+  def cohort_name
+    subject.is_a?(Cohort) ? subject.name : nil
+  end
+
+  def enclosure_name
+    subject.is_a?(Enclosure) ? subject.name : nil
+  end
+
+  def animal_tag
+    subject.is_a?(Animal) ? subject.tag : nil
+  end
+
+  def display_data
+    [
+      date,
+      subject_type,
+      measurement_type_name,
+      value,
+      measurement_event_name,
+      enclosure_name,
+      cohort_name,
+      animal_tag,
+      nil
+    ]
   end
 end

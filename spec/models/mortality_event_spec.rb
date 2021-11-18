@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
-  it "Mortality Event has associations" do
+  it "has associations" do
     is_expected.to belong_to(:animal).optional
     is_expected.to belong_to(:cohort)
     is_expected.to belong_to(:organization)
@@ -9,11 +9,17 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
     is_expected.to belong_to(:processed_file).optional
   end
 
-  include_examples 'organization presence validation' do
-    let(:model) { described_class.new animal: build(:animal), cohort: build(:cohort), organization: organization }
+  describe "Validtions >" do
+    subject(:mortality_event) { build(:mortality_event) }
+
+    it "has a valid factory" do
+      expect(mortality_event).to be_valid
+    end
+
+    it_behaves_like OrganizationScope
   end
 
-  describe "#create_from_csv_data" do
+  describe ".create_from_csv_data" do
     let(:cohort) { create(:cohort, name: "Aquarium of the Pacific location enclosure cohort", organization: organization) }
     let(:animal) { create(:animal, tag: "F-AOP", organization: organization) }
     let(:organization) { create(:organization) }
@@ -122,7 +128,7 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
   end
 
   describe "#display_data" do
-    subject { mortality_event.display_data }
+    subject(:display_data) { mortality_event.display_data }
 
     context "for an Animal" do
       let(:enclosure) { build(:enclosure, name: "Tank 2") }
@@ -132,9 +138,17 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
       let(:mortality_event) { build(:mortality_event, mortality_date: "2021-10-11 00:00:00.000000000 +0000", animal: animal, cohort: cohort, exit_type: exit_type) }
 
       it 'returns the correct data for displaying an animal mortality event' do
-        expect(subject).to eq(
+        expect(display_data).to eq(
           [
-            "2021-10-11 00:00:00.000000000 +0000", "Animal", "mortality event", nil, nil, "Tank 2", "Aquarium of the Pacific location enclosure cohort", "R2D2-PO", "sacrifical clam"
+            "2021-10-11 00:00:00.000000000 +0000",
+            "Animal",
+            "mortality event",
+            nil,
+            nil,
+            "Tank 2",
+            "Aquarium of the Pacific location enclosure cohort",
+            "R2D2-PO",
+            "sacrifical clam"
           ]
         )
       end
@@ -147,9 +161,17 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
       let(:mortality_event) { build(:mortality_event, :for_cohort, mortality_date: "2021-10-11 00:00:00.000000000 +0000", mortality_count: 12, cohort: cohort, exit_type: exit_type) }
 
       it 'returns the correct data for displaying a cohort mortality event' do
-        expect(subject).to eq(
+        expect(display_data).to eq(
           [
-            "2021-10-11 00:00:00.000000000 +0000", "Cohort", "mortality event", 12, nil, "Tank 2", "Aquarium of the Pacific location enclosure cohort", nil, "sacrifical clam"
+            "2021-10-11 00:00:00.000000000 +0000",
+            "Cohort",
+            "mortality event",
+            12,
+            nil,
+            "Tank 2",
+            "Aquarium of the Pacific location enclosure cohort",
+            nil,
+            "sacrifical clam"
           ]
         )
       end
