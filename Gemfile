@@ -74,7 +74,7 @@ gem 'reports_kit' # Replaced by blazer reporting - 1/24/21
 # app/overrides that depend on the Blazer code at this version of the gem. Updating
 # this gem will require review of our overridden classes with changes to code in the
 # desired Blazer gem version.
-gem 'blazer', '2.4.7'
+gem 'blazer', '2.4.8'
 
 # Excel and CSV support
 gem 'creek'
