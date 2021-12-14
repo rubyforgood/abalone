@@ -30,8 +30,11 @@ class MeasurementTypesController < ApplicationController
   end
 
   def destroy
-    @measurement_type.destroy
-    redirect_to measurement_types_url, notice: 'Measurement Type was successfully destroyed.'
+    if @measurement_type.destroy
+      redirect_to measurement_types_url, notice: 'Measurement Type was successfully destroyed.'
+    else
+      redirect_to measurement_types_url, alert: @measurement_type.errors.full_messages.join(". ")
+    end
   end
 
   def edit; end
