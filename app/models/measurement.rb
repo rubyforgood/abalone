@@ -12,18 +12,6 @@ class Measurement < ApplicationRecord
   delegate :name, to: :measurement_type, prefix: true, allow_nil: true
   delegate :name, to: :measurement_event, prefix: true, allow_nil: true
 
-  HEADERS = [
-    "Date",
-    "Subject Type",
-    "Measurement Type",
-    "Value",
-    "Measurement Event",
-    "Enclosure Name",
-    "Cohort Name",
-    "Tag",
-    "Reason"
-  ].freeze
-
   # We want mortality events to be created as part of measurement file uploads, which means that if a measurement
   # file is uploaded and it has mortality events, we want to show that data as well
   def self.data_for_file(processed_file_id)

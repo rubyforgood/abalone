@@ -9,10 +9,6 @@ class FileUploadsController < ApplicationController
   # and process the data with a MeasurementJob.
   before_action :set_processed_file, only: %i[show destroy]
 
-  FILE_UPLOAD_CATEGORIES = CsvImporter::CATEGORIES.map do |category|
-    [category, category.delete(' ')]
-  end.freeze
-
   def index
     @pagy, @processed_files = pagy(ProcessedFile.for_organization(current_organization).order(updated_at: :desc))
     @processed_files.each { |processed_file| authorize! :index, processed_file }
@@ -23,13 +19,14 @@ class FileUploadsController < ApplicationController
   end
 
   def new
-    @categories = [['Select One', '']] + FILE_UPLOAD_CATEGORIES
+    @categories = [['Select One', '']] + FileUploader::FILE_UPLOAD_CATEGORIES
   end
 
   def show
     authorize! :show, @processed_file
-    record_class = CsvImporter::CATEGORIES.find { |v| v == @processed_file.category }.constantize
-    @headers = record_class::HEADERS
+    record_class = FileUploader::UPLOADABLE_MODELS.find { |model| model.to_s == @processed_file.category }
+    record_job_processor = FileUploader::UPLOAD_JOBS.find { |job| job.to_s == [record_class, "Job"].join }
+    @headers = record_job_processor::HEADERS
     @records = record_class.data_for_file(@processed_file.id)
     respond_to do |format|
       format.html

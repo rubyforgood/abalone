@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/ModuleLength
 module ImportJob
   extend ActiveSupport::Concern
 
@@ -33,8 +34,12 @@ module ImportJob
   def validate_headers(temporary_file)
     raise "No input file specified" unless temporary_file
 
-    headers = CSV.parse(temporary_file.contents, headers: true, header_converters: ->(header) { CsvImporter.header_conversion(header) }).headers.compact
-    valid_headers = category_model::HEADERS.map { |header| CsvImporter.header_conversion(header) }
+    headers = CSV.parse(
+      temporary_file.contents,
+      headers: true,
+      header_converters: ->(header) { CsvImporter.header_conversion(header) }
+    ).headers.compact
+    valid_headers = self.class::HEADERS.map { |header| CsvImporter.header_conversion(header) }
 
     log("Headers in file: #{headers}", :debug)
     log("Valid headers for model: #{valid_headers}", :debug)
@@ -44,7 +49,12 @@ module ImportJob
   def import_records(temporary_file)
     raise "No input file specified" unless temporary_file
 
-    csv_importer = CsvImporter.new(temporary_file.contents, category_model.name.underscore.humanize.titleize, @processed_file.id, @organization)
+    csv_importer = CsvImporter.new(
+      target_model,
+      temporary_file.contents,
+      @processed_file.id,
+      @organization
+    )
     csv_importer.call
 
     if csv_importer.errored?
@@ -59,12 +69,8 @@ module ImportJob
     true
   end
 
-  def category
-    self.class.category
-  end
-
-  def category_model
-    @category_model ||= category.constantize
+  def target_model
+    self.class.target_model
   end
 
   def already_processed?
@@ -72,16 +78,20 @@ module ImportJob
   end
 
   def already_processed_file
-    @already_processed_file ||= ProcessedFile.where(status: ['Processed', 'Processed with errors'])
-                                             .where(filename: filename)
+    @already_processed_file ||= ProcessedFile.where(
+      status: ['Processed', 'Processed with errors'],
+      filename: filename
+    )
   end
 
   def initialize_processed_file(temporary_file, filename, organization)
-    @processed_file = ProcessedFile.create(temporary_file_id: temporary_file.id,
-                                           filename: filename,
-                                           category: category,
-                                           organization: organization,
-                                           status: 'Running')
+    @processed_file = ProcessedFile.create(
+      temporary_file_id: temporary_file.id,
+      filename: filename,
+      category: target_model,
+      organization: organization,
+      status: 'Running'
+    )
   end
 
   def complete_processed_file!
@@ -115,8 +125,9 @@ module ImportJob
   end
 
   module ImportJobClassMethods
-    def category
-      @category ||= to_s.gsub(/Job/, '')
+    def target_model
+      @target_model ||= to_s.gsub(/Job/, '').constantize
     end
   end
 end
+# rubocop:enable Metrics/ModuleLength

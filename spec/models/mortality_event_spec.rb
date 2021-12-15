@@ -19,6 +19,15 @@ RSpec.describe MortalityEvent, :aggregate_failures, type: :model do
     it_behaves_like OrganizationScope
   end
 
+  describe ".data_for_file" do
+    let(:processed_file) { create :processed_file }
+    let!(:mortality_event) { create :mortality_event, processed_file: processed_file }
+
+    subject { described_class.data_for_file(processed_file.id) }
+
+    it { is_expected.to match_array([mortality_event]) }
+  end
+
   describe ".create_from_csv_data" do
     let(:cohort) { create(:cohort, name: "Aquarium of the Pacific location enclosure cohort", organization: organization) }
     let(:animal) { create(:animal, tag: "F-AOP", organization: organization) }

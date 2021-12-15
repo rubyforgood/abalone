@@ -18,14 +18,13 @@ describe "When I visit the File Uploads New page", type: :system do
 
     expect(page).to have_content("File Upload")
     expect(page).to have_content("Category")
-    expect(page).to have_select("category", with_options: CsvImporter::CATEGORIES)
+    expect(page).to have_select("category", with_options: FileUploader::UPLOADABLE_MODELS)
     expect(page).to have_content("Select up to 10 files to upload")
   end
 
   it "I can create a new file upload" do
     visit new_file_upload_path
 
-    select(CsvImporter::CATEGORIES.first, from: "Category")
     upload_file("Measurement", [valid_file])
 
     expect(page).to have_content("Successfully queued spreadsheet for import")

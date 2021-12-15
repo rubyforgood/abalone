@@ -1,8 +1,19 @@
 # Takes in CSV files and creates background jobs to process them
 class FileUploader
-  attr_accessor :category, :input_file, :filename, :reference, :result_message, :organization
+  attr_accessor :category,
+                :input_file,
+                :filename,
+                :reference,
+                :result_message,
+                :organization
 
-  FILE_UPLOAD_CATEGORIES = CsvImporter::CATEGORIES.map { |category| [category, category.delete(' ')] }.freeze
+  UPLOADABLE_MODELS = [
+    Measurement,
+    MortalityEvent
+  ].freeze
+  UPLOAD_JOBS = UPLOADABLE_MODELS.map { |model| "#{model}Job".constantize }
+
+  FILE_UPLOAD_CATEGORIES = UPLOADABLE_MODELS.map { |model| [model.to_s, model.to_s.gsub(" ", "")] }.freeze
 
   def initialize(category:, input_file:, organization:)
     @category = category
