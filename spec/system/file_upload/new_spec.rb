@@ -31,7 +31,7 @@ describe "When I visit the File Uploads New page", type: :system do
     expect(page).to have_content("Successfully queued spreadsheet for import")
     expect(page).to have_current_path(file_uploads_path)
 
-    click_on("Upload More Files")
+    click_link("Upload More Files")
     expect(page).to have_current_path(new_file_upload_path)
   end
 
