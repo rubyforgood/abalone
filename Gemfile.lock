@@ -47,8 +47,8 @@ GEM
     activerecord (6.1.4.1)
       activemodel (= 6.1.4.1)
       activesupport (= 6.1.4.1)
-    activerecord-postgres_enum (1.7.0)
-      activerecord (>= 5)
+    activerecord-postgres_enum (2.0.0)
+      activerecord (>= 5.2)
       pg
     activestorage (6.1.4.1)
       actionpack (= 6.1.4.1)
@@ -349,7 +349,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-postgres_enum (~> 1.7)
+  activerecord-postgres_enum (~> 2.0)
   annotate
   blazer (= 2.4.7)
   bootsnap (>= 1.1.0)
