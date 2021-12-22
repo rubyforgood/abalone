@@ -33,8 +33,7 @@ class ExitTypesController < ApplicationController
   end
 
   def destroy
-    if @exit_type.mortality_events.empty?
-      @exit_type.destroy
+    if @exit_type.destroy
       redirect_to exit_types_url, notice: "Exit type was successfully destroyed."
     else
       redirect_to exit_types_path, alert: 'Some mortality events are using this exit type'
