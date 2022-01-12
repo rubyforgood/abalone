@@ -181,7 +181,7 @@ GEM
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (4.11.0)
+    pagy (5.7.3)
     paper_trail (12.1.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -375,7 +375,7 @@ DEPENDENCIES
   jquery-rails
   listen (>= 3.0.5, < 3.8)
   newrelic_rpm
-  pagy (~> 4.11)
+  pagy (~> 5.7)
   paper_trail
   pg (>= 0.18, < 2.0)
   pry
