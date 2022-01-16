@@ -1,4 +1,4 @@
-class MeasurementJob < ApplicationJob
+class MortalityEventJob < ApplicationJob
   include ImportJob
 
   HEADERS = [

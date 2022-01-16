@@ -1,17 +1,11 @@
 class CsvImporter
-  attr_reader :stats, :category_name, :temporary_file, :processed_file_id, :error_details, :error_messages, :organization
-
-  CATEGORIES_MAPPED_TO_MODELS = {
-    'measurement' => {
-      'length' => Measurement,
-      'count' => Measurement,
-      'weight' => Measurement,
-      'gonad score' => Measurement,
-      'animal mortality event' => MortalityEvent,
-      'cohort mortality event' => MortalityEvent
-    }
-  }.freeze
-  CATEGORIES = CATEGORIES_MAPPED_TO_MODELS.keys.map(&:titleize).freeze
+  attr_reader :target_model,
+              :temporary_file,
+              :processed_file_id,
+              :organization,
+              :error_details,
+              :error_messages,
+              :stats
 
   class InvalidCategoryError < StandardError; end
 
@@ -19,10 +13,10 @@ class CsvImporter
     header&.strip&.downcase&.gsub(' ', '_')&.gsub(/[^a-z0-9_]/, '')&.gsub(/_+/, '_')&.gsub(/^_+/, '')
   end
 
-  def initialize(temporary_file, category_name, processed_file_id, organization = nil)
+  def initialize(target_model, temporary_file, processed_file_id, organization = nil)
+    @target_model = target_model
     @temporary_file = temporary_file
     @processed_file_id = processed_file_id
-    @category_name = category_name
     @stats = Hash.new(0)
     @organization = organization
     @error_details = {}
@@ -53,9 +47,8 @@ class CsvImporter
       ).each do |csv_row|
         csv_row[:processed_file_id] = processed_file_id
         csv_row[:raw] = false
-        model = model_from(category_name, csv_row[:measurement_type])
 
-        record = model.create_from_csv_data(create_attributes(csv_row.to_h))
+        record = target_model.create_from_csv_data(create_attributes(csv_row.to_h))
         record.cleanse_data! if record.respond_to?(:cleanse_data!)
 
         if record.valid?
@@ -74,14 +67,6 @@ class CsvImporter
         raise ActiveRecord::Rollback
       end
     end
-  end
-
-  def model_from(category_name, type)
-    category = CATEGORIES_MAPPED_TO_MODELS.dig(category_name.downcase, type.downcase)
-
-    raise InvalidCategoryError if category.nil?
-
-    category
   end
 
   def increment_stats(model)

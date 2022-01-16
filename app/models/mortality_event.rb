@@ -6,18 +6,6 @@ class MortalityEvent < ApplicationRecord
   belongs_to :exit_type, optional: true
   belongs_to :processed_file, optional: true
 
-  HEADERS = [
-    "Date",
-    "Subject Type",
-    "Measurement Type",
-    "Value",
-    "Measurement Event",
-    "Enclosure Name",
-    "Cohort Name",
-    "Tag",
-    "Reason"
-  ].freeze
-
   def self.create_from_csv_data(attrs)
     if attrs[:measurement_type] == "animal mortality event"
       animal_attrs = attrs_for_animal(attrs)
@@ -48,6 +36,10 @@ class MortalityEvent < ApplicationRecord
     measurement_attrs[:exit_type] = ExitType.find_by(name: attrs.fetch(:reason), organization_id: attrs.fetch(:organization_id))
     measurement_attrs[:processed_file_id] = attrs.fetch(:processed_file_id)
     measurement_attrs
+  end
+
+  def self.data_for_file(processed_file_id)
+    where(processed_file_id: processed_file_id)
   end
 
   def display_data

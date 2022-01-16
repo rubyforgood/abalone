@@ -1,0 +1,3 @@
+date,subject_type,measurement_type,value,measurement_event,enclosure_name,cohort_name,tag,reason
+10/01/21,Animal,animal mortality event,,October Survey,Test Enclosure,Test Cohort,M-AOP,Incidental
+10/01/21,Cohort,cohort mortality event,2,October Survey,Test Enclosure,Test Cohort,M-AOP,Incidental

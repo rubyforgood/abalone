@@ -29,14 +29,14 @@ describe "When I visit the File Uploads show page", type: :system do
 
   it "shows all the values that have been imported" do
     expect do
-      CsvImporter.new(file, category_name, processed_file.id, user.organization).call
+      CsvImporter.new(Measurement, file, processed_file.id, user.organization).call
     end.to change { Measurement.count + MortalityEvent.count }
 
     visit show_processed_file_path(processed_file.id)
     expect(page).to have_content("Processed File")
 
     within(".table thead") do
-      Measurement::HEADERS.each do |header|
+      MeasurementJob::HEADERS.each do |header|
         expect(page).to have_content(header)
       end
     end

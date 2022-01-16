@@ -1,7 +1,7 @@
 require "rails_helper"
 
 shared_examples_for "import job" do
-  let(:local_sample_data_filepath) { Rails.root.join("db", "sample_data_files", described_class.category.underscore, filename) }
+  let(:local_sample_data_filepath) { Rails.root.join("db", "sample_data_files", described_class.target_model.to_s.underscore, filename) }
   let(:sample_csv_text) { File.read(local_sample_data_filepath, encoding: 'bom|utf-8') }
   let(:temporary_file) { create(:temporary_file, contents: sample_csv_text) }
   let(:perform_job) { described_class.perform_now(temporary_file, filename, organization) }
@@ -47,11 +47,11 @@ shared_examples_for "import job" do
 
   it "imports record into db" do
     instance = described_class.new
-    record_count_before = instance.category.constantize.count
+    record_count_before = instance.target_model.count
 
-    expect { instance.perform(temporary_file, filename, organization) }.to change { instance.category.constantize.count }
+    expect { instance.perform(temporary_file, filename, organization) }.to change { instance.target_model.count }
 
-    record_count_after = instance.category.constantize.count
+    record_count_after = instance.target_model.count
     expect(
       record_count_before < record_count_after
     ).to eq(true)
