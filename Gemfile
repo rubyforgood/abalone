@@ -34,7 +34,7 @@ gem 'newrelic_rpm'
 gem 'webpacker', '~> 5'
 
 # Pagination helper
-gem 'pagy', '~> 4.11'
+gem 'pagy', '~> 5.7'
 
 # Simple authorization solution for Rails. All permissions are stored in a single location.
 gem 'cancancan', '~> 3.3'
