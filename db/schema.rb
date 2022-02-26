@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_10_14_153539) do
     t.integer "entry_year"
     t.datetime "entry_date"
     t.string "entry_point", default: ""
-    t.enum "sex", null: false, enum_name: "animal_sex"
+    t.enum "sex", null: false, enum_type: "animal_sex"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "organization_id"
