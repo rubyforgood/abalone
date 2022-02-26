@@ -25,7 +25,7 @@ Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-sta
 
 ### Prerequisites
 This application is built on following and you must have these installed before you begin:
-* Ruby (3.0.2)
+* Ruby (3.0.3)
 * Rails (6.1.4.6)
 * PostgreSQL (tested on 9.x)
 * Yarn
