@@ -4,7 +4,7 @@ Blazer::QueriesController.class_eval do
   def set_queries(limit = nil)
     # With the exception of this first statement which scopes the query to the current_user's
     # organization, all of this code is identical to the :set_queries method from the
-    # Blazer 2.4.7 source code.
+    # Blazer 2.5.0 source code.
     @queries = Blazer::Query.named
       .joins(creator: :organization)
       .where(creator: {organization: current_organization})
