@@ -8,6 +8,6 @@
     "tailwindcss": "^1.9.6"
   },
   "devDependencies": {
-    "webpack-dev-server": "3.11.2"
+    "webpack-dev-server": "4.9.0"
   }
 }
