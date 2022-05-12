@@ -73,7 +73,7 @@ GEM
     ast (2.4.2)
     bcrypt (3.1.16)
     bindex (0.8.1)
-    blazer (2.5.0)
+    blazer (2.6.3)
       activerecord (>= 5)
       chartkick (>= 3.2)
       railties (>= 5)
@@ -160,7 +160,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    loofah (2.16.0)
+    loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -353,7 +353,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgres_enum (~> 2.0)
   annotate
-  blazer (= 2.5.0)
+  blazer (= 2.6.3)
   bootsnap (>= 1.1.0)
   brakeman
   byebug
