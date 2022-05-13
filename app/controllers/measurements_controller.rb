@@ -3,7 +3,7 @@ class MeasurementsController < ApplicationController
   before_action :set_measurement, only: %i[show edit update]
 
   def index
-    @pagy, @measurements = pagy(Measurement.all)
+    @pagy, @measurements = pagy(current_organization.measurements)
   end
 
   def show; end
