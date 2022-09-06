@@ -1,6 +1,6 @@
 ## Abalone Analytics Blazer Reporting
 
-This application utilizes a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access to specific tables with data scoped to an organizational level. Modifications to the Blazer gem are performed in app/overrides directories per [Rails documented practices](https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers). The Blazer gem version has been locked at 2.4.7 to ensure these overrides remain dependable.
+This application utilizes a modified implementation of the [Blazer](https://github.com/ankane/blazer) gem to provide direct SQL access to specific tables with data scoped to an organizational level. Modifications to the Blazer gem are performed in app/overrides directories per [Rails documented practices](https://edgeguides.rubyonrails.org/engines.html#overriding-models-and-controllers). The Blazer gem version has been locked at 2.5.0 to ensure these overrides remain dependable.
 
 Use of the Blazer gem requires setup in both the production and development environments.
 
@@ -8,7 +8,7 @@ Use of the Blazer gem requires setup in both the production and development envi
 
 #### Initial Setup
 
-This setup assumes Heroku hosting. Guidance for setup on other hosting platforms is welcome via PR. The maintainers will also update this document as the application evolves.
+This setup assumes Heroku hosting. Guidance for setup on other hosting platforms is welcome via pull request. The maintainers will also update this document as the application evolves.
 
 Note: Requires, at least, a Standard-0 Postgres instance in Heroku to allow for the creation of additional roles.
 
@@ -27,10 +27,10 @@ Note: For consistency, each org credential should be named with that organizatio
 6. Attach that credential to the application.
 7. Leave the permissions blank. They will be set by the Blazer rake task.
 8. Repeat steps 5-7 for each organization in the application.
-9. In Heroku, add the environment variables for the blazer credential and all org credentials. The urls will be available under each credential in the Postgres add-on.
-    `BLAZER_DATABASE_URL: add credential uri here`
-    `ORG1_DATABASE_URL: add credential uri here`
-    `ORG2_DATABASE_URL: add credential uri here`
+9. In Heroku, add the environment variables for the blazer credential and all org credentials. The urls will be available under each credential in the Postgres add-on.  
+    `BLAZER_DATABASE_URL: add credential uri here`  
+    `ORG1_DATABASE_URL: add credential uri here`  
+    `ORG2_DATABASE_URL: add credential uri here`  
 10. Run a backup of the production database
 11. Run the Blazer rake task: `heroku run SAVE=1 rake blazer:add_database_security`.
 12. Log in as an organization user and confirm reporting is now functioning and scoped.
@@ -84,7 +84,7 @@ This process assumes initial setup, migration and seeding of a local postgres da
 ### Refreshing the staging database
 
 - Run manual backup of the database
-- Confirm that we have a backup of each SQL query. (these will need to be re-entered)
+- Confirm that we have a backup of each SQL query (these will need to be re-entered).
 - Reset the database through the Heroku interface
 - `heroku run rails db:migrate --app abalone-staging`
 - `heroku run rails db:seed --app abalone-staging`

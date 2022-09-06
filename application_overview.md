@@ -1,8 +1,8 @@
 # Application Overview
 
-__Last updated to the document: August 2021__
+__Last updated to the document: September 2022__
 
-This document provides a general overview of the key parts of the Abalone Analytics application. It is primarily intended to help facilitate on-boarding of developers that are new to the application. As the application evolves, so will this document. PRs with updates and improvements are welcome!!
+This document provides a general overview of the key parts of the Abalone Analytics application. It is primarily intended to help facilitate on-boarding of developers that are new to the application. As the application evolves, so will this document. PRs with updates and improvements are welcome!
 
 ## Purpose
 
@@ -18,7 +18,7 @@ The application also accepts direct imports for several models in the system. Th
 
 ### Data Storage
 
-Imported data is currently stored in the database and presented using a combination of standard rails views (Animals index, Cohorts index, etc.) and the reporting interface described below. We expect the storage and presentation of data to evolve to suit the needs of the application's initial stakeholders.
+Imported data is stored in the database and presented using a combination of standard rails views (Animals index, Cohorts index, etc.) and the reporting interface described below. We expect the storage and presentation of data to evolve to suit the needs of the application's initial stakeholders.
 
 ### Reporting
 
@@ -37,7 +37,7 @@ Currently, an organization's users can have one of two roles - `admin` and `user
 
 #### Row level security
 
-The application makes use of row level security to protect each organizations data in the reporting interface. The technical process for applying and updating the row level security can be found [here](https://github.com/rubyforgood/abalone/blob/main/blazer_reporting.md). The application has a rake task in place that handles the SQL commands needed. This task is updated when new tables that should be included in row level security or made available to an org_user are added.
+The application makes use of row level security to protect each organizations data in the reporting interface. The technical process for applying and updating the row level security can be found [here](https://github.com/rubyforgood/abalone/blob/main/blazer_reporting.md). The application has a rake task that handles the SQL commands needed. This task is updated when new tables that should be included in row level security or made available to an org_user are added.
 
 #### Other models
 
@@ -52,21 +52,23 @@ Currently, the following models access the `organization` model directly. This i
   operations
   facilities
   animals
+  processed_files
 ```
 
 ### Data Import
 
 There are two primary paths for importing data into the system.  
 
-The first is through the File Upload interface. This allows users to import csv files containing measurement data. Organizations can enter custom measurement types, for example, `mm`, `count`, `gonad_score`. In the future, additional categories beyond `measurement` could be added to this interface. Organizations can upload existing files or download a template file that they can populate.
+The first is through the File Upload interface. This allows users to import csv files containing measurement event data or mortality event date. Organizations can enter custom measurement types, for example, `mm`, `count`, `gonad_score` and custom exit types, for example, `incidental`, `olutplanted`, `sacrificed`. In the future, additional categories beyond `measurement` and `mortalityEvent` could be added to this interface. Organizations can upload existing files or download a template file that they can populate.
 
 Application Flow:
 - Files uploaded at FileUploads#new
 - Upload is sent to [FileUploder](https://github.com/rubyforgood/abalone/blob/main/app/lib/file_uploader.rb)
 - If the category is valid, a background job is created to process the files
+- The job for the relevant `UPLOADABLE_MODEL` is run. This job will include `ImportJob`
 - [ImportJob](https://github.com/rubyforgood/abalone/blob/main/app/jobs/concerns/import_job.rb) runs
-- The job is performed, validating headers against the model and calling `import_records`
-- The import information is passed to [CSVImporter.new](https://github.com/rubyforgood/abalone/blob/main/app/lib/csv_importer.rb) to create the measurement record from the import.
+- The job is performed, validating headers and calling `import_records`
+- The import information is passed to [CSVImporter.new](https://github.com/rubyforgood/abalone/blob/main/app/lib/csv_importer.rb) to create the record from the import.
 
 The second is through the CSV Upload path available on certain index pages. These allow users to import model specific csv files such as a file of basic animal data. These are most likely to be used when onboarding an organization.
 
