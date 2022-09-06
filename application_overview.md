@@ -1,6 +1,6 @@
 # Application Overview
 
-__Last updated to the document: September 2022__
+__Last update to this document: September 2022__
 
 This document provides a general overview of the key parts of the Abalone Analytics application. It is primarily intended to help facilitate on-boarding of developers that are new to the application. As the application evolves, so will this document. PRs with updates and improvements are welcome!
 
