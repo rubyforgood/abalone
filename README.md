@@ -10,16 +10,16 @@ The Puget Sound Restoration Fund works to raise and outplant hatchery-reared [Pi
 
 This application will enable groups to add data either through CSV upload or through the web interface. Groups can view reports and visual representations of key data. Future plans include giving groups the ability to generate custom reports on the fly.
 
-## Welcome Contributors!!
+<!-- ## Welcome Contributors!!
 Thank you for checking out the project. We would love to have you contribute!
 
-We recommend that you join us in slack https://rubyforgood.herokuapp.com/ #abalone channel to ask questions quickly and hear about office hours (currently Tuesday 6-7pm Eastern), stakeholder news, and upcoming new issues.
+We recommend that you join us in slack https://rubyforgood.herokuapp.com/ #abalone channel.
 
 Start by reading our contributing [guide](https://github.com/rubyforgood/abalone/blob/main/CONTRIBUTING.md).
 
 Checkout the [Issues tab](https://github.com/rubyforgood/abalone/issues). An issue can be claimed by commenting on it.
 
-Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-started) and [Get Familiar with the App](https://github.com/rubyforgood/abalone#get-familiar-with-the-app) sections to learn more about the application.
+Explore the [Getting Started](https://github.com/rubyforgood/abalone#getting-started) and [Get Familiar with the App](https://github.com/rubyforgood/abalone#get-familiar-with-the-app) sections to learn more about the application. -->
 
 ## Getting Started
 
@@ -88,10 +88,10 @@ This application uses a modified implementation of the [Blazer](https://github.c
 
 ### Docker
 
-We are currently experimenting with Docker for development. While we would love for more people to try it out be forewarned - Docker functionality may not be maintained moving forward. You will need Docker and docker-compose.
+We are currently experimenting with Docker for development. While we would love for more people to try it out, be forewarned - Docker functionality may not be maintained moving forward. You will need Docker and docker-compose.
 
 * [Docker Desktop](https://www.docker.com/products/docker-desktop) is recommended for Windows and Mac computers.
-* The `make` utility can also make your development life easier. It it usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
+* The `make` utility can also make your development life easier. It is usually already installed on Linux and Mac computers. For Windows, an easy way to install it is via [Chocolatey](https://chocolatey.org/install), a software package management system similar to Homebrew for Windows. Once Chocolatey is installed, install make with `choco install make` in a command prompt running as Administrator.
 * If you run into issues using Docker Desktop on windows, we recommend you view [this page](https://github.com/mdworken/MKD-Docker-Windows-Rails) for troubleshooting info.
 
 **Starting Fresh**
@@ -148,7 +148,7 @@ We want it to be easy to understand and contribute to this app, which means we l
 
 [Application Overview](https://github.com/rubyforgood/abalone/blob/main/application_overview.md)
 
-### Current Status
+<!-- ### Current Status
 
 __Last status update: August 2021__
 
@@ -156,7 +156,7 @@ This app is currently in testing with the two initial stakeholder groups. We are
 
 Issues specific to stakeholder testing and onboarding are part of the [Stakeholder Testing and Onboarding](https://github.com/rubyforgood/abalone/milestone/10) milestone.
 
-Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues) and feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue.
+Take a look at the current [Issues](https://github.com/rubyforgood/abalone/issues) and feel free to assign one to yourself and take it on! If you have any questions about requirements, post your question in the issue. -->
 
 ### The Problem
 Our stakeholders, the Bodega Marine Laboratory and the Puget Sound Restoration Fund work with large amounts of data collected as part of their abalone captive breeding programs. They need a system that can act as a central data repository for all of this data and provide robust reporting capabilities to help them examine trends and combine data collected across their research efforts.
@@ -181,8 +181,6 @@ We are building a multi-tenant application which has the following capabilities:
 
 [See a full data dictionary here.](https://github.com/rubyforgood/abalone/wiki/Abalone-Data-Dictionary)
 
-## Deployment
-The application is currently deployed on Heroku at https://abalone-staging.herokuapp.com/.
 
 ## And Don't Forget...
 

@@ -70,7 +70,7 @@ end
 
 # Report builder
 gem 'reports_kit' # Replaced by blazer reporting - 1/24/21
-# Dependency on Blazer version 2.4.7 due to app-specific overrides living in
+# Dependency on Blazer version 2.5.0 due to app-specific overrides living in
 # app/overrides that depend on the Blazer code at this version of the gem. Updating
 # this gem will require review of our overridden classes with changes to code in the
 # desired Blazer gem version.
