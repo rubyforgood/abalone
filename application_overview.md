@@ -59,7 +59,7 @@ Currently, the following models access the `organization` model directly. This i
 
 There are two primary paths for importing data into the system.  
 
-The first is through the File Upload interface. This allows users to import csv files containing measurement event data or mortality event date. Organizations can enter custom measurement types, for example, `mm`, `count`, `gonad_score` and custom exit types, for example, `incidental`, `olutplanted`, `sacrificed`. In the future, additional categories beyond `measurement` and `mortalityEvent` could be added to this interface. Organizations can upload existing files or download a template file that they can populate.
+The first is through the File Upload interface. This allows users to import csv files containing measurement event data or mortality event date. Organizations can enter custom measurement types, for example, `mm`, `count`, `gonad_score` and custom exit types, for example, `incidental`, `outplanted`, `sacrificed`. In the future, additional categories beyond `measurement` and `mortalityEvent` could be added to this interface. Organizations can upload existing files or download a template file that they can populate.
 
 Application Flow:
 - Files uploaded at FileUploads#new
