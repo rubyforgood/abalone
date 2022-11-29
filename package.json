@@ -4,7 +4,7 @@
   "dependencies": {
     "@rails/webpacker": "5.4.3",
     "autoprefixer": "^10.4.8",
-    "stimulus": "^3.1.0",
+    "stimulus": "^3.2.0",
     "tailwindcss": "^1.9.6"
   },
   "devDependencies": {
