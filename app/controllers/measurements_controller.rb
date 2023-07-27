@@ -8,7 +8,9 @@ class MeasurementsController < ApplicationController
 
   def show; end
 
-  def edit; end
+  def edit
+    redirect_to measurements_path, alert: 'Not authorized to edit this measurement' unless current_org_measurement?
+  end
 
   def update
     if @measurement.update(measurement_params)
@@ -54,5 +56,9 @@ class MeasurementsController < ApplicationController
       :subject_type,
       :measurement_type_id
     ).merge(organization_id: current_organization.id)
+  end
+
+  def current_org_measurement?
+    @measurement.organization == current_organization
   end
 end
